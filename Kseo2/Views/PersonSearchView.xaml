@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="Kseo2.Views.PersonSearchView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             Background="LightYellow"
+             Height="800" Width="600">
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="120"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <CheckBox x:Name="CanSearchAutamatically" IsThreeState="False" Content="Wyszukiwanie automatyczne"/>
+            <CheckBox x:Name="HasPesel" IsThreeState="False" Content="Posiada PESEL:"/>
+            
+            <TextBox x:Name="Pesel" IsEnabled="{Binding HasPesel}" />
+            <TextBlock Text="Nazwisko*:"/>
+            <TextBox x:Name="LastName" />
+            <TextBlock Text="Imię**:"/>
+            <TextBox x:Name="FirstName" />
+            <TextBlock Text="Imię ojca**:"/>
+            <TextBox x:Name="FatherName" />
+            <TextBlock Text="Data urodzenia**:"/>
+            <TextBox x:Name="BirthDate" />
+            
+            <TextBlock Text="Wyniki:"/>
+            <TextBlock x:Name="CounterResults" />
+            
+            
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+            <Button x:Name="Search" Content="Szukaj" Height="40" />
+            <Button x:Name="SelectPerson" Content="Wybierz" />
+            <Button x:Name="NewPerson" Content="Nowa osoba" />
+            <Button x:Name="Cancel" Content="Anuluj" />
+        </StackPanel>
+    </Grid>
+</UserControl>
