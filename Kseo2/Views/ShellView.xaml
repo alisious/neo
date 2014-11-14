@@ -17,6 +17,7 @@
             <Button x:Name="ShowScreenTwo" Content="Show Screen Two"/>
             <Button x:Name="ShowSearchPersonScreen" Content="Show Search Person Screen"/>
             <Button x:Name="ShowEditPersonScreen" Content="Show Edit Person Screen" />
+            <Button x:Name="ShowDetailsPersonScreen" Content="Show Details Person Screen"/>
         </StackPanel>
         <ContentControl Grid.Row="1"  x:Name="ActiveItem"/>
 

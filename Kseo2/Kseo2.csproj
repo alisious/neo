@@ -127,11 +127,15 @@
     <Compile Include="Service\IVerificationService.cs" />
     <Compile Include="Service\PersonService.cs" />
     <Compile Include="Service\SearchResults.cs" />
+    <Compile Include="ViewModels\PersonDetailsViewModel.cs" />
     <Compile Include="ViewModels\PersonEditViewModel.cs" />
     <Compile Include="ViewModels\PersonSearchViewModel.cs" />
     <Compile Include="ViewModels\ScreenOneViewModel.cs" />
     <Compile Include="ViewModels\ScreenTwoViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="Views\PersonDetailsView.xaml.cs">
+      <DependentUpon>PersonDetailsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PersonEditView.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>PersonEditView.xaml</DependentUpon>
@@ -182,6 +186,10 @@
     <Page Include="Kseo2ResourceDictionary.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PersonDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PersonEditView.xaml">
       <SubType>Designer</SubType>

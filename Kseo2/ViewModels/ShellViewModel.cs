@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using Kseo2.Model;
 
 namespace Kseo2.ViewModels
 {
@@ -27,6 +28,11 @@ namespace Kseo2.ViewModels
         public void ShowEditPersonScreen()
         {
             ActivateItem(new PersonEditViewModel());
+        }
+
+        public void ShowDetailsPersonScreen()
+        {
+            ActivateItem(new PersonDetailsViewModel(new Person()));
         }
     }
 }
