@@ -10,7 +10,6 @@ namespace Kseo2.ViewModels
 {
     public class PersonEditViewModel :Screen,IDataErrorInfo
     {
-        private Person _person;
         private string _Pesel;
         private string _LastName;
         private string _FirstName;
@@ -25,12 +24,8 @@ namespace Kseo2.ViewModels
 
         #region Public properties
 
-        public Person Person
-        {
-            get { return _person; }
-            set { _person = value; }
-        }
-        
+        public Person Person { get; set; }
+
         public bool HasPesel
         {
             get { return _HasPesel; }
@@ -39,10 +34,23 @@ namespace Kseo2.ViewModels
                 _HasPesel = value;
                 if (value == false) Pesel = string.Empty;
                 NotifyOfPropertyChange(() => HasPesel);
+                NotifyOfPropertyChange(()=>PeselVisibility);
             }
         }
 
-        [Required(ErrorMessage="PESEL jest wymagany!")]
+        public string PeselVisibility
+        {
+            get
+            {
+                if (HasPesel)
+                {
+                    return "Visible";
+                }
+                return "Collapsed";
+            }
+        }
+
+        [Required(ErrorMessage=@"PESEL jest wymagany!")]
         [StringLength(11,ErrorMessage="PESEL musi składać się z 11 znaków!")]
         public string Pesel
         {
@@ -64,20 +72,19 @@ namespace Kseo2.ViewModels
             set
             {
                 Person.LastName = value;
-                //NotifyOfPropertyChange(() => LastName);
                 OnPropertyChanged(value);
 
             }
         }
 
+        [Required(ErrorMessage = @"Imię jest wymagane!")]
         public string FirstName
         {
-            get { return _FirstName; }
+            get { return Person.FirstName; }
             set
             {
-                _FirstName = value;
-                NotifyOfPropertyChange(() => FirstName);
-
+                Person.FirstName = value;
+                OnPropertyChanged(value);
             }
         }
 
@@ -153,15 +160,18 @@ namespace Kseo2.ViewModels
 
         public PersonEditViewModel()
         {
-            validation.Validators.Add(new DataAnnotationsValidator(GetType()));
+            _validation.Validators.Add(new DataAnnotationsValidator(GetType()));
             Person = new Person();
         }
                
 
         public IResult Save()
         {
-            OnPropertyChanged(Pesel, "Pesel");
-            OnPropertyChanged(LastName, "LastName");
+
+            OnPropertyChanged(Pesel,"Pesel");
+            OnPropertyChanged(LastName,"LastName");
+            OnPropertyChanged(FirstName,"FirstName");
+
             if (CanSave == true)
             {
                 return new MessengerResult("Your changes where saved.")
@@ -182,26 +192,35 @@ namespace Kseo2.ViewModels
 
         public bool CanSave
         {
-            get { return !validation.HasErrors; }
+            get { return !_validation.HasErrors; }
         }
 
         protected void OnPropertyChanged(object value, [CallerMemberName] string propertyName = "")
         {
-            validation.ValidateProperty(propertyName, value);
+            if (propertyName == "Pesel")
+            {
+                if (HasPesel)
+                    _validation.ValidateProperty(propertyName, value);
+            }
+            else
+            {
+                _validation.ValidateProperty(propertyName, value);
+            }
+            
             NotifyOfPropertyChange(propertyName);
             NotifyOfPropertyChange(() => CanSave);
         }
 
 
         #region Validation
-        private readonly ValidationAdapter validation = new ValidationAdapter();
+        private readonly ValidationAdapter _validation = new ValidationAdapter();
         public string Error
         {
             get { throw new NotImplementedException(); }
         }
         public string this[string columnName]
         {
-            get { return string.Join(Environment.NewLine, validation.GetPropertyError(columnName)); }
+            get { return string.Join(Environment.NewLine, _validation.GetPropertyError(columnName)); }
         }
         #endregion
     }

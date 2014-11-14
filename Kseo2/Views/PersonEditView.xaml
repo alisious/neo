@@ -38,7 +38,7 @@
         <StackPanel Grid.Column="1">
             <CheckBox x:Name="HasPesel" IsThreeState="False" Content="Posiada PESEL:"/>
 
-            <TextBox x:Name="Pesel" IsEnabled="{Binding HasPesel}" />
+            <TextBox x:Name="Pesel" Visibility="{Binding PeselVisibility}" />
             <TextBlock Text="Nazwisko*:"/>
             <TextBox x:Name="LastName" />
             <TextBlock Text="Imię**:"/>
