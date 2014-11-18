@@ -9,9 +9,10 @@ namespace Kseo2.Service
 {
     public interface IPersonService
     {
-        PersonSearchResult Search(string pesel,string lastName,int resultsLimit = 20);
-        PersonSearchResult Search(string lastName, string firstName, string fatherName, string birthDate, int resultsLimit = 20);
-        void AddPerson(Person person);
+        SearchResult<Person> Search(string pesel,string lastName,int resultsLimit = 20);
+        SearchResult<Person> Search(string lastName, string firstName, string fatherName, string birthDate, int resultsLimit = 20);
+        Person GetSingle(int id);
+        Person AddPerson(Person person);
         void RemovePerson(Person person);
 
 

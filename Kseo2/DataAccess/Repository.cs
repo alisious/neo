@@ -84,7 +84,7 @@ namespace Kseo2.DataAccess
         {
             T item = null;
             IQueryable<T> dbQuery = context.Set<T>();
-
+            
             //Apply eager loading
             foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
                    dbQuery = dbQuery.Include<T, object>(navigationProperty);

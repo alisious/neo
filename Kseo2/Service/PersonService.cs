@@ -11,41 +11,41 @@ namespace Kseo2.Service
     /// <summary>
     /// Klasa odpowiedzialna za obsługę operacji dotyczących osoby. 
     /// </summary>
-    public class PersonService
+    public class PersonService :IPersonService 
     {
-        private KseoContext _ctx;
+        private readonly IPersonRepository _personRepository;
 
         private bool CheckPeselDuplicate(string aPesel,int aId)
         {
-            var query = from p in _ctx.Persons
-                        where p.Pesel == aPesel && p.Id != aId
-                        select p;
-            return (query.ToList<Person>().Count>0);
+            return _personRepository.CountListItems(x => x.Pesel.StartsWith(aPesel) && x.Id != aId) > 0;
         }
 
         public PersonService()
         {
-            _ctx = new KseoContext();
+            _personRepository = new PersonRepository();
         }
 
         public PersonService(KseoContext context)
         {
-            _ctx = context;
+            _personRepository = new PersonRepository(context);
         }
 
         public Person AddPerson(Person person)
         {
-            if (CheckPeselDuplicate(person.Pesel, person.Id)==false)
+            try
             {
-                _ctx.Persons.Add(person);
-                _ctx.SaveChanges();
+                _personRepository.Add(person);
+                SaveChanges();
                 return person;
             }
-            else
-                return null;
+            catch (Exception e)
+            {
+                throw new Exception("Błąd dodawania osoby!", e);
+                //return null;    
+            }
             
         }
-
+/*
         public void DeletePerson(Person person)
         {
             _ctx.Persons.Remove(person);
@@ -117,14 +117,37 @@ namespace Kseo2.Service
             return _searchResult;
         }
 
-
+*/
         /// <summary>
         /// Metoda zapisuje zmiany wprowadzone w agregacie.
         /// Przed zapisaniem sprawdza unikalność PESEL'a
         /// </summary>
         public void SaveChanges()
         {
-           _ctx.SaveChanges();
+           _personRepository.SaveChanges();
+        }
+
+        public SearchResult<Person> Search(string pesel, string lastName, int resultsLimit = 20)
+        {
+            var r = new SearchResult<Person>();
+            r.ResultsCounter = _personRepository.CountListItems(x => x.Pesel.StartsWith(pesel) && x.LastName.StartsWith(lastName));
+            if (r.ResultsCounter <= resultsLimit)
+                r.Results = _personRepository.GetList(x => x.Pesel.StartsWith(pesel) && x.LastName.StartsWith(lastName));
+            return r;
+        }
+
+        public SearchResult<Person> Search(string lastName, string firstName, string fatherName, string birthDate, int resultsLimit = 20)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Person GetSingle(int id)
+        {
+            throw new NotImplementedException();
+        }
+        public void RemovePerson(Person person)
+        {
+            throw new NotImplementedException();
         }
     }
 }

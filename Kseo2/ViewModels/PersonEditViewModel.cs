@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using Caliburn.Micro.Extras;
 using Kseo2.Model;
+using Kseo2.Service;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -10,6 +11,8 @@ namespace Kseo2.ViewModels
 {
     public class PersonEditViewModel :Screen,IDataErrorInfo
     {
+        private readonly IPersonService _personService;
+        
         private string _Pesel;
         private string _LastName;
         private string _FirstName;
@@ -160,6 +163,7 @@ namespace Kseo2.ViewModels
 
         public PersonEditViewModel()
         {
+            _personService = new PersonService();
             _validation.Validators.Add(new DataAnnotationsValidator(GetType()));
             Person = new Person();
         }
@@ -174,6 +178,7 @@ namespace Kseo2.ViewModels
 
             if (CanSave == true)
             {
+                _personService.AddPerson(Person);
                 return new MessengerResult("Your changes where saved.")
                     .Caption("Save")
                     .Image(MessageImage.Information);

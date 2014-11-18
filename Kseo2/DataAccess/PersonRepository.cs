@@ -11,6 +11,7 @@ namespace Kseo2.DataAccess
     public class PersonRepository :Repository<Person>, IPersonRepository 
     {
         public PersonRepository(KseoContext context) : base(context) { }
+        public PersonRepository() : base() { }
 
     }
 }

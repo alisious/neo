@@ -267,7 +267,7 @@ namespace Kseo2.ViewModels
         
         public void Search()
         {
-            var _searchResult = _personService.Find(Pesel, LastName, ResultsLimit);
+            var _searchResult = _personService.Search(Pesel, LastName, ResultsLimit);
             CounterResults = _searchResult.ResultsCounter;
             Results = new ObservableCollection<Person>(_searchResult.Results);
             if (Results.Count == 1)

@@ -40,9 +40,9 @@
 
             <TextBox x:Name="Pesel" Visibility="{Binding PeselVisibility}" />
             <TextBlock Text="Nazwisko*:"/>
-            <TextBox x:Name="LastName" />
+            <TextBox x:Name="LastName" CharacterCasing="Upper" />
             <TextBlock Text="Imię**:"/>
-            <TextBox x:Name="FirstName" />
+            <TextBox x:Name="FirstName" CharacterCasing="Upper"/>
             <TextBlock Text="Drugie imię:"/>
             <TextBox x:Name="MiddleName" />
             <TextBlock Text="Imię ojca**:"/>

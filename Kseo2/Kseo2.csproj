@@ -44,7 +44,7 @@
       <HintPath>..\packages\Caliburn.Micro.2.0.1\lib\net45\Caliburn.Micro.Platform.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework">
-      <HintPath>..\..\..\Github\kseo\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
@@ -113,13 +113,13 @@
     <Compile Include="DatabaseScripts\ReservationEndReason.cs" />
     <Compile Include="DatabaseScripts\Suspension.cs" />
     <Compile Include="DatabaseScripts\Verification.cs" />
+    <Compile Include="Model\DictionaryItem.cs" />
     <Compile Include="Service\IPersonService.cs" />
     <Compile Include="DataAccess\CountryRepository.cs" />
     <Compile Include="DataAccess\IRepository.cs" />
     <Compile Include="DataAccess\KseoContextInitializer.cs" />
     <Compile Include="DataAccess\PersonRepository.cs" />
     <Compile Include="DataAccess\Repository.cs" />
-    <Compile Include="Model\Country.cs" />
     <Compile Include="IShell.cs" />
     <Compile Include="DataAccess\KseoContext.cs" />
     <Compile Include="Model\Entity.cs" />
