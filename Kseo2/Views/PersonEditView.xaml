@@ -36,23 +36,23 @@
             <ColumnDefinition Width="20*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="1">
-            <CheckBox x:Name="HasPesel" IsThreeState="False" Content="Posiada PESEL:"/>
+            <CheckBox x:Name="HasPesel" IsThreeState="False" Content="Posiada PESEL:" />
 
             <TextBox x:Name="Pesel" Visibility="{Binding PeselVisibility}" />
-            <TextBlock Text="Nazwisko*:"/>
-            <TextBox x:Name="LastName" CharacterCasing="Upper" />
-            <TextBlock Text="Imię**:"/>
-            <TextBox x:Name="FirstName" CharacterCasing="Upper"/>
+            <TextBlock Text="Nazwisko*:" FontWeight="Bold"/>
+            <TextBox x:Name="LastName" CharacterCasing="Upper"  />
+            <TextBlock Text="Imię**:" FontWeight="Bold"/>
+            <TextBox x:Name="FirstName" CharacterCasing="Upper" />
             <TextBlock Text="Drugie imię:"/>
             <TextBox x:Name="MiddleName" />
-            <TextBlock Text="Imię ojca**:" FontWeight="{Binding TextBlockFont}"/>
+            <TextBlock Text="Imię ojca**:" FontWeight="{Binding RequiredFontWeight}"/>
             <TextBox x:Name="FatherName" />
             <TextBlock Text="Imię matki:"/>
             <TextBox x:Name="MotherName" />
             <TextBlock Text="Nazwisko rodowe matki:"/>
             <TextBox x:Name="MotherMaidenName" />
-            <TextBlock Text="Data urodzenia**:"/>
-            <TextBox x:Name="BirthDate" />
+            <TextBlock Text="Data urodzenia**:" FontWeight="{Binding RequiredFontWeight}"/>
+            <TextBox x:Name="BirthDate"  />
             <TextBlock Text="Miejsce urodzenia:"/>
             <TextBox x:Name="BirthPlace" />
         </StackPanel>

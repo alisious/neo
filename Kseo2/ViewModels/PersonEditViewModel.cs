@@ -29,7 +29,7 @@ namespace Kseo2.ViewModels
 
         public Person Person { get; set; }
 
-        public string TextBlockFont
+        public string RequiredFontWeight
         {
             get
             {
@@ -53,7 +53,7 @@ namespace Kseo2.ViewModels
                 if (value == false) Pesel = string.Empty;
                 NotifyOfPropertyChange(() => HasPesel);
                 NotifyOfPropertyChange(()=>PeselVisibility);
-                NotifyOfPropertyChange(()=>TextBlockFont);
+                NotifyOfPropertyChange(() => RequiredFontWeight);
             }
         }
 
@@ -77,8 +77,8 @@ namespace Kseo2.ViewModels
             set
             {
                 Person.Pesel = value;
-                //NotifyOfPropertyChange(() => Pesel);
-                OnPropertyChanged(value);
+                NotifyOfPropertyChange(() => Pesel);
+                //OnPropertyChanged(value);
 
             }
         }
@@ -91,7 +91,7 @@ namespace Kseo2.ViewModels
             set
             {
                 Person.LastName = value;
-                OnPropertyChanged(value);
+                NotifyOfPropertyChange(() => LastName);
 
             }
         }
@@ -180,7 +180,7 @@ namespace Kseo2.ViewModels
         public PersonEditViewModel()
         {
             _personService = new PersonService();
-            _validation.Validators.Add(new DataAnnotationsValidator(GetType()));
+            //_validation.Validators.Add(new DataAnnotationsValidator(GetType()));
             Person = new Person();
         }
                
@@ -248,7 +248,23 @@ namespace Kseo2.ViewModels
         }
         public string this[string columnName]
         {
-            get { return string.Join(Environment.NewLine, _validation.GetPropertyError(columnName)); }
+            get 
+            {
+                string s = String.Empty;
+                switch (columnName)
+                {
+                    case "Pesel" : s = HasPesel ? "PESEL jest wymagany!":""; break;
+                    case "LastName": s="Nazwisko jest wymagane!"; break;
+                    case "FirstName": s = "Imię jest wymagane!"; break;
+                    case "FatherName": s = HasPesel ? "":"Imię ojca jest wymagane!"; break;
+                    case "BirthDate": s = HasPesel ? "":"Data urodzenia jest wymagana!"; break;
+                    default:
+                        s=String.Empty;
+                        break;
+                }
+                return s;
+                //return string.Join(Environment.NewLine, _validation.GetPropertyError(columnName)); 
+            }
         }
         #endregion
     }
