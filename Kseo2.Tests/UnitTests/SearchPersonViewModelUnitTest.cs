@@ -4,31 +4,34 @@ using Kseo2.ViewModels;
 using Kseo2.Service;
 using Kseo2.DataAccess;
 
-namespace Kseo2.Tests
+namespace Kseo2.Tests.UnitTests
 {
     [TestClass]
     public class SearchPersonViewModelUnitTest
     {
         [TestMethod]
-        public void Can_Not_Get_Persons_Over_Limit()
+        public void Not_Show_Results_Over_Limit()
         {
-            throw new NotImplementedException();
+            //given
+
+
+            //when
+
+
+            //then
         }
 
         [TestMethod]
-        public void Can_Count_Search_Persons_Results()
+        public void Show_Results_In_Limit()
         {
             //given
-            KseoContext ctx = new KseoContext();
-            PersonService ps = new PersonService(ctx);
-            PersonSearchViewModel vm = new PersonSearchViewModel(ps);
-            vm.Pesel = "000";
+           
             
             //when
             
             
             //then
-            Assert.AreEqual(5, vm.CounterResults);
+            throw new NotImplementedException();
 
         }
 

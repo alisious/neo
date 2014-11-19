@@ -24,6 +24,23 @@ namespace Kseo2.Tests.UnitTests
             _ctx.Dispose();
         }
 
+
+        [TestMethod]
+        public void PersonService_Can_check_pesel_duplicate()
+        {
+            //given
+            var ps = new PersonService(_ctx);
+            var p1 = ps.GetSingle(1);
+            var p2 = new Person() {Pesel = p1.Pesel, LastName = "KWIATKOWSKI", FirstName = "JAN"};
+            //when
+            var r = ps.HasPeselDuplicate(p2);
+
+            //then
+            Assert.IsTrue(r);
+            
+
+        }
+
         [TestMethod]
         public void PersonService_Can_get_person_by_id()
         {
@@ -31,26 +48,30 @@ namespace Kseo2.Tests.UnitTests
             var ps = new PersonService(_ctx);
             
             //when
-            var p_db = ps.GetSingle(1);
+            var pDb = ps.GetSingle(1);
+
             //then
-            Assert.IsNotNull(p_db);
-            Assert.AreEqual("NAZWISKO0", p_db.LastName);
+            Assert.IsNotNull(pDb);
+            Assert.AreEqual("NAZWISKO0", pDb.LastName);
 
         }
 
         [TestMethod]
         public void PersonService_Can_add_new_person()
         {
+            
             //given
             var ps = new PersonService(_ctx);
             var p = new Person() {Pesel="73020916558",FirstName="JACEK",LastName="KORPUSIK"};
-            
+
             //when
             ps.AddPerson(p);
+            ps.SaveChanges();
             var id = p.Id;
-            var p_db = ps.GetSingle(id);
+            var pDb = ps.GetSingle(id);
+
             //then
-            Assert.IsNotNull(p_db);
+            Assert.IsNotNull(pDb);
 
         }
 
@@ -59,31 +80,32 @@ namespace Kseo2.Tests.UnitTests
         {
             //given
             var ps = new PersonService(_ctx);
-            var p = ps.GetSingle(1);
+            var p = ps.GetSingle(10);
             
             //when
             p.LastName = "NOWE NAZWISKO";
             ps.SaveChanges();
 
-            var p_db = ps.GetSingle(p.Id);
+            var pDb = ps.GetSingle(p.Id);
             //then
-            Assert.IsNotNull(p_db);
-            Assert.AreEqual("NOWE NAZWISKO", p_db.LastName);
+            Assert.IsNotNull(pDb);
+            Assert.AreEqual("NOWE NAZWISKO", pDb.LastName);
         }
 
         [TestMethod]
-        public void PersonService_Can_delete_person()
+        public void PersonService_Can_remove_person()
         {
             //given
             var ps = new PersonService(_ctx);
             var p = ps.GetSingle(1);
 
             //when
-            //ps.DeletePerson(p);
+            ps.RemovePerson(p);
+            ps.SaveChanges();
            
-            var p_db = ps.GetSingle(1);
+            var pDb = ps.GetSingle(1);
             //then
-            Assert.IsNull(p_db);
+            Assert.IsNull(pDb);
             
         }
 
@@ -109,15 +131,15 @@ namespace Kseo2.Tests.UnitTests
             var ps = new PersonService(_ctx);
 
             //when
-            var sr = ps.Search("NAZWISKO","IMIE","","",20);
+            var sr = ps.Search("NAZW","IM","","",20);
 
             //then
             Assert.IsNotNull(sr);
-            Assert.IsTrue(sr.ResultsCounter>20);
+            Assert.IsTrue(sr.ResultsCounter>0);
         }
 
         [TestMethod]
-
+        
         public void PersonService_Can_not_add_new_person_with_duplicated_pesel()
         {
             //given
@@ -125,12 +147,22 @@ namespace Kseo2.Tests.UnitTests
             var p1 = new Person() { Pesel = "73020916558", FirstName = "JACEK", LastName = "KORPUSIK" };
             var p2 = new Person() { Pesel = "73020916558", FirstName = "JAN", LastName = "KOWALSKI" };
             //when
-            var new_person1 = ps.AddPerson(p1);
-            var new_person2 = ps.AddPerson(p2);
-                       
+            ps.AddPerson(p1);
+            Exception exc = null;
+            try
+            {
+                ps.AddPerson(p2);
+                ps.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                exc = e;
+            }
+
             //then
-            Assert.IsNotNull(new_person1);
-            Assert.IsNull(new_person2);
+            Assert.IsNotNull(exc);
+            Assert.AreEqual(typeof(DbUpdateException),exc.GetType());
+
         }
 
         [TestMethod]
@@ -140,16 +172,25 @@ namespace Kseo2.Tests.UnitTests
             var ps = new PersonService(_ctx);
             var p1 = new Person() { Pesel = "90010101010", FirstName = "JACEK", LastName = "KORPUSIK" };
             var p2 = new Person() { Pesel = "90010101011", FirstName = "JAN", LastName = "KOWALSKI" };
-            var new_person1 = ps.AddPerson(p1);
-            var new_person2 = ps.AddPerson(p2);
+            ps.AddPerson(p1);
+            ps.AddPerson(p2);
+            ps.SaveChanges();
             //when
-            new_person2.Pesel = new_person1.Pesel;
-            //var updated_person = ps.UpdatePerson(new_person2);
-            
+            p2.Pesel = p1.Pesel;
+            Exception exc = null;
+            try
+            {
+               ps.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                exc = e;
+            }
+
             //then
-            Assert.IsNotNull(new_person1);
-            Assert.IsNotNull(new_person2);
-            //Assert.IsNull(updated_person);
+            Assert.IsNotNull(exc);
+            Assert.AreEqual(typeof(DbUpdateException), exc.GetType());
+   
         }
 
         [TestMethod]

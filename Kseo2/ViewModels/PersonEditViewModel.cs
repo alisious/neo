@@ -29,6 +29,21 @@ namespace Kseo2.ViewModels
 
         public Person Person { get; set; }
 
+        public string TextBlockFont
+        {
+            get
+            {
+                if (HasPesel)
+                {
+                    return "Normal";
+                }
+                else
+                {
+                    return "Bold";
+                }
+            }
+        }
+
         public bool HasPesel
         {
             get { return _HasPesel; }
@@ -38,6 +53,7 @@ namespace Kseo2.ViewModels
                 if (value == false) Pesel = string.Empty;
                 NotifyOfPropertyChange(() => HasPesel);
                 NotifyOfPropertyChange(()=>PeselVisibility);
+                NotifyOfPropertyChange(()=>TextBlockFont);
             }
         }
 
@@ -172,22 +188,29 @@ namespace Kseo2.ViewModels
         public IResult Save()
         {
 
-            OnPropertyChanged(Pesel,"Pesel");
-            OnPropertyChanged(LastName,"LastName");
-            OnPropertyChanged(FirstName,"FirstName");
 
             if (CanSave == true)
             {
-                _personService.AddPerson(Person);
-                return new MessengerResult("Your changes where saved.")
-                    .Caption("Save")
-                    .Image(MessageImage.Information);
+                try
+                {
+                    _personService.AddPerson(Person);
+                    _personService.SaveChanges();
+                    return new MessengerResult("Zmiany zostały zapisane.")
+                        .Caption("Informacja")
+                        .Image(MessageImage.Information);
+                }
+                catch (Exception e)
+                {
+                    return new MessengerResult(e.Message)
+                        .Caption("Błąd!")
+                        .Image(MessageImage.Error);
+                }
             }
             else
             {
                 return null;
             }
-            
+
         }
 
         public void Cancel()

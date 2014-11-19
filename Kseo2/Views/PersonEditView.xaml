@@ -45,7 +45,7 @@
             <TextBox x:Name="FirstName" CharacterCasing="Upper"/>
             <TextBlock Text="Drugie imię:"/>
             <TextBox x:Name="MiddleName" />
-            <TextBlock Text="Imię ojca**:"/>
+            <TextBlock Text="Imię ojca**:" FontWeight="{Binding TextBlockFont}"/>
             <TextBox x:Name="FatherName" />
             <TextBlock Text="Imię matki:"/>
             <TextBox x:Name="MotherName" />

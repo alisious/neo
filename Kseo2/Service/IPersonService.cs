@@ -12,8 +12,9 @@ namespace Kseo2.Service
         SearchResult<Person> Search(string pesel,string lastName,int resultsLimit = 20);
         SearchResult<Person> Search(string lastName, string firstName, string fatherName, string birthDate, int resultsLimit = 20);
         Person GetSingle(int id);
-        Person AddPerson(Person person);
+        void AddPerson(Person person);
         void RemovePerson(Person person);
+        void SaveChanges();
 
 
     }

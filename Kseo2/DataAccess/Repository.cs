@@ -10,22 +10,26 @@ namespace Kseo2.DataAccess
     public class Repository<T> :IRepository<T> where T :class
     {
 
-        private readonly KseoContext context;
+        private readonly KseoContext _context;
+       
+        #region Constructors
 
         public Repository()
         {
-            context = new KseoContext();
+            _context = new KseoContext();
         }
 
         public Repository(KseoContext context)
         {
-            this.context = context;
+            this._context = context;
         }
+        
+        #endregion
 
         public virtual IList<T> GetAll(params System.Linq.Expressions.Expression<Func<T, object>>[] navigationProperties)
         {
             List<T> list;
-            IQueryable<T> dbQuery = context.Set<T>();
+            IQueryable<T> dbQuery = _context.Set<T>();
 
             //Apply eager loading
             foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
@@ -39,7 +43,7 @@ namespace Kseo2.DataAccess
 
         public int CountAllItems(params Expression<Func<T, object>>[] navigationProperties)
         {
-            IQueryable<T> dbQuery = context.Set<T>();
+            IQueryable<T> dbQuery = _context.Set<T>();
 
             //Apply eager loading
             foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
@@ -53,7 +57,7 @@ namespace Kseo2.DataAccess
         public virtual IList<T> GetList(Func<T, bool> where, params System.Linq.Expressions.Expression<Func<T, object>>[] navigationProperties)
         {
             List<T> list;
-            IQueryable<T> dbQuery = context.Set<T>();
+            IQueryable<T> dbQuery = _context.Set<T>();
             
             //Apply eager loading
             foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
@@ -68,7 +72,7 @@ namespace Kseo2.DataAccess
         public int CountListItems(Func<T, bool> where, params Expression<Func<T, object>>[] navigationProperties)
         {
            
-            IQueryable<T> dbQuery = context.Set<T>();
+            IQueryable<T> dbQuery = _context.Set<T>();
 
             //Apply eager loading
             foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
@@ -83,7 +87,7 @@ namespace Kseo2.DataAccess
         public virtual T GetSingle(Func<T, bool> where, params System.Linq.Expressions.Expression<Func<T, object>>[] navigationProperties)
         {
             T item = null;
-            IQueryable<T> dbQuery = context.Set<T>();
+            IQueryable<T> dbQuery = _context.Set<T>();
             
             //Apply eager loading
             foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
@@ -97,7 +101,7 @@ namespace Kseo2.DataAccess
         public void Add(params T[] items)
         {
                foreach (T item in items)
-                    context.Set<T>().Add(item);
+                    _context.Set<T>().Add(item);
         }
 
        // public void Update(params T[] items)
@@ -108,13 +112,13 @@ namespace Kseo2.DataAccess
         public void Remove(params T[] items)
         {
             foreach (T item in items)
-                context.Set<T>().Remove(item);
+                _context.Set<T>().Remove(item);
         }
 
 
         public void SaveChanges()
         {
-            context.SaveChanges();
+            _context.SaveChanges();
         }
 
 
