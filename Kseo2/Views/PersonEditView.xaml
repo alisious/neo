@@ -36,7 +36,7 @@
             <ColumnDefinition Width="20*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="1">
-            <CheckBox x:Name="HasPesel" IsThreeState="False" Content="Posiada PESEL:" />
+            <CheckBox x:Name="HasPesel" IsThreeState="False" Content="Posiada PESEL:" FontWeight="{Binding RequiredFontWeight}" />
 
             <TextBox x:Name="Pesel" Visibility="{Binding PeselVisibility}" />
             <TextBlock Text="Nazwisko*:" FontWeight="Bold"/>

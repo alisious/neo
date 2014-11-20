@@ -52,9 +52,15 @@ namespace Kseo2.ViewModels
             {
                 _HasPesel = value;
                 if (value == false) Pesel = string.Empty;
+                ;
                 NotifyOfPropertyChange(() => HasPesel);
-                NotifyOfPropertyChange(()=>PeselVisibility);
+                NotifyOfPropertyChange(() => PeselVisibility);
                 NotifyOfPropertyChange(() => RequiredFontWeight);
+                
+                NotifyOfPropertyChange(() => Pesel);
+                NotifyOfPropertyChange(() => FatherName);
+                NotifyOfPropertyChange(() => BirthDate);
+                
             }
         }
 
@@ -84,7 +90,7 @@ namespace Kseo2.ViewModels
         }
 
 
-       
+        [Required(ErrorMessage = @"Nazwisko jest wymagane!", AllowEmptyStrings = false)]
         public string LastName
         {
             get { return Person.LastName; }
@@ -96,7 +102,7 @@ namespace Kseo2.ViewModels
             }
         }
 
-        
+        [Required(ErrorMessage = @"Imię jest wymagane!",AllowEmptyStrings = false)]
         public string FirstName
         {
             get { return Person.FirstName; }
@@ -121,7 +127,7 @@ namespace Kseo2.ViewModels
         
         public bool HasNoPesel { get { return !HasPesel; } }
 
-        [RequiredEx(ErrorMessage = @"Imię ojca jest wymagane w przypadku braku PESEL!",GuardProperty = "HasNoPesel")]
+        [RequiredEx(ErrorMessage = @"Imię ojca jest wymagane w przypadku braku PESEL!", AllowEmptyStrings = false,GuardProperty = "HasNoPesel")]
         public string FatherName
         {
             get { return _FatherName; }
@@ -133,7 +139,7 @@ namespace Kseo2.ViewModels
             }
         }
 
-        public string MotherName
+        public string MotherName 
         {
             get { return _MotherName; }
             set
@@ -155,6 +161,8 @@ namespace Kseo2.ViewModels
             }
         }
 
+        [RequiredEx(ErrorMessage = @"Data urodzenia jest wymagana w przypadku braku PESEL!",AllowEmptyStrings = false, GuardProperty = "HasNoPesel")]
+    
         public string BirthDate
         {
             get { return _BirthDate; }
@@ -177,7 +185,7 @@ namespace Kseo2.ViewModels
             }
         }
 
-        public bool Guard { get; set; }
+        
 
         #endregion
 
