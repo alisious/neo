@@ -133,6 +133,15 @@
     <Compile Include="ViewModels\ScreenOneViewModel.cs" />
     <Compile Include="ViewModels\ScreenTwoViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="ViewModels\Validation\DomainValidator.cs" />
+    <Compile Include="ViewModels\Validation\EmailValidator.cs" />
+    <Compile Include="ViewModels\Validation\IValidationControl.cs" />
+    <Compile Include="ViewModels\Validation\MultipleEmailValidator.cs" />
+    <Compile Include="ViewModels\Validation\PathValidator.cs" />
+    <Compile Include="ViewModels\Validation\RequiredEx.cs" />
+    <Compile Include="ViewModels\Validation\StrongPasswordValidator.cs" />
+    <Compile Include="ViewModels\Validation\ValidatingScreen.cs" />
+    <Compile Include="ViewModels\Validation\ValidationGroupAttribute.cs" />
     <Compile Include="Views\PersonDetailsView.xaml.cs">
       <DependentUpon>PersonDetailsView.xaml</DependentUpon>
     </Compile>
