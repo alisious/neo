@@ -20,14 +20,29 @@ namespace Kseo2.Model
             FatherName = String.Empty;
         }
 
+
+        private  string _pesel;
+
         public int Id { get; set; }
 
         [Required]
-        [RegularExpression("[0-9]{11}", ErrorMessage = "PESEL musi sk³adaæ siê z 11 cyfr.")]
+        //[RegularExpression("[0-9]{11}", ErrorMessage = "PESEL musi sk³adaæ siê z 11 cyfr.")]
         [StringLength(11)]
         [DisplayName("PESEL")]
-        [Index("INX_PERSON_PESEL",IsUnique=true)]    
-        public string Pesel { get; set; }
+        [Index("INX_PERSON_PESEL", IsUnique = true)]
+        public string Pesel
+        {
+            get
+            {
+                if(!HasPESEL)
+                {
+                    var p = String.Format("0000000000{0}", Id);
+                    _pesel = String.Format("A{0}",p.Substring(Id.ToString().Length,10));
+                }
+                return _pesel;
+            }
+            set { _pesel = value; }
+        }
 
         [Required]
         [StringLength(50)]
@@ -35,11 +50,11 @@ namespace Kseo2.Model
         public string LastName { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(30)]
         [DisplayName("Imiê")]
         public string FirstName { get; set; }
 
-        [StringLength(50)]
+        [StringLength(30)]
         [DisplayName("Drugie imiê")]
         public string MiddleName { get; set; }
 
@@ -73,6 +88,7 @@ namespace Kseo2.Model
         public string Sex { get; set; }
 
         private bool _hasPESEL;
+
         
         [DisplayName("Posiada PESEL")]
         public bool HasPESEL

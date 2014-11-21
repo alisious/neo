@@ -76,6 +76,25 @@ namespace Kseo2.Tests.UnitTests
         }
 
         [TestMethod]
+        public void PersonService_Can_add_new_person_HasNoPesel()
+        {
+
+            //given
+            var ps = new PersonService(_ctx);
+            var p = new Person() { HasPESEL = false, FirstName = "JACEK", LastName = "KORPUSIK" };
+
+            //when
+            ps.AddPerson(p);
+            ps.SaveChanges();
+            var id = p.Id;
+            var pDb = ps.GetSingle(id);
+
+            //then
+            Assert.IsNotNull(pDb);
+
+        }
+
+        [TestMethod]
         public void PersonService_Can_update_person()
         {
             //given

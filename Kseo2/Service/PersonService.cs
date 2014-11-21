@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity.Validation;
 
 namespace Kseo2.Service
 {
@@ -63,6 +64,12 @@ namespace Kseo2.Service
             try
             {
                 _context.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                var sb = new StringBuilder(@"Nie powiodła się walidacja danych osoby!");
+                sb.AppendLine(e.Message);
+                throw new DbUpdateException(sb.ToString(), e);
             }
             catch (DbUpdateException e)
             {

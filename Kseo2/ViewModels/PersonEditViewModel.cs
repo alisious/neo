@@ -1,4 +1,5 @@
-﻿using Caliburn.Micro;
+﻿using System.Text.RegularExpressions;
+using Caliburn.Micro;
 using Caliburn.Micro.Extras;
 using Caliburn.Micro.Validation;
 using Kseo2.Model;
@@ -30,7 +31,7 @@ namespace Kseo2.ViewModels
 
         public Person Person { get; set; }
 
-        public string RequiredFontWeight
+        public string BoldWhenHasNoPesel
         {
             get
             {
@@ -45,24 +46,39 @@ namespace Kseo2.ViewModels
             }
         }
 
+        public string BoldWhenHasPesel
+        {
+            get
+            {
+                if (HasPesel)
+                {
+                    return "Bold";
+                }
+                else
+                {
+                    return "Normal";
+                }
+            }
+        }
+
         public bool HasPesel
         {
-            get { return _HasPesel; }
+            get { return Person.HasPESEL; }
             set
             {
-                _HasPesel = value;
+                Person.HasPESEL = value;
                 if (value == false) Pesel = string.Empty;
-                ;
-                NotifyOfPropertyChange(() => HasPesel);
                 NotifyOfPropertyChange(() => PeselVisibility);
-                NotifyOfPropertyChange(() => RequiredFontWeight);
-                
+                NotifyOfPropertyChange(() => BoldWhenHasNoPesel);
+                NotifyOfPropertyChange(() => BoldWhenHasPesel);
                 NotifyOfPropertyChange(() => Pesel);
                 NotifyOfPropertyChange(() => FatherName);
                 NotifyOfPropertyChange(() => BirthDate);
-                
+                OnPropertyChanged(value);
             }
         }
+
+        public bool HasNoPesel { get { return !HasPesel; } }
 
         public string PeselVisibility
         {
@@ -76,8 +92,9 @@ namespace Kseo2.ViewModels
             }
         }
 
-        [RequiredEx(ErrorMessage=@"PESEL jest wymagany!",GuardProperty = "HasPesel",ValidateWhileDisabled = false)]
-        //[StringLength(11,ErrorMessage=@"PESEL musi składać się z 11 znaków!")]
+        [RequiredEx(ErrorMessage=@"PESEL jest wymagany!",GuardProperty = "HasPesel")]
+        [RegularExpression("[0-9]{11}", ErrorMessage = @"PESEL powinien składać się z 11 cyfr!")]
+        [ValidationGroup(IncludeInErrorsValidation = false, GroupName = "HasPeselGroup")]
         public string Pesel
         {
             get { return Person.Pesel; }
@@ -85,7 +102,6 @@ namespace Kseo2.ViewModels
             {
                 Person.Pesel = value;
                 OnPropertyChanged(value);
-
             }
         }
 
@@ -97,8 +113,7 @@ namespace Kseo2.ViewModels
             set
             {
                 Person.LastName = value;
-                NotifyOfPropertyChange(() => LastName);
-
+                OnPropertyChanged(value);
             }
         }
 
@@ -125,9 +140,9 @@ namespace Kseo2.ViewModels
         }
 
         
-        public bool HasNoPesel { get { return !HasPesel; } }
 
         [RequiredEx(ErrorMessage = @"Imię ojca jest wymagane w przypadku braku PESEL!", AllowEmptyStrings = false,GuardProperty = "HasNoPesel")]
+        [ValidationGroup(IncludeInErrorsValidation = false, GroupName = "HasNoPeselGroup")]
         public string FatherName
         {
             get { return _FatherName; }
@@ -162,14 +177,17 @@ namespace Kseo2.ViewModels
         }
 
         [RequiredEx(ErrorMessage = @"Data urodzenia jest wymagana w przypadku braku PESEL!",AllowEmptyStrings = false, GuardProperty = "HasNoPesel")]
-    
+        //[RegularExpression(@"\d{4}([-]\d{2})?([-]\d{2})?",ErrorMessage = @"Rok, Rok-Miesiąc lub data urodzenia.")]
+        [RegularExpression(@"((?:19|20)\d\d)([-](0[1-9]|1[012]))?([-](0[1-9]|[12][0-9]|3[01]))?", ErrorMessage = @"Rok, Rok-Miesiąc lub data urodzenia.")]
+        //[DataType(DataType.Date)]
+        [ValidationGroup(IncludeInErrorsValidation = false, GroupName = "HasNoPeselGroup")]
         public string BirthDate
         {
             get { return _BirthDate; }
             set
             {
                 _BirthDate = value;
-                NotifyOfPropertyChange(() => BirthDate);
+                OnPropertyChanged(value);
 
             }
         }
@@ -185,7 +203,17 @@ namespace Kseo2.ViewModels
             }
         }
 
-        
+        public bool CanSave
+        {
+            get
+            {
+                var r = HasErrorsByGroup();
+                if (HasPesel)
+                    return !r && !HasErrorsByGroup("HasPeselGroup");
+                else
+                    return !r && !HasErrorsByGroup("HasNoPeselGroup");
+            }
+        }
 
         #endregion
 
@@ -229,11 +257,7 @@ namespace Kseo2.ViewModels
         {
             this.TryClose(false);
         }
-
-        public bool CanSave
-        {
-            get { return !HasErrorsByGroup();  }
-        }
+        
 
         protected void OnPropertyChanged(object value, [CallerMemberName] string propertyName = "")
         {
