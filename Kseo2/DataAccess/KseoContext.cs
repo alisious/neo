@@ -30,6 +30,13 @@ namespace Kseo2.DataAccess
                 .WithMany()
                 .Map(m => m.ToTable("Citizenship", "Person"));
 
+            modelBuilder.Entity<DictionaryItem>()
+                .HasMany(e => e.Subitems)
+                .WithOptional(x => x.Masteritem);
+                
+            
+
+
             //modelBuilder.Entity<Person>()
             //    .HasMany<Verification>(p => p.Verifications)
             //    .WithRequired(v => v.Person);

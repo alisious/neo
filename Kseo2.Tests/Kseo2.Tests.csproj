@@ -80,6 +80,7 @@
     <Compile Include="UnitTests\SearchPersonViewModelUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTests\PersonServiceUnitTest.cs" />
+    <Compile Include="UnitTests\CountryUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kseo2\Kseo2.csproj">

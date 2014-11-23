@@ -14,59 +14,30 @@ namespace Kseo2.ViewModels
     public class PersonEditViewModel : ValidatingScreen<PersonEditViewModel>
     {
         private readonly IPersonService _personService;
+        private Person _person { get; set; }
         
-        private string _Pesel;
-        private string _LastName;
-        private string _FirstName;
-        private string _FatherName;
-        private string _BirthDate;
-        private bool _HasPesel = true;
-        private string _MiddleName;
-        private string _MotherName;
-        private string _BirthPlace;
-        private string _MotherMaidenName;
 
 
         #region Public properties
 
-        public Person Person { get; set; }
+        
 
-        public string BoldWhenHasNoPesel
+        public string BoldWhenHasNoPesel 
         {
-            get
-            {
-                if (HasPesel)
-                {
-                    return "Normal";
-                }
-                else
-                {
-                    return "Bold";
-                }
-            }
+            get { return HasPesel?"Normal":"Bold"; }
         }
 
         public string BoldWhenHasPesel
         {
-            get
-            {
-                if (HasPesel)
-                {
-                    return "Bold";
-                }
-                else
-                {
-                    return "Normal";
-                }
-            }
+            get { return HasPesel ? "Bold" : "Normal";}
         }
 
         public bool HasPesel
         {
-            get { return Person.HasPESEL; }
+            get { return _person.HasPESEL; }
             set
             {
-                Person.HasPESEL = value;
+                _person.HasPESEL = value;
                 if (value == false) Pesel = string.Empty;
                 NotifyOfPropertyChange(() => PeselVisibility);
                 NotifyOfPropertyChange(() => BoldWhenHasNoPesel);
@@ -82,14 +53,7 @@ namespace Kseo2.ViewModels
 
         public string PeselVisibility
         {
-            get
-            {
-                if (HasPesel)
-                {
-                    return "Visible";
-                }
-                return "Collapsed";
-            }
+            get { return HasPesel ? "Visible" : "Collapsed"; }
         }
 
         [RequiredEx(ErrorMessage=@"PESEL jest wymagany!",GuardProperty = "HasPesel")]
@@ -97,10 +61,10 @@ namespace Kseo2.ViewModels
         [ValidationGroup(IncludeInErrorsValidation = false, GroupName = "HasPeselGroup")]
         public string Pesel
         {
-            get { return Person.Pesel; }
+            get { return _person.Pesel; }
             set
             {
-                Person.Pesel = value;
+                _person.Pesel = value;
                 OnPropertyChanged(value);
             }
         }
@@ -109,10 +73,10 @@ namespace Kseo2.ViewModels
         [Required(ErrorMessage = @"Nazwisko jest wymagane!", AllowEmptyStrings = false)]
         public string LastName
         {
-            get { return Person.LastName; }
+            get { return _person.LastName; }
             set
             {
-                Person.LastName = value;
+                _person.LastName = value;
                 OnPropertyChanged(value);
             }
         }
@@ -120,20 +84,20 @@ namespace Kseo2.ViewModels
         [Required(ErrorMessage = @"Imię jest wymagane!",AllowEmptyStrings = false)]
         public string FirstName
         {
-            get { return Person.FirstName; }
+            get { return _person.FirstName; }
             set
             {
-                Person.FirstName = value;
+                _person.FirstName = value;
                 OnPropertyChanged(value);
             }
         }
 
         public string MiddleName
         {
-            get { return _MiddleName; }
+            get { return _person.MiddleName; }
             set
             {
-                _MiddleName = value;
+                _person.MiddleName = value;
                 NotifyOfPropertyChange(() => MiddleName);
 
             }
@@ -145,10 +109,10 @@ namespace Kseo2.ViewModels
         [ValidationGroup(IncludeInErrorsValidation = false, GroupName = "HasNoPeselGroup")]
         public string FatherName
         {
-            get { return _FatherName; }
+            get { return _person.FatherName; }
             set
             {
-                _FatherName = value;
+                _person.FatherName = value;
                 OnPropertyChanged(value);
 
             }
@@ -156,10 +120,10 @@ namespace Kseo2.ViewModels
 
         public string MotherName 
         {
-            get { return _MotherName; }
+            get { return _person.MotherName; }
             set
             {
-                _MotherName = value;
+                _person.MotherName = value;
                 NotifyOfPropertyChange(() => MotherName);
 
             }
@@ -167,26 +131,24 @@ namespace Kseo2.ViewModels
 
         public string MotherMaidenName
         {
-            get { return _MotherMaidenName; }
+            get { return _person.MotherMaidenName; }
             set
             {
-                _MotherMaidenName = value;
+                _person.MotherMaidenName = value;
                 NotifyOfPropertyChange(() => MotherMaidenName);
 
             }
         }
 
         [RequiredEx(ErrorMessage = @"Data urodzenia jest wymagana w przypadku braku PESEL!",AllowEmptyStrings = false, GuardProperty = "HasNoPesel")]
-        //[RegularExpression(@"\d{4}([-]\d{2})?([-]\d{2})?",ErrorMessage = @"Rok, Rok-Miesiąc lub data urodzenia.")]
         [RegularExpression(@"((?:19|20)\d\d)([-](0[1-9]|1[012]))?([-](0[1-9]|[12][0-9]|3[01]))?", ErrorMessage = @"Rok, Rok-Miesiąc lub data urodzenia.")]
-        //[DataType(DataType.Date)]
         [ValidationGroup(IncludeInErrorsValidation = false, GroupName = "HasNoPeselGroup")]
         public string BirthDate
         {
-            get { return _BirthDate; }
+            get { return _person.BirthDate; }
             set
             {
-                _BirthDate = value;
+                _person.BirthDate = value;
                 OnPropertyChanged(value);
 
             }
@@ -194,10 +156,10 @@ namespace Kseo2.ViewModels
 
         public string BirthPlace
         {
-            get { return _BirthPlace; }
+            get { return _person.BirthPlace; }
             set
             {
-                _BirthPlace = value;
+                _person.BirthPlace = value;
                 NotifyOfPropertyChange(() => BirthPlace);
 
             }
@@ -221,7 +183,7 @@ namespace Kseo2.ViewModels
         public PersonEditViewModel()
         {
             _personService = new PersonService();
-            Person = new Person();
+            _person = new Person();
         }
                
 
@@ -233,7 +195,7 @@ namespace Kseo2.ViewModels
             {
                 try
                 {
-                    _personService.AddPerson(Person);
+                    _personService.AddPerson(_person);
                     _personService.SaveChanges();
                     return new MessengerResult("Zmiany zostały zapisane.")
                         .Caption("Informacja")

@@ -12,12 +12,18 @@ namespace Kseo2.Model
     {
         public DictionaryItem()
         {
+            ShortName = String.Empty;
+            LongName = String.Empty;
             DisplayOrder = 0;
             IsActive = true;
+            Subitems = new HashSet<DictionaryItem>();
         }
 
         public int Id { get; set; }
 
+        [StringLength(10)]
+        public string ShortName { get; set; }
+        
         [Required]
         [StringLength(50)]
         public string Name { get; set; }
@@ -28,6 +34,8 @@ namespace Kseo2.Model
         public int DisplayOrder { get; set; }
 
         public bool IsActive { get; set; }
+        public virtual DictionaryItem Masteritem { get; set; }
+        public virtual ICollection<DictionaryItem> Subitems { get; set; }  
 
     }
 

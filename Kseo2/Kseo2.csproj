@@ -114,6 +114,8 @@
     <Compile Include="DatabaseScripts\Suspension.cs" />
     <Compile Include="DatabaseScripts\Verification.cs" />
     <Compile Include="Model\DictionaryItem.cs" />
+    <Compile Include="Service\DictionaryService.cs" />
+    <Compile Include="Service\IDictionaryService.cs" />
     <Compile Include="Service\IPersonService.cs" />
     <Compile Include="DataAccess\CountryRepository.cs" />
     <Compile Include="DataAccess\IRepository.cs" />
