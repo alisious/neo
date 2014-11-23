@@ -27,6 +27,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <DataTemplate x:Key="NationalityDataTemplate">
+            <TextBlock Text="{Binding LongName}"/>
+        </DataTemplate>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -38,6 +41,12 @@
         <StackPanel Grid.Column="1">
             <CheckBox x:Name="HasPesel" IsThreeState="False" FlowDirection="RightToLeft" HorizontalAlignment="Left" Content=":Posiada PESEL" FontWeight="{Binding BoldWhenHasPesel}" />
             <TextBox x:Name="Pesel" Visibility="{Binding PeselVisibility}"/>
+            <TextBlock Text="Płeć:" FontWeight="Bold"/>
+            <StackPanel Orientation="Horizontal">
+                <RadioButton x:Name="SexMale" IsChecked="{Binding IsMale}" Content="MĘŻCZYZNA" Margin="40,5,5,5" GroupName="Sex"/>
+                <RadioButton x:Name="SexFemale" IsChecked="{Binding IsFemale}" Content="KOBIETA" Margin="40,5,5,5" GroupName="Sex"/>
+                <TextBox x:Name="Sex" Width="20"  CharacterCasing="Upper"  />
+            </StackPanel>
             <TextBlock Text="Nazwisko:" FontWeight="Bold"/>
             <TextBox x:Name="LastName" CharacterCasing="Upper"  />
             <TextBlock Text="Imię:" FontWeight="Bold"/>
@@ -54,6 +63,10 @@
             <TextBox x:Name="BirthDate"  />
             <TextBlock Text="Miejsce urodzenia:"/>
             <TextBox x:Name="BirthPlace" />
+            <TextBlock Text="Narodowość:"/>
+            <ComboBox x:Name="Nationality" Margin="0,0,40,0" ItemsSource="{Binding Countries}" ItemTemplate="{StaticResource NationalityDataTemplate}" SelectedItem="{Binding Nationality}" IsEditable="True">
+                
+            </ComboBox>
         </StackPanel>
         <StackPanel Grid.Column="2">
             <Button x:Name="Save" Content="Zapisz" />

@@ -8,14 +8,19 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
+using System.Collections.Generic;
 
 namespace Kseo2.ViewModels
 {
     public class PersonEditViewModel : ValidatingScreen<PersonEditViewModel>
     {
         private readonly IPersonService _personService;
+        private readonly IDictionaryService<Country> _countryService;
+        private readonly UnitOfWork _uow;
+
+
         private Person _person { get; set; }
-        
+        private List<Country> _countries;
 
 
         #region Public properties
@@ -68,6 +73,45 @@ namespace Kseo2.ViewModels
                 OnPropertyChanged(value);
             }
         }
+
+        #region Sex properties
+        
+        [Required(ErrorMessage = @"Płeć jest wymagana!")]
+        public string Sex
+        {
+            get { return _person.Sex; }
+            set
+            {
+                _person.Sex = value;
+                NotifyOfPropertyChange(() => IsMale);
+                NotifyOfPropertyChange(() => IsFemale);
+                OnPropertyChanged(value);
+            }
+        }
+
+        public bool IsMale
+        {
+            get { return Sex=="M"; }
+            set 
+            { 
+                Sex = value ? "M" : "K";
+                NotifyOfPropertyChange(() => IsMale);
+            }
+        }
+
+        public bool IsFemale
+        {
+            get { return Sex == "K"; }
+            set
+            {
+                Sex = value ? "K" : "M";
+                NotifyOfPropertyChange(() => IsFemale);
+            }
+        } 
+
+        #endregion
+
+
 
 
         [Required(ErrorMessage = @"Nazwisko jest wymagane!", AllowEmptyStrings = false)]
@@ -177,12 +221,26 @@ namespace Kseo2.ViewModels
             }
         }
 
+        public List<Country> Countries
+        {
+            get { return _countries; }
+            set 
+            { 
+                _countries = value;
+                NotifyOfPropertyChange(() => Countries);
+            }
+        }
+
         #endregion
 
 
         public PersonEditViewModel()
         {
-            _personService = new PersonService();
+
+            _uow = new UnitOfWork();
+            _personService = new PersonService(_uow.Context());
+            _countryService = new DictionaryService<Country>(_uow.Context());
+            Countries = _countryService.GetAll(null);
             _person = new Person();
         }
                

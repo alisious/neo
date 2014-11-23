@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Kseo2.Model
 {
-    public abstract class DictionaryItem
+    public abstract class DictionaryItem<T> where T :class
     {
         public DictionaryItem()
         {
@@ -16,7 +16,7 @@ namespace Kseo2.Model
             LongName = String.Empty;
             DisplayOrder = 0;
             IsActive = true;
-            Subitems = new HashSet<DictionaryItem>();
+            Subitems = new HashSet<T>();
         }
 
         public int Id { get; set; }
@@ -26,6 +26,7 @@ namespace Kseo2.Model
         
         [Required]
         [StringLength(50)]
+        [Index("INX_NAME", IsUnique = true)]
         public string Name { get; set; }
 
         [StringLength(200)]
@@ -34,11 +35,11 @@ namespace Kseo2.Model
         public int DisplayOrder { get; set; }
 
         public bool IsActive { get; set; }
-        public virtual DictionaryItem Masteritem { get; set; }
-        public virtual ICollection<DictionaryItem> Subitems { get; set; }  
+        public virtual T Masteritem { get; set; }
+        public virtual ICollection<T> Subitems { get; set; }  
 
     }
 
     [Table("Person.Country")]
-    public partial class Country : DictionaryItem { }
+    public partial class Country : DictionaryItem<Country> { }
 }

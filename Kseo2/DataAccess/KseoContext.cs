@@ -21,16 +21,16 @@ namespace Kseo2.DataAccess
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Person>()
-                .HasOptional(e=>e.Nationality)
-                .WithMany()
-                .HasForeignKey(e => e.NationalityId);
+                .HasOptional(e => e.Nationality)
+                .WithMany();
+                
             
             modelBuilder.Entity<Person>()
                 .HasMany(e=>e.Citizenships)
                 .WithMany()
                 .Map(m => m.ToTable("Citizenship", "Person"));
 
-            modelBuilder.Entity<DictionaryItem>()
+            modelBuilder.Entity<Country>()
                 .HasMany(e => e.Subitems)
                 .WithOptional(x => x.Masteritem);
                 

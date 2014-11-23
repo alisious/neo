@@ -25,6 +25,9 @@ namespace Kseo2.Tests.UnitTests
         }
 
 
+
+
+
         [TestMethod]
         public void PersonService_Can_check_pesel_duplicate()
         {
@@ -72,6 +75,60 @@ namespace Kseo2.Tests.UnitTests
 
             //then
             Assert.IsNotNull(pDb);
+
+        }
+
+
+        [TestMethod]
+        public void mozna_dodac_nowa_osobe_z_narodowaoscia()
+        {
+
+            //given
+            var cs = new DictionaryService<Country>(_ctx);
+            var c = cs.GetSingle(1);
+
+            var ps = new PersonService(_ctx);
+            var p = new Person() { Pesel = "73020916558", FirstName = "JACEK", LastName = "KORPUSIK" };
+            p.Nationality = c;
+
+            //when
+            ps.AddPerson(p);
+            ps.SaveChanges();
+            var id = p.Id;
+            var pDb = ps.GetSingle(id);
+
+            //then
+            Assert.IsNotNull(c);
+            Assert.IsNotNull(pDb);
+            Assert.IsNotNull(pDb.Nationality);
+
+        }
+
+        [TestMethod]
+        public void mozna_dodac_nowa_osobe_z_wielokrotnym_obywatelstwem()
+        {
+
+            //given
+            var cs = new DictionaryService<Country>(_ctx);
+            var c1 = cs.GetSingle(1);
+            var c2 = cs.GetSingle(2);
+
+            var ps = new PersonService(_ctx);
+            var p = new Person() { Pesel = "73020916558", FirstName = "JACEK", LastName = "KORPUSIK" };
+            p.Citizenships.Add(c1);
+            p.Citizenships.Add(c2);
+
+            //when
+            ps.AddPerson(p);
+            ps.SaveChanges();
+            var id = p.Id;
+            var pDb = ps.GetSingle(id);
+
+            //then
+            Assert.IsNotNull(c1);
+            Assert.IsNotNull(c2);
+            Assert.IsNotNull(pDb);
+            Assert.AreEqual(2, pDb.Citizenships.Count);
 
         }
 

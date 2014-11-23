@@ -81,8 +81,7 @@ namespace Kseo2.Model
         [DisplayName("Nazwisko panieñskie matki")]
         public string MotherMaidenName { get; set; }
 
-        public int? NationalityId { get; set; }
-
+        
         [StringLength(1)]
         [DisplayName("P³eæ")]
         public string Sex { get; set; }
@@ -112,6 +111,7 @@ namespace Kseo2.Model
 
             } 
         }
+
 
         [DisplayName("Narodowoœæ")]
         public virtual Country Nationality { get; set; }

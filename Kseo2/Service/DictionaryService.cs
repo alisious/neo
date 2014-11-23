@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Kseo2.Service
 {
-    public class DictionaryService<T> :IDictionaryService<T> where T :DictionaryItem
+    public class DictionaryService<T> :IDictionaryService<T> where T :DictionaryItem<T>
     {
         private readonly KseoContext _context;
         
@@ -37,22 +37,22 @@ namespace Kseo2.Service
 
         public T GetSingle(int id)
         {
-            throw new NotImplementedException();
+            return _context.Set<T>().Find(id);
         }
 
-        public void AddItem(DictionaryItem newItem)
+        public void AddItem(T newItem)
         {
-            throw new NotImplementedException();
+            _context.Set<T>().Add(newItem);
         }
 
-        public void RemoveItem(DictionaryItem removedItem)
+        public void RemoveItem(T removedItem)
         {
-            throw new NotImplementedException();
+            _context.Set<T>().Remove(removedItem);
         }
 
         public void SaveChanges()
         {
-            throw new NotImplementedException();
+            _context.SaveChanges();
         }
     }
 }

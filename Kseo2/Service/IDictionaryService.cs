@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Kseo2.Service
 {
-    public interface IDictionaryService<T> where T :DictionaryItem
+    public interface IDictionaryService<T> where T :DictionaryItem<T>
     {
-        List<T> GetAll(T group=null);
-        List<T> GetAllByDisplayOrder(T group=null);
+        List<T> GetAll(T group);
+        List<T> GetAllByDisplayOrder(T group);
         T GetSingle(int id);
-        void AddItem(DictionaryItem newItem);
-        void RemoveItem(DictionaryItem removedItem);
+        void AddItem(T newItem);
+        void RemoveItem(T removedItem);
         void SaveChanges();
     }
 }
