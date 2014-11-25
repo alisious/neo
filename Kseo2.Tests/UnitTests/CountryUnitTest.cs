@@ -13,7 +13,7 @@ namespace Kseo2.Tests.UnitTests
         {
             //given
             var ctx = new KseoContext();
-            var c = new Country() { Name = "KONGO", LongName = "" };
+            var c = new Country() { Name = "KONGO", Description = "" };
             ctx.Countries.Add(c);
             ctx.SaveChanges();
 

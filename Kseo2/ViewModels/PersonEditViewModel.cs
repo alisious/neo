@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Kseo2.ViewModels
 {
@@ -255,7 +256,13 @@ namespace Kseo2.ViewModels
 
         }
 
-        #endregion
+        public HashSet<Country> Citizenships
+        {
+            get { return _person.Citizenships; }
+        }
+       #endregion
+
+
         public bool CanSave
         {
             get
@@ -273,7 +280,18 @@ namespace Kseo2.ViewModels
         #endregion
 
 
-        
+        public void EditCitizenships()
+        {
+            WindowManager _windowManager = new WindowManager();
+            CountrySelectViewModel vm = new CountrySelectViewModel(this.Countries);
+            vm.SetSelectedCountries(Citizenships);
+            if (_windowManager.ShowDialog(vm) == true)
+            {
+                _person.Citizenships = new HashSet<Country>(vm.GetSelectedCountries());
+
+                NotifyOfPropertyChange(() => Citizenships);
+            }
+        }
                
 
         public IResult Save()

@@ -117,7 +117,7 @@ namespace Kseo2.Model
         public virtual Country Nationality { get; set; }
 
         [DisplayName("Obywatelstwo")]
-        public virtual ICollection<Country> Citizenships { get; set; }
+        public virtual HashSet<Country> Citizenships { get; set; }
 
         
         #region Private methods

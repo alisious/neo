@@ -1,20 +1,3 @@
-Ôªøusing Kseo2.Model;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Kseo2.DataAccess
-{
-    public class KseoContextInitializer : DropCreateDatabaseAlways<KseoContext>
-    {
-        protected override void Seed(KseoContext context)
-        {
-
-
-         #region Inicjowanie s≈Çownik√≥w
 context.Countries.Add(new Country(){ShortName="AF", Name="AFGANISTAN", DisplayOrder=3});
 context.Countries.Add(new Country(){ShortName="AL", Name="ALBANIA", DisplayOrder=4});
 context.Countries.Add(new Country(){ShortName="DA", Name="ALGIERIA", DisplayOrder=5});
@@ -30,7 +13,7 @@ context.Countries.Add(new Country(){ShortName="AR", Name="ARMENIA", DisplayOrder
 context.Countries.Add(new Country(){ShortName="AD", Name="ARUBA", DisplayOrder=15});
 context.Countries.Add(new Country(){ShortName="AS", Name="AUSTRALIA", DisplayOrder=16});
 context.Countries.Add(new Country(){ShortName="AU", Name="AUSTRIA", DisplayOrder=17});
-context.Countries.Add(new Country(){ShortName="AZ", Name="AZERBEJD≈ªAN", DisplayOrder=18});
+context.Countries.Add(new Country(){ShortName="AZ", Name="AZERBEJDØAN", DisplayOrder=18});
 context.Countries.Add(new Country(){ShortName="BH", Name="BAHAMY", DisplayOrder=19});
 context.Countries.Add(new Country(){ShortName="BR", Name="BAHRJAN", DisplayOrder=20});
 context.Countries.Add(new Country(){ShortName="BC", Name="BANGLADESZ", DisplayOrder=21});
@@ -38,39 +21,39 @@ context.Countries.Add(new Country(){ShortName="BB", Name="BARBADOS", DisplayOrde
 context.Countries.Add(new Country(){ShortName="BE", Name="BELGIA", DisplayOrder=23});
 context.Countries.Add(new Country(){ShortName="BL", Name="BELIZE", DisplayOrder=24});
 context.Countries.Add(new Country(){ShortName="BM", Name="BERMUDY", DisplayOrder=25});
-context.Countries.Add(new Country(){ShortName="BP", Name="BEZPA≈ÉSTWOWIEC", DisplayOrder=26});
+context.Countries.Add(new Country(){ShortName="BP", Name="BEZPA—STWOWIEC", DisplayOrder=26});
 context.Countries.Add(new Country(){ShortName="BT", Name="BHUTAN", DisplayOrder=27});
-context.Countries.Add(new Country(){ShortName="BI", Name="BIA≈ÅORU≈ö", DisplayOrder=28});
+context.Countries.Add(new Country(){ShortName="BI", Name="BIA£ORUå", DisplayOrder=28});
 context.Countries.Add(new Country(){ShortName="BU", Name="BIRMA (MYANMAR)", DisplayOrder=29});
 context.Countries.Add(new Country(){ShortName="BO", Name="BOLIWIA", DisplayOrder=30});
-context.Countries.Add(new Country(){ShortName="YF", Name="BO≈öNIA,HERCEGOWINA", DisplayOrder=31});
+context.Countries.Add(new Country(){ShortName="YF", Name="BOåNIA,HERCEGOWINA", DisplayOrder=31});
 context.Countries.Add(new Country(){ShortName="BW", Name="BOTSWANA", DisplayOrder=32});
 context.Countries.Add(new Country(){ShortName="XX", Name="BRAK DANYCH", DisplayOrder=33});
 context.Countries.Add(new Country(){ShortName="BA", Name="BRAZYLIA", DisplayOrder=34});
 context.Countries.Add(new Country(){ShortName="BN", Name="BRUNEI", DisplayOrder=35});
 context.Countries.Add(new Country(){ShortName="BJ", Name="BRYTYJSKIE TERYTORIUM OCEANU INDYJSKIEGO", DisplayOrder=36});
-context.Countries.Add(new Country(){ShortName="BG", Name="BU≈ÅGARIA", DisplayOrder=37});
-context.Countries.Add(new Country(){ShortName="BK", Name="BURKINA FASO (G√ìRNA WOLTA)", DisplayOrder=38});
+context.Countries.Add(new Country(){ShortName="BG", Name="BU£GARIA", DisplayOrder=37});
+context.Countries.Add(new Country(){ShortName="BK", Name="BURKINA FASO (G”RNA WOLTA)", DisplayOrder=38});
 context.Countries.Add(new Country(){ShortName="BD", Name="BURUNDI", DisplayOrder=39});
 context.Countries.Add(new Country(){ShortName="CL", Name="CHILE", DisplayOrder=40});
 context.Countries.Add(new Country(){ShortName="CN", Name="CHINY", DisplayOrder=41});
 context.Countries.Add(new Country(){ShortName="YG", Name="CHORWACJA", DisplayOrder=42});
 context.Countries.Add(new Country(){ShortName="CP", Name="CYPR", DisplayOrder=43});
 context.Countries.Add(new Country(){ShortName="CD", Name="CZAD", DisplayOrder=44});
-context.Countries.Add(new Country(){ShortName="CS", Name="CZECHOS≈ÅOWACJA", DisplayOrder=45});
+context.Countries.Add(new Country(){ShortName="CS", Name="CZECHOS£OWACJA", DisplayOrder=45});
 context.Countries.Add(new Country(){ShortName="CZ", Name="CZECHY", DisplayOrder=46});
 context.Countries.Add(new Country(){ShortName="DN", Name="DANIA", DisplayOrder=47});
 context.Countries.Add(new Country(){ShortName="ZA", Name="DEMOKRATYCZNA REPUBLIKA KONGA (ZAIR)", DisplayOrder=48});
 context.Countries.Add(new Country(){ShortName="DM", Name="DOMINIKA", DisplayOrder=49});
 context.Countries.Add(new Country(){ShortName="DO", Name="DOMINIKANA", DisplayOrder=50});
-context.Countries.Add(new Country(){ShortName="DI", Name="D≈ªIBUTI", DisplayOrder=51});
+context.Countries.Add(new Country(){ShortName="DI", Name="DØIBUTI", DisplayOrder=51});
 context.Countries.Add(new Country(){ShortName="EG", Name="EGIPT", DisplayOrder=52});
 context.Countries.Add(new Country(){ShortName="EC", Name="EKWADOR", DisplayOrder=53});
 context.Countries.Add(new Country(){ShortName="ER", Name="ERYTREA", DisplayOrder=54});
 context.Countries.Add(new Country(){ShortName="ET", Name="ESTONIA", DisplayOrder=55});
 context.Countries.Add(new Country(){ShortName="EH", Name="ETIOPIA", DisplayOrder=56});
 context.Countries.Add(new Country(){ShortName="FL", Name="FALKLANDY/MALWINY", DisplayOrder=57});
-context.Countries.Add(new Country(){ShortName="FJ", Name="FID≈ªI", DisplayOrder=58});
+context.Countries.Add(new Country(){ShortName="FJ", Name="FIDØI", DisplayOrder=58});
 context.Countries.Add(new Country(){ShortName="PH", Name="FILIPINY", DisplayOrder=59});
 context.Countries.Add(new Country(){ShortName="FI", Name="FINLANDIA", DisplayOrder=60});
 context.Countries.Add(new Country(){ShortName="FR", Name="FRANCJA", DisplayOrder=61});
@@ -88,7 +71,7 @@ context.Countries.Add(new Country(){ShortName="GJ", Name="GWADELUPA", DisplayOrd
 context.Countries.Add(new Country(){ShortName="GT", Name="GWATEMALA", DisplayOrder=73});
 context.Countries.Add(new Country(){ShortName="GS", Name="GWINEA", DisplayOrder=74});
 context.Countries.Add(new Country(){ShortName="GE", Name="GWINEA BISSAU", DisplayOrder=75});
-context.Countries.Add(new Country(){ShortName="GK", Name="GWINEA R√ìWNIKOWA", DisplayOrder=76});
+context.Countries.Add(new Country(){ShortName="GK", Name="GWINEA R”WNIKOWA", DisplayOrder=76});
 context.Countries.Add(new Country(){ShortName="HT", Name="HAITI", DisplayOrder=77});
 context.Countries.Add(new Country(){ShortName="ES", Name="HISZPANIA", DisplayOrder=78});
 context.Countries.Add(new Country(){ShortName="NL", Name="HOLANDIA", DisplayOrder=79});
@@ -105,9 +88,9 @@ context.Countries.Add(new Country(){ShortName="JA", Name="JAMAJKA", DisplayOrder
 context.Countries.Add(new Country(){ShortName="JP", Name="JAPONIA", DisplayOrder=90});
 context.Countries.Add(new Country(){ShortName="YE", Name="JEMEN", DisplayOrder=91});
 context.Countries.Add(new Country(){ShortName="JO", Name="JORDANIA", DisplayOrder=92});
-context.Countries.Add(new Country(){ShortName="YU", Name="JUGOS≈ÅAWIA", DisplayOrder=93});
+context.Countries.Add(new Country(){ShortName="YU", Name="JUGOS£AWIA", DisplayOrder=93});
 context.Countries.Add(new Country(){ShortName="CY", Name="KAJMANY", DisplayOrder=94});
-context.Countries.Add(new Country(){ShortName="KH", Name="KAMBOD≈ªA (KAMPUCZA)", DisplayOrder=95});
+context.Countries.Add(new Country(){ShortName="KH", Name="KAMBODØA (KAMPUCZA)", DisplayOrder=95});
 context.Countries.Add(new Country(){ShortName="CM", Name="KAMERUN", DisplayOrder=96});
 context.Countries.Add(new Country(){ShortName="CA", Name="KANADA", DisplayOrder=97});
 context.Countries.Add(new Country(){ShortName="QA", Name="KATAR", DisplayOrder=98});
@@ -118,8 +101,8 @@ context.Countries.Add(new Country(){ShortName="KR", Name="KIRIBATI", DisplayOrde
 context.Countries.Add(new Country(){ShortName="CI", Name="KOLUMBIA", DisplayOrder=103});
 context.Countries.Add(new Country(){ShortName="KM", Name="KOMORY", DisplayOrder=104});
 context.Countries.Add(new Country(){ShortName="CO", Name="KONGO", DisplayOrder=105});
-context.Countries.Add(new Country(){ShortName="KO", Name="KOREA PO≈ÅUDNIOWA", DisplayOrder=106});
-context.Countries.Add(new Country(){ShortName="RK", Name="KOREA≈ÉSKA REPUBLIKA LUDOWO-DEMOKRATYCZNA (KOREA P√ì≈ÅNOCNA)", DisplayOrder=107});
+context.Countries.Add(new Country(){ShortName="KO", Name="KOREA PO£UDNIOWA", DisplayOrder=106});
+context.Countries.Add(new Country(){ShortName="RK", Name="KOREA—SKA REPUBLIKA LUDOWO-DEMOKRATYCZNA (KOREA P”£NOCNA)", DisplayOrder=107});
 context.Countries.Add(new Country(){ShortName="CR", Name="KOSTARYKA", DisplayOrder=108});
 context.Countries.Add(new Country(){ShortName="CB", Name="KUBA", DisplayOrder=109});
 context.Countries.Add(new Country(){ShortName="KW", Name="KUWEJT", DisplayOrder=110});
@@ -131,7 +114,7 @@ context.Countries.Add(new Country(){ShortName="LY", Name="LIBIA", DisplayOrder=1
 context.Countries.Add(new Country(){ShortName="LI", Name="LICHTENSTEIN", DisplayOrder=116});
 context.Countries.Add(new Country(){ShortName="LT", Name="LITWA", DisplayOrder=117});
 context.Countries.Add(new Country(){ShortName="LU", Name="LUKSEMBURG", DisplayOrder=118});
-context.Countries.Add(new Country(){ShortName="LO", Name="≈ÅOTWA", DisplayOrder=119});
+context.Countries.Add(new Country(){ShortName="LO", Name="£OTWA", DisplayOrder=119});
 context.Countries.Add(new Country(){ShortName="YH", Name="MACEDONIA", DisplayOrder=120});
 context.Countries.Add(new Country(){ShortName="MG", Name="MADAGASKAR", DisplayOrder=121});
 context.Countries.Add(new Country(){ShortName="MA", Name="MAKAU", DisplayOrder=122});
@@ -147,7 +130,7 @@ context.Countries.Add(new Country(){ShortName="MY", Name="MAURITIUS", DisplayOrd
 context.Countries.Add(new Country(){ShortName="MJ", Name="MAYOTTE", DisplayOrder=132});
 context.Countries.Add(new Country(){ShortName="ME", Name="MEKSYK", DisplayOrder=133});
 context.Countries.Add(new Country(){ShortName="MI", Name="MIKRONEZJA", DisplayOrder=134});
-context.Countries.Add(new Country(){ShortName="MO", Name="MO≈ÅDAWIA", DisplayOrder=135});
+context.Countries.Add(new Country(){ShortName="MO", Name="MO£DAWIA", DisplayOrder=135});
 context.Countries.Add(new Country(){ShortName="MC", Name="MONAKO", DisplayOrder=136});
 context.Countries.Add(new Country(){ShortName="MN", Name="MONGOLIA", DisplayOrder=137});
 context.Countries.Add(new Country(){ShortName="MQ", Name="MONTSERRAT", DisplayOrder=138});
@@ -179,27 +162,27 @@ context.Countries.Add(new Country(){ShortName="PL", Name="POLSKA", DisplayOrder=
 context.Countries.Add(new Country(){ShortName="PK", Name="POLSKIE BEZ NR PESEL", DisplayOrder=2});
 context.Countries.Add(new Country(){ShortName="PI", Name="PORTORYKO", DisplayOrder=163});
 context.Countries.Add(new Country(){ShortName="PR", Name="PORTUGALIA", DisplayOrder=164});
-context.Countries.Add(new Country(){ShortName="RS", Name="REPUBLIKA ≈öRODKOWOAFRYKA≈ÉSKA", DisplayOrder=165});
-context.Countries.Add(new Country(){ShortName="RZ", Name="REPUBLIKA ZIELONEGO PRZYLƒÑDKA", DisplayOrder=166});
+context.Countries.Add(new Country(){ShortName="RS", Name="REPUBLIKA åRODKOWOAFRYKA—SKA", DisplayOrder=165});
+context.Countries.Add(new Country(){ShortName="RZ", Name="REPUBLIKA ZIELONEGO PRZYL•DKA", DisplayOrder=166});
 context.Countries.Add(new Country(){ShortName="RE", Name="REUNION", DisplayOrder=167});
 context.Countries.Add(new Country(){ShortName="RH", Name="RODEZJA", DisplayOrder=168});
 context.Countries.Add(new Country(){ShortName="RO", Name="ROSJA", DisplayOrder=169});
-context.Countries.Add(new Country(){ShortName="RP", Name="RPA (REPUBLIKA PO≈ÅUDNIOWEJ AFRYKI)", DisplayOrder=170});
+context.Countries.Add(new Country(){ShortName="RP", Name="RPA (REPUBLIKA PO£UDNIOWEJ AFRYKI)", DisplayOrder=170});
 context.Countries.Add(new Country(){ShortName="RA", Name="RUANDA", DisplayOrder=171});
 context.Countries.Add(new Country(){ShortName="RU", Name="RUMUNIA", DisplayOrder=172});
 context.Countries.Add(new Country(){ShortName="SH", Name="SAHARA ZACHODNIA", DisplayOrder=173});
 context.Countries.Add(new Country(){ShortName="SY", Name="SALWADOR", DisplayOrder=174});
-context.Countries.Add(new Country(){ShortName="SS", Name="SAMOA AMERYKA≈ÉSKIE", DisplayOrder=175});
+context.Countries.Add(new Country(){ShortName="SS", Name="SAMOA AMERYKA—SKIE", DisplayOrder=175});
 context.Countries.Add(new Country(){ShortName="SN", Name="SAMOA ZACHODNIE", DisplayOrder=176});
 context.Countries.Add(new Country(){ShortName="SM", Name="SAN MARINO", DisplayOrder=177});
 context.Countries.Add(new Country(){ShortName="SE", Name="SENEGAL", DisplayOrder=178});
-context.Countries.Add(new Country(){ShortName="YJ", Name="SERBIA,CZARNOG√ìRA", DisplayOrder=179});
+context.Countries.Add(new Country(){ShortName="YJ", Name="SERBIA,CZARNOG”RA", DisplayOrder=179});
 context.Countries.Add(new Country(){ShortName="SC", Name="SESZELE", DisplayOrder=180});
 context.Countries.Add(new Country(){ShortName="SB", Name="SIERRA LEONE", DisplayOrder=181});
 context.Countries.Add(new Country(){ShortName="SK", Name="SIKKIM", DisplayOrder=182});
 context.Countries.Add(new Country(){ShortName="SG", Name="SINGAPUR", DisplayOrder=183});
-context.Countries.Add(new Country(){ShortName="SL", Name="S≈ÅOWACJA", DisplayOrder=184});
-context.Countries.Add(new Country(){ShortName="YI", Name="S≈ÅOWENIA", DisplayOrder=185});
+context.Countries.Add(new Country(){ShortName="SL", Name="S£OWACJA", DisplayOrder=184});
+context.Countries.Add(new Country(){ShortName="YI", Name="S£OWENIA", DisplayOrder=185});
 context.Countries.Add(new Country(){ShortName="SO", Name="SOMALIA", DisplayOrder=186});
 context.Countries.Add(new Country(){ShortName="LK", Name="SRI LANKA (CEJLON)", DisplayOrder=187});
 context.Countries.Add(new Country(){ShortName="SZ", Name="SUAZI", DisplayOrder=188});
@@ -208,7 +191,7 @@ context.Countries.Add(new Country(){ShortName="SR", Name="SURINAM", DisplayOrder
 context.Countries.Add(new Country(){ShortName="SP", Name="SYRIA", DisplayOrder=191});
 context.Countries.Add(new Country(){ShortName="CH", Name="SZWAJCARIA", DisplayOrder=192});
 context.Countries.Add(new Country(){ShortName="SW", Name="SZWECJA", DisplayOrder=193});
-context.Countries.Add(new Country(){ShortName="TA", Name="TAD≈ªYKISTAN", DisplayOrder=194});
+context.Countries.Add(new Country(){ShortName="TA", Name="TADØYKISTAN", DisplayOrder=194});
 context.Countries.Add(new Country(){ShortName="TH", Name="TAJLANDIA (SYJAM)", DisplayOrder=195});
 context.Countries.Add(new Country(){ShortName="TN", Name="TAJWAN", DisplayOrder=196});
 context.Countries.Add(new Country(){ShortName="TZ", Name="TANZANIA", DisplayOrder=197});
@@ -233,37 +216,22 @@ context.Countries.Add(new Country(){ShortName="VK", Name="WAKE", DisplayOrder=21
 context.Countries.Add(new Country(){ShortName="VF", Name="WALLIS I FUTUNA", DisplayOrder=216});
 context.Countries.Add(new Country(){ShortName="VA", Name="WATYKAN", DisplayOrder=217});
 context.Countries.Add(new Country(){ShortName="VE", Name="WENEZUELA", DisplayOrder=218});
-context.Countries.Add(new Country(){ShortName="HU", Name="WƒòGRY", DisplayOrder=219});
+context.Countries.Add(new Country(){ShortName="HU", Name="W GRY", DisplayOrder=219});
 context.Countries.Add(new Country(){ShortName="GB", Name="WIELKA BRYTANIA", DisplayOrder=220});
 context.Countries.Add(new Country(){ShortName="VD", Name="WIETNAM", DisplayOrder=221});
-context.Countries.Add(new Country(){ShortName="IT", Name="W≈ÅOCHY", DisplayOrder=222});
-context.Countries.Add(new Country(){ShortName="WN", Name="WSP√ìLNOTA NIEPODLEG≈ÅYCH PA≈ÉSTW", DisplayOrder=223});
-context.Countries.Add(new Country(){ShortName="WK", Name="WYBRZE≈ªE KO≈öCI S≈ÅONIOWEJ", DisplayOrder=224});
-context.Countries.Add(new Country(){ShortName="VO", Name="WYSPY BO≈ªEGO NARODZENIA", DisplayOrder=225});
+context.Countries.Add(new Country(){ShortName="IT", Name="W£OCHY", DisplayOrder=222});
+context.Countries.Add(new Country(){ShortName="WN", Name="WSP”LNOTA NIEPODLEG£YCH PA—STW", DisplayOrder=223});
+context.Countries.Add(new Country(){ShortName="WK", Name="WYBRZEØE KOåCI S£ONIOWEJ", DisplayOrder=224});
+context.Countries.Add(new Country(){ShortName="VO", Name="WYSPY BOØEGO NARODZENIA", DisplayOrder=225});
 context.Countries.Add(new Country(){ShortName="VC", Name="WYSPY COOKA", DisplayOrder=226});
 context.Countries.Add(new Country(){ShortName="VZ", Name="WYSPY DZIEWICZE (USA)", DisplayOrder=227});
 context.Countries.Add(new Country(){ShortName="VB", Name="WYSPY DZIEWICZE (WLK. BRYT.)", DisplayOrder=228});
 context.Countries.Add(new Country(){ShortName="VS", Name="WYSPY KOKOSOWE", DisplayOrder=229});
 context.Countries.Add(new Country(){ShortName="VM", Name="WYSPY MARSHALLA", DisplayOrder=230});
 context.Countries.Add(new Country(){ShortName="VL", Name="WYSPY SALOMONA", DisplayOrder=231});
-context.Countries.Add(new Country(){ShortName="VG", Name="WYSPY ≈öWIƒòTEGO TOMASZA I KSIƒò≈ªYCA", DisplayOrder=232});
-context.Countries.Add(new Country(){ShortName="CV", Name="WYSPY ZIELONEGO PRZYLƒÑDKA", DisplayOrder=233});
+context.Countries.Add(new Country(){ShortName="VG", Name="WYSPY åWI TEGO TOMASZA I KSI ØYCA", DisplayOrder=232});
+context.Countries.Add(new Country(){ShortName="CV", Name="WYSPY ZIELONEGO PRZYL•DKA", DisplayOrder=233});
 context.Countries.Add(new Country(){ShortName="ZM", Name="ZAMBIA", DisplayOrder=234});
 context.Countries.Add(new Country(){ShortName="ZI", Name="ZIMBABWE (RODEZJA)", DisplayOrder=235});
 context.Countries.Add(new Country(){ShortName="ZE", Name="ZJEDNOCZONE EMIRATY ARABSKIE", DisplayOrder=236});
 context.Countries.Add(new Country(){ShortName="SU", Name="ZSRR", DisplayOrder=237});
-             
-
-         #endregion
-
-
-            for (int i = 0; i < 100; i++)
-            {
-                string pesel = "00000000000"+i.ToString();
-                context.Persons.Add(new Person() { Pesel = pesel.Substring(pesel.Length-11,11), FirstName = "IMIƒò"+i.ToString(), LastName = "NAZWISKO"+i.ToString() });
-            }
-
-            context.SaveChanges();
-        }
-    }
-}

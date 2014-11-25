@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace Kseo2.Model
         public DictionaryItem()
         {
             ShortName = String.Empty;
-            LongName = String.Empty;
+            Description = String.Empty;
             DisplayOrder = 0;
             IsActive = true;
             Subitems = new HashSet<T>();
@@ -22,16 +23,20 @@ namespace Kseo2.Model
         public int Id { get; set; }
 
         [StringLength(10)]
+        [DisplayName("Skrót")]
         public string ShortName { get; set; }
         
         [Required]
-        [StringLength(50)]
+        [StringLength(100)]
         [Index("INX_NAME", IsUnique = true)]
+        [DisplayName("Nazwa")]
         public string Name { get; set; }
 
         [StringLength(200)]
-        public string LongName { get; set; }
+        [DisplayName("Opis")]
+        public string Description { get; set; }
 
+        [DisplayName("Kolejność")]
         public int DisplayOrder { get; set; }
 
         public bool IsActive { get; set; }
@@ -45,11 +50,5 @@ namespace Kseo2.Model
     }
 
     [Table("Person.Country")]
-    public partial class Country : DictionaryItem<Country>
-    {
-        public override string ToString()
-        {
-            return LongName;
-        }
-    }
+    public partial class Country : DictionaryItem<Country> {}
 }

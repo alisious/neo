@@ -28,25 +28,21 @@
             </Setter>
         </Style>
         <DataTemplate x:Key="NationalityDataTemplate">
-            <TextBlock Text="{Binding LongName}"/>
+            <TextBlock Text="{Binding Name}"/>
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20*"/>
-            <ColumnDefinition Width="500" />
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="140" />
-            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="10*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="1">
+        <StackPanel Grid.Column="1" Margin="5,5,5,5">
             <CheckBox x:Name="HasPesel" IsThreeState="False" FlowDirection="RightToLeft" HorizontalAlignment="Left" Content=":Posiada PESEL" FontWeight="{Binding BoldWhenHasPesel}" />
             <TextBox x:Name="Pesel" Visibility="{Binding PeselVisibility}"/>
-            <TextBlock Text="Płeć:" FontWeight="Bold"/>
-            <StackPanel Orientation="Horizontal">
-                <RadioButton x:Name="SexMale" IsChecked="{Binding IsMale}" Content="MĘŻCZYZNA" Margin="40,5,5,5" GroupName="Sex"/>
-                <RadioButton x:Name="SexFemale" IsChecked="{Binding IsFemale}" Content="KOBIETA" Margin="40,5,5,5" GroupName="Sex"/>
-                <TextBox x:Name="Sex" Width="20"  CharacterCasing="Upper"  />
-            </StackPanel>
+            
             <TextBlock Text="Nazwisko:" FontWeight="Bold"/>
             <TextBox x:Name="LastName" CharacterCasing="Upper"  />
             <TextBlock Text="Imię:" FontWeight="Bold"/>
@@ -71,7 +67,37 @@
                       IsEditable="True">
             </ComboBox>
         </StackPanel>
-        <StackPanel Grid.Column="2">
+        <StackPanel Grid.Column="2" Margin="5,13,5,-3">
+            <TextBlock Text="Płeć:" FontWeight="Bold"/>
+            <StackPanel Orientation="Horizontal">
+                <RadioButton x:Name="SexMale" IsChecked="{Binding IsMale}" Content="MĘŻCZYZNA" Margin="40,5,5,5" GroupName="Sex"/>
+                <RadioButton x:Name="SexFemale" IsChecked="{Binding IsFemale}" Content="KOBIETA" Margin="40,5,5,5" GroupName="Sex"/>
+                <TextBox x:Name="Sex" Width="20"  CharacterCasing="Upper"  />
+            </StackPanel>
+            <StackPanel Height="163">
+                <DockPanel  Margin="5,0,5,0" Height="156">
+                    <DockPanel DockPanel.Dock="Top">
+                        <Label Content="Obywatelstwo:" />
+                    </DockPanel>
+                    <StackPanel DockPanel.Dock="Right">
+                        <Button Name="EditCitizenships" Content="..." Width="20" TabIndex="12"/>
+                    </StackPanel>
+                    <ListBox x:Name="Citizenships" ItemsSource="{Binding Citizenships}" TabIndex="10" >
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Vertical" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Name="Country" Text="{Binding Path=Name}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Column="3">
             <Button x:Name="Save" Content="Zapisz" />
             <Button x:Name="Cancel" Content="Anuluj" />
         </StackPanel>
