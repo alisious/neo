@@ -36,10 +36,20 @@ namespace Kseo2.Model
 
         public bool IsActive { get; set; }
         public virtual T Masteritem { get; set; }
-        public virtual ICollection<T> Subitems { get; set; }  
+        public virtual ICollection<T> Subitems { get; set; }
 
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 
     [Table("Person.Country")]
-    public partial class Country : DictionaryItem<Country> { }
+    public partial class Country : DictionaryItem<Country>
+    {
+        public override string ToString()
+        {
+            return LongName;
+        }
+    }
 }

@@ -15,13 +15,35 @@ namespace Kseo2.ViewModels
     public class PersonEditViewModel : ValidatingScreen<PersonEditViewModel>
     {
         private readonly IPersonService _personService;
-        private readonly IDictionaryService<Country> _countryService;
         private readonly UnitOfWork _uow;
 
 
         private Person _person { get; set; }
         private List<Country> _countries;
 
+        #region Constructors
+
+
+        public PersonEditViewModel()
+        {
+
+            _uow = new UnitOfWork();
+            _uow.LoadDictionary(typeof(Country));
+            _personService = new PersonService(_uow.Context());
+            Countries = _uow.Countries;
+            _person = new Person();
+        }
+
+        public PersonEditViewModel(UnitOfWork uow)
+        {
+            _uow = uow;
+            _personService = new PersonService(_uow.Context());
+            Countries = _uow.Countries;
+            _person = new Person();
+        }
+
+
+        #endregion
 
         #region Public properties
 
@@ -209,6 +231,31 @@ namespace Kseo2.ViewModels
             }
         }
 
+        #region Narodwość i Obywatelstwo
+
+
+        public List<Country> Countries
+        {
+            get { return _countries; }
+            set
+            {
+                _countries = value;
+                NotifyOfPropertyChange(() => Countries);
+            }
+        }
+
+        public Country Nationality
+        {
+            get { return _person.Nationality; }
+            set
+            {
+                _person.Nationality = value;
+                NotifyOfPropertyChange(()=>Nationality);
+            }
+
+        }
+
+        #endregion
         public bool CanSave
         {
             get
@@ -221,28 +268,12 @@ namespace Kseo2.ViewModels
             }
         }
 
-        public List<Country> Countries
-        {
-            get { return _countries; }
-            set 
-            { 
-                _countries = value;
-                NotifyOfPropertyChange(() => Countries);
-            }
-        }
+        
 
         #endregion
 
 
-        public PersonEditViewModel()
-        {
-
-            _uow = new UnitOfWork();
-            _personService = new PersonService(_uow.Context());
-            _countryService = new DictionaryService<Country>(_uow.Context());
-            Countries = _countryService.GetAll(null);
-            _person = new Person();
-        }
+        
                
 
         public IResult Save()
@@ -285,7 +316,7 @@ namespace Kseo2.ViewModels
             NotifyOfPropertyChange(() => CanSave);
         }
 
+      
 
-       
     }
 }

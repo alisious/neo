@@ -12,11 +12,13 @@ namespace Kseo2.Service
     {
         private readonly KseoContext _context;
         
+ 
+        
         public DictionaryService()
         {
             _context = new KseoContext();
         }
-
+        
         public DictionaryService(KseoContext context)
         {
             _context = context;

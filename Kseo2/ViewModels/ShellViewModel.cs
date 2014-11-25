@@ -1,12 +1,17 @@
 ﻿using Caliburn.Micro;
 using Kseo2.Model;
+using Kseo2.Service;
 
 namespace Kseo2.ViewModels
 {
     public class ShellViewModel :Conductor<Screen>,IShell
     {
+        private UnitOfWork _uow;
+        
         public ShellViewModel()
-        {
+        {   
+            _uow = new UnitOfWork();
+            _uow.LoadDictionary(typeof(Country));
             ShowScreenOne();
         }
 
@@ -27,7 +32,7 @@ namespace Kseo2.ViewModels
 
         public void ShowEditPersonScreen()
         {
-            ActivateItem(new PersonEditViewModel());
+            ActivateItem(new PersonEditViewModel(_uow));
         }
 
         public void ShowDetailsPersonScreen()

@@ -64,8 +64,11 @@
             <TextBlock Text="Miejsce urodzenia:"/>
             <TextBox x:Name="BirthPlace" />
             <TextBlock Text="Narodowość:"/>
-            <ComboBox x:Name="Nationality" Margin="0,0,40,0" ItemsSource="{Binding Countries}" ItemTemplate="{StaticResource NationalityDataTemplate}" SelectedItem="{Binding Nationality}" IsEditable="True">
-                
+            <ComboBox x:Name="Nationality" Margin="0,0,40,0" 
+                      ItemsSource="{Binding Countries}" 
+                      ItemTemplate="{StaticResource NationalityDataTemplate}" 
+                      SelectedItem="{Binding Nationality}"
+                      IsEditable="True">
             </ComboBox>
         </StackPanel>
         <StackPanel Grid.Column="2">
