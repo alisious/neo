@@ -104,7 +104,7 @@
     <Compile Include="DatabaseScripts\Position.cs" />
     <Compile Include="DatabaseScripts\Prolongation.cs" />
     <Compile Include="DatabaseScripts\Purpose.cs" />
-    <Compile Include="DatabaseScripts\Question.cs" />
+    <Compile Include="Model\Question.cs" />
     <Compile Include="DatabaseScripts\QuestionForm.cs" />
     <Compile Include="DatabaseScripts\QuestionReason.cs" />
     <Compile Include="DatabaseScripts\Rank.cs" />
@@ -237,6 +237,7 @@
   <ItemGroup>
     <Content Include="DatabaseScripts\KseoContext20141106.sql" />
     <Content Include="DatabaseScripts\script.sql" />
+    <Resource Include="Images\preferences_composer.png" />
     <Resource Include="DatabaseScripts\Slowniki\Countries_new.txt" />
     <Resource Include="DatabaseScripts\Slowniki\Kraje.txt" />
     <Resource Include="DatabaseScripts\Slowniki\Obywatelstwa.txt" />

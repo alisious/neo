@@ -16,8 +16,13 @@ namespace Kseo2.Model
         {
             Citizenships = new HashSet<Country>();
             _hasPESEL = true;
+            MiddleName = String.Empty;
+            PreviousName = String.Empty;
             BirthDate = String.Empty;
+            BirthPlace = String.Empty;
             FatherName = String.Empty;
+            MotherName = String.Empty;
+            MotherMaidenName = String.Empty;
         }
 
 
@@ -26,7 +31,6 @@ namespace Kseo2.Model
         public int Id { get; set; }
 
         [Required]
-        //[RegularExpression("[0-9]{11}", ErrorMessage = "PESEL musi sk³adaæ siê z 11 cyfr.")]
         [StringLength(11)]
         [DisplayName("PESEL")]
         [Index("INX_PERSON_PESEL", IsUnique = true)]
@@ -36,8 +40,7 @@ namespace Kseo2.Model
             {
                 if(!HasPESEL)
                 {
-                    var p = String.Format("0000000000{0}", Id);
-                    _pesel = String.Format("A{0}",p.Substring(Id.ToString().Length,10));
+                    _pesel = Guid.NewGuid().ToString().Substring(1,11);
                 }
                 return _pesel;
             }
@@ -57,6 +60,10 @@ namespace Kseo2.Model
         [StringLength(30)]
         [DisplayName("Drugie imiê")]
         public string MiddleName { get; set; }
+
+        [StringLength(50)]
+        [DisplayName("Nazwisko poprzednie")]
+        public string PreviousName { get; set; }
 
         [Required(AllowEmptyStrings = true)]
         [StringLength(10)]

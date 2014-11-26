@@ -10,6 +10,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Kseo2.Helpers;
 
 namespace Kseo2.ViewModels
 {
@@ -84,7 +85,7 @@ namespace Kseo2.ViewModels
 
         public string PeselVisibility
         {
-            get { return HasPesel ? "Visible" : "Collapsed"; }
+            get { return HasPesel ? "Visible" : "Hidden"; }
         }
 
         [RequiredEx(ErrorMessage=@"PESEL jest wymagany!",GuardProperty = "HasPesel")]
@@ -96,6 +97,17 @@ namespace Kseo2.ViewModels
             set
             {
                 _person.Pesel = value;
+                if (value.Length >= 6 && String.IsNullOrEmpty(BirthDate))
+                {
+                    var d = PeselValidator.GetBirthDateFromPESEL(value);
+                    if (d.HasValue)
+                        BirthDate = d.Value.ToShortDateString();
+                }
+                if (value.Length>=9 && String.IsNullOrEmpty(Sex))
+                {
+                    Sex = PeselValidator.GetSexFromPESEL(value);
+                }
+                
                 OnPropertyChanged(value);
             }
         }
@@ -176,6 +188,16 @@ namespace Kseo2.ViewModels
             }
         }
 
+        public string PreviousName
+        {
+            get { return _person.PreviousName; }
+            set
+            {
+                _person.PreviousName = value;
+                NotifyOfPropertyChange(() => PreviousName);
+
+            }
+        }
         
 
         [RequiredEx(ErrorMessage = @"Imię ojca jest wymagane w przypadku braku PESEL!", AllowEmptyStrings = false,GuardProperty = "HasNoPesel")]

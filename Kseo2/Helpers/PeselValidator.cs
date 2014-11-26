@@ -59,7 +59,7 @@ namespace Kseo2.Helpers
         {
             //Policz rok z uwzględnieniem XIX, XXI, XXII i XXIII wieku
             List<int> aInt = new List<int>();
-            for (int i = 0; i < 11; i++)
+            for (int i = 0; i < 6 ; i++)
             {
                 aInt.Add(int.Parse(pesel.Substring(i, 1)));
             }

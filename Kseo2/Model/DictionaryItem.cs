@@ -51,6 +51,12 @@ namespace Kseo2.Model
 
     [Table("Person.Country")]
     public partial class Country : DictionaryItem<Country> {}
+    [Table("Verification.QuestionForm")]
+    public partial class QuestionForm : DictionaryItem<QuestionForm> { }
+    [Table("Verification.QuestionReason")]
+    public partial class QuestionReason : DictionaryItem<QuestionReason> { }
+    [Table("Common.Rank")]
+    public partial class Rank :DictionaryItem<Rank> {}
 
     
 }

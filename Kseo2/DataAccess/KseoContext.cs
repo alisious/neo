@@ -33,9 +33,18 @@ namespace Kseo2.DataAccess
             modelBuilder.Entity<Country>()
                 .HasMany(e => e.Subitems)
                 .WithOptional(x => x.Masteritem);
-                
-            
 
+            modelBuilder.Entity<Rank>()
+                  .HasMany(e => e.Subitems)
+                  .WithOptional(x => x.Masteritem);
+
+            modelBuilder.Entity<QuestionForm>()
+                .HasMany(e => e.Subitems)
+                .WithOptional(x => x.Masteritem);
+
+            modelBuilder.Entity<QuestionReason>()
+                .HasMany(e => e.Subitems)
+                .WithOptional(x => x.Masteritem);
 
             //modelBuilder.Entity<Person>()
             //    .HasMany<Verification>(p => p.Verifications)

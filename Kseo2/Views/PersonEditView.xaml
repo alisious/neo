@@ -4,33 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="1024"
+             d:DesignHeight="500" d:DesignWidth="800"
              Background="LightYellow">
     <UserControl.Resources>
-        <Style TargetType="{x:Type TextBox}">
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="0,2,40,2" />
-            <Setter Property="Validation.ErrorTemplate">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <DockPanel LastChildFill="true">
-                            <Border Background="Red" DockPanel.Dock="Right" Margin="5,0,0,0" Width="20" Height="20" CornerRadius="10"
-									ToolTip="{Binding ElementName=customAdorner, Path=AdornedElement.(Validation.Errors).CurrentItem.ErrorContent}">
-                                <TextBlock Text="!" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="White">
-                                </TextBlock>
-                            </Border>
-                            <AdornedElementPlaceholder Name="customAdorner" VerticalAlignment="Center" >
-                                <Border BorderBrush="Red" BorderThickness="1" />
-                            </AdornedElementPlaceholder>
-                        </DockPanel>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <DataTemplate x:Key="NationalityDataTemplate">
-            <TextBlock Text="{Binding Name}"/>
-        </DataTemplate>
-    </UserControl.Resources>
+        
+     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10*"/>
@@ -41,46 +19,51 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="1" Margin="5,5,5,5">
             <CheckBox x:Name="HasPesel" IsThreeState="False" FlowDirection="RightToLeft" HorizontalAlignment="Left" Content=":Posiada PESEL" FontWeight="{Binding BoldWhenHasPesel}" />
-            <TextBox x:Name="Pesel" Visibility="{Binding PeselVisibility}"/>
-            
+            <TextBox x:Name="Pesel" Visibility="{Binding PeselVisibility}" />
+            <TextBlock Text="Płeć:" FontWeight="Bold"/>
+            <StackPanel Orientation="Horizontal" Height="20">
+                <RadioButton x:Name="SexMale" IsChecked="{Binding IsMale}" Content="MĘŻCZYZNA" Margin="25,0,0,0" GroupName="Sex"/>
+                <RadioButton x:Name="SexFemale" IsChecked="{Binding IsFemale}" Content="KOBIETA" Margin="20,0,0,0" GroupName="Sex"/>
+                <TextBox x:Name="Sex" Width="0"    />
+            </StackPanel>
             <TextBlock Text="Nazwisko:" FontWeight="Bold"/>
-            <TextBox x:Name="LastName" CharacterCasing="Upper"  />
+            <TextBox x:Name="LastName"   />
             <TextBlock Text="Imię:" FontWeight="Bold"/>
-            <TextBox x:Name="FirstName" CharacterCasing="Upper" />
+            <TextBox x:Name="FirstName"  />
             <TextBlock Text="Drugie imię:"/>
             <TextBox x:Name="MiddleName" />
+            <TextBlock Text="Nazwisko poprzednie:" />
+            <TextBox x:Name="PreviousName"   />
             <TextBlock Text="Imię ojca:" FontWeight="{Binding BoldWhenHasNoPesel}"/>
-            <TextBox x:Name="FatherName" />
+            <TextBox x:Name="FatherName"/>
             <TextBlock Text="Imię matki:"/>
             <TextBox x:Name="MotherName" />
             <TextBlock Text="Nazwisko rodowe matki:"/>
             <TextBox x:Name="MotherMaidenName" />
+        </StackPanel>
+        <StackPanel Grid.Column="2" Margin="5,5,5,5">
             <TextBlock Text="Data urodzenia (RRRR-MM-DD):" FontWeight="{Binding BoldWhenHasNoPesel}"/>
             <TextBox x:Name="BirthDate"  />
-            <TextBlock Text="Miejsce urodzenia:"/>
+            <TextBlock Text="Miejsce urodzenia:" />
             <TextBox x:Name="BirthPlace" />
             <TextBlock Text="Narodowość:"/>
             <ComboBox x:Name="Nationality" Margin="0,0,40,0" 
                       ItemsSource="{Binding Countries}" 
-                      ItemTemplate="{StaticResource NationalityDataTemplate}" 
                       SelectedItem="{Binding Nationality}"
+                      SelectedValuePath="Name"
                       IsEditable="True">
             </ComboBox>
-        </StackPanel>
-        <StackPanel Grid.Column="2" Margin="5,13,5,-3">
-            <TextBlock Text="Płeć:" FontWeight="Bold"/>
-            <StackPanel Orientation="Horizontal">
-                <RadioButton x:Name="SexMale" IsChecked="{Binding IsMale}" Content="MĘŻCZYZNA" Margin="40,5,5,5" GroupName="Sex"/>
-                <RadioButton x:Name="SexFemale" IsChecked="{Binding IsFemale}" Content="KOBIETA" Margin="40,5,5,5" GroupName="Sex"/>
-                <TextBox x:Name="Sex" Width="0"  CharacterCasing="Upper"  />
-            </StackPanel>
-            <StackPanel Height="163">
-                <DockPanel  Margin="5,0,5,0" Height="156">
-                    <DockPanel DockPanel.Dock="Top">
-                        <Label Content="Obywatelstwo:" />
-                    </DockPanel>
+            
+                <DockPanel  Margin="0,0,5,0" Height="187">
+                    <TextBlock DockPanel.Dock="Top" Text="Obywatelstwo:"/>
                     <StackPanel DockPanel.Dock="Right">
-                        <Button Name="EditCitizenships" Content="..." Width="20" TabIndex="12"/>
+                        <Button Name="EditCitizenships" Width="40" TabIndex="12" Margin="0">
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="..\Images\preferences_composer.png" Width="30" Height="30" />
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
                     </StackPanel>
                     <ListBox x:Name="Citizenships" ItemsSource="{Binding Citizenships}" TabIndex="10" >
                         <ListBox.ItemsPanel>
@@ -95,7 +78,7 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
                 </DockPanel>
-            </StackPanel>
+            
         </StackPanel>
         <StackPanel Grid.Column="3">
             <Button x:Name="Save" Content="Zapisz" />
