@@ -72,7 +72,7 @@
             <StackPanel Orientation="Horizontal">
                 <RadioButton x:Name="SexMale" IsChecked="{Binding IsMale}" Content="MĘŻCZYZNA" Margin="40,5,5,5" GroupName="Sex"/>
                 <RadioButton x:Name="SexFemale" IsChecked="{Binding IsFemale}" Content="KOBIETA" Margin="40,5,5,5" GroupName="Sex"/>
-                <TextBox x:Name="Sex" Width="20"  CharacterCasing="Upper"  />
+                <TextBox x:Name="Sex" Width="0"  CharacterCasing="Upper"  />
             </StackPanel>
             <StackPanel Height="163">
                 <DockPanel  Margin="5,0,5,0" Height="156">

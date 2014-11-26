@@ -21,6 +21,7 @@ namespace Kseo2.ViewModels
 
         private Person _person { get; set; }
         private List<Country> _countries;
+        
 
         #region Constructors
 
@@ -32,6 +33,7 @@ namespace Kseo2.ViewModels
             _uow.LoadDictionary(typeof(Country));
             _personService = new PersonService(_uow.Context());
             Countries = _uow.Countries;
+            
             _person = new Person();
         }
 
@@ -40,6 +42,7 @@ namespace Kseo2.ViewModels
             _uow = uow;
             _personService = new PersonService(_uow.Context());
             Countries = _uow.Countries;
+            
             _person = new Person();
         }
 
@@ -98,7 +101,10 @@ namespace Kseo2.ViewModels
         }
 
         #region Sex properties
-        
+
+       
+
+
         [Required(ErrorMessage = @"Płeć jest wymagana!")]
         public string Sex
         {
@@ -231,6 +237,10 @@ namespace Kseo2.ViewModels
 
             }
         }
+
+
+        
+
 
         #region Narodwość i Obywatelstwo
 

@@ -51,4 +51,6 @@ namespace Kseo2.Model
 
     [Table("Person.Country")]
     public partial class Country : DictionaryItem<Country> {}
+
+    
 }
