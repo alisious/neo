@@ -38,7 +38,7 @@ namespace Kseo2.Service
             get
             {
                 if (_context == null)
-                    _countries = _countryService.GetAllByDisplayOrder(null);
+                    _countries = _countryService.GetItems();
                 return _countries;
             }
         }
@@ -47,7 +47,7 @@ namespace Kseo2.Service
 
         public void LoadDictionary(Type type)
         {
-            if (type == typeof (Country)) _countries = _countryService.GetAllByDisplayOrder(null);
+            if (type == typeof (Country)) _countries = _countryService.GetItems();
         }
     }
 }

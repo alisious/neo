@@ -24,19 +24,18 @@ namespace Kseo2.Service
             _context = context;
         }
 
-        public List<T> GetAll(T group = null)
+        public List<T> GetItems(bool activeOnly=true,bool byDisplayOrder=true, T group = null)
         {
-            IQueryable<T> query = _context.Set<T>();
-            return query.OrderBy(x => x.Name).ToList<T>();
-        }
+            IQueryable<T> query = _context.Set<T>().Include("Subitems").Where(x=>x.Masteritem==group);
+            if (activeOnly) { query = query.Where(x => x.IsActive == true); }
+            if (byDisplayOrder)
+            { query = query.OrderBy(x => x.DisplayOrder); }
+            else
+            { query = query.OrderBy(x => x.Name); }
 
-        public List<T> GetAllByDisplayOrder(T group = null)
-        {
-            IQueryable<T> query = _context.Set<T>();
-            return (group==null) ? query.OrderBy(x => x.DisplayOrder).ToList<T>()
-                : query.OrderBy(x => x.DisplayOrder).ToList<T>();
+            return query.ToList<T>();
         }
-
+        
         public T GetSingle(int id)
         {
             return _context.Set<T>().Find(id);

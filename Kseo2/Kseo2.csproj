@@ -81,37 +81,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DatabaseScripts\Activity.cs" />
-    <Compile Include="DatabaseScripts\ActivityType.cs" />
-    <Compile Include="DatabaseScripts\Category.cs" />
-    <Compile Include="DatabaseScripts\ConductingOfficer.cs" />
-    <Compile Include="DatabaseScripts\ConductingUnit.cs" />
-    <Compile Include="DatabaseScripts\Cooperation.cs" />
-    <Compile Include="DatabaseScripts\CooperationEndReason.cs" />
-    <Compile Include="DatabaseScripts\Employee.cs" />
-    <Compile Include="DatabaseScripts\Interaction.cs" />
-    <Compile Include="DatabaseScripts\InvolvedPerson.cs" />
-    <Compile Include="DatabaseScripts\InvolveType.cs" />
-    <Compile Include="DatabaseScripts\Issue.cs" />
-    <Compile Include="DatabaseScripts\IssueCharakteristic.cs" />
-    <Compile Include="DatabaseScripts\IssueType.cs" />
-    <Compile Include="DatabaseScripts\Model1.cs" />
-    <Compile Include="DatabaseScripts\ObtainingBase.cs" />
-    <Compile Include="DatabaseScripts\Operator.cs" />
-    <Compile Include="DatabaseScripts\Organization.cs" />
-    <Compile Include="DatabaseScripts\OrganizationalUnit.cs" />
-    <Compile Include="DatabaseScripts\PersonAlias.cs" />
-    <Compile Include="DatabaseScripts\Position.cs" />
-    <Compile Include="DatabaseScripts\Prolongation.cs" />
-    <Compile Include="DatabaseScripts\Purpose.cs" />
+    <Compile Include="Model\Organization.cs" />
+    <Compile Include="Model\OrganizationalUnit.cs" />
     <Compile Include="Model\Question.cs" />
-    <Compile Include="DatabaseScripts\QuestionForm.cs" />
-    <Compile Include="DatabaseScripts\QuestionReason.cs" />
-    <Compile Include="DatabaseScripts\Rank.cs" />
-    <Compile Include="DatabaseScripts\Reservation.cs" />
-    <Compile Include="DatabaseScripts\ReservationEndReason.cs" />
-    <Compile Include="DatabaseScripts\Suspension.cs" />
-    <Compile Include="DatabaseScripts\Verification.cs" />
     <Compile Include="Helpers\PeselValidator.cs" />
     <Compile Include="Model\DictionaryItem.cs" />
     <Compile Include="Service\DictionaryService.cs" />
@@ -235,8 +207,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="DatabaseScripts\KseoContext20141106.sql" />
-    <Content Include="DatabaseScripts\script.sql" />
     <Resource Include="Images\preferences_composer.png" />
     <Resource Include="DatabaseScripts\Slowniki\Countries_new.txt" />
     <Resource Include="DatabaseScripts\Slowniki\Kraje.txt" />

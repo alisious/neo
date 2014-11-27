@@ -9,8 +9,7 @@ namespace Kseo2.Service
 {
     public interface IDictionaryService<T> where T :DictionaryItem<T>
     {
-        List<T> GetAll(T group);
-        List<T> GetAllByDisplayOrder(T group);
+        List<T> GetItems(bool activeOnly,bool byDisplayOrder, T group);
         T GetSingle(int id);
         void AddItem(T newItem);
         void RemoveItem(T removedItem);

@@ -28,7 +28,7 @@ namespace Kseo2
         public bool IsActive { get; set; }
 
         public virtual ICollection<OrganizationalUnit> OrganizationalUnit { get; set; }
-
         public virtual ICollection<Question> Question { get; set; }
+        
     }
 }

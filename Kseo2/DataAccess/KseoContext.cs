@@ -16,6 +16,13 @@ namespace Kseo2.DataAccess
 
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Person> Persons { get; set; }
+        public virtual DbSet<Rank> Ranks { get; set; }
+        public virtual DbSet<Organization> Organizations { get; set; }
+        public virtual DbSet<OrganizationalUnit> OrganizationalUnits { get; set; }
+        public virtual DbSet<Question> Questions { get; set; }
+        public virtual DbSet<QuestionForm> QuestionForms { get; set; }
+        public virtual DbSet<QuestionReason> QuestionReasons { get; set; }
+
         //public virtual DbSet<Verification> Verifications { get; set; } 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -23,8 +30,7 @@ namespace Kseo2.DataAccess
             modelBuilder.Entity<Person>()
                 .HasOptional(e => e.Nationality)
                 .WithMany();
-                
-            
+                       
             modelBuilder.Entity<Person>()
                 .HasMany(e=>e.Citizenships)
                 .WithMany()
@@ -45,6 +51,24 @@ namespace Kseo2.DataAccess
             modelBuilder.Entity<QuestionReason>()
                 .HasMany(e => e.Subitems)
                 .WithOptional(x => x.Masteritem);
+
+            modelBuilder.Entity<Organization>()
+                .HasMany(e => e.OrganizationalUnits)
+                .WithRequired(e => e.Organization)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<OrganizationalUnit>()
+                .HasMany(e => e.Subordinates)
+                .WithOptional(x => x.MasterUnit);
+               
+
+            /*
+            modelBuilder.Entity<Question>()
+                .HasMany(e => e.Verification)
+                .WithRequired(e => e.Question)
+                .WillCascadeOnDelete(false);
+            */
+
 
             //modelBuilder.Entity<Person>()
             //    .HasMany<Verification>(p => p.Verifications)
