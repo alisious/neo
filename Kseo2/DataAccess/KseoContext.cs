@@ -22,14 +22,13 @@ namespace Kseo2.DataAccess
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<QuestionForm> QuestionForms { get; set; }
         public virtual DbSet<QuestionReason> QuestionReasons { get; set; }
-
-        //public virtual DbSet<Verification> Verifications { get; set; } 
+        public virtual DbSet<Verification> Verifications { get; set; }
+        public virtual DbSet<Operator> Operators { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Person>()
-                .HasOptional(e => e.Nationality)
-                .WithMany();
+                .HasOptional(e => e.Nationality);
                        
             modelBuilder.Entity<Person>()
                 .HasMany(e=>e.Citizenships)
@@ -59,9 +58,21 @@ namespace Kseo2.DataAccess
 
             modelBuilder.Entity<OrganizationalUnit>()
                 .HasMany(e => e.Subordinates)
-                .WithOptional(x => x.MasterUnit);
-               
+                .WithOptional(x => x.MasterUnit); 
 
+            modelBuilder.Entity<Verification>()
+                .HasRequired(e => e.QuestionReason);
+
+            modelBuilder.Entity<Verification>()
+                .HasRequired(e => e.Operator);
+
+            modelBuilder.Entity<Verification>()
+                .HasRequired(e => e.Person);
+
+            modelBuilder.Entity<Verification>()
+                .HasRequired(e => e.Question);
+            
+            
             /*
             modelBuilder.Entity<Question>()
                 .HasMany(e => e.Verification)
@@ -73,7 +84,7 @@ namespace Kseo2.DataAccess
             //modelBuilder.Entity<Person>()
             //    .HasMany<Verification>(p => p.Verifications)
             //    .WithRequired(v => v.Person);
-            
+
         }
     }
 }

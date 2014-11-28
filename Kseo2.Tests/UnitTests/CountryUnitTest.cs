@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Kseo2.Model;
 using Kseo2.DataAccess;
 
-namespace Kseo2.Tests.UnitTests
+namespace Kseo2.Tests.SprawdzeniaUnitTest
 {
     [TestClass]
     public class CountryUnitTest

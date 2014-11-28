@@ -81,11 +81,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\Operator.cs" />
     <Compile Include="Model\Organization.cs" />
     <Compile Include="Model\OrganizationalUnit.cs" />
     <Compile Include="Model\Question.cs" />
     <Compile Include="Helpers\PeselValidator.cs" />
     <Compile Include="Model\DictionaryItem.cs" />
+    <Compile Include="Model\Verification.cs" />
     <Compile Include="Service\DictionaryService.cs" />
     <Compile Include="Service\IDictionaryService.cs" />
     <Compile Include="Service\IPersonService.cs" />

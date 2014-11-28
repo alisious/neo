@@ -4,7 +4,7 @@ using Kseo2.ViewModels;
 using Kseo2.Service;
 using Kseo2.DataAccess;
 
-namespace Kseo2.Tests.UnitTests
+namespace Kseo2.Tests.SprawdzeniaUnitTest
 {
     [TestClass]
     public class SearchPersonViewModelUnitTest

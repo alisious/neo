@@ -5,7 +5,7 @@ using Kseo2.Service;
 using Kseo2.Model;
 using System.Data.Entity.Infrastructure;
 
-namespace Kseo2.Tests.UnitTests
+namespace Kseo2.Tests.SprawdzeniaUnitTest
 {
     [TestClass]
     public class PersonServiceUnitTest

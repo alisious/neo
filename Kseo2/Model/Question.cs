@@ -11,14 +11,20 @@ namespace Kseo2.Model
     {
         public Question()
         {
-            //Verification = new HashSet<Verification>();
+            
         }
 
         public int Id { get; set; }
 
+        [StringLength(2)]
+        public string Classification { get; set; }
+
         [StringLength(50)]
-        public string DocNum { get; set; }
-        
+        public string RegNumber { get; set; }
+
+        [Column(TypeName = "date")]
+        public DateTime RegDate { get; set; }
+
         [Required]
         [StringLength(50)]
         public string Asker { get; set; }
@@ -29,17 +35,14 @@ namespace Kseo2.Model
         [StringLength(100)]
         public string SignerPosition { get; set; }
         
-        public virtual Organization Organization { get; set; }
+        public virtual Organization AskerOrganization { get; set; }
 
-        public virtual OrganizationalUnit OrganizationalUnit { get; set; }
+        public virtual OrganizationalUnit AskerOrganizationalUnit { get; set; }
             
         public virtual Rank AskerRank { get; set; }
 
         public virtual QuestionForm QuestionForm { get; set; }
+       
 
-        //przenieœæ do Verification
-        //public virtual QuestionReason QuestionReason { get; set; }
-
-        //public virtual ICollection<Verification> Verification { get; set; }
     }
 }
