@@ -9,11 +9,13 @@
     [Table("Verification.Verification")]
     public class Verification :Entity
     {
-        public Verification()
+        public Verification(User author, Question question = null)
         {
-            ResultsNote = String.Empty;
+            Answer = String.Empty;
             Notes = String.Empty;
-
+            Question = question ?? new Question();
+            Author = author;
+            Citizenships = new HashSet<Country>();
         }
 
         public int Id { get; set; }
@@ -21,44 +23,41 @@
         [StringLength(11)]
         public string Pesel { get; set; }
         [StringLength(50)]
-        public string Imiona { get; set; }
+        public string FirstName { get; set; }
         [StringLength(50)]
-        public string Nazwiska { get; set; }
+        public string LastName { get; set; }
         [StringLength(50)]
-        public string ImieOjca { get; set; }
+        public string FatherName { get; set; }
         [StringLength(50)]
-        public string ImieMatki { get; set; }
+        public string MotherName { get; set; }
         [StringLength(50)]
-        public string NazwiskoRodoweMatki { get; set; }
+        public string MotherMaidenName { get; set; }
         [StringLength(10)]
-        public string DataUrodzenia { get; set; }
+        public string BirthDate { get; set; }
         [StringLength(100)]
-        public string MiejsceUrodzenia { get; set; }
+        public string BirthPlace { get; set; }
 
         [Column(TypeName = "ntext")]
-        public string ResultsNote { get; set; }
+        public string Answer { get; set; }
 
         public bool IsRegistered { get; set; }
-        
-        [StringLength(2)]
-        public string KlauzulaOdpowiedzi { get; set; }
-        [Column(TypeName = "ntext")]
-        public string TrescOdpowiedzi { get; set; }
 
 
         [Column(TypeName = "ntext")]
         public string Notes { get; set; }
-        
+
+        [Column(TypeName = "datetime2")]
         public DateTime CreationTime { get; set; }
 
         public virtual QuestionReason QuestionReason { get; set; }
-        public virtual Operator Operator { get; set; }
-        public virtual Question Question { get; set; }
-        public virtual Person Person { get; set; }
+        public User Author { get; set; }
+        public Question Question { get; set; }
 
-        public Odpowiedz Odpowiedz {get; protected set; }
+        public virtual Person FoundedPerson { get; set; }
 
-
+        public ICollection<Country> Citizenships { get; set; }
+        public Country Nationality { get; set; }
+       
     }
 
 

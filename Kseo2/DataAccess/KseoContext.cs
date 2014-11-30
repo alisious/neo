@@ -23,7 +23,7 @@ namespace Kseo2.DataAccess
         public virtual DbSet<QuestionForm> QuestionForms { get; set; }
         public virtual DbSet<QuestionReason> QuestionReasons { get; set; }
         public virtual DbSet<Verification> Verifications { get; set; }
-        public virtual DbSet<Operator> Operators { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -52,9 +52,8 @@ namespace Kseo2.DataAccess
                 .WithOptional(x => x.Masteritem);
 
             modelBuilder.Entity<Organization>()
-                .HasMany(e => e.OrganizationalUnits)
-                .WithRequired(e => e.Organization)
-                .WillCascadeOnDelete(false);
+                .HasMany(e => e.Subitems)
+                .WithOptional(x => x.Masteritem);
 
             modelBuilder.Entity<OrganizationalUnit>()
                 .HasMany(e => e.Subordinates)
@@ -64,15 +63,21 @@ namespace Kseo2.DataAccess
                 .HasRequired(e => e.QuestionReason);
 
             modelBuilder.Entity<Verification>()
-                .HasRequired(e => e.Operator);
+                .HasRequired(e => e.Author);
 
             modelBuilder.Entity<Verification>()
-                .HasRequired(e => e.Person);
+                .HasRequired(e => e.FoundedPerson);
 
             modelBuilder.Entity<Verification>()
-                .HasRequired(e => e.Question);
-            
-            
+                .HasRequired(e => e.Question)
+                .WithMany(q => q.Verifications);
+
+            modelBuilder.Entity<Verification>()
+                .HasMany(e => e.Citizenships)
+                .WithMany()
+                .Map(m => m.ToTable("Citizenship", "Verification"));
+
+
             /*
             modelBuilder.Entity<Question>()
                 .HasMany(e => e.Verification)

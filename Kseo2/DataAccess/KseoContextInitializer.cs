@@ -316,22 +316,29 @@ namespace Kseo2.DataAccess
             var zw = new Organization() { ShortName="ŻW", Name = "ŻANDARMERIA WOJSKOWA", Description = "", DisplayOrder = 10 };
             context.Organizations.Add(zw);
             var kg = new OrganizationalUnit(){ Name = "KG ŻW", Description = "KOMENDA GŁÓWNA ŻANDARMERII WOJSKOWEJ", DisplayOrder = 101, Organization = zw };
-            zw.OrganizationalUnits.Add(kg);
-            context.OrganizationalUnits.Add(new OrganizationalUnit() { Name = "MOŻW", Description = "MAZOWIECKI ODDZIAŁ ŻANDARMERII WOJSKOWEJ", DisplayOrder = 101, MasterUnit = kg, Organization = zw });
-            context.OrganizationalUnits.Add(new OrganizationalUnit() { Name = "ODDZIAŁ KRYMINALNY ZDŚ", Description = "ODDZIAŁ KRYMINALNY", DisplayOrder = 102, MasterUnit = kg, Organization = zw });
+            context.OrganizationalUnits.Add(new OrganizationalUnit() { Name = "ODDZIAŁ KRYMINALNY KGŻW", Description = "ODDZIAŁ KRYMINALNY KGŻW", DisplayOrder = 102, MasterUnit = kg, Organization = zw });
+            context.OrganizationalUnits.Add(new OrganizationalUnit() { Name = "MOŻW WARSZAWA", Description = "MAZOWIECKI ODDZIAŁ ŻANDARMERII WOJSKOWEJ", DisplayOrder = 101, MasterUnit = kg, Organization = zw });
+            context.OrganizationalUnits.Add(new OrganizationalUnit() { Name = "OOIN KGŻW", Description = "ODDZIAŁ OCHRONY INFORMACJI NIEJAWNYCH KGŻW", DisplayOrder = 103, MasterUnit = kg, Organization = zw });
             context.OrganizationalUnits.Add(new OrganizationalUnit() { Name = "OŻW BYDGOSZCZ", Description = "ODDZIAŁ ŻANDARMERII WOJSKOWEJ BYDGOSZCZ", DisplayOrder = 103, MasterUnit = kg, Organization = zw });
             context.OrganizationalUnits.Add(new OrganizationalUnit() { Name = "OŻW ELBLĄG", Description = "ODDZIAŁ ŻANDARMERII WOJSKOWEJ ELBLĄG", DisplayOrder = 104, MasterUnit = kg, Organization = zw });
             context.OrganizationalUnits.Add(new OrganizationalUnit() { Name = "OŻW KRAKÓW", Description = "ODDZIAŁ ŻANDARMERII WOJSKOWEJ KRAKÓW", DisplayOrder = 105, MasterUnit = kg, Organization = zw });
-            
+            context.OrganizationalUnits.Add(new OrganizationalUnit() { Name = "OŻW SZCZECIN", Description = "ODDZIAŁ ŻANDARMERII WOJSKOWEJ SZCZECIN", DisplayOrder = 106, MasterUnit = kg, Organization = zw });
+            context.OrganizationalUnits.Add(new OrganizationalUnit() { Name = "OŻW ŻAGAŃ", Description = "ODDZIAŁ ŻANDARMERII WOJSKOWEJ ŻAGAŃ", DisplayOrder = 107, MasterUnit = kg, Organization = zw });
+
             context.Organizations.Add(new Organization() { ShortName = "", Name = "SKW", Description = "SŁUŻBA KONTRWYWIADU WOJSKOWEGO", DisplayOrder = 20 });
             context.Organizations.Add(new Organization() { ShortName = "", Name = "SWW", Description = "SŁUŻBA WYWIADU WOJSKOWEGO", DisplayOrder = 30 });
             context.Organizations.Add(new Organization() { ShortName = "", Name = "POLICJA", Description = "POLICJA", DisplayOrder = 40 });
+            context.Organizations.Add(new Organization() { ShortName = "", Name = "STRAŻ GRANICZNA", Description = "STRAŻ GRANICZNA", DisplayOrder = 50 });
+            context.Organizations.Add(new Organization() { ShortName = "", Name = "BOR", Description = "BIURO OCHRONY RZĄDU", DisplayOrder = 60 });
+            context.Organizations.Add(new Organization() { ShortName = "", Name = "DEPARTAMENT KADR", Description = "DEPARTAMENT KADR MON", DisplayOrder = 70 });
+            context.Organizations.Add(new Organization() { ShortName = "", Name = "AGENCA BW i W", Description = "AGENCJA BEZPIECZEŃSWTA WEWNĘTRZNEGO i AGENCJA WYWIADU", DisplayOrder = 80 });
+            
                        
             #endregion
 
             #endregion
 
-
+            context.Users.Add(new User() {Login = Environment.UserName,Name = "Użytkownik Testowy"});
 
 
 

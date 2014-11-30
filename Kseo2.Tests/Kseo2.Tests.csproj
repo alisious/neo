@@ -81,7 +81,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTests\PersonServiceUnitTest.cs" />
     <Compile Include="UnitTests\CountryUnitTest.cs" />
-    <Compile Include="UnitTests\VerificationUnitTest.cs" />
+    <Compile Include="UnitTests\UserServiceUnitTest.cs" />
+    <Compile Include="UnitTests\VerificationServiceUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kseo2\Kseo2.csproj">

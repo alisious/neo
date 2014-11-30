@@ -81,13 +81,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Operator.cs" />
-    <Compile Include="Model\Organization.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="Model\OrganizationalUnit.cs" />
     <Compile Include="Model\Question.cs" />
     <Compile Include="Helpers\PeselValidator.cs" />
     <Compile Include="Model\DictionaryItem.cs" />
     <Compile Include="Model\Verification.cs" />
+    <Compile Include="Service\IOrgaznizationalUnitService.cs" />
+    <Compile Include="Service\OrganizationalUnitService.cs" />
+    <Compile Include="Service\Service.cs" />
     <Compile Include="Service\DictionaryService.cs" />
     <Compile Include="Service\IDictionaryService.cs" />
     <Compile Include="Service\IPersonService.cs" />
@@ -101,10 +103,13 @@
     <Compile Include="Model\Entity.cs" />
     <Compile Include="Model\Person.cs" />
     <Compile Include="Service\IUnitOfWork.cs" />
+    <Compile Include="Service\IUserService.cs" />
     <Compile Include="Service\IVerificationService.cs" />
     <Compile Include="Service\PersonService.cs" />
     <Compile Include="Service\SearchResults.cs" />
     <Compile Include="Service\UnitOfWork.cs" />
+    <Compile Include="Service\UserService.cs" />
+    <Compile Include="Service\VerificationService.cs" />
     <Compile Include="ViewModels\CountrySelectViewModel.cs" />
     <Compile Include="ViewModels\PersonDetailsViewModel.cs" />
     <Compile Include="ViewModels\PersonEditViewModel.cs" />
@@ -112,6 +117,7 @@
     <Compile Include="ViewModels\ScreenOneViewModel.cs" />
     <Compile Include="ViewModels\ScreenTwoViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="ViewModels\StartScreenViewModel.cs" />
     <Compile Include="ViewModels\Validation\DomainValidator.cs" />
     <Compile Include="ViewModels\Validation\EmailValidator.cs" />
     <Compile Include="ViewModels\Validation\IValidationControl.cs" />
@@ -143,6 +149,9 @@
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\StartScreenView.xaml.cs">
+      <DependentUpon>StartScreenView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppBootstrapper.cs" />
@@ -163,6 +172,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Model\ModelClassDiagram.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -203,6 +213,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ShellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StartScreenView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

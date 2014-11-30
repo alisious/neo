@@ -4,13 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
-             
-             Height="600" Width="1200">
+             d:DesignHeight="600" d:DesignWidth="1200"
+             >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Background="Yellow" Orientation="Horizontal">
             <Button x:Name="ShowScreenOne" Content="Show Screen One"/>
@@ -20,7 +20,12 @@
             <Button x:Name="ShowDetailsPersonScreen" Content="Show Details Person Screen"/>
         </StackPanel>
         <ContentControl Grid.Row="1"  x:Name="ActiveItem"/>
-
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Label Content="Użytkownik:" VerticalAlignment="Center"/>
+            <TextBlock x:Name="ActiveUser_Name" VerticalAlignment="Center"/>
+            <Label Content="Data:" VerticalAlignment="Center"/>
+            <TextBlock x:Name="ActiveDate" Text="{Binding ActiveDate}" VerticalAlignment="Center"/>
+        </StackPanel>
 
     </Grid>
 </UserControl>

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Kseo2.Model.Verification">
+    <Position X="3.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAiAEAAEAAAAAAAgAAAACQAEAABAAAEAAFAggAAAAg=</HashCode>
+      <FileName>Model\Verification.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Question" />
+      <Property Name="FoundedPerson" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Kseo2.Model.Question">
+    <Position X="0.5" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAIJAAAAAAAAAQAAAAAAAQAAACACAAAACAAIAg=</HashCode>
+      <FileName>Model\Question.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="AskerOrganizationalUnit" />
+      <Property Name="AskerOrganization" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Kseo2.Model.Person">
+    <Position X="6.25" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACACAEAANAAABAAAAAAQAAQAEAIBAAAAgAAAAACAiAg=</HashCode>
+      <FileName>Model\Person.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kseo2.Model.OrganizationalUnit" Collapsed="true">
+    <Position X="1.25" Y="6.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACQAAAAAAgAAABEAAAAAQAAAAAgIABAAAAAAAAIAA=</HashCode>
+      <FileName>Model\OrganizationalUnit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kseo2.Model.Organization" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\DictionaryItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

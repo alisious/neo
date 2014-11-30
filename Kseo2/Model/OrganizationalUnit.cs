@@ -19,6 +19,7 @@ namespace Kseo2.Model
             IsActive = true;
             DisplayOrder = 0;
             Description = String.Empty;
+            Level = 0;
         }
 
         public int Id { get; set; }
@@ -36,6 +37,8 @@ namespace Kseo2.Model
         public int DisplayOrder { get; set; }
         
         public bool IsActive { get; set; }
+        
+        public short Level { get; set; }
 
         //public virtual ICollection<Employee> Employee { get; set; }
 

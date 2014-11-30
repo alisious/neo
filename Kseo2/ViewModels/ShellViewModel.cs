@@ -1,18 +1,42 @@
 ﻿using Caliburn.Micro;
 using Kseo2.Model;
 using Kseo2.Service;
+using System;
 
 namespace Kseo2.ViewModels
 {
     public class ShellViewModel :Conductor<Screen>,IShell
     {
         private UnitOfWork _uow;
+        private User _activeUser;
         
         public ShellViewModel()
         {   
             _uow = new UnitOfWork();
             _uow.LoadDictionary(typeof(Country));
+            _uow.LoadDictionary(typeof(QuestionForm));
+            _uow.LoadDictionary(typeof(QuestionReason));
+            _uow.LoadDictionary(typeof(Organization));
+            _uow.LoadDictionary(typeof(Rank));
+            ActiveUser = _uow.ActiveUser;
+            //TODO: Dorobić obsługę pierwszego logowania.
             ShowScreenOne();
+        }
+
+        public User ActiveUser
+        {
+            get { return _activeUser; }
+            set
+            {
+                _activeUser = value;
+                NotifyOfPropertyChange(()=>ActiveUser);
+            }
+
+        }
+
+        public string ActiveDate
+        {
+            get { return DateTime.Today.ToShortDateString(); }
         }
 
         public void ShowScreenOne()

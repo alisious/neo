@@ -124,7 +124,7 @@ namespace Kseo2.Service
         public SearchResult<Person> Find(string aPesel, string aLastName,int aResultsLimit = 15)
         {
             var query = from p in _ctx.Persons
-                        where p.Pesel.StartsWith(aPesel) && p.LastName.StartsWith(aLastName)
+                        where p.PESEL.StartsWith(aPesel) && p.LastName.StartsWith(aLastName)
                         select p;
 
             SearchResult<Person> _searchResult = new SearchResult<Person>();

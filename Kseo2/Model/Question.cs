@@ -19,6 +19,7 @@ namespace Kseo2.Model
         [StringLength(2)]
         public string Classification { get; set; }
 
+        
         [StringLength(50)]
         public string RegNumber { get; set; }
 
@@ -42,6 +43,8 @@ namespace Kseo2.Model
         public virtual Rank AskerRank { get; set; }
 
         public virtual QuestionForm QuestionForm { get; set; }
+
+        public virtual ICollection<Verification> Verifications { get; set; } 
        
 
     }
