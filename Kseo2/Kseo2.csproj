@@ -127,6 +127,7 @@
     <Compile Include="ViewModels\Validation\StrongPasswordValidator.cs" />
     <Compile Include="ViewModels\Validation\ValidatingScreen.cs" />
     <Compile Include="ViewModels\Validation\ValidationGroupAttribute.cs" />
+    <Compile Include="ViewModels\VerificationViewModel.cs" />
     <Compile Include="Views\CountrySelectView.xaml.cs">
       <DependentUpon>CountrySelectView.xaml</DependentUpon>
     </Compile>

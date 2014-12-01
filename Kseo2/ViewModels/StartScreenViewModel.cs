@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 
 namespace Kseo2.ViewModels
 {
-    class StartScreenViewModel :Screen
+    public class StartScreenViewModel :Screen
     {
-
+        public StartScreenViewModel()
+        {
+            DisplayName = "Strona startowa...";
+        }
     }
 }

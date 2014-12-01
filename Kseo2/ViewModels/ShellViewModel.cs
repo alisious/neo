@@ -5,13 +5,15 @@ using System;
 
 namespace Kseo2.ViewModels
 {
-    public class ShellViewModel :Conductor<Screen>,IShell
+    public class ShellViewModel :Conductor<Screen>.Collection.OneActive,IShell
     {
         private UnitOfWork _uow;
         private User _activeUser;
         
         public ShellViewModel()
         {   
+            Items.Add(new StartScreenViewModel());
+            
             _uow = new UnitOfWork();
             _uow.LoadDictionary(typeof(Country));
             _uow.LoadDictionary(typeof(QuestionForm));
