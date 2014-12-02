@@ -9,6 +9,12 @@
     [Table("Verification.Verification")]
     public class Verification :Entity
     {
+
+        protected Verification()
+        {
+
+        }
+
         public Verification(User author, Question question = null)
         {
             Answer = String.Empty;

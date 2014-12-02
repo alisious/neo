@@ -10,14 +10,21 @@ namespace Kseo2.Tests.UnitTests
     [TestClass]
     public class VerificationServiceUnitTest
     {
-        [TestMethod]
-        public void mozna_dodac_nowe_sprawdzenie()
+        
+        private readonly UnitOfWork _uow = new UnitOfWork();
+
+        [TestInitialize]
+        public void Initialize()
         {
-            //given
-            var uow = new UnitOfWork();
-            var org = uow.Organizations.FirstOrDefault();
-            var qf = uow.QuestionForms.FirstOrDefault();
-            var qr = uow.QuestionReasons.FirstOrDefault();
+            
+        }
+
+
+        private Verification CreateTestVerification()
+        {
+            var org = _uow.Organizations.FirstOrDefault();
+            var qf = _uow.QuestionForms.FirstOrDefault();
+            var qr = _uow.QuestionReasons.FirstOrDefault();
             var q = new Question()
             {
                 Asker = "KORPUSIK",
@@ -31,25 +38,35 @@ namespace Kseo2.Tests.UnitTests
                 Signer = "KORPUSIK",
                 SignerPosition = "SZEF WYDZIAŁU"
             };
-            var vs = new VerificationService(uow.Context());
-            var v = new Verification(uow.ActiveUser, q) {Answer = "", QuestionReason = qr};
+            var v = new Verification(_uow.ActiveUser, q) { Answer = "", QuestionReason = qr };
+            return v;
+        }
+
+
+        [TestMethod]
+        public void mozna_dodac_nowe_sprawdzenie()
+        {
+            //given
+            var vs = new VerificationService(_uow.Context());
+            var v = CreateTestVerification();
             //when
             vs.AddVerification(v);
-            uow.SaveChanges();
-            var v1 = uow.Context().Verifications.Find(v.Id);
+
+            var uow = new UnitOfWork();
+            var vs1 = new VerificationService(uow.Context());
+            var v1 = vs1.GetSingle(v.Id);
+
+            
             //then
             Assert.IsNotNull(v1);
+            Assert.IsNotNull(v1.Question);
+            Assert.AreEqual("KORPUSIK",v1.Question.Asker);
             
         }
 
         [TestMethod]
         public void mozna_zapisac_zmiany_sprawdzenia()
         {
-            //given
-
-            //when
-
-            //then
 
             throw new NotImplementedException();
         }
@@ -70,12 +87,48 @@ namespace Kseo2.Tests.UnitTests
         public void mozna_usunac_sprawdzenie()
         {
             //given
+            var vs = new VerificationService(_uow.Context());
+            var v = CreateTestVerification();
+            vs.AddVerification(v);
 
-            //when
+
+            var uow = new UnitOfWork();
+            var vs1 = new VerificationService(uow.Context());
+            var v1 = vs1.GetSingle(v.Id);
+            var i = v1.Id;
+            vs1.RemoveVerification(v1);
+
+            v = vs.GetSingle(i);
 
             //then
+            Assert.IsNull(v);
+            
 
-            throw new NotImplementedException();
+           
+        }
+
+        [TestMethod]
+        public void mozna_usunac_zapytanie()
+        {
+            //given
+            var vs = new VerificationService(_uow.Context());
+            var v = CreateTestVerification();
+            vs.AddVerification(v);
+            
+            var uow = new UnitOfWork();
+            var vs1 = new VerificationService(uow.Context());
+            var v1 = vs1.GetSingle(v.Id);
+            var q = v1.Question;
+            var i = v1.Id;
+            vs1.RemoveVerification(v1);
+
+            v = vs.GetSingle(i);
+
+            //then
+            Assert.IsNull(v);
+
+
+
         }
 
         [TestMethod]
