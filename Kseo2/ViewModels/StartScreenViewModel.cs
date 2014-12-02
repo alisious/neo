@@ -13,5 +13,10 @@ namespace Kseo2.ViewModels
         {
             DisplayName = "Strona startowa...";
         }
+
+        public void NewVerification()
+        {
+           ((Conductor<IScreen>.Collection.OneActive)this.Parent).ActivateItem(((Conductor<IScreen>.Collection.OneActive)this.Parent).Items[1]);
+        }
     }
 }

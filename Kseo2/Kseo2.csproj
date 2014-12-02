@@ -222,7 +222,19 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\arrow_down.png" />
+    <Resource Include="Images\cancel_mark.png" />
+    <Resource Include="Images\intruder.png" />
+    <Resource Include="Images\logo_ewid.gif" />
+    <Resource Include="Images\logo_ewid_300.gif" />
+    <Resource Include="Images\ok_mark.png" />
+    <Resource Include="Images\question_mark.png" />
+    <Resource Include="Images\save.png" />
+    <Resource Include="Images\user_male_add.png" />
+    <Resource Include="Images\zw.jpg" />
+    <Resource Include="Images\zw.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\preferences_composer.png" />
     <Resource Include="DatabaseScripts\Slowniki\Countries_new.txt" />

@@ -1,15 +1,33 @@
-﻿using Caliburn.Micro;
+﻿using System.Linq;
+using System.Runtime.Serialization;
+using Caliburn.Micro;
 using Kseo2.Model;
 using Kseo2.Service;
 using System;
 
+using System.Windows.Controls.Primitives;
+
 namespace Kseo2.ViewModels
 {
+   
     public class ShellViewModel :Conductor<Screen>.Collection.OneActive,IShell
     {
+        private readonly IWindowManager _windowManager;
         private UnitOfWork _uow;
         private User _activeUser;
-        
+
+
+        public ShellViewModel(IWindowManager windowManager)
+        {
+            _windowManager = windowManager;
+            DisplayName = "KSEO 2.0";
+            Items.Add(new StartScreenViewModel());
+            Items.Add(new PersonSearchViewModel());
+            
+            ActivateItem(Items[0]);
+
+        }
+
         public ShellViewModel()
         {   
             Items.Add(new StartScreenViewModel());
@@ -22,6 +40,7 @@ namespace Kseo2.ViewModels
             _uow.LoadDictionary(typeof(Rank));
             ActiveUser = _uow.ActiveUser;
             //TODO: Dorobić obsługę pierwszego logowania.
+            this.DisplayName = "KSEO 1.0";
             ShowScreenOne();
         }
 

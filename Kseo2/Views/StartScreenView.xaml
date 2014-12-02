@@ -6,13 +6,27 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1200">
     <Grid>
-            <StackPanel>
-                <GroupBox Header="Sprawdzenia:">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="147*"/>
+            <ColumnDefinition Width="179*"/>
+            <ColumnDefinition Width="274*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="121*"/>
+            <RowDefinition Height="113*"/>
+            <RowDefinition Height="127*"/>
+            <RowDefinition Height="239*"/>
+        </Grid.RowDefinitions>
+        <Image Grid.RowSpan="2" Source="/Kseo2;component/Images/logo_ewid_300.gif" >
+
+        </Image>
+        <StackPanel Grid.Row="0" Grid.Column="1" >
+            <GroupBox Header="Sprawdzenia:">
                 <StackPanel>
-                    <Button x:Name="NewVerification">Dodaj</Button>
+                    <Button x:Name="NewVerification">Nowe sprawdzenie</Button>
                     <Button x:Name="FindVerification">Szukaj</Button>
                 </StackPanel>
-          </GroupBox>
-            </StackPanel>
+            </GroupBox>
+        </StackPanel>
     </Grid>
 </UserControl>
