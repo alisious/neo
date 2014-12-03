@@ -23,7 +23,8 @@ namespace Kseo2.ViewModels
             DisplayName = "KSEO 2.0";
             Items.Add(new StartScreenViewModel());
             Items.Add(new PersonSearchViewModel());
-            
+            _uow = new UnitOfWork();
+            ActiveUser = _uow.ActiveUser;
             ActivateItem(Items[0]);
 
         }

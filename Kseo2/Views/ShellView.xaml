@@ -23,10 +23,17 @@
         </StackPanel>
         <ContentControl Grid.Row="1"  x:Name="ActiveItem"/>
         <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <Label Content="Użytkownik:" VerticalAlignment="Center"/>
-            <TextBlock x:Name="ActiveUser_Name" VerticalAlignment="Center"/>
-            <Label Content="Data:" VerticalAlignment="Center"/>
-            <TextBlock x:Name="ActiveDate" Text="{Binding ActiveDate}" VerticalAlignment="Center"/>
+            <GroupBox Header="Data operacji:" Width="150">
+                <TextBlock x:Name="ActiveDate" Text="{Binding ActiveDate}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </GroupBox>
+            <GroupBox Header="Użytkownik:" Width="300" FontSize="14" >
+                <TextBlock x:Name="ActiveUser_Name" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </GroupBox>
+            <GroupBox Header="Raport dzienny:" FontSize="14" >
+                
+            </GroupBox>
+            
+            
         </StackPanel>
 
     </Grid>
