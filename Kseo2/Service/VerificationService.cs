@@ -59,14 +59,32 @@ namespace Kseo2.Service
             }
         }
 
+        public void UpdateVerification(Verification verification)
+        {
+            _context.SaveChanges();
+        }
+
         public Verification GetSingle(int id)
         {
-            return _context.Verifications.Include(e => e.Question).FirstOrDefault(e => e.Id == id);
+            return _context.Verifications
+                .Include(e => e.Question)
+                .Include(e=>e.Nationality)
+                .FirstOrDefault(e => e.Id == id);
         }
 
         public SearchResult<Model.Verification> Search(string regNum, string pesel, string firstName, string lastName, int resultsLimit = 20)
         {
-            throw new NotImplementedException();
+            var sr = new SearchResult<Verification>();
+            var query = _context.Verifications
+                .Include(e=>e.Question)
+                .Where(e=>e.Question.RegNumber.StartsWith(regNum) 
+                    && e.Pesel.StartsWith(pesel)
+                    && e.FirstName.StartsWith(firstName)
+                    && e.LastName.StartsWith(lastName));
+            sr.ResultsCounter = query.Count();
+            if (sr.ResultsCounter <= resultsLimit)
+                sr.Results = query.ToList();
+            return sr;
         }
 
         public SearchResult<Model.Verification> Search(Model.User author, DateTime creationDate, int resultsLimit = 20)

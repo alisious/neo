@@ -345,7 +345,7 @@ namespace Kseo2.DataAccess
             for (int i = 0; i < 100; i++)
             {
                 string pesel = "00000000000"+i.ToString();
-                context.Persons.Add(new Person() { Pesel = pesel.Substring(pesel.Length-11,11), FirstName = "IMIĘ"+i.ToString(), LastName = "NAZWISKO"+i.ToString() });
+                context.Persons.Add(new Person() { Pesel = pesel.Substring(pesel.Length-11,11), FirstName = "IMIĘ"+i.ToString(), LastName = "NAZWISKO"+i.ToString(),Sex = "M" });
             }
 
             context.SaveChanges();

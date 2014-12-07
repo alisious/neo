@@ -1,4 +1,6 @@
-﻿namespace Kseo2.Model
+﻿using System.ComponentModel;
+
+namespace Kseo2.Model
 {
     using System;
     using System.Collections.Generic;
@@ -12,16 +14,32 @@
 
         protected Verification()
         {
-
+            Initialize();
         }
 
         public Verification(User author, Question question = null)
         {
-            Answer = String.Empty;
-            Notes = String.Empty;
+            Initialize();
             Question = question ?? new Question();
             Author = author;
+            
+        }
+
+
+        private void Initialize()
+        {
+            Pesel = String.Empty;
+            FirstName = String.Empty;
+            LastName = String.Empty;
+            FatherName = String.Empty;
+            MotherName = String.Empty;
+            MotherMaidenName = String.Empty;
+            BirthDate = String.Empty;
+            BirthPlace = String.Empty;
+            Answer = String.Empty;
+            Notes = String.Empty;
             Citizenships = new HashSet<Country>();
+            
         }
 
         public int Id { get; set; }
@@ -47,8 +65,7 @@
         public string Answer { get; set; }
 
         public bool IsRegistered { get; set; }
-
-
+        
         [Column(TypeName = "ntext")]
         public string Notes { get; set; }
 

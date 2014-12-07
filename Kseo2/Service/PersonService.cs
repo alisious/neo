@@ -14,29 +14,16 @@ namespace Kseo2.Service
     /// <summary>
     /// Klasa odpowiedzialna za obsługę operacji dotyczących osoby. 
     /// </summary>
-    public class PersonService :IPersonService 
+    public class PersonService :Service,IPersonService 
     {
 
-        #region Private fields
+       #region Constructors
+
+        public PersonService() : base() {}
+
+        public PersonService(KseoContext context) : base(context) {}
         
-        private readonly KseoContext _context;
- 
-        #endregion
-
-        #region Constructors
-
-        public PersonService()
-        {
-            _context = new KseoContext();
-            
-        }
-
-        public PersonService(KseoContext context)
-        {
-            _context = context;
-        }
-
-        #endregion
+       #endregion
 
         public bool HasPeselDuplicate(Person person)
         {
@@ -166,6 +153,20 @@ namespace Kseo2.Service
                                                    && x.FirstName.StartsWith(firstName) 
                                                    && x.FatherName.StartsWith(fatherName) 
                                                    && x.BirthDate.StartsWith(birthDate)).ToList();
+            return r;
+        }
+
+        public SearchResult<Person> Search(string pesel,string lastName, string firstName, string fatherName, string birthDate, int resultsLimit = 20)
+        {
+            var query = _context.Persons.Where(x => x.Pesel.StartsWith(pesel)
+                                                    && x.LastName.StartsWith(lastName)
+                                                    && x.FirstName.StartsWith(firstName)
+                                                    && x.FatherName.StartsWith(fatherName)
+                                                    && x.BirthDate.StartsWith(birthDate));
+
+            var r = new SearchResult<Person>{ResultsCounter = query.Count()};
+            if (r.ResultsCounter <= resultsLimit)
+                r.Results = query.ToList();
             return r;
         }
 

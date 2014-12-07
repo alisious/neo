@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="Kseo2.Views.VerificationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1000"
+             >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="61*"/>
+            <ColumnDefinition Width="140"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="300"></RowDefinition>
+            <RowDefinition Height="300"></RowDefinition>
+            <RowDefinition Height="10*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <GroupBox Header="Dane osoby:" Grid.Column="0" Grid.Row="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="80"/>
+                </Grid.ColumnDefinitions>
+<StackPanel Grid.Column="0" Grid.Row="0" Margin="5,0,0,0">
+    <TextBlock Text="PESEL:"></TextBlock>
+    <TextBox x:Name="Verification_Pesel"/>
+                    <TextBlock Text="Nazwisko:"></TextBlock>
+                    <TextBox x:Name="Verification_LastName"/>
+    <TextBlock Text="Imię:"></TextBlock>
+                    <TextBox x:Name="Verification_FirstName"/>
+    <TextBlock Text="Imię ojca:"></TextBlock>
+                    <TextBox x:Name="Verification_FatherName"/>
+    <TextBlock Text="Data urodzenia:"></TextBlock>
+                    <TextBox x:Name="Verification_BirthDate"/>
+</StackPanel>
+                <Button x:Name="SelectPerson" Grid.Column="1" Grid.Row="0" VerticalAlignment="Top">Sprawdź</Button>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Zapytanie:" Grid.Column="0" Grid.Row="1">
+
+        </GroupBox>
+        <GroupBox Header="Wynik sprawdzenie:" Grid.Column="1" Grid.Row="0">
+
+        </GroupBox>
+        <GroupBox Header="Odpowiedź:" Grid.Column="1" Grid.Row="1">
+
+        </GroupBox>
+        <GroupBox Grid.Column="3" Grid.Row="0">
+            <StackPanel>
+                <Button x:Name="Close">Zamknij</Button>
+                <Button x:Name="Save">Zapisz</Button>
+                <Button x:Name="AddNewQuestion">Nowe zapytanie</Button>
+                <Button x:Name="AddNewVerification">Nowe sprawdzenie</Button>
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</UserControl>

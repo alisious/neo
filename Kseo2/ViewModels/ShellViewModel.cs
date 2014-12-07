@@ -17,23 +17,27 @@ namespace Kseo2.ViewModels
         private User _activeUser;
 
 
+
+
+
         public ShellViewModel(IWindowManager windowManager)
         {
             _windowManager = windowManager;
             DisplayName = "KSEO 2.0";
-            Items.Add(new StartScreenViewModel());
-            Items.Add(new PersonSearchViewModel());
             _uow = new UnitOfWork();
+            Items.Add(new StartScreenViewModel(_uow));
+            Items.Add(new PersonSearchViewModel(_uow));
             ActiveUser = _uow.ActiveUser;
             ActivateItem(Items[0]);
 
         }
 
         public ShellViewModel()
-        {   
-            Items.Add(new StartScreenViewModel());
-            
+        {
             _uow = new UnitOfWork();
+            Items.Add(new StartScreenViewModel(_uow));
+            
+            
             _uow.LoadDictionary(typeof(Country));
             _uow.LoadDictionary(typeof(QuestionForm));
             _uow.LoadDictionary(typeof(QuestionReason));
@@ -45,6 +49,7 @@ namespace Kseo2.ViewModels
             ShowScreenOne();
         }
 
+       
         public User ActiveUser
         {
             get { return _activeUser; }
@@ -73,7 +78,7 @@ namespace Kseo2.ViewModels
 
         public void ShowSearchPersonScreen()
         {
-            ActivateItem(new PersonSearchViewModel());
+            ActivateItem(new PersonSearchViewModel(_uow));
         }
 
         public void ShowEditPersonScreen()

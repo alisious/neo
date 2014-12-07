@@ -5,7 +5,7 @@ using Kseo2.Service;
 using Kseo2.Model;
 using System.Data.Entity.Infrastructure;
 
-namespace Kseo2.Tests.SprawdzeniaUnitTest
+namespace Kseo2.Tests.PersonServiceUnitTest
 {
     [TestClass]
     public class PersonServiceUnitTest
@@ -34,7 +34,7 @@ namespace Kseo2.Tests.SprawdzeniaUnitTest
             //given
             var ps = new PersonService(_ctx);
             var p1 = ps.GetSingle(1);
-            var p2 = new Person() {Pesel = p1.Pesel, LastName = "KWIATKOWSKI", FirstName = "JAN"};
+            var p2 = new Person() { Pesel = p1.Pesel, LastName = "KWIATKOWSKI", FirstName = "JAN", Sex = "M" };
             //when
             var r = ps.HasPeselDuplicate(p2);
 
@@ -65,7 +65,7 @@ namespace Kseo2.Tests.SprawdzeniaUnitTest
             
             //given
             var ps = new PersonService(_ctx);
-            var p = new Person() {Pesel="73020916558",FirstName="JACEK",LastName="KORPUSIK"};
+            var p = new Person() {Pesel="73020916558",FirstName="JACEK",LastName="KORPUSIK",Sex = "M"};
 
             //when
             ps.AddPerson(p);
@@ -88,7 +88,7 @@ namespace Kseo2.Tests.SprawdzeniaUnitTest
             var c = cs.GetSingle(1);
 
             var ps = new PersonService(_ctx);
-            var p = new Person() { Pesel = "73020916558", FirstName = "JACEK", LastName = "KORPUSIK" };
+            var p = new Person() { Pesel = "99999999999", FirstName = "JACEK", LastName = "KORPUSIK", Sex = "M" };
             p.Nationality = c;
 
             //when
@@ -114,7 +114,7 @@ namespace Kseo2.Tests.SprawdzeniaUnitTest
             var c2 = cs.GetSingle(2);
 
             var ps = new PersonService(_ctx);
-            var p = new Person() { Pesel = "73020916558", FirstName = "JACEK", LastName = "KORPUSIK" };
+            var p = new Person() { Pesel = "88888888888", FirstName = "JACEK", LastName = "KORPUSIK", Sex = "M" };
             p.Citizenships.Add(c1);
             p.Citizenships.Add(c2);
 
@@ -138,7 +138,7 @@ namespace Kseo2.Tests.SprawdzeniaUnitTest
 
             //given
             var ps = new PersonService(_ctx);
-            var p = new Person() { HasPESEL = false, FirstName = "JACEK", LastName = "KORPUSIK" };
+            var p = new Person() { HasPESEL = false, FirstName = "JACEK", LastName = "KORPUSIK", Sex = "M" };
 
             //when
             ps.AddPerson(p);
@@ -220,8 +220,8 @@ namespace Kseo2.Tests.SprawdzeniaUnitTest
         {
             //given
             var ps = new PersonService(_ctx);
-            var p1 = new Person() { Pesel = "73020916558", FirstName = "JACEK", LastName = "KORPUSIK" };
-            var p2 = new Person() { Pesel = "73020916558", FirstName = "JAN", LastName = "KOWALSKI" };
+            var p1 = new Person() { Pesel = "73020916558", FirstName = "JACEK", LastName = "KORPUSIK", Sex = "M" };
+            var p2 = new Person() { Pesel = "73020916558", FirstName = "JAN", LastName = "KOWALSKI", Sex = "M" };
             //when
             ps.AddPerson(p1);
             Exception exc = null;
@@ -246,8 +246,8 @@ namespace Kseo2.Tests.SprawdzeniaUnitTest
         {
             //given
             var ps = new PersonService(_ctx);
-            var p1 = new Person() { Pesel = "90010101010", FirstName = "JACEK", LastName = "KORPUSIK" };
-            var p2 = new Person() { Pesel = "90010101011", FirstName = "JAN", LastName = "KOWALSKI" };
+            var p1 = new Person() { Pesel = "90010101010", FirstName = "JACEK", LastName = "KORPUSIK", Sex = "M" };
+            var p2 = new Person() { Pesel = "90010101011", FirstName = "JAN", LastName = "KOWALSKI", Sex = "M" };
             ps.AddPerson(p1);
             ps.AddPerson(p2);
             ps.SaveChanges();

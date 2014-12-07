@@ -12,8 +12,10 @@ namespace Kseo2.ViewModels
         #region Private fields
 
         //private IPersonRepository _PersonRepository = new PersonRepository(); 
-        private PersonService _personService = new PersonService();
-        
+        private PersonService _personService;
+        private UnitOfWork _unitOfWork;
+
+
         private short _PeselLengthLimit = 4;
         private short _NamesLengthLimit = 3;
         private short _DateLengthLimit = 4;
@@ -25,10 +27,10 @@ namespace Kseo2.ViewModels
         private string _BirthDate = string.Empty;
         private bool _HasPesel = true;
 
-        private bool _CanSearchAutomatically = false;
+        private bool _CanSearchAutomatically = true;
         private int _ResultsLimit = 15;
         private int _CounterResults = 0;
-        private ObservableCollection<Person> _Results = new ObservableCollection<Person>();
+        private BindableCollection<Person> _Results = new BindableCollection<Person>();
         private Person _SelectedResult;
          
         
@@ -89,6 +91,8 @@ namespace Kseo2.ViewModels
                 _Pesel = value;
                 NotifyOfPropertyChange(() => Pesel);
                 NotifyOfPropertyChange(() => CanSearch);
+                SearchAutomaticaly();
+
             }
         }
 
@@ -100,6 +104,7 @@ namespace Kseo2.ViewModels
                 _LastName = value;
                 NotifyOfPropertyChange(() => LastName);
                 NotifyOfPropertyChange(() => CanSearch);
+                SearchAutomaticaly();
             }
         }
 
@@ -111,6 +116,7 @@ namespace Kseo2.ViewModels
                 _FirstName = value;
                 NotifyOfPropertyChange(() => FirstName);
                 NotifyOfPropertyChange(() => CanSearch);
+                SearchAutomaticaly();
             }
         }
 
@@ -122,6 +128,7 @@ namespace Kseo2.ViewModels
                 _FatherName = value;
                 NotifyOfPropertyChange(() => FatherName);
                 NotifyOfPropertyChange(() => CanSearch);
+                SearchAutomaticaly();
             }
         }
 
@@ -133,6 +140,7 @@ namespace Kseo2.ViewModels
                 _BirthDate = value;
                 NotifyOfPropertyChange(() => BirthDate);
                 NotifyOfPropertyChange(() => CanSearch);
+                SearchAutomaticaly();
             }
         }
 
@@ -166,7 +174,7 @@ namespace Kseo2.ViewModels
             }
         }
 
-        public ObservableCollection<Person> Results
+        public BindableCollection<Person> Results
         {
             get { return _Results; }
             set
@@ -191,11 +199,19 @@ namespace Kseo2.ViewModels
         {
             get
             {
+
+                return (Pesel.Length>=PeselLengthLimit) 
+                || (LastName.Length >= NamesLengthLimit)
+                || (FirstName.Length >= NamesLengthLimit)
+                || (FatherName.Length >= NamesLengthLimit)
+                || (BirthDate.Length >= DateLengthLimit);
+                
+                /*
                 if (HasPesel == true)
                     return CanSearchWhenPeselKnown();
                 else
                     return CanSearchWhenPeselUnknown();
-               
+               */
             }
         }
 
@@ -213,13 +229,13 @@ namespace Kseo2.ViewModels
 
 
         #region Constructors
-        public PersonSearchViewModel()
-        { }
 
-        public PersonSearchViewModel(PersonService aPersonService)
+        public PersonSearchViewModel(UnitOfWork unitOfWork)
         {
-            _personService = aPersonService;
-        } 
+            _unitOfWork = unitOfWork;
+            _personService = new PersonService(_unitOfWork.Context());
+        }
+
         #endregion
 
         #region Public methods
@@ -246,7 +262,7 @@ namespace Kseo2.ViewModels
 
         public void SelectPerson()
         {
-            this.TryClose(true);
+            TryClose(true);
         }
         
         public void Cancel()
@@ -254,35 +270,20 @@ namespace Kseo2.ViewModels
             this.TryClose(false);
         }
 
-       /* public void CountResults()
-        {
-            CounterResults = _PersonRepository.CountPersonsByPeselFamilyName(PeselToSearch,LastNameToSearch);
-        }
-
-        public void GetResults()
-        {
-            Results = new ObservableCollection<Person>(_PersonRepository.GetPersonsByPeselFamilyName(PeselToSearch, LastNameToSearch));
-        }
-        */
-        
+      
         public void Search()
         {
-            var _searchResult = _personService.Search(Pesel, LastName, ResultsLimit);
-            CounterResults = _searchResult.ResultsCounter;
-            Results = new ObservableCollection<Person>(_searchResult.Results);
+            var searchResult = _personService.Search(Pesel,LastName,FirstName,FatherName,BirthDate,ResultsLimit);
+            CounterResults = searchResult.ResultsCounter;
+            Results = new BindableCollection<Person>(searchResult.Results);
             if (Results.Count == 1)
                 SelectedResult = Results[0];
+        }
 
-            /*
-            CountResults();
-            if (CounterResults <= ResultsLimit)
-                GetResults();
-            else
-                Results = new ObservableCollection<Person>();
-
-            if (Results.Count == 1)
-                SelectedResult = Results[0];
-             */
+        public void SearchAutomaticaly()
+        {
+            if(CanSearch && CanSearchAutomatically)
+                Search();
         }
 
         #endregion

@@ -153,6 +153,9 @@
     <Compile Include="Views\StartScreenView.xaml.cs">
       <DependentUpon>StartScreenView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\VerificationView.xaml.cs">
+      <DependentUpon>VerificationView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppBootstrapper.cs" />
@@ -221,6 +224,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\VerificationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\arrow_down.png" />
@@ -249,6 +256,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\search_files.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\moro.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

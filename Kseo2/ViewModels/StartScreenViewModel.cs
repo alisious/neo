@@ -4,19 +4,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Kseo2.Service;
 
 namespace Kseo2.ViewModels
 {
     public class StartScreenViewModel :Screen
     {
-        public StartScreenViewModel()
+        private UnitOfWork _unitOfWork;
+        public StartScreenViewModel(UnitOfWork unitOfWork)
         {
             DisplayName = "Strona startowa...";
+            _unitOfWork = unitOfWork;
         }
+
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+            ((Conductor<Screen>.Collection.OneActive)Parent).DisplayName=DisplayName;
+        }
+
+       
 
         public void NewVerification()
         {
-           ((Conductor<IScreen>.Collection.OneActive)this.Parent).ActivateItem(((Conductor<IScreen>.Collection.OneActive)this.Parent).Items[1]);
+            var parent = (Conductor<Screen>.Collection.OneActive) Parent;
+            parent.ActivateItem(new VerificationViewModel(_unitOfWork));
+            parent.DisplayName = "Nowe sprawdzenie...";
         }
     }
 }

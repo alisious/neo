@@ -88,7 +88,7 @@ namespace Kseo2.Model
         [DisplayName("Nazwisko panieñskie matki")]
         public string MotherMaidenName { get; set; }
 
-        
+        [Required(AllowEmptyStrings = false,ErrorMessage = @"P³eæ jest wymagana!")]
         [StringLength(1)]
         [DisplayName("P³eæ")]
         public string Sex { get; set; }

@@ -69,6 +69,9 @@ namespace Kseo2.DataAccess
                 .HasOptional(e => e.FoundedPerson);
 
             modelBuilder.Entity<Verification>()
+                .HasOptional(e => e.Nationality);
+
+            modelBuilder.Entity<Verification>()
                 .HasRequired(e => e.Question)
                 .WithMany(q => q.Verifications);
 
