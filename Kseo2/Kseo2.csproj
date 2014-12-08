@@ -114,6 +114,7 @@
     <Compile Include="ViewModels\PersonDetailsViewModel.cs" />
     <Compile Include="ViewModels\PersonEditViewModel.cs" />
     <Compile Include="ViewModels\PersonSearchViewModel.cs" />
+    <Compile Include="ViewModels\QuestionViewModel.cs" />
     <Compile Include="ViewModels\ScreenOneViewModel.cs" />
     <Compile Include="ViewModels\ScreenTwoViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
@@ -137,6 +138,9 @@
     <Compile Include="Views\PersonEditView.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>PersonEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QuestionView.xaml.cs">
+      <DependentUpon>QuestionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ScreenOneView.xaml.cs">
       <DependentUpon>ScreenOneView.xaml</DependentUpon>
@@ -201,6 +205,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PersonEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QuestionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
