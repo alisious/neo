@@ -17,7 +17,9 @@ namespace Kseo2.ViewModels
         private readonly VerificationService _verificationService;
         private readonly IWindowManager _windowManager;
         private Verification _verification;
-        private UnitOfWork _unitOfWork; 
+        private UnitOfWork _unitOfWork;
+        private QuestionViewModel _questionViewModel;
+
 
         public VerificationViewModel(UnitOfWork unitOfWork)
         {
@@ -25,6 +27,7 @@ namespace Kseo2.ViewModels
             DisplayName = "Nowe sprawdzenie ...";
             _unitOfWork = unitOfWork;
             _verificationService = new VerificationService(_unitOfWork.Context());
+            QuestionViewModel = new QuestionViewModel(_unitOfWork,null);
         }
 
         protected override void OnActivate()
@@ -47,6 +50,17 @@ namespace Kseo2.ViewModels
                 NotifyOfPropertyChange(()=>Verification);
             }
         }
+
+        public QuestionViewModel QuestionViewModel
+        {
+            get { return _questionViewModel; }
+            set
+            {
+                _questionViewModel = value;
+                NotifyOfPropertyChange(()=>QuestionViewModel);
+            }
+        }
+
 
         public void SelectPerson()
         {

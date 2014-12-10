@@ -59,6 +59,6 @@ namespace Kseo2.Model
     public partial class Rank :DictionaryItem<Rank> {}
     [Table("Common.Organization")]
     public partial class Organization : DictionaryItem<Organization> { }
-
+    
     
 }

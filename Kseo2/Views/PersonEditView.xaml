@@ -48,7 +48,7 @@
             <TextBox x:Name="BirthPlace" />
             <TextBlock Text="Narodowość:"/>
             <ComboBox x:Name="Nationality" Margin="0,0,40,0" 
-                      ItemsSource="{Binding Countries}" 
+                      ItemsSource="{Binding UoW.Countries}" 
                       SelectedItem="{Binding Nationality}"
                       SelectedValuePath="Name"
                       IsEditable="True">

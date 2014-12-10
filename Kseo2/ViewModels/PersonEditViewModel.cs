@@ -17,7 +17,7 @@ namespace Kseo2.ViewModels
     public class PersonEditViewModel : ValidatingScreen<PersonEditViewModel>
     {
         private readonly IPersonService _personService;
-        private readonly UnitOfWork _uow;
+        private UnitOfWork _uow;
 
 
         private Person _person { get; set; }
@@ -40,7 +40,7 @@ namespace Kseo2.ViewModels
 
         public PersonEditViewModel(UnitOfWork uow)
         {
-            _uow = uow;
+            UoW = uow;
             _personService = new PersonService(_uow.Context());
             Countries = _uow.Countries;
             
@@ -52,7 +52,16 @@ namespace Kseo2.ViewModels
 
         #region Public properties
 
-        
+
+        public UnitOfWork UoW
+        {
+            get { return _uow; }
+            set
+            {
+                _uow = value;
+                NotifyOfPropertyChange(()=>UoW);
+            }
+        }
 
         public string BoldWhenHasNoPesel 
         {

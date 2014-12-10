@@ -42,7 +42,7 @@
         </GroupBox>
 
         <GroupBox Header="Zapytanie:" Grid.Column="0" Grid.Row="1">
-
+            <ContentControl x:Name="QuestionViewModel"></ContentControl>
         </GroupBox>
         <GroupBox Header="Wynik sprawdzenie:" Grid.Column="1" Grid.Row="0">
 

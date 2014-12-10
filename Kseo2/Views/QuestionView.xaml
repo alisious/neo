@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="600">
+             d:DesignHeight="300" d:DesignWidth="600">
     <UserControl.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="VerticalAlignment" Value="Bottom"/>
@@ -16,41 +16,53 @@
     
     <Grid>
         <StackPanel>
-            <StackPanel Orientation="Horizontal" Height="33">
-                <TextBlock Text="Klauzula:" Width="180"/>
-                <ComboBox Width="120" />
+            
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Forma zapytania:" Width="180" />
+                <ComboBox x:Name="Question_QuestionForm" Width="319" Margin="0,5,0,0"
+                          ItemsSource="{Binding UnitOfWork.QuestionForms}" 
+                      SelectedItem="{Binding Question.QuestionForm}"
+                      SelectedValuePath="Name"
+                      IsEditable="True"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Numer:" Width="180"/>
-                <TextBox Width="120" />
+                <TextBlock Text="Numer pisma:" Width="180"/>
+                <TextBox Width="197" Margin="0,5,0,0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Data rej:" Width="180" />
-                <TextBox Width="120" />
+                <TextBox Width="120" Margin="0,5,0,0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Osoba pytająca:" Width="180" />
-                <TextBox Width="120" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Osoba podpisująca:" Width="180" />
-                <TextBox Width="321" />
+                <TextBlock Text="Pytający:" Width="180" />
+                <TextBox Width="319" Margin="0,5,0,0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Stanowisko podpisującego:" Width="180" />
-                <TextBox Width="327" />
+                <TextBox Width="320" Margin="0,5,0,0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Forma zapytania:" Width="180" />
-                <ComboBox Width="198" />
+                <TextBlock Text="Podpisujący:" Width="180" />
+                <TextBox Width="321" Margin="0,5,0,0"/>
             </StackPanel>
+            
+            
             <StackPanel Orientation="Horizontal" Height="30">
                 <TextBlock Text="Instytucja pytająca:" Width="180" />
-                <ComboBox Width="322" />
+                <ComboBox x:Name="AskerOrganization" Width="322" Margin="0,5,0,0"
+                      ItemsSource="{Binding UnitOfWork.Organizations}" 
+                      SelectedItem="{Binding AskerOrganization}"
+                      SelectedValuePath="Name"
+                      IsEditable="True"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="30">
-                <TextBlock Text="Jednostka orgaznizacyjna:" Width="180" />
-                <ComboBox Width="322" />
+                <TextBlock Text="Komórka pytająca:" Width="180" />
+                <ComboBox x:Name="AskerOrganizationalUnit" Width="108" Margin="0,5,0,0" 
+                      ItemsSource="{Binding MPHQ.Subordinates}" 
+                      SelectedItem="{Binding Question.AskerOrganizationalUnit}"
+                      SelectedValuePath="Name"
+                      IsEditable="True"
+                      IsEnabled="{Binding IsEnabledAskerOrganizationalUnit}"/>
             </StackPanel>
         </StackPanel>
     </Grid>

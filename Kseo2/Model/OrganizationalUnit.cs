@@ -52,5 +52,9 @@ namespace Kseo2.Model
         //public virtual ICollection<Question> Question { get; set; }
 
         //public virtual ICollection<Reservation> Reservation { get; set; }
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

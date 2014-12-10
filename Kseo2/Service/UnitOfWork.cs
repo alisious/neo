@@ -17,7 +17,7 @@ namespace Kseo2.Service
         private List<QuestionForm> _questionForms;
         private List<QuestionReason> _questionReasons;
         private List<Organization> _organizations;
- 
+        
         private readonly DictionaryService<Country> _countryService;
         private readonly DictionaryService<Rank> _rankService;
         private readonly DictionaryService<QuestionForm> _questionFormService;
