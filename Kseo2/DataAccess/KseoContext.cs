@@ -11,6 +11,8 @@ namespace Kseo2.DataAccess
         public KseoContext()
             : base("name=KseoContext")
         {
+            Configuration.LazyLoadingEnabled = false;
+            Configuration.ProxyCreationEnabled = false;
             Database.SetInitializer<KseoContext>(new KseoContextInitializer());
         }
 

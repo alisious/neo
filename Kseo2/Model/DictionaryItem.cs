@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Kseo2.Model
 {
-    public abstract class DictionaryItem<T> where T :class
+    public abstract class DictionaryItem<T> :IEntity where T :class
     {
         public DictionaryItem()
         {
@@ -47,6 +47,8 @@ namespace Kseo2.Model
         {
             return Name;
         }
+
+        public EntityState EntityState { get; set; }
     }
 
     [Table("Person.Country")]

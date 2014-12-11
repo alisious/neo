@@ -1,129 +1,156 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Runtime.Serialization;
+using Kseo2.Model;
 
 namespace Kseo2.DataAccess
 {
-    public class Repository<T> :IRepository<T> where T :class
+    public class Repository<T> :IRepository<T> where T :class,IEntity
     {
 
-        private readonly KseoContext _context;
-       
-        #region Constructors
-
-        public Repository()
+        protected static System.Data.Entity.EntityState GetEntityState(Kseo2.Model.EntityState entityState)
         {
-            _context = new KseoContext();
-        }
-
-        public Repository(KseoContext context)
-        {
-            this._context = context;
+            switch (entityState)
+            {
+                case Model.EntityState.Unchanged:
+                    return System.Data.Entity.EntityState.Unchanged;
+                case Model.EntityState.Added:
+                    return System.Data.Entity.EntityState.Added;
+                case Model.EntityState.Modified:
+                    return System.Data.Entity.EntityState.Modified;
+                case Model.EntityState.Deleted:
+                    return System.Data.Entity.EntityState.Deleted;
+                default:
+                    return System.Data.Entity.EntityState.Detached;
+            }
         }
         
-        #endregion
-
         public virtual IList<T> GetAll(params System.Linq.Expressions.Expression<Func<T, object>>[] navigationProperties)
         {
             List<T> list;
-            IQueryable<T> dbQuery = _context.Set<T>();
+            using (var context = new KseoContext())
+            {
+                IQueryable<T> dbQuery = context.Set<T>();
 
-            //Apply eager loading
-            foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
-                   dbQuery = dbQuery.Include<T, object>(navigationProperty);
-
-           list = dbQuery
-                 .ToList<T>();
-           
+                //Apply eager loading
+                //foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
+                //    dbQuery = dbQuery.Include<T, object>(navigationProperty);
+                dbQuery = navigationProperties.Aggregate(dbQuery, (current, navigationProperty) => current.Include<T, object>(navigationProperty));
+                list = dbQuery.AsNoTracking().ToList<T>();
+            }
             return list;
         }
 
-        public int CountAllItems(params Expression<Func<T, object>>[] navigationProperties)
+        public virtual SearchResult<T> GetList(Func<T, bool> where, int resultsLimit = 20, params System.Linq.Expressions.Expression<Func<T, object>>[] navigationProperties)
         {
-            IQueryable<T> dbQuery = _context.Set<T>();
+            var result = new SearchResult<T>();
+            using (var context = new KseoContext())
+            {
+                IQueryable<T> dbQuery = context.Set<T>();
 
-            //Apply eager loading
-            foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
-                dbQuery = dbQuery.Include<T, object>(navigationProperty);
-
-            var r = dbQuery.Count<T>();
-
-            return r;
+                //Apply eager loading
+                dbQuery = navigationProperties.Aggregate(dbQuery, (current, navigationProperty) => current.Include<T, object>(navigationProperty));
+                result.Counter = dbQuery.Where(where).Count();
+                if (result.Counter <= resultsLimit) 
+                    result.Results = dbQuery.Where(where).ToList<T>();
+            }
+            return result;
         }
 
-        public virtual IList<T> GetList(Func<T, bool> where, params System.Linq.Expressions.Expression<Func<T, object>>[] navigationProperties)
-        {
-            List<T> list;
-            IQueryable<T> dbQuery = _context.Set<T>();
-            
-            //Apply eager loading
-            foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
-                 dbQuery = dbQuery.Include<T, object>(navigationProperty);
-
-           list = dbQuery
-                 .Where(where)
-                 .ToList<T>();
-           return list;
-        }
-
-        public int CountListItems(Func<T, bool> where, params Expression<Func<T, object>>[] navigationProperties)
-        {
-           
-            IQueryable<T> dbQuery = _context.Set<T>();
-
-            //Apply eager loading
-            foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
-                dbQuery = dbQuery.Include<T, object>(navigationProperty);
-
-            var r = dbQuery
-                  .Where(where)
-                  .Count<T>();
-            return r;
-        }
-
+        
         public virtual T GetSingle(Func<T, bool> where, params System.Linq.Expressions.Expression<Func<T, object>>[] navigationProperties)
         {
             T item = null;
-            IQueryable<T> dbQuery = _context.Set<T>();
-            
-            //Apply eager loading
-            foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
-                   dbQuery = dbQuery.Include<T, object>(navigationProperty);
+            using (var context = new KseoContext())
+            {
+                IQueryable<T> dbQuery = context.Set<T>();
+
+                //Apply eager loading
+                dbQuery = navigationProperties.Aggregate(dbQuery, (current, navigationProperty) => current.Include<T, object>(navigationProperty));
 
                 item = dbQuery
-                      .FirstOrDefault(where); //Apply where clause
+                    .FirstOrDefault(where); //Apply where clause
+            }
             return item;
         }
 
         public void Add(params T[] items)
         {
-               foreach (T item in items)
-                    _context.Set<T>().Add(item);
+            Update(items);
         }
 
-       // public void Update(params T[] items)
-       // {
-       //     throw new NotImplementedException();
-       // }
+        public void Update(params T[] items)
+        {
+            try
+            {
+                using (var context = new KseoContext())
+                {
+                    var dbSet = context.Set<T>();
+                    foreach (var item  in items)
+                    {
+                        dbSet.Add(item);
+                        foreach (var entry in context.ChangeTracker.Entries<IEntity>())
+                        {
+                            var entity = entry.Entity;
+                            entry.State = GetEntityState(entity.EntityState);
+                        }
+                    }
+                    context.SaveChanges();
+                }
+            }
+            catch (DbEntityValidationException exception)
+            {
+               throw new DataAccessLayerException("Błąd walidacji danych!",exception);
+            }
+            catch (DbUpdateException exception)
+            {
+                throw new DataAccessLayerException("Błąd zapisu do bazy danych!", exception);
+            }
+            catch (Exception exception)
+            {
+                throw new DataAccessLayerException("Inny błąd!", exception);
+            }
+            
+        }
 
         public void Remove(params T[] items)
         {
-            foreach (T item in items)
-                _context.Set<T>().Remove(item);
+            Update(items);
         }
-
-
-        public void SaveChanges()
-        {
-            _context.SaveChanges();
-        }
-
-
-       
-
         
-    }
+     }
+
+    [Serializable]
+    public class DataAccessLayerException : Exception
+    {
+        //
+        // For guidelines regarding the creation of new exception types, see
+        //    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/cpgenref/html/cpconerrorraisinghandlingguidelines.asp
+        // and
+        //    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dncscol/html/csharp07192001.asp
+        //
+
+        public DataAccessLayerException()
+        {
+        }
+
+        public DataAccessLayerException(string message) : base(message)
+        {
+        }
+
+        public DataAccessLayerException(string message, Exception inner) : base(message, inner)
+        {
+        }
+
+        protected DataAccessLayerException(
+            SerializationInfo info,
+            StreamingContext context) : base(info, context)
+        {
+        }
+    } 
 }

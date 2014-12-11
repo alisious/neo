@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Kseo2.DataAccess
 {
-    public class KseoContextInitializer : DropCreateDatabaseAlways<KseoContext>
+    public class KseoContextInitializer : DropCreateDatabaseIfModelChanges<KseoContext> //DropCreateDatabaseAlways<KseoContext>
     {
         protected override void Seed(KseoContext context)
         {

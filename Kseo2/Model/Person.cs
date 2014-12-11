@@ -10,7 +10,7 @@ namespace Kseo2.Model
     using System.Text;
 
     [Table("Person.Person")]
-    public partial class Person :Entity
+    public partial class Person :Entity,IEntity
     {
         public Person()
         {
@@ -146,5 +146,8 @@ namespace Kseo2.Model
         } 
         #endregion
 
+
+        public EntityState EntityState { get; set; }
+        
     }
 }
