@@ -120,6 +120,8 @@ namespace Kseo2.Model
         }
 
 
+        public virtual int? NationalityId { get; set; }
+        [ForeignKey("NationalityId")]
         [DisplayName("Narodowoœæ")]
         public virtual Country Nationality { get; set; }
 

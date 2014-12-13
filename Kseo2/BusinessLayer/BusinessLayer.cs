@@ -31,7 +31,7 @@ namespace Kseo2.BusinessLayer
 
         public Model.Person GetPersonByPesel(string pesel)
         {
-            return _personRepository.GetSingle(x => x.Pesel == pesel,p=>p.Nationality);
+            return _personRepository.GetSingle(x => x.Pesel == pesel,p=>p.Nationality,p=>p.Citizenships);
         }
 
         public void AddPerson(params Model.Person[] persons)

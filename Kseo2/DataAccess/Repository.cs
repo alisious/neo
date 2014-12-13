@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Runtime.Serialization;
@@ -29,7 +28,34 @@ namespace Kseo2.DataAccess
                     return System.Data.Entity.EntityState.Detached;
             }
         }
-        
+       
+        /*
+        public static void ModifyRelatedEntities<T2>(T parent,Expression<Func<T,object>> collection,System.Data.Entity.EntityState state,params T2[] children)
+        where T2 :IEntity
+        {
+            try
+            {
+                using (var context = new KseoContext())
+                {
+                    var parentDbSet = context.Set<T>();
+                    parentDbSet.Add(parent);
+
+                    var childrenDbSet = context.Set<T2>();
+                    foreach (var child in children)
+                    {
+                        childrenDbSet.Add(child);
+                        var obj = new ObjectContext("");
+                        obj.ObjectStateManager.ChangeRelationshipState(parent, child, collection, state);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+        */
         public virtual IList<T> GetAll(params System.Linq.Expressions.Expression<Func<T, object>>[] navigationProperties)
         {
             List<T> list;
@@ -84,6 +110,7 @@ namespace Kseo2.DataAccess
             Update(items);
         }
 
+        
         public void Update(params T[] items)
         {
             try
@@ -93,6 +120,7 @@ namespace Kseo2.DataAccess
                     var dbSet = context.Set<T>();
                     foreach (var item  in items)
                     {
+                        item.EntityState = Kseo2.Model.EntityState.Deleted;
                         dbSet.Add(item);
                         foreach (var entry in context.ChangeTracker.Entries<IEntity>())
                         {
@@ -116,6 +144,11 @@ namespace Kseo2.DataAccess
                 throw new DataAccessLayerException("Inny błąd!", exception);
             }
             
+        }
+
+        public void UpdateGraph(T item)
+        {
+            throw new NotImplementedException();
         }
 
         public void Remove(params T[] items)

@@ -15,6 +15,7 @@ namespace Kseo2.DataAccess
         T GetSingle(Func<T, bool> where, params Expression<Func<T, object>>[] navigationProperties);
         void Add(params T[] items);
         void Update(params T[] items);
+        void UpdateGraph(T item);
         void Remove(params T[] items);
         
     }

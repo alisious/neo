@@ -14,16 +14,20 @@ namespace KseoConsoleApplication
         static void Main(string[] args)
         {
             var businessLayer = new BusinessLayer();
-            var country = businessLayer.GetCountryByName("POLSKA");
+            var pl = businessLayer.GetCountryByName("POLSKA");
+            var af = businessLayer.GetCountryByName("AFGANISTAN");
+            var al = businessLayer.GetCountryByName("ALBANIA");
+            /*
             var ja = new Person
             {
-                Pesel = "73020916561",
+                Pesel = "73020916563",
                 LastName = "KORPUSIK",
                 FirstName = "JACEK",
                 BirthDate = "1973-02-09",
                 BirthPlace = "HONOLULU",
                 Sex = "M",
-                Nationality = country,
+                Nationality = pl,
+                Citizenships = new HashSet<Country>(){pl,af},
                 EntityState = EntityState.Added
             };
             businessLayer.AddPerson(new Person[]{ja});
@@ -33,8 +37,19 @@ namespace KseoConsoleApplication
             {
                 Console.WriteLine(osoba.Pesel);
             }
-            var o = businessLayer.GetPersonByPesel("73020916561");
+             */ 
+            var o = businessLayer.GetPersonByPesel("73020916563");
+            //o.Citizenships.Remove(af);
+            al.EntityState = EntityState.Added;
+            o.Citizenships.Add(al);
+            o.EntityState = EntityState.Modified;
+            businessLayer.UpdatePerson(o);
+            o = businessLayer.GetPersonByPesel("73020916563");
             Console.WriteLine(String.Format("{0} {1} Narodowość: {2}",o.FirstName,o.LastName,o.Nationality.Name));
+            foreach (var ob in o.Citizenships)
+            {
+                Console.WriteLine(String.Format("Obywatelstwo: {0}", ob.Name));
+            }
             Console.ReadLine();
         }
     }
