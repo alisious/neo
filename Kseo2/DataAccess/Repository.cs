@@ -133,7 +133,10 @@ namespace Kseo2.DataAccess
             }
             catch (DbEntityValidationException exception)
             {
-               throw new DataAccessLayerException("Błąd walidacji danych!",exception);
+                var m = (exception.InnerException!=null)?"; " + exception.InnerException.Message:
+                String.Empty;
+                 
+                throw new DataAccessLayerException(String.Concat("Błąd walidacji danych!",m),exception);
             }
             catch (DbUpdateException exception)
             {
@@ -144,6 +147,7 @@ namespace Kseo2.DataAccess
                 throw new DataAccessLayerException("Inny błąd!", exception);
             }
             
+
         }
 
         public void UpdateGraph(T item)

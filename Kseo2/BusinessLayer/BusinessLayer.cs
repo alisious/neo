@@ -58,5 +58,25 @@ namespace Kseo2.BusinessLayer
         {
             return _countryRepository.GetSingle(c => c.Name.Equals(name));
         }
+
+        public IList<T> GetAllItems<T>() where T : DictionaryItem<T>
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddItem(params DictItem[] items)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateItem(params DictItem[] items)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveItem(params DictItem[] items)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -86,6 +86,7 @@
     </Compile>
     <Compile Include="BusinessLayer\BusinessLayer.cs" />
     <Compile Include="BusinessLayer\IBusinessLayer.cs" />
+    <Compile Include="Model\DictItem.cs" />
     <Compile Include="Model\IEntity.cs" />
     <Compile Include="Model\SearchResult.cs" />
     <Compile Include="Model\User.cs" />
