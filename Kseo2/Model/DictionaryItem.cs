@@ -11,7 +11,7 @@ namespace Kseo2.Model
 {
     public abstract class DictionaryItem<T> :IEntity where T :class
     {
-        public DictionaryItem()
+        protected DictionaryItem()
         {
             ShortName = String.Empty;
             Description = String.Empty;

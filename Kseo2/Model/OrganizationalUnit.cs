@@ -7,7 +7,7 @@ namespace Kseo2.Model
     using System.Data.Entity.Spatial;
 
     [Table("Common.OrganizationalUnit")]
-    public partial class OrganizationalUnit :Entity
+    public partial class OrganizationalUnit :IEntity
     {
         public OrganizationalUnit()
         {
@@ -56,5 +56,7 @@ namespace Kseo2.Model
         {
             return Name;
         }
+
+        public EntityState EntityState { get; set; }
     }
 }

@@ -13,16 +13,18 @@ namespace Kseo2.BusinessLayer
 
         #region Dictionary routines
 
-        IList<T> GetAllItems<T>() where T : DictionaryItem<T>;
-        //IList<T> GetItemsByGroup<T>(T group) where T : DictionaryItem<T>;
-        //IList<T> GetItemsByGroup<T>(string groupName) where T : DictionaryItem<T>;
-        void AddItem(params DictItem[] items);
-        void UpdateItem(params DictItem[] items);
-        void RemoveItem(params DictItem[] items);
-
-
-            #endregion
+        void ReloadDictionary(Type dictionaryItemType);
         
+        
+        #endregion
+
+        #region OrganizationalUnit routines
+
+        IList<OrganizationalUnit> GetAllOrganizationalUnits(Organization organization=null);
+        IList<OrganizationalUnit> GetOrganizationalUnits(OrganizationalUnit masterUnit=null);
+        
+        #endregion
+
         
         IList<Person> GetAllPersons();
         SearchResult<Person> GetPersons(Func<Person, bool> where, int resultsLimit = 20);
@@ -31,7 +33,7 @@ namespace Kseo2.BusinessLayer
         void UpdatePerson(params Person[] persons);
         void RemovePerson(params Person[] persons);
 
-        IList<Country> GetAllCountries();
+
         Country GetCountryByName(string name);
 
     }
