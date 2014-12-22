@@ -159,8 +159,34 @@ namespace Kseo2.DataAccess
         {
             Update(items);
         }
-        
-     }
+
+
+
+        public IList<T> GetList(Func<T, bool> where, params System.Linq.Expressions.Expression<Func<T, object>>[] navigationProperties)
+        {
+            List<T> result;
+            using (var context = new KseoContext())
+            {
+                IQueryable<T> dbQuery = context.Set<T>();
+
+                //Apply eager loading
+                dbQuery = navigationProperties.Aggregate(dbQuery, (current, navigationProperty) => current.Include<T, object>(navigationProperty));
+                result = dbQuery.Where(where).ToList<T>();
+            }
+            return result;
+        }
+
+        public int Count(Func<T, bool> where)
+        {
+            int result;
+            using (var context = new KseoContext())
+            {
+                IQueryable<T> dbQuery = context.Set<T>();
+                result = dbQuery.Where(where).Count();
+            }
+            return result;
+        }
+    }
 
     [Serializable]
     public class DataAccessLayerException : Exception

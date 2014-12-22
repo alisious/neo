@@ -1,65 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using Kseo2.DataAccess;
 using Kseo2.Model;
+using System.Collections;
 
 namespace Kseo2.BusinessLayer
 {
     public class BusinessLayer :IBusinessLayer
     {
         private readonly IPersonRepository _personRepository;
-        private readonly ICountryRepository _countryRepository;
+        private readonly IOrganizationalUnitRepository _organizationalUnitRepository;
+        private readonly Dictionary<Type,IList> _dictionaries = new Dictionary<Type, IList>();
+
         
-        private IList<Country> _dictionaryCountries;
-        private IList<Organization> _dictionaryOrganizations;
-        private IList<QuestionForm> _dictionaryQuestionForms;
-        private IList<QuestionReason> _dictionaryQuestionReasons;
-
-
         public BusinessLayer()
         {
             _personRepository = new PersonRepository();
-            _countryRepository = new CountryRepository();
-            _dictionaryCountries = new List<Country>();
-            _dictionaryOrganizations = new List<Organization>();
-            _dictionaryQuestionForms = new List<QuestionForm>();
-            _dictionaryQuestionReasons = new List<QuestionReason>();
-        }
-
-        public IList<Country> DictionaryCountries
-        {
-            get { return _dictionaryCountries; }
-        }
-
-        public IList<Organization> DictionaryOrganizations
-        {
-            get { return _dictionaryOrganizations; }
-        }
-
-        public IList<QuestionForm> DictionaryQuestionForms
-        {
-            get { return _dictionaryQuestionForms; }
-        }
-
-        public IList<QuestionReason> DictionaryQuestionReasons
-        {
-            get { return _dictionaryQuestionReasons; }
-        }
-
-
-        public void ReloadDictionary(Type dictionaryItemType)
-        {
+            _organizationalUnitRepository = new OrganizationalUnitRepository();
             
-            if (dictionaryItemType == typeof (Country)) _dictionaryCountries = new Repository<Country>().GetAll();
-            if (dictionaryItemType == typeof(Organization)) _dictionaryOrganizations = new Repository<Organization>().GetAll();
-            if (dictionaryItemType == typeof(QuestionForm)) _dictionaryQuestionForms = new Repository<QuestionForm>().GetAll();
-            if (dictionaryItemType == typeof(QuestionReason)) _dictionaryQuestionReasons = new Repository<QuestionReason>().GetAll();
-
+            _dictionaries.Add(typeof(Country),new List<Country>());
+            _dictionaries.Add(typeof(Organization), new List<Organization>());
+            _dictionaries.Add(typeof(QuestionForm), new List<QuestionForm>());
+            _dictionaries.Add(typeof(QuestionReason), new List<QuestionReason>());
+            
         }
+
+        public  void LoadDictionary<T>() where T : DictionaryItem<T>
+        {
+            var repo = new DictionaryItemRepository<T>();
+            var list = repo.GetAll(d=>d.IsActive.Equals(true));
+            if (_dictionaries.ContainsKey(typeof (T)))
+                _dictionaries[typeof (T)] = (IList)list;
+            else
+            {
+                _dictionaries.Add(typeof(T), (IList)list);
+            }
+       }
+
+
+       
 
         public IList<Model.Person> GetAllPersons()
         {
@@ -94,25 +78,56 @@ namespace Kseo2.BusinessLayer
 
 
 
-        public IList<OrganizationalUnit> GetAllOrganizationalUnits(Organization organization = null)
+        public IList<OrganizationalUnit> GetOrganizationalUnits(Organization organization,bool activeOnly=true)
         {
-            var organizationalUnitRepository = new Repository<OrganizationalUnit>();
-
-            return (organization == null)
-                ? organizationalUnitRepository.GetAll()
-                : organizationalUnitRepository.GetAll(ou=>ou.Organization==organization);
+            
+            return activeOnly
+                ? _organizationalUnitRepository.GetList(ou=>ou.IsActive.Equals(true) && ou.Organization.Equals(organization))
+                : _organizationalUnitRepository.GetList(ou=>ou.Organization==organization);
         }
 
-        public IList<OrganizationalUnit> GetOrganizationalUnits(OrganizationalUnit masterUnit = null)
+        public OrganizationalUnit GetSingle(int id)
         {
-            throw new NotImplementedException();
+            return _organizationalUnitRepository.GetSingle(ou => ou.Id.Equals(id), ou => ou.MasterUnit,
+                ou => ou.Subordinates);
         }
         
 
-        public Country GetCountryByName(string name)
+        public T GetDictionaryItemByName<T>(string name) where T :DictionaryItem<T>
         {
-            var repo = new CountryRepository();
-            return repo.GetSingle(c => c.Name.Equals(name));
+            var repo = new DictionaryItemRepository<T>();
+            return repo.GetSingle(d => d.Name.Equals(name));
+        }
+
+
+        public IList<T> GetDictionaryItems<T>(bool activeOnly = true, T group = null) where T : DictionaryItem<T>
+        {
+           var repo = new DictionaryItemRepository<T>();
+            return activeOnly
+                ? repo.GetAll((d => d.IsActive.Equals(true) && d.Masteritem.Equals(group)), d => d.Masteritem,
+                    d => d.Subitems)
+                : repo.GetAll(d => d.Masteritem.Equals(group), d => d.Masteritem, d => d.Subitems);
+           
+        }
+
+        public IList<T> GetAllDictionaryItems<T>(bool activeOnly = true) where T : DictionaryItem<T>
+        {
+            var repo = new DictionaryItemRepository<T>();
+            return activeOnly 
+                ? repo.GetAll(d => d.IsActive.Equals(true),d=>d.Masteritem,d=>d.Subitems) 
+                : repo.GetAll();
+        }
+
+
+        public IList<T> GetDictionary<T>() where T :DictionaryItem<T>
+        {
+           if (_dictionaries.ContainsKey(typeof (T)))
+                return (List<T>)_dictionaries[typeof (T)];
+           else
+           {
+               return new List<T>();
+           }
+
         }
     }
 }

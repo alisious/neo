@@ -23,9 +23,9 @@ namespace Kseo2.Tests.UnitTests
             //given
             InitializeTest();
             var personRepo = new PersonRepository();
-            var countryRepo = new CountryRepository();
-            var c1 = countryRepo.GetSingle(c => c.Name.Equals("POLSKA"));
-            var c2 = countryRepo.GetSingle(c => c.Name.Equals("HOLANDIA"));
+            var dictRepo = new DictionaryItemRepository<Country>();
+            var c1 = dictRepo.GetSingle(c => c.Name.Equals("POLSKA"));
+            var c2 = dictRepo.GetSingle(c => c.Name.Equals("HOLANDIA"));
             var p1 = new Person()
             {
                 Pesel = "73020916001",
@@ -45,8 +45,8 @@ namespace Kseo2.Tests.UnitTests
             personRepo.Remove(p2);
 
             var p3 = personRepo.GetSingle(p => p.Pesel.Equals("73020916001"), p => p.Nationality, p => p.Citizenships);
-            c1 = countryRepo.GetSingle(c => c.Name.Equals("POLSKA"));
-            c2 = countryRepo.GetSingle(c => c.Name.Equals("HOLANDIA"));
+            c1 = dictRepo.GetSingle(c => c.Name.Equals("POLSKA"));
+            c2 = dictRepo.GetSingle(c => c.Name.Equals("HOLANDIA"));
             //then
             Assert.IsNotNull(c1);
             Assert.IsNotNull(c2);
@@ -89,7 +89,7 @@ namespace Kseo2.Tests.UnitTests
             //given
             InitializeTest();
             var personRepo = new PersonRepository();
-            var countryRepo = new CountryRepository();
+            var countryRepo = new DictionaryItemRepository<Country>();
             var c1 = countryRepo.GetSingle(c => c.Name.Equals("POLSKA"));
             var p1 = new Person()
             {
@@ -118,7 +118,7 @@ namespace Kseo2.Tests.UnitTests
             //given
             InitializeTest();
             var personRepo = new PersonRepository();
-            var countryRepo = new CountryRepository();
+            var countryRepo = new DictionaryItemRepository<Country>();
             var c1 = countryRepo.GetSingle(c => c.Name.Equals("POLSKA"));
             var c2 = countryRepo.GetSingle(c => c.Name.Equals("HOLANDIA"));
             var p1 = new Person()
@@ -152,7 +152,7 @@ namespace Kseo2.Tests.UnitTests
             //given
             InitializeTest();
             var personRepo = new PersonRepository();
-            var countryRepo = new CountryRepository();
+            var countryRepo = new DictionaryItemRepository<Country>();
             var c1 = countryRepo.GetSingle(c => c.Name.Equals("POLSKA"));
             var c2 = countryRepo.GetSingle(c => c.Name.Equals("HOLANDIA"));
             var p1 = new Person()
@@ -184,7 +184,7 @@ namespace Kseo2.Tests.UnitTests
             //given
             InitializeTest();
             var personRepo = new PersonRepository();
-            var countryRepo = new CountryRepository();
+            var countryRepo = new DictionaryItemRepository<Country>();
             var c1 = countryRepo.GetSingle(c => c.Name.Equals("POLSKA"));
             var c2 = countryRepo.GetSingle(c => c.Name.Equals("HOLANDIA"));
             var c3 = countryRepo.GetSingle(c => c.Name.Equals("FINLANDIA"));

@@ -14,9 +14,9 @@ namespace KseoConsoleApplication
         static void Main(string[] args)
         {
             var businessLayer = new BusinessLayer();
-            var pl = businessLayer.GetCountryByName("POLSKA");
-            var af = businessLayer.GetCountryByName("AFGANISTAN");
-            var al = businessLayer.GetCountryByName("ALBANIA");
+            var pl = businessLayer.GetDictionaryItemByName<Country>("POLSKA");
+            var af = businessLayer.GetDictionaryItemByName<Country>("AFGANISTAN");
+            var al = businessLayer.GetDictionaryItemByName<Country>("ALBANIA");
             /*
             var ja = new Person
             {

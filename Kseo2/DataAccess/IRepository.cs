@@ -11,6 +11,8 @@ namespace Kseo2.DataAccess
     public interface IRepository<T> where T :class,IEntity
     {
         IList<T> GetAll(params Expression<Func<T, object>>[] navigationProperties);
+        IList<T> GetList(Func<T, bool> where, params Expression<Func<T, object>>[] navigationProperties);
+        int Count(Func<T, bool> where);
         SearchResult<T> GetList(Func<T, bool> where, int resultsLimit = 0, params Expression<Func<T, object>>[] navigationProperties);
         T GetSingle(Func<T, bool> where, params Expression<Func<T, object>>[] navigationProperties);
         void Add(params T[] items);
