@@ -9,10 +9,10 @@ namespace Kseo2.Model
     using System.Data.Entity.Spatial;
 
     [Table("Verification.Verification")]
-    public class Verification :Entity
+    public class Verification :IEntity
     {
 
-        protected Verification()
+        public Verification()
         {
             Initialize();
         }
@@ -39,6 +39,8 @@ namespace Kseo2.Model
             Answer = String.Empty;
             Notes = String.Empty;
             Citizenships = new HashSet<Country>();
+            Question = new Question();
+
             
         }
 
@@ -81,6 +83,9 @@ namespace Kseo2.Model
         public ICollection<Country> Citizenships { get; set; }
         public Country Nationality { get; set; }
        
+        [NotMapped]
+        public EntityState EntityState { get; set; }
+
     }
 
 

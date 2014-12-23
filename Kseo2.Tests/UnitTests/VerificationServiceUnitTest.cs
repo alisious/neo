@@ -4,6 +4,7 @@ using Kseo2.DataAccess;
 using Kseo2.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Kseo2.Service;
+using Moq;
 
 namespace Kseo2.Tests.UnitTests
 {
@@ -17,6 +18,21 @@ namespace Kseo2.Tests.UnitTests
         public void Initialize()
         {
             
+        }
+
+
+        [TestMethod]
+        public void mozna_pobrac_sprawdzenie_wg_id()
+        {
+            var mock = new Mock<VerificationRepository>();
+            mock.Setup(m => m.GetSingle(v=>v.Id==5))
+            .Returns(new Verification{ Id = 5 });
+            IVerificationRepository verificationRepository = mock.Object;
+            var verification = verificationRepository.GetSingle(x=>x.Id==5);
+            Assert.IsTrue(verification.Id == 5);
+            
+
+
         }
 
 

@@ -22,22 +22,33 @@ namespace Kseo2.BusinessLayer
         #endregion
 
         #region OrganizationalUnit routines
-
+        
         IList<OrganizationalUnit> GetOrganizationalUnits(Organization organization, bool activeOnly = true);
         OrganizationalUnit GetSingle(int id);
         
         #endregion
 
-        
+        #region Person routines
+
         IList<Person> GetAllPersons();
         SearchResult<Person> GetPersons(Func<Person, bool> where, int resultsLimit = 20);
         Person GetPersonByPesel(string pesel);
         void AddPerson(params Person[] persons);
         void UpdatePerson(params Person[] persons);
-        void RemovePerson(params Person[] persons);
-
-
+        void RemovePerson(params Person[] persons); 
         
+        #endregion
+
+
+        #region Verification routines
+
+        SearchResult<Verification> GetVerifications(Func<Verification, bool> where, int resultsLimit = 20);
+        Verification GetVerificationById(int id);
+        void AddVerification(params Verification[] verifications);
+        void UpdateVerification(params Verification[] verifications);
+        void RemoveVerification(params Verification[] verifications);
+
+        #endregion
         
 
     }

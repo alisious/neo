@@ -30,20 +30,63 @@ namespace Kseo2.BusinessLayer
             
         }
 
-        public  void LoadDictionary<T>() where T : DictionaryItem<T>
+        #region DictionaryItem routines
+
+        public void LoadDictionary<T>() where T : DictionaryItem<T>
         {
             var repo = new DictionaryItemRepository<T>();
-            var list = repo.GetAll(d=>d.IsActive.Equals(true));
-            if (_dictionaries.ContainsKey(typeof (T)))
-                _dictionaries[typeof (T)] = (IList)list;
+            var list = repo.GetAll(d => d.IsActive.Equals(true));
+            if (_dictionaries.ContainsKey(typeof(T)))
+                _dictionaries[typeof(T)] = (IList)list;
             else
             {
                 _dictionaries.Add(typeof(T), (IList)list);
             }
-       }
+        }
+
+        public T GetDictionaryItemByName<T>(string name) where T : DictionaryItem<T>
+        {
+            var repo = new DictionaryItemRepository<T>();
+            return repo.GetSingle(d => d.Name.Equals(name));
+        }
 
 
-       
+        public IList<T> GetDictionaryItems<T>(bool activeOnly = true, T group = null) where T : DictionaryItem<T>
+        {
+            var repo = new DictionaryItemRepository<T>();
+            return activeOnly
+                ? repo.GetAll((d => d.IsActive.Equals(true) && d.Masteritem == group), d => d.Masteritem,
+                    d => d.Subitems)
+                : repo.GetAll(d => d.Masteritem == group, d => d.Masteritem, d => d.Subitems);
+
+
+
+
+        }
+
+        public IList<T> GetAllDictionaryItems<T>(bool activeOnly = true) where T : DictionaryItem<T>
+        {
+            var repo = new DictionaryItemRepository<T>();
+            return activeOnly
+                ? repo.GetAll(d => d.IsActive.Equals(true), d => d.Masteritem, d => d.Subitems)
+                : repo.GetAll();
+        }
+
+
+        public IList<T> GetDictionary<T>() where T : DictionaryItem<T>
+        {
+            if (_dictionaries.ContainsKey(typeof(T)))
+                return (List<T>)_dictionaries[typeof(T)];
+            else
+            {
+                return new List<T>();
+            }
+
+        }
+        
+        #endregion
+
+        #region Person routines
 
         public IList<Model.Person> GetAllPersons()
         {
@@ -57,7 +100,7 @@ namespace Kseo2.BusinessLayer
 
         public Model.Person GetPersonByPesel(string pesel)
         {
-            return _personRepository.GetSingle(x => x.Pesel == pesel,p=>p.Nationality,p=>p.Citizenships);
+            return _personRepository.GetSingle(x => x.Pesel == pesel, p => p.Nationality, p => p.Citizenships);
         }
 
         public void AddPerson(params Model.Person[] persons)
@@ -75,59 +118,59 @@ namespace Kseo2.BusinessLayer
             _personRepository.Remove(persons);
         }
 
-
-
-
-        public IList<OrganizationalUnit> GetOrganizationalUnits(Organization organization,bool activeOnly=true)
+        
+        #endregion
+        
+        #region OrganizationalUnit routines
+        public IList<OrganizationalUnit> GetOrganizationalUnits(Organization organization, bool activeOnly = true)
         {
-            
+
             return activeOnly
-                ? _organizationalUnitRepository.GetList(ou=>ou.IsActive.Equals(true) && ou.Organization.Equals(organization))
-                : _organizationalUnitRepository.GetList(ou=>ou.Organization==organization);
+                ? _organizationalUnitRepository.GetList(
+                ou => ou.IsActive.Equals(true) && ou.Organization.Id.Equals(organization.Id),
+                ou => ou.MasterUnit,
+                ou => ou.Organization,
+                ou => ou.Subordinates)
+                : _organizationalUnitRepository.GetList(ou => ou.Organization.Id.Equals(organization.Id),
+                ou => ou.Organization,
+                ou => ou.MasterUnit,
+                ou => ou.Subordinates);
         }
 
         public OrganizationalUnit GetSingle(int id)
         {
-            return _organizationalUnitRepository.GetSingle(ou => ou.Id.Equals(id), ou => ou.MasterUnit,
-                ou => ou.Subordinates);
+            return _organizationalUnitRepository.GetSingle(ou => ou.Id.Equals(id),
+                ou => ou.MasterUnit,
+                ou => ou.Subordinates,
+                ou => ou.Organization);
         }
         
+        #endregion
 
-        public T GetDictionaryItemByName<T>(string name) where T :DictionaryItem<T>
+        #region Verification routines
+
+        public SearchResult<Verification> GetVerifications(Func<Verification, bool> where, int resultsLimit = 20)
         {
-            var repo = new DictionaryItemRepository<T>();
-            return repo.GetSingle(d => d.Name.Equals(name));
+            throw new NotImplementedException();
         }
 
-
-        public IList<T> GetDictionaryItems<T>(bool activeOnly = true, T group = null) where T : DictionaryItem<T>
+        public Verification GetVerificationById(int id)
         {
-           var repo = new DictionaryItemRepository<T>();
-            return activeOnly
-                ? repo.GetAll((d => d.IsActive.Equals(true) && d.Masteritem.Equals(group)), d => d.Masteritem,
-                    d => d.Subitems)
-                : repo.GetAll(d => d.Masteritem.Equals(group), d => d.Masteritem, d => d.Subitems);
-           
+            throw new NotImplementedException();
+        }
+        public void AddVerification(params Verification[] verifications)
+        {
+            throw new NotImplementedException();
+        }
+        public void UpdateVerification(params Verification[] verifications)
+        {
+            throw new NotImplementedException();
+        }
+        public void RemoveVerification(params Verification[] verifications)
+        {
+            throw new NotImplementedException();
         }
 
-        public IList<T> GetAllDictionaryItems<T>(bool activeOnly = true) where T : DictionaryItem<T>
-        {
-            var repo = new DictionaryItemRepository<T>();
-            return activeOnly 
-                ? repo.GetAll(d => d.IsActive.Equals(true),d=>d.Masteritem,d=>d.Subitems) 
-                : repo.GetAll();
-        }
-
-
-        public IList<T> GetDictionary<T>() where T :DictionaryItem<T>
-        {
-           if (_dictionaries.ContainsKey(typeof (T)))
-                return (List<T>)_dictionaries[typeof (T)];
-           else
-           {
-               return new List<T>();
-           }
-
-        }
+        #endregion
     }
 }
