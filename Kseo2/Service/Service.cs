@@ -11,7 +11,7 @@ namespace Kseo2.Service
     {
         #region Private fields
         
-            protected readonly KseoContext _context;
+            protected readonly IKseoContext _context;
  
         #endregion
 
@@ -28,6 +28,10 @@ namespace Kseo2.Service
             _context = context;
         }
 
+        public Service(IKseoContext context)
+        {
+            _context = context;
+        }
         #endregion
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Kseo2.DataAccess;
 using Kseo2.Service;
 
 namespace Kseo2.ViewModels
@@ -28,8 +29,10 @@ namespace Kseo2.ViewModels
         public void NewVerification()
         {
             var parent = (Conductor<Screen>.Collection.OneActive) Parent;
-            parent.ActivateItem(new VerificationViewModel(_unitOfWork));
-            parent.DisplayName = "Nowe sprawdzenie...";
+            //parent.ActivateItem(new VerificationViewModel(_unitOfWork));
+            parent.ActivateItem(new VerificationViewModel(new KseoContext()));
+            
+           
         }
     }
 }

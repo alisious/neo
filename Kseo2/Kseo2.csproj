@@ -86,7 +86,10 @@
     </Compile>
     <Compile Include="BusinessLayer\BusinessLayer.cs" />
     <Compile Include="BusinessLayer\IBusinessLayer.cs" />
+    <Compile Include="BusinessLayer\PersonService.cs" />
+    <Compile Include="BusinessLayer\Service.cs" />
     <Compile Include="DataAccess\DictionaryItemRepository.cs" />
+    <Compile Include="DataAccess\IKseoContext.cs" />
     <Compile Include="DataAccess\OrganizationalUnitRepository.cs" />
     <Compile Include="DataAccess\VerificationRepository.cs" />
     <Compile Include="Model\IEntity.cs" />

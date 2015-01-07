@@ -21,7 +21,7 @@ namespace Kseo2.Service
 
         public PersonService() : base() {}
 
-        public PersonService(KseoContext context) : base(context) {}
+        public PersonService(IKseoContext context) : base(context) {}
         
        #endregion
 

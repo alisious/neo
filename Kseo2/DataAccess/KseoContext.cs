@@ -6,7 +6,7 @@ namespace Kseo2.DataAccess
     using System.Linq;
     using Kseo2.Model;
 
-    public partial class KseoContext : DbContext
+    public partial class KseoContext : DbContext,IKseoContext
     {
         public KseoContext()
             : base("name=KseoContext")

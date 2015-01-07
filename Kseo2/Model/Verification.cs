@@ -40,8 +40,6 @@ namespace Kseo2.Model
             Notes = String.Empty;
             Citizenships = new HashSet<Country>();
             Question = new Question();
-
-            
         }
 
         public int Id { get; set; }
@@ -82,7 +80,7 @@ namespace Kseo2.Model
 
         public ICollection<Country> Citizenships { get; set; }
         public Country Nationality { get; set; }
-       
+
         [NotMapped]
         public EntityState EntityState { get; set; }
 

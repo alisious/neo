@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using Kseo2.DataAccess;
 using Kseo2.Model;
 using Kseo2.Service;
 using System.Collections.Generic;
@@ -10,6 +11,8 @@ namespace Kseo2.ViewModels
     {
                     
         #region Private fields
+
+        private readonly IKseoContext _context;
 
         //private IPersonRepository _PersonRepository = new PersonRepository(); 
         private PersonService _personService;
@@ -236,6 +239,11 @@ namespace Kseo2.ViewModels
             _personService = new PersonService(_unitOfWork.Context());
         }
 
+        public PersonSearchViewModel(IKseoContext context)
+        {
+            _context = context;
+            _personService = new PersonService(_context);
+        }
         #endregion
 
         #region Public methods
