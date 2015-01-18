@@ -36,6 +36,7 @@ namespace Kseo2.Model
         [StringLength(100)]
         public string SignerPosition { get; set; }
         
+        [Required(ErrorMessage = @"Nazwa instytucji pytaj¹cej jest obowi¹zkowa!")]
         public virtual Organization AskerOrganization { get; set; }
 
         public virtual OrganizationalUnit AskerOrganizationalUnit { get; set; }

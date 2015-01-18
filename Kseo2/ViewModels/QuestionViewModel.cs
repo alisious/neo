@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -8,24 +9,30 @@ using Caliburn.Micro;
 using Kseo2.DataAccess;
 using Kseo2.Model;
 using Kseo2.Service;
+using Caliburn.Micro.Validation;
+using System.Runtime.CompilerServices;
 
 namespace Kseo2.ViewModels
 {
-    public class QuestionViewModel :Screen
+    public class QuestionViewModel : ValidatingScreen<QuestionViewModel>
     {
+
+        #region Private fields
         private readonly IKseoContext _context;
-        private Question _question;
-        
-        private readonly List<Organization> _organizations; 
-        private List<OrganizationalUnit> _organizationalUnits;
+        private Question _currentQuestion;
+        private readonly List<Organization> _askerOrganizations;
+        private List<OrganizationalUnit> _askerOrganizationalUnits;
         private readonly List<QuestionForm> _questionForms; 
+        #endregion
         
-        public QuestionViewModel(IKseoContext context,Question question)
+        #region Constructors
+
+        public QuestionViewModel(IKseoContext context, Question currentQuestion)
         {
-        
+
             _context = context;
-            Question = question;
-            _organizations = context.Organizations
+            CurrentQuestion = currentQuestion;
+            _askerOrganizations = context.Organizations
                 .Where(o => o.IsActive.Equals(true))
                 .OrderBy(o => o.DisplayOrder)
                 .ToList();
@@ -33,74 +40,106 @@ namespace Kseo2.ViewModels
                 .Where(o => o.IsActive.Equals(true))
                 .OrderBy(o => o.DisplayOrder)
                 .ToList();
-            
+
         }
 
-        public QuestionViewModel(UnitOfWork uow)
-        {
-            _question = new Question();
-            
-        }
+        
+        #endregion
 
-        public QuestionViewModel(UnitOfWork uow=null,Question question=null)
-        {
-            Question = question ?? new Question();
-            
-        }
+        #region Public properties
 
-        public Question Question
+        public Question CurrentQuestion
         {
-            get { return _question; }
+            get { return _currentQuestion; }
             set
             {
-                _question = value;
-                NotifyOfPropertyChange(() => Question);
-                
-                }
-
+                _currentQuestion = value;
+                NotifyOfPropertyChange(() => CurrentQuestion);
+            }
+        }
+        
+        public List<Organization> AskerOrganizations
+        {
+            get { return _askerOrganizations; }
         }
 
-        public Organization AskerOrganization
+        [Required(ErrorMessage = @"Nazwa instytucji pytającej jest obowiązkowa!")]
+        public Organization SelectedAskerOrganization
         {
-            get { return Question.AskerOrganization; }
+            get { return CurrentQuestion.AskerOrganization; }
             set
             {
-                Question.AskerOrganization = value;
-                OrganizationalUnits = (value==null) 
-                    ? new List<OrganizationalUnit>() 
+                CurrentQuestion.AskerOrganization = value;
+                AskerOrganizationalUnits = (value == null)
+                    ? new List<OrganizationalUnit>()
                     : _context.OrganizationalUnits
-                        .Include(ou=>ou.Organization)
+                        .Include(ou => ou.Organization)
                         .Where(ou => ou.IsActive.Equals(true) && ou.Organization.Id == value.Id)
-                        .OrderBy(ou=>ou.DisplayOrder)
+                        .OrderBy(ou => ou.DisplayOrder)
                         .ToList();
-                NotifyOfPropertyChange(()=>AskerOrganization);
+                OnPropertyChanged(value);
+             }
+        }
+        
+        public OrganizationalUnit SelectedAskerOrganizationalUnit
+        {
+            get { return CurrentQuestion.AskerOrganizationalUnit; }
+            set
+            {
+                CurrentQuestion.AskerOrganizationalUnit = value;
+                OnPropertyChanged(value);
+            }
+        }
+        
+
+        public List<OrganizationalUnit> AskerOrganizationalUnits
+        {
+            get { return _askerOrganizationalUnits; }
+            set
+            {
+                _askerOrganizationalUnits = value;
+                NotifyOfPropertyChange(() => AskerOrganizationalUnits);
+                NotifyOfPropertyChange(() => IsEnabledAskerOrganizationalUnit);
             }
         }
 
         public bool IsEnabledAskerOrganizationalUnit
         {
-            get { return OrganizationalUnits.Count > 0; }
+            get { return AskerOrganizationalUnits.Count > 0; }
         }
 
-        public List<OrganizationalUnit> OrganizationalUnits
+        public QuestionForm SelectedQuestionForm
         {
-            get { return _organizationalUnits; }
+            get { return CurrentQuestion.QuestionForm; }
             set
             {
-                _organizationalUnits = value;
-                NotifyOfPropertyChange(()=>OrganizationalUnits);
-                NotifyOfPropertyChange(()=>IsEnabledAskerOrganizationalUnit);
+                CurrentQuestion.QuestionForm = value;
+                OnPropertyChanged(value);
             }
-        }
-
-        public List<Organization> Organizations
-        {
-            get { return _organizations; }
         }
 
         public List<QuestionForm> QuestionForms
         {
             get { return _questionForms; }
         }
-    }
+
+        public bool CanSave
+        {
+            get { return !HasErrors; }
+        } 
+        #endregion
+        
+        #region Public methods
+        
+        #endregion
+
+
+        #region Helpers and validators
+        protected void OnPropertyChanged(object value, [CallerMemberName] string propertyName = "")
+        {
+            NotifyOfPropertyChange(propertyName);
+            NotifyOfPropertyChange(() => CanSave);
+        } 
+        #endregion
+}
 }

@@ -86,6 +86,7 @@
     <Compile Include="UnitTests\RepositoryUnitTest.cs" />
     <Compile Include="UnitTests\UserServiceUnitTest.cs" />
     <Compile Include="UnitTests\VerificationServiceUnitTest.cs" />
+    <Compile Include="ViewModelTests\QuestionViewModelUnitTest.cs" />
     <Compile Include="ViewModelTests\VerificationViewModelTest.cs" />
   </ItemGroup>
   <ItemGroup>

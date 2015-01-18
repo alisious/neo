@@ -39,6 +39,8 @@ namespace Kseo2.Model
             Answer = String.Empty;
             Notes = String.Empty;
             Citizenships = new HashSet<Country>();
+            Nationality = null;
+            QuestionReason = null;
             Question = new Question();
         }
 
@@ -47,8 +49,10 @@ namespace Kseo2.Model
         [StringLength(11)]
         public string Pesel { get; set; }
         [StringLength(50)]
+        [Required(AllowEmptyStrings  = false,ErrorMessage = @"Imię osoby sprawdzanej jest wymagane!")]
         public string FirstName { get; set; }
         [StringLength(50)]
+        [Required(AllowEmptyStrings = false, ErrorMessage = @"Nazwisko osoby sprawdzanej jest wymagane!")]
         public string LastName { get; set; }
         [StringLength(50)]
         public string FatherName { get; set; }
@@ -72,6 +76,7 @@ namespace Kseo2.Model
         [Column(TypeName = "datetime2")]
         public DateTime CreationTime { get; set; }
 
+        [Required(ErrorMessage = @"Wymagane jest podanie powodu sprawdzenia!")]
         public virtual QuestionReason QuestionReason { get; set; }
         public User Author { get; set; }
         public Question Question { get; set; }
