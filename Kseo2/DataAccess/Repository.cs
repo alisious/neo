@@ -12,6 +12,18 @@ namespace Kseo2.DataAccess
     public class Repository<T> :IRepository<T> where T :class,IEntity
     {
 
+        private readonly KseoContext _context;
+        public Repository()
+        {
+            _context = null;
+        }
+
+        public Repository(KseoContext context)
+        {
+            _context = context;
+        }
+
+
         protected static System.Data.Entity.EntityState GetEntityState(Kseo2.Model.EntityState entityState)
         {
             switch (entityState)
@@ -29,33 +41,7 @@ namespace Kseo2.DataAccess
             }
         }
        
-        /*
-        public static void ModifyRelatedEntities<T2>(T parent,Expression<Func<T,object>> collection,System.Data.Entity.EntityState state,params T2[] children)
-        where T2 :IEntity
-        {
-            try
-            {
-                using (var context = new KseoContext())
-                {
-                    var parentDbSet = context.Set<T>();
-                    parentDbSet.Add(parent);
-
-                    var childrenDbSet = context.Set<T2>();
-                    foreach (var child in children)
-                    {
-                        childrenDbSet.Add(child);
-                        var obj = new ObjectContext("");
-                        obj.ObjectStateManager.ChangeRelationshipState(parent, child, collection, state);
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                
-                throw;
-            }
-        }
-        */
+        
         public virtual IList<T> GetAll(params System.Linq.Expressions.Expression<Func<T, object>>[] navigationProperties)
         {
             List<T> list;
