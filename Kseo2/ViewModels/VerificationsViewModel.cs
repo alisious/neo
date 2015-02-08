@@ -4,11 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Caliburn.Micro;
+using Kseo2.Model;
 
 namespace Kseo2.ViewModels
 {
     public class VerificationsViewModel :Screen
     {
+
+        public Verification SelectedItem { get; set; }
+
+        public bool CanEdit
+        {
+            get { return SelectedItem != null; }
+        }
+        public bool CanRemove { get { return SelectedItem != null; } }
 
     }
 }

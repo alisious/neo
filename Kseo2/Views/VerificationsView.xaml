@@ -8,41 +8,36 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="100"></ColumnDefinition>
+            
             <ColumnDefinition Width="241*"/>
         </Grid.ColumnDefinitions>
-        <GroupBox Grid.Column="1">
-            <ContentControl x:Name="OperationsButtons"></ContentControl>
-        </GroupBox>
-        <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1">
-            
-            <StackPanel Orientation="Vertical">
-                <Button  Height="100">
+        <StackPanel Orientation="Vertical">
+                <Button x:Name="Add" Height="100">
                     <StackPanel Orientation="Vertical">
                         <Image Source="..\Images/file_add.png" Height="50"  Width="50"/>
                         <TextBlock Text="Dodaj"/>
                     </StackPanel>
                 </Button>
-                <Button  Height="100">
+                <Button x:Name="Edit" Height="100" IsEnabled="{Binding CanEdit}">
                     <StackPanel Orientation="Vertical">
                         <Image Source="..\Images/file_edit.png" Height="50"  Width="50"/>
                         <TextBlock Text="Edytuj"/>
                     </StackPanel>
                 </Button>
-                <Button  Height="100">
+                <Button x:Name="Remove" Height="100" IsEnabled="{Binding CanRemove}">
                     <StackPanel Orientation="Vertical">
                         <Image Source="..\Images/file_delete.png" Height="50"  Width="50"/>
                         <TextBlock Text="Usuń"/>
                     </StackPanel>
                 </Button>
-                <Button  Height="100">
+                <Button x:Name="Search"  Height="100" >
                     <StackPanel Orientation="Vertical">
                         <Image Source="..\Images/file_search.png" Height="50"  Width="50"/>
                         <TextBlock Text="Szukaj"/>
                     </StackPanel>
                 </Button>
                 </StackPanel>
-        </Border>
+       
         
     </Grid>
 </UserControl>

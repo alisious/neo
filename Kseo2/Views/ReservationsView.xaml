@@ -6,27 +6,36 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="600">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="80"/>
-            <RowDefinition Height="133*"/>
-        </Grid.RowDefinitions>
-        
-            <StackPanel Orientation="Horizontal">
-                <Button Height="Auto"  >
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="..\Images/file_add.png" Height="60"  Width="60"/>
-                        <TextBlock Text="Nowe zabezpieczenie" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-                
-                <Button Height="Auto" >
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="..\Images/file_search.png" Height="50"  Width="50"/>
-                        <TextBlock Text="Szukaj"/>
-                    </StackPanel>
-                </Button>
-            </StackPanel>
-       
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
 
+            <ColumnDefinition Width="241*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical">
+            <Button x:Name="Add" Height="100">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="..\Images/file_add.png" Height="50"  Width="50"/>
+                    <TextBlock Text="Dodaj"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="Edit" Height="100" IsEnabled="{Binding CanEdit}">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="..\Images/file_edit.png" Height="50"  Width="50"/>
+                    <TextBlock Text="Edytuj"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="Remove" Height="100" IsEnabled="{Binding CanRemove}">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="..\Images/file_delete.png" Height="50"  Width="50"/>
+                    <TextBlock Text="Usuń"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="Search"  Height="100" >
+                <StackPanel Orientation="Vertical">
+                    <Image Source="..\Images/file_search.png" Height="50"  Width="50"/>
+                    <TextBlock Text="Szukaj"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
     </Grid>
 </UserControl>

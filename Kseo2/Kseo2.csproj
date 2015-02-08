@@ -151,9 +151,6 @@
     <Compile Include="Views\DailyReportView.xaml.cs">
       <DependentUpon>DailyReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\OperationsButtonsView.xaml.cs">
-      <DependentUpon>OperationsButtonsView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\PersonDetailsView.xaml.cs">
       <DependentUpon>PersonDetailsView.xaml</DependentUpon>
     </Compile>
@@ -226,10 +223,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DailyReportView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\OperationsButtonsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
