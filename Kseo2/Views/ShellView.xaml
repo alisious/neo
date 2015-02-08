@@ -9,32 +9,66 @@
             WindowState="Maximized"
              >
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="529*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Background="Yellow" Orientation="Horizontal">
-            <Button x:Name="ShowScreenOne" Content="Show Screen One"/>
-            <Button x:Name="ShowScreenTwo" Content="Show Screen Two"/>
-            <Button x:Name="ShowSearchPersonScreen" Content="Show Search Person Screen"/>
-            <Button x:Name="ShowEditPersonScreen" Content="Show Edit Person Screen" />
-            <Button x:Name="ShowDetailsPersonScreen" Content="Show Details Person Screen"/>
-        </StackPanel>
-        <ContentControl Grid.Row="1"  x:Name="ActiveItem"/>
-        <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <GroupBox Header="Data operacji:" Width="150">
-                <TextBlock x:Name="ActiveDate" Text="{Binding ActiveDate}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            </GroupBox>
-            <GroupBox Header="Użytkownik:" Width="300" FontSize="14" >
-                <TextBlock x:Name="ActiveUser_Name" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            </GroupBox>
-            <GroupBox Header="Raport dzienny:" FontSize="14" >
-                
-            </GroupBox>
-            
-            
-        </StackPanel>
-
+        <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Source="/Kseo2;component/Images/logo_ewid_300.gif"/>
+       
+        <ContentControl x:Name="DailyReport" Grid.Column="0" Grid.Row="2"/>
+        <TabControl Grid.Column="1" Grid.Row="0" Grid.RowSpan="3">
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Width="180">
+                        <Image Source="..\Images/search_files.png" Height="50"  Width="50"/>
+                        <TextBlock Text="Sprawdzenia" Foreground="Blue" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <ContentControl x:Name="Verifications"/>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Width="180">
+                        <Image Source="..\Images/preferences-contact-list.png" Height="50"  Width="50"/>
+                        <TextBlock Text="Zabezpieczenia" Foreground="Blue" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    </TabItem.Header>
+                <ContentControl x:Name="Reservations"/>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Width="180">
+                        <Image Source="..\Images/spy-128.png" Height="50"  Width="50"/>
+                        <TextBlock Text="Współpraca" Foreground="Blue" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <ContentControl x:Name="Collaborations"/>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Width="180">
+                        <Image Source="..\Images/folder-document.png" Height="50"  Width="50"/>
+                        <TextBlock Text="Procedury" Foreground="Blue" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Width="180">
+                        <Image Source="..\Images/users.png" Height="50"  Width="50"/>
+                        <TextBlock Text="Osoby" Foreground="Blue" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </TabItem.Header>
+            </TabItem>
+        </TabControl>
+        <ContentControl Grid.Column="1"  Grid.Row="2" Grid.RowSpan="2"   x:Name="ActiveItem"/>
+        
+        
     </Grid>
 </Window>

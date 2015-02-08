@@ -6,6 +6,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="300">
     <Grid >
-            
+        <StackPanel>
+            <GroupBox Header="Data operacji:">
+                <TextBlock x:Name="OperationDate"/>
+            </GroupBox>
+            <GroupBox Header="Raport dzienny:" />
+
+        </StackPanel>
+        
     </Grid>
 </UserControl>

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Runtime.Serialization;
 using Caliburn.Micro;
+using Kseo2.DataAccess;
 using Kseo2.Model;
 using Kseo2.Service;
 using System;
@@ -14,7 +15,10 @@ namespace Kseo2.ViewModels
     {
         private readonly IWindowManager _windowManager;
         private UnitOfWork _uow;
+        private KseoContext _kseoContext;
         private User _activeUser;
+
+         
 
 
 
@@ -23,33 +27,24 @@ namespace Kseo2.ViewModels
         public ShellViewModel(IWindowManager windowManager)
         {
             _windowManager = windowManager;
-            DisplayName = "KSEO 2.0";
-            _uow = new UnitOfWork();
-            Items.Add(new StartScreenViewModel(_uow));
-            Items.Add(new PersonSearchViewModel(_uow));
-            ActiveUser = _uow.ActiveUser;
-            ActivateItem(Items[0]);
-
+            _kseoContext = new KseoContext();
+            DisplayName = "Komputerowy System Ewidencji Operacyjnej 2.0";
+            DailyReport = new DailyReportViewModel(ActiveUser);
+            Verifications = new VerificationsViewModel();
+            Reservations = new ReservationsViewModel();
+            Collaborations = new CollaborationsViewModel();
+            Procedures = new ProceduresViewModel();
+            Persons = new PersonsViewModel();
         }
+        
 
-        public ShellViewModel()
-        {
-            _uow = new UnitOfWork();
-            Items.Add(new StartScreenViewModel(_uow));
-            
-            
-            _uow.LoadDictionary(typeof(Country));
-            _uow.LoadDictionary(typeof(QuestionForm));
-            _uow.LoadDictionary(typeof(QuestionReason));
-            _uow.LoadDictionary(typeof(Organization));
-            _uow.LoadDictionary(typeof(Rank));
-            ActiveUser = _uow.ActiveUser;
-            //TODO: Dorobić obsługę pierwszego logowania.
-            this.DisplayName = "KSEO 1.0";
-            ShowScreenOne();
-        }
+        public DailyReportViewModel DailyReport { get; private set; }
+        public VerificationsViewModel Verifications { get; private set; }
+        public ReservationsViewModel Reservations { get; private set; }
+        public CollaborationsViewModel Collaborations { get; private set; }
+        public ProceduresViewModel Procedures {get; private set; }
+        public PersonsViewModel Persons { get; private set; }
 
-       
         public User ActiveUser
         {
             get { return _activeUser; }
@@ -61,10 +56,8 @@ namespace Kseo2.ViewModels
 
         }
 
-        public string ActiveDate
-        {
-            get { return DateTime.Today.ToShortDateString(); }
-        }
+       
+        //TODO: Usunąć poniższe
 
         public void ShowScreenOne()
         {

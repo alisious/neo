@@ -121,15 +121,19 @@
     <Compile Include="Service\UnitOfWork.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Service\VerificationService.cs" />
+    <Compile Include="ViewModels\CollaborationsViewModel.cs" />
     <Compile Include="ViewModels\CountrySelectViewModel.cs" />
+    <Compile Include="ViewModels\DailyReportViewModel.cs" />
     <Compile Include="ViewModels\PersonDetailsViewModel.cs" />
     <Compile Include="ViewModels\PersonEditViewModel.cs" />
     <Compile Include="ViewModels\PersonSearchViewModel.cs" />
+    <Compile Include="ViewModels\PersonsViewModel.cs" />
+    <Compile Include="ViewModels\ProceduresViewModel.cs" />
     <Compile Include="ViewModels\QuestionViewModel.cs" />
+    <Compile Include="ViewModels\ReservationsViewModel.cs" />
     <Compile Include="ViewModels\ScreenOneViewModel.cs" />
     <Compile Include="ViewModels\ScreenTwoViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
-    <Compile Include="ViewModels\StartScreenViewModel.cs" />
     <Compile Include="ViewModels\Validation\DomainValidator.cs" />
     <Compile Include="ViewModels\Validation\EmailValidator.cs" />
     <Compile Include="ViewModels\Validation\IValidationControl.cs" />
@@ -139,12 +143,16 @@
     <Compile Include="ViewModels\Validation\StrongPasswordValidator.cs" />
     <Compile Include="ViewModels\Validation\ValidatingScreen.cs" />
     <Compile Include="ViewModels\Validation\ValidationGroupAttribute.cs" />
+    <Compile Include="ViewModels\VerificationsViewModel.cs" />
     <Compile Include="ViewModels\VerificationViewModel.cs" />
     <Compile Include="Views\CountrySelectView.xaml.cs">
       <DependentUpon>CountrySelectView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DailyReportView.xaml.cs">
       <DependentUpon>DailyReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OperationsButtonsView.xaml.cs">
+      <DependentUpon>OperationsButtonsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PersonDetailsView.xaml.cs">
       <DependentUpon>PersonDetailsView.xaml</DependentUpon>
@@ -155,6 +163,9 @@
     </Compile>
     <Compile Include="Views\QuestionView.xaml.cs">
       <DependentUpon>QuestionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReservationsView.xaml.cs">
+      <DependentUpon>ReservationsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ScreenOneView.xaml.cs">
       <DependentUpon>ScreenOneView.xaml</DependentUpon>
@@ -168,8 +179,8 @@
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\StartScreenView.xaml.cs">
-      <DependentUpon>StartScreenView.xaml</DependentUpon>
+    <Compile Include="Views\VerificationsView.xaml.cs">
+      <DependentUpon>VerificationsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\VerificationView.xaml.cs">
       <DependentUpon>VerificationView.xaml</DependentUpon>
@@ -218,6 +229,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\OperationsButtonsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PersonDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -227,6 +242,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\QuestionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReservationsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -246,7 +265,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\StartScreenView.xaml">
+    <Page Include="Views\VerificationsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -286,7 +305,26 @@
   <ItemGroup>
     <Resource Include="Images\moro.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\checked_user-128.png" />
+    <Resource Include="Images\folder-document.png" />
+    <Resource Include="Images\profile.png" />
+    <Resource Include="Images\spy-128.png" />
+    <Resource Include="Images\users.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Accept-Male-User.png" />
+    <Resource Include="Images\Edit-Male-User.png" />
+    <Resource Include="Images\human-folder-public.png" />
+    <Resource Include="Images\preferences-contact-list.png" />
+    <Resource Include="Images\sign-up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\file_add.png" />
+    <Resource Include="Images\file_delete.png" />
+    <Resource Include="Images\file_edit.png" />
+    <Resource Include="Images\file_search.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
