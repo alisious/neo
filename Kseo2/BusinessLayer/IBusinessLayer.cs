@@ -31,7 +31,7 @@ namespace Kseo2.BusinessLayer
         #region Person routines
 
         IList<Person> GetAllPersons();
-        SearchResult<Person> GetPersons(Func<Person, bool> where, int resultsLimit = 20);
+        
         Person GetPersonByPesel(string pesel);
         void AddPerson(params Person[] persons);
         void UpdatePerson(params Person[] persons);
@@ -42,7 +42,7 @@ namespace Kseo2.BusinessLayer
 
         #region Verification routines
 
-        SearchResult<Verification> GetVerifications(Func<Verification, bool> where, int resultsLimit = 20);
+        
         Verification GetVerificationById(int id);
         void AddVerification(params Verification[] verifications);
         void UpdateVerification(params Verification[] verifications);

@@ -8,9 +8,49 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="241*"/>
+            <ColumnDefinition Width="81"/>
+            <ColumnDefinition Width="619*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Vertical">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="600*"/>
+        </Grid.RowDefinitions>
+        <GroupBox Header="Ustawienia:" Grid.Column="0" Grid.ColumnSpan="2">
+            <StackPanel>
+                <CheckBox x:Name="SearchAutomatically" IsChecked="True" Content="szukaj automatycznie" IsThreeState="False"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Długość filtra:"/>
+                    <TextBox x:Name="FilterLength" Text="3" TextAlignment="Right"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Limit wyników:"/>
+                    <TextBox x:Name="ResultsLimit" Text="20" TextAlignment="Right"/>
+                </StackPanel>
+        </StackPanel>
+        </GroupBox>
+        <GroupBox Header="Filtrowanie:" Grid.Column="2">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Width="200">
+                    <TextBlock Text="Nazwisko:"></TextBlock>
+                    <TextBox x:Name="SearchedLastName"></TextBox>
+                    <TextBlock Text="Imię:"></TextBlock>
+                    <TextBox x:Name="SearchedFirstName"></TextBox>
+                </StackPanel>
+                <StackPanel Width="200">
+                    <TextBlock Text="Drugie imię:"></TextBlock>
+                    <TextBox x:Name="SearchedMiddleName"></TextBox>
+                    <TextBlock Text="Imię ojca:"></TextBlock>
+                    <TextBox x:Name="SearchedFatherName"></TextBox>
+                </StackPanel>
+                <StackPanel Width="200">
+                    <TextBlock Text="Data ur:"></TextBlock>
+                    <TextBox x:Name="SearchedBirthDate"></TextBox>
+                    <TextBlock Text="PESEL:"></TextBlock>
+                    <TextBox x:Name="SearchedPesel"></TextBox>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+        <StackPanel Orientation="Vertical" Grid.Row="1">
             <Button x:Name="Add" Height="100">
                 <StackPanel Orientation="Vertical">
                     <Image Source="..\Images/file_add.png" Height="50"  Width="50"/>
@@ -36,8 +76,8 @@
                 </StackPanel>
             </Button>
         </StackPanel>
-        
-        <DataGrid x:Name="Items" Grid.Column="1">
+
+        <DataGrid x:Name="Items" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
             <DataGrid.Columns>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
@@ -73,8 +113,8 @@
                 <DataGridTextColumn Header="Imię ojca" Binding="{Binding FatherName}" Width="200"/>
                 <DataGridTextColumn Header="Data ur." Binding="{Binding BirthDate}" Width="150"/>
                 <DataGridTextColumn Header="PESEL" Binding="{Binding Pesel}" Width="100*" ></DataGridTextColumn>
-                
-                
+
+
             </DataGrid.Columns>
         </DataGrid>
 

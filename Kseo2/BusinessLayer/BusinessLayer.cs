@@ -149,10 +149,7 @@ namespace Kseo2.BusinessLayer
 
         #region Verification routines
 
-        public SearchResult<Verification> GetVerifications(Func<Verification, bool> where, int resultsLimit = 20)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public Verification GetVerificationById(int id)
         {
