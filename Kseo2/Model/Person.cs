@@ -128,6 +128,39 @@ namespace Kseo2.Model
         [DisplayName("Obywatelstwo")]
         public virtual HashSet<Country> Citizenships { get; set; }
 
+        [NotMapped]
+        public bool IsVerified { get { return true; } }
+        [NotMapped]
+        public bool IsCooperator { get { return true; } }
+        [NotMapped]
+        public bool IsReserved { get { return true; } }
+        [NotMapped]
+        public bool IsContained { get { return true; } }
+
+
+        [NotMapped]
+        public string VerifiedImage
+        {
+            get { return IsCooperator ? @"..\Images/search_files.png" : String.Empty; }
+        }
+
+        [NotMapped]
+        public string CooperatorImage 
+        {
+            get { return IsCooperator ? @"../Images/spy-128.png" : String.Empty; }
+        }
+
+        [NotMapped]
+        public string ReservedImage
+        {
+            get { return IsReserved ? @"../Images/preferences-contact-list.png" : String.Empty; }
+        }
+
+        [NotMapped]
+        public string ContainedImage
+        {
+            get { return IsContained ? @"../Images/folder-document.png" : String.Empty; }
+        }
         
         #region Private methods
         private void SetPeselUnknown()

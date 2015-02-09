@@ -34,7 +34,7 @@ namespace Kseo2.ViewModels
             Reservations = new ReservationsViewModel();
             Collaborations = new CollaborationsViewModel();
             Procedures = new ProceduresViewModel();
-            Persons = new PersonsViewModel();
+            Persons = new PersonsViewModel(_kseoContext);
         }
         
 

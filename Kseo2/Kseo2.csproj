@@ -88,6 +88,8 @@
     </Compile>
     <Compile Include="BusinessLayer\BusinessLayer.cs" />
     <Compile Include="BusinessLayer\IBusinessLayer.cs" />
+    <Compile Include="BusinessLayer\PersonService.cs" />
+    <Compile Include="BusinessLayer\SearchResult.cs" />
     <Compile Include="DataAccess\DictionaryItemRepository.cs" />
     <Compile Include="DataAccess\OrganizationalUnitRepository.cs" />
     <Compile Include="DataAccess\VerificationRepository.cs" />
@@ -145,6 +147,9 @@
     <Compile Include="ViewModels\Validation\ValidationGroupAttribute.cs" />
     <Compile Include="ViewModels\VerificationsViewModel.cs" />
     <Compile Include="ViewModels\VerificationViewModel.cs" />
+    <Compile Include="Views\CollaborationsView.xaml.cs">
+      <DependentUpon>CollaborationsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CountrySelectView.xaml.cs">
       <DependentUpon>CountrySelectView.xaml</DependentUpon>
     </Compile>
@@ -157,6 +162,12 @@
     <Compile Include="Views\PersonEditView.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>PersonEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PersonsView.xaml.cs">
+      <DependentUpon>PersonsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProceduresView.xaml.cs">
+      <DependentUpon>ProceduresView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\QuestionView.xaml.cs">
       <DependentUpon>QuestionView.xaml</DependentUpon>
@@ -218,6 +229,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\CollaborationsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CountrySelectView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -231,6 +246,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PersonEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PersonsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProceduresView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
