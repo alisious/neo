@@ -20,13 +20,14 @@ namespace Kseo2.ViewModels
 
         private int _resultsLimit = 20;
         private bool _canSearchAutomatically = true;
-        private int _firstNameTemplateLengthTrigger = 3;
-        private string _lastNameTemplate;
-        private string _firstNameTemplate;
-        private string _middleNameTemplate;
-        private string _fatherNameTemplate;
-        private string _birthDateTemplate;
-        private string _peselTemplate;
+        private int _resultsCounter = 0;
+        private int _lastNameTemplateLengthTrigger = 3;
+        private string _lastNameTemplate=String.Empty;
+        private string _firstNameTemplate = String.Empty;
+        private string _middleNameTemplate = String.Empty;
+        private string _fatherNameTemplate = String.Empty;
+        private string _birthDateTemplate = String.Empty;
+        private string _peselTemplate = String.Empty;
 
 
         
@@ -34,7 +35,9 @@ namespace Kseo2.ViewModels
         {
             _kseoContext = kseoContext;
             _personService = new PersonService(kseoContext);
-            Items = new ObservableCollection<Person>(_kseoContext.Persons.ToList());
+            Items = new ObservableCollection<Person>();
+            ResultsCounter = Items.Count;
+            NotifyOfPropertyChange(()=>CanSearch);
         }
 
         public ObservableCollection<Person> Items
@@ -65,8 +68,10 @@ namespace Kseo2.ViewModels
         {
             get { return SelectedItem != null; }
         }
+
         public bool CanRemove { get { return SelectedItem != null; } }
 
+        
         public string LastNameTemplate
         {
             get { return _lastNameTemplate; }
@@ -74,6 +79,8 @@ namespace Kseo2.ViewModels
             {
                 _lastNameTemplate = value;
                 NotifyOfPropertyChange(()=>LastNameTemplate);
+                NotifyOfPropertyChange(()=>CanSearch);
+                SearchAutomatically();
             }
         }
 
@@ -84,6 +91,7 @@ namespace Kseo2.ViewModels
             {
                 _firstNameTemplate = value;
                 NotifyOfPropertyChange(()=>FirstNameTemplate);
+                SearchAutomatically();
             }
         }
 
@@ -94,6 +102,7 @@ namespace Kseo2.ViewModels
             {
                 _middleNameTemplate = value;
                 NotifyOfPropertyChange(()=>MiddleNameTemplate);
+                SearchAutomatically();
             }
         }
 
@@ -104,6 +113,7 @@ namespace Kseo2.ViewModels
             {
                 _fatherNameTemplate = value;
                 NotifyOfPropertyChange(()=>FatherNameTemplate);
+                SearchAutomatically();
             }
         }
 
@@ -114,6 +124,7 @@ namespace Kseo2.ViewModels
             {
                 _birthDateTemplate = value;
                 NotifyOfPropertyChange(()=>BirthDateTemplate);
+                SearchAutomatically();
             }
         }
 
@@ -124,6 +135,7 @@ namespace Kseo2.ViewModels
             {
                 _peselTemplate = value;
                 NotifyOfPropertyChange(()=>PeselTemplate);
+                SearchAutomatically();
             }
         }
 
@@ -147,22 +159,56 @@ namespace Kseo2.ViewModels
             }
         }
 
-        public int FirstNameTemplateLengthTrigger
+        public int LastNameTemplateLengthTrigger
         {
-            get { return _firstNameTemplateLengthTrigger; }
+            get { return _lastNameTemplateLengthTrigger; }
             set
             {
-                _firstNameTemplateLengthTrigger = value;
-                NotifyOfPropertyChange(()=>FirstNameTemplateLengthTrigger);
+                _lastNameTemplateLengthTrigger = value;
+                NotifyOfPropertyChange(()=>LastNameTemplateLengthTrigger);
+                NotifyOfPropertyChange(()=>CanSearch);
             }
+        }
+
+        public int ResultsCounter
+        {
+            get { return _resultsCounter; }
+            set
+            {
+                _resultsCounter = value;
+                NotifyOfPropertyChange(()=>ResultsCounter);
+            }
+        }
+
+        public bool CanSearch
+        {
+            get { return LastNameTemplate.Length >= LastNameTemplateLengthTrigger; }
         }
 
 
         public void Search()
         {
-            
-            Items = new ObservableCollection<Person>(_personService.Search(p=>p.LastName.StartsWith()).Results);
 
+            var sr = _personService.Search(p => p.LastName.StartsWith(LastNameTemplate ?? String.Empty)
+                                                && p.FirstName.StartsWith(FirstNameTemplate ?? String.Empty)
+                                                && p.MiddleName.StartsWith(MiddleNameTemplate ?? String.Empty)
+                                                && p.FatherName.StartsWith(FatherNameTemplate ?? String.Empty)
+                                                && p.BirthDate.StartsWith(BirthDateTemplate ?? String.Empty)
+                                                && p.Pesel.StartsWith(PeselTemplate ?? String.Empty),ResultsLimit);
+            if (sr.ResultsCounter<=ResultsLimit)
+                Items = new ObservableCollection<Person>(sr.Results);
+            else
+            {
+                Items.Clear();
+            }
+            ResultsCounter = sr.ResultsCounter;
+
+        }
+
+        private void SearchAutomatically()
+        {
+            if (CanSearchAutomatically && CanSearch)
+                Search();
         }
 
     }
