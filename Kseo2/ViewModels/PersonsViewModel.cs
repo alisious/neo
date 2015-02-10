@@ -133,7 +133,7 @@ namespace Kseo2.ViewModels
 
         public void Add()
         {
-            var personViewModel = new PersonViewModel(Context);
+            var personViewModel = new PersonViewModel(0);
             personViewModel.DisplayName = "Nowa osoba.";
             var windowManager = new WindowManager();
             

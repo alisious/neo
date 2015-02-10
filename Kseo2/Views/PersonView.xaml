@@ -7,11 +7,11 @@
              d:DesignHeight="800" d:DesignWidth="1200">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="80"/>
             <RowDefinition Height="700*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="80"/>
             <ColumnDefinition Width="800*"/>
             <ColumnDefinition Width="100"/>
         </Grid.ColumnDefinitions>
@@ -26,8 +26,8 @@
                     </StackPanel>
                 </TabItem.Header>
                 <StackPanel>
-                    <StackPanel x:Name="DanePodstawowe" Orientation="Horizontal"  MinHeight="480">
-                        <StackPanel Width="300">
+                    <StackPanel x:Name="DanePodstawowe" Orientation="Horizontal"  MinHeight="350">
+                        <StackPanel MinWidth="250">
                             <CheckBox x:Name="HasPesel" IsThreeState="False" FlowDirection="RightToLeft" HorizontalAlignment="Left" Content=":Posiada PESEL" FontWeight="{Binding BoldWhenHasPesel}" />
                             <TextBox x:Name="Pesel" Visibility="{Binding PeselVisibility}" />
                             <TextBlock Text="Płeć:" FontWeight="Bold"/>
@@ -44,18 +44,52 @@
                             <TextBox x:Name="MiddleName" />
                             <TextBlock Text="Nazwisko poprzednie:" />
                             <TextBox x:Name="PreviousName"   />
+                            
+                        </StackPanel>
+                        <StackPanel MinWidth="250">
                             <TextBlock Text="Imię ojca:" FontWeight="{Binding BoldWhenHasNoPesel}"/>
                             <TextBox x:Name="FatherName"/>
                             <TextBlock Text="Imię matki:"/>
                             <TextBox x:Name="MotherName" />
                             <TextBlock Text="Nazwisko rodowe matki:"/>
                             <TextBox x:Name="MotherMaidenName" />
-                        </StackPanel>
-                        <StackPanel MinWidth="250">
                             <TextBlock Text="Data urodzenia (RRRR-MM-DD):" FontWeight="{Binding BoldWhenHasNoPesel}"/>
                             <TextBox x:Name="BirthDate"  />
                             <TextBlock Text="Miejsce urodzenia:" />
                             <TextBox x:Name="BirthPlace" />
+                        </StackPanel>
+                        <StackPanel MinWidth="400">
+                            <TextBlock Text="Narodowość:"/>
+                            <ComboBox x:Name="Nationality" Margin="0,0,40,0" 
+                                        ItemsSource="{Binding Countries}" 
+                                        SelectedItem="{Binding Nationality}"
+                                        SelectedValuePath="Name"
+                                        IsEditable="True">
+                            </ComboBox>
+                            <DockPanel  Margin="0,0,5,0" Height="187">
+                                <TextBlock DockPanel.Dock="Top" Text="Obywatelstwo:"/>
+                                <StackPanel DockPanel.Dock="Right">
+                                    <Button Name="EditCitizenships" Width="40" TabIndex="12" Margin="0">
+                                        <Button.Content>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Source="..\Images\preferences_composer.png" Width="30" Height="30" />
+                                            </StackPanel>
+                                        </Button.Content>
+                                    </Button>
+                                </StackPanel>
+                                <ListBox x:Name="Citizenships" ItemsSource="{Binding Citizenships}" TabIndex="10" >
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel Orientation="Vertical" />
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Name="Country" Text="{Binding Path=Name}"/>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </DockPanel>
                         </StackPanel>
                     </StackPanel>
                     <StackPanel>

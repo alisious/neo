@@ -337,8 +337,6 @@ namespace Kseo2.ViewModels
 
         public IResult Save()
         {
-
-
             if (CanSave == true)
             {
                 try

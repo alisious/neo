@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Caliburn.Micro.Validation;
 using Kseo2.DataAccess;
 using Kseo2.Model;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 using Kseo2.Helpers;
+using Caliburn.Micro;
+using Caliburn.Micro.Extras;
 
 namespace Kseo2.ViewModels
 {
@@ -16,13 +19,15 @@ namespace Kseo2.ViewModels
     {
         private readonly KseoContext _context;
         private Person _currentPerson;
+        private List<Country> _countries; 
         
 
-        public PersonViewModel(KseoContext context)
+        public PersonViewModel(int personId=0)
         {
             DisplayName = "Edycja danych osoby.";
-            _context = context;
-            CurrentPerson = new Person();
+            _context = new KseoContext();
+            Countries = _context.Countries.Where(c => c.IsActive.Equals(true)).ToList();
+            CurrentPerson = (personId == 0) ? new Person() : _context.Persons.FirstOrDefault(p => p.Id.Equals(personId));
         }
 
         public Person CurrentPerson
@@ -225,6 +230,46 @@ namespace Kseo2.ViewModels
             }
         }
 
+        public Country Nationality
+        {
+            get { return CurrentPerson.Nationality; }
+            set
+            {
+                CurrentPerson.Nationality = value;
+                NotifyOfPropertyChange(() => Nationality);
+            }
+
+        }
+
+        public List<Country> Countries
+        {
+            get { return _countries; }
+            set
+            {
+                _countries = value;
+                NotifyOfPropertyChange(()=>Countries);
+            }
+        }
+
+        public HashSet<Country> Citizenships
+        {
+            get { return CurrentPerson.Citizenships; }
+        }
+
+
+        public void EditCitizenships()
+        {
+            var windowManager = new WindowManager();
+            var vm = new CountrySelectViewModel(this.Countries);
+            vm.SetSelectedCountries(Citizenships);
+            if (windowManager.ShowDialog(vm) == true)
+            {
+                CurrentPerson.Citizenships = new HashSet<Country>(vm.GetSelectedCountries());
+
+                NotifyOfPropertyChange(() => Citizenships);
+            }
+        }
+
         public void Cancel()
         {
             TryClose(false);
@@ -240,6 +285,34 @@ namespace Kseo2.ViewModels
                 else
                     return !r && !HasErrorsByGroup("HasNoPeselGroup");
             }
+        }
+
+        public IResult Save()
+        {
+            if (CanSave)
+            {
+                try
+                {
+                    _context.Persons.Add(CurrentPerson);
+                    _context.SaveChanges();
+                    TryClose(true);
+                    return new MessengerResult("Zmiany zostały zapisane.")
+                        .Caption("Informacja")
+                        .Image(MessageImage.Information);
+                    
+                }
+                catch (Exception ex)
+                {
+                    return new MessengerResult(ex.Message)
+                        .Caption("Błąd!")
+                        .Image(MessageImage.Error);
+                }
+            }
+            else
+            {
+                return null;
+            }
+
         }
 
         protected void OnPropertyChanged(object value, [CallerMemberName] string propertyName = "")
