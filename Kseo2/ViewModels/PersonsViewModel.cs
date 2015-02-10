@@ -11,66 +11,30 @@ using System.Collections.ObjectModel;
 
 namespace Kseo2.ViewModels
 {
-    public class PersonsViewModel :Screen
+    public class PersonsViewModel :ListViewModel<Person>
     {
-        private readonly KseoContext _kseoContext;
-        private ObservableCollection<Person> _items;
-        private Person _selectedItem;
-        private readonly PersonService _personService;
 
-        private int _resultsLimit = 20;
-        private bool _canSearchAutomatically = true;
-        private int _resultsCounter = 0;
-        private int _lastNameTemplateLengthTrigger = 3;
-        private string _lastNameTemplate=String.Empty;
-        private string _firstNameTemplate = String.Empty;
-        private string _middleNameTemplate = String.Empty;
-        private string _fatherNameTemplate = String.Empty;
-        private string _birthDateTemplate = String.Empty;
-        private string _peselTemplate = String.Empty;
-
-
+        #region Private fields
+            private readonly PersonService _personService;
+            private string _lastNameTemplate = String.Empty;
+            private string _firstNameTemplate = String.Empty;
+            private string _middleNameTemplate = String.Empty;
+            private string _fatherNameTemplate = String.Empty;
+            private string _birthDateTemplate = String.Empty;
+            private string _peselTemplate = String.Empty; 
+        #endregion
         
-        public PersonsViewModel(KseoContext kseoContext)
+        
+        public PersonsViewModel(KseoContext kseoContext) :base(kseoContext)
         {
-            _kseoContext = kseoContext;
+            
             _personService = new PersonService(kseoContext);
-            Items = new ObservableCollection<Person>();
-            ResultsCounter = Items.Count;
             NotifyOfPropertyChange(()=>CanSearch);
         }
 
-        public ObservableCollection<Person> Items
-        {
-            get { return _items; }
-            set
-            {
-                _items = value;
-                NotifyOfPropertyChange(()=>Items);
-            }
-        }
 
-        public Person SelectedItem
-        {
-            get { return _selectedItem; }
-            set
-            {
-                _selectedItem = value;
-                NotifyOfPropertyChange(()=>SelectedItem);
-                NotifyOfPropertyChange(()=>CanEdit);
-                NotifyOfPropertyChange(()=>CanRemove);
-            }
-        }
-     
 
-        
-        public bool CanEdit
-        {
-            get { return SelectedItem != null; }
-        }
-
-        public bool CanRemove { get { return SelectedItem != null; } }
-
+        #region Public properties
         
         public string LastNameTemplate
         {
@@ -78,8 +42,8 @@ namespace Kseo2.ViewModels
             set
             {
                 _lastNameTemplate = value;
-                NotifyOfPropertyChange(()=>LastNameTemplate);
-                NotifyOfPropertyChange(()=>CanSearch);
+                NotifyOfPropertyChange(() => LastNameTemplate);
+                NotifyOfPropertyChange(() => CanSearch);
                 SearchAutomatically();
             }
         }
@@ -90,7 +54,7 @@ namespace Kseo2.ViewModels
             set
             {
                 _firstNameTemplate = value;
-                NotifyOfPropertyChange(()=>FirstNameTemplate);
+                NotifyOfPropertyChange(() => FirstNameTemplate);
                 SearchAutomatically();
             }
         }
@@ -101,7 +65,7 @@ namespace Kseo2.ViewModels
             set
             {
                 _middleNameTemplate = value;
-                NotifyOfPropertyChange(()=>MiddleNameTemplate);
+                NotifyOfPropertyChange(() => MiddleNameTemplate);
                 SearchAutomatically();
             }
         }
@@ -112,7 +76,7 @@ namespace Kseo2.ViewModels
             set
             {
                 _fatherNameTemplate = value;
-                NotifyOfPropertyChange(()=>FatherNameTemplate);
+                NotifyOfPropertyChange(() => FatherNameTemplate);
                 SearchAutomatically();
             }
         }
@@ -123,7 +87,7 @@ namespace Kseo2.ViewModels
             set
             {
                 _birthDateTemplate = value;
-                NotifyOfPropertyChange(()=>BirthDateTemplate);
+                NotifyOfPropertyChange(() => BirthDateTemplate);
                 SearchAutomatically();
             }
         }
@@ -134,59 +98,21 @@ namespace Kseo2.ViewModels
             set
             {
                 _peselTemplate = value;
-                NotifyOfPropertyChange(()=>PeselTemplate);
+                NotifyOfPropertyChange(() => PeselTemplate);
                 SearchAutomatically();
             }
-        }
+        } 
+        
+        #endregion
 
-        public int ResultsLimit
+        
+        public override bool CanSearch
         {
-            get { return _resultsLimit; }
-            set
-            {
-                _resultsLimit = value;
-                NotifyOfPropertyChange(()=>ResultsLimit);
-            }
-        }
-
-        public bool CanSearchAutomatically
-        {
-            get { return _canSearchAutomatically; }
-            set
-            {
-                _canSearchAutomatically = value;
-                NotifyOfPropertyChange(()=>CanSearchAutomatically);
-            }
-        }
-
-        public int LastNameTemplateLengthTrigger
-        {
-            get { return _lastNameTemplateLengthTrigger; }
-            set
-            {
-                _lastNameTemplateLengthTrigger = value;
-                NotifyOfPropertyChange(()=>LastNameTemplateLengthTrigger);
-                NotifyOfPropertyChange(()=>CanSearch);
-            }
-        }
-
-        public int ResultsCounter
-        {
-            get { return _resultsCounter; }
-            set
-            {
-                _resultsCounter = value;
-                NotifyOfPropertyChange(()=>ResultsCounter);
-            }
-        }
-
-        public bool CanSearch
-        {
-            get { return LastNameTemplate.Length >= LastNameTemplateLengthTrigger; }
+            get { return LastNameTemplate.Length >= FilterTemplateLengthTrigger; }
         }
 
 
-        public void Search()
+        public override void Search()
         {
 
             var sr = _personService.Search(p => p.LastName.StartsWith(LastNameTemplate ?? String.Empty)
@@ -205,10 +131,16 @@ namespace Kseo2.ViewModels
 
         }
 
-        private void SearchAutomatically()
+        public void Add()
         {
-            if (CanSearchAutomatically && CanSearch)
-                Search();
+            var personViewModel = new PersonViewModel(Context);
+            personViewModel.DisplayName = "Nowa osoba.";
+            var windowManager = new WindowManager();
+            
+            if (windowManager.ShowDialog(personViewModel) == true)
+            {
+               
+            }
         }
 
     }

@@ -79,9 +79,6 @@ namespace Kseo2.ViewModels
             ActivateItem(new PersonEditViewModel(_uow));
         }
 
-        public void ShowDetailsPersonScreen()
-        {
-            ActivateItem(new PersonDetailsViewModel(new Person()));
-        }
+       
     }
 }

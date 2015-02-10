@@ -126,10 +126,11 @@
     <Compile Include="ViewModels\CollaborationsViewModel.cs" />
     <Compile Include="ViewModels\CountrySelectViewModel.cs" />
     <Compile Include="ViewModels\DailyReportViewModel.cs" />
-    <Compile Include="ViewModels\PersonDetailsViewModel.cs" />
+    <Compile Include="ViewModels\ListViewModel.cs" />
     <Compile Include="ViewModels\PersonEditViewModel.cs" />
     <Compile Include="ViewModels\PersonSearchViewModel.cs" />
     <Compile Include="ViewModels\PersonsViewModel.cs" />
+    <Compile Include="ViewModels\PersonViewModel.cs" />
     <Compile Include="ViewModels\ProceduresViewModel.cs" />
     <Compile Include="ViewModels\QuestionViewModel.cs" />
     <Compile Include="ViewModels\ReservationsViewModel.cs" />
@@ -156,15 +157,15 @@
     <Compile Include="Views\DailyReportView.xaml.cs">
       <DependentUpon>DailyReportView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PersonDetailsView.xaml.cs">
-      <DependentUpon>PersonDetailsView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\PersonEditView.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>PersonEditView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PersonsView.xaml.cs">
       <DependentUpon>PersonsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PersonView.xaml.cs">
+      <DependentUpon>PersonView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProceduresView.xaml.cs">
       <DependentUpon>ProceduresView.xaml</DependentUpon>
@@ -241,15 +242,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\PersonDetailsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\PersonEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PersonsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PersonView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -340,6 +341,18 @@
     <Resource Include="Images\file_delete.png" />
     <Resource Include="Images\file_edit.png" />
     <Resource Include="Images\file_search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Add-Male-User.png" />
+    <Resource Include="Images\Male-User-Help.png" />
+    <Resource Include="Images\man.png" />
+    <Resource Include="Images\Remove-Male-User.png" />
+    <Resource Include="Images\Search-Male-User.png" />
+    <Resource Include="Images\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Briefcase.png" />
+    <Resource Include="Images\mail-128.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

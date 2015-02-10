@@ -129,6 +129,9 @@ namespace Kseo2.Model
         public virtual HashSet<Country> Citizenships { get; set; }
 
         [NotMapped]
+        public String FullName { get { return String.Format("{0} {1}", LastName, FirstName); } }
+        
+        [NotMapped]
         public bool IsVerified { get { return true; } }
         [NotMapped]
         public bool IsCooperator { get { return true; } }
