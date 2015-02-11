@@ -123,10 +123,13 @@
     <Compile Include="Service\UnitOfWork.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Service\VerificationService.cs" />
+    <Compile Include="ViewModels\AssociationListViewModel.cs" />
     <Compile Include="ViewModels\CollaborationsViewModel.cs" />
     <Compile Include="ViewModels\CountrySelectViewModel.cs" />
     <Compile Include="ViewModels\DailyReportViewModel.cs" />
     <Compile Include="ViewModels\ListViewModel.cs" />
+    <Compile Include="ViewModels\PersonAddressesViewModel.cs" />
+    <Compile Include="ViewModels\PersonBaseViewModel.cs" />
     <Compile Include="ViewModels\PersonEditViewModel.cs" />
     <Compile Include="ViewModels\PersonSearchViewModel.cs" />
     <Compile Include="ViewModels\PersonsViewModel.cs" />
@@ -156,6 +159,9 @@
     </Compile>
     <Compile Include="Views\DailyReportView.xaml.cs">
       <DependentUpon>DailyReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PersonAddressesView.xaml.cs">
+      <DependentUpon>PersonAddressesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PersonEditView.xaml.cs">
       <SubType>Code</SubType>
@@ -239,6 +245,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DailyReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PersonAddressesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

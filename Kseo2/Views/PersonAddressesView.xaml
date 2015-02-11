@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="Kseo2.Views.PersonAddressesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="1000">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="619*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="300*"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Orientation="Vertical" Grid.Row="1">
+            <Button x:Name="Add" Height="80">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="..\Images/file_add.png" Height="50"  Width="50"/>
+                    <TextBlock Text="Dodaj"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="Edit" Height="80" IsEnabled="{Binding CanEdit}">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="..\Images/file_edit.png" Height="50"  Width="50"/>
+                    <TextBlock Text="Edytuj"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="Remove" Height="80" IsEnabled="{Binding CanRemove}">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="..\Images/file_delete.png" Height="50"  Width="50"/>
+                    <TextBlock Text="Usuń"/>
+                </StackPanel>
+            </Button>
+
+        </StackPanel>
+
+        <DataGrid x:Name="Items" Grid.Column="1">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Height="20"  Source="{Binding CurrentImage}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTextColumn Header="Rodzaj" Binding="{Binding LastName}" Width="200"></DataGridTextColumn>
+                <DataGridTextColumn Header="Miejscowość" Binding="{Binding FirstName}" Width="200" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Ulica" Binding="{Binding MiddleName}" Width="200" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Nr domu" Binding="{Binding FatherName}" Width="200"/>
+                <DataGridTextColumn Header="Nr lokalu." Binding="{Binding BirthDate}" Width="150"/>
+                <DataGridTextColumn Header="Kod poczt." Binding="{Binding Pesel}" Width="100*" ></DataGridTextColumn>
+
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</UserControl>

@@ -30,6 +30,7 @@ namespace Kseo2.ViewModels
             _inAddingMode = (personId == 0);
             Countries = _context.Countries.Where(c => c.IsActive.Equals(true)).ToList();
             CurrentPerson = _inAddingMode ? new Person() : _context.Persons.FirstOrDefault(p => p.Id.Equals(personId));
+            PersonAddresses = new PersonAddressesViewModel();
         }
 
         public Person CurrentPerson
@@ -42,6 +43,8 @@ namespace Kseo2.ViewModels
             }
         }
 
+        public PersonAddressesViewModel PersonAddresses{ get; set; }
+       
         public string FullName
         {
             get { return CurrentPerson.FullName; }

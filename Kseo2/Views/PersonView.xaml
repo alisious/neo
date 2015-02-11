@@ -101,6 +101,7 @@
                                         <TextBlock Text="Adresy" Foreground="Blue" VerticalAlignment="Center"/>
                                     </StackPanel>
                                 </TabItem.Header>
+                                <ContentControl x:Name="PersonAddresses"/>
                             </TabItem>
                             <TabItem>
                                 <TabItem.Header>
