@@ -19,15 +19,17 @@ namespace Kseo2.ViewModels
     {
         private readonly KseoContext _context;
         private Person _currentPerson;
-        private List<Country> _countries; 
-        
+        private List<Country> _countries;
+        private bool _inAddingMode;
+
 
         public PersonViewModel(int personId=0)
         {
             DisplayName = "Edycja danych osoby.";
             _context = new KseoContext();
+            _inAddingMode = (personId == 0);
             Countries = _context.Countries.Where(c => c.IsActive.Equals(true)).ToList();
-            CurrentPerson = (personId == 0) ? new Person() : _context.Persons.FirstOrDefault(p => p.Id.Equals(personId));
+            CurrentPerson = _inAddingMode ? new Person() : _context.Persons.FirstOrDefault(p => p.Id.Equals(personId));
         }
 
         public Person CurrentPerson
@@ -171,7 +173,7 @@ namespace Kseo2.ViewModels
         #endregion
 
         [RequiredEx(ErrorMessage = @"Data urodzenia jest wymagana w przypadku braku PESEL!", AllowEmptyStrings = false, GuardProperty = "HasNoPesel")]
-        [RegularExpression(@"((?:19|20)\d\d)([-](0[1-9]|1[012]))?([-](0[1-9]|[12][0-9]|3[01]))?", ErrorMessage = @"Rok, Rok-Miesiąc lub data urodzenia.")]
+        [RegularExpression(@"((?:19|20)\d\d)([-](0[1-9]|1[012]))?([-](0[1-9]|[12][0-9]|3[01]))?", ErrorMessage = @"Data urodzenia w jednym z trzech formatów: RRRR, RRRR-MM, RRRR-MM-DD")]
         [ValidationGroup(IncludeInErrorsValidation = false, GroupName = "HasNoPeselGroup")]
         public string BirthDate
         {
@@ -293,17 +295,19 @@ namespace Kseo2.ViewModels
             {
                 try
                 {
-                    _context.Persons.Add(CurrentPerson);
+                    if (_inAddingMode) _context.Persons.Add(CurrentPerson);
                     _context.SaveChanges();
                     TryClose(true);
-                    return new MessengerResult("Zmiany zostały zapisane.")
-                        .Caption("Informacja")
-                        .Image(MessageImage.Information);
-                    
+                    return null;
+                    //return new MessengerResult("Zmiany zostały zapisane.")
+                    //    .Caption("Informacja")
+                    //    .Image(MessageImage.Information);
+
                 }
                 catch (Exception ex)
                 {
-                    return new MessengerResult(ex.Message)
+                    var msg = (ex.InnerException != null) ? ex.InnerException.Message : ex.Message;
+                    return new MessengerResult(msg)
                         .Caption("Błąd!")
                         .Image(MessageImage.Error);
                 }

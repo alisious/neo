@@ -143,5 +143,20 @@ namespace Kseo2.ViewModels
             }
         }
 
+        public void Edit()
+        {
+            if (SelectedItem != null)
+            {
+                var personViewModel = new PersonViewModel(SelectedItem.Id);
+                personViewModel.DisplayName = "Zmiana danych osoby.";
+                var windowManager = new WindowManager();
+
+                if (windowManager.ShowDialog(personViewModel) == true)
+                {
+
+                }
+            }
+        }
+
     }
 }
