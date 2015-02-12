@@ -29,7 +29,11 @@ namespace Kseo2.ViewModels
             _context = new KseoContext();
             _inAddingMode = (personId == 0);
             Countries = _context.Countries.Where(c => c.IsActive.Equals(true)).ToList();
-            CurrentPerson = _inAddingMode ? new Person() : _context.Persons.FirstOrDefault(p => p.Id.Equals(personId));
+            CurrentPerson = _inAddingMode ? new Person() : _context.Persons
+                .Include("Addresses")
+                .Include("Workplaces")
+                .Include("Citizenships")
+                .FirstOrDefault(p => p.Id.Equals(personId));
             PersonAddresses = new PersonAddressesViewModel();
         }
 

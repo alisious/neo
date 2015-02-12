@@ -93,7 +93,9 @@
     <Compile Include="DataAccess\DictionaryItemRepository.cs" />
     <Compile Include="DataAccess\OrganizationalUnitRepository.cs" />
     <Compile Include="DataAccess\VerificationRepository.cs" />
+    <Compile Include="Model\Address.cs" />
     <Compile Include="Model\IEntity.cs" />
+    <Compile Include="Model\Location.cs" />
     <Compile Include="Model\SearchResult.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\OrganizationalUnit.cs" />
@@ -101,6 +103,7 @@
     <Compile Include="Helpers\PeselValidator.cs" />
     <Compile Include="Model\DictionaryItem.cs" />
     <Compile Include="Model\Verification.cs" />
+    <Compile Include="Model\Workplace.cs" />
     <Compile Include="Service\IOrgaznizationalUnitService.cs" />
     <Compile Include="Service\OrganizationalUnitService.cs" />
     <Compile Include="Service\Service.cs" />

@@ -15,6 +15,8 @@ namespace Kseo2.Model
         public Person()
         {
             Citizenships = new HashSet<Country>();
+            Workplaces = new HashSet<Workplace>();
+            Addresses = new HashSet<Address>();
             _hasPESEL = true;
             MiddleName = String.Empty;
             PreviousName = String.Empty;
@@ -128,6 +130,9 @@ namespace Kseo2.Model
         [DisplayName("Obywatelstwo")]
         public virtual HashSet<Country> Citizenships { get; set; }
 
+        public virtual HashSet<Address> Addresses { get; set; }
+        public virtual HashSet<Workplace> Workplaces { get; set; }
+            
         [NotMapped]
         public String FullName { get { return String.Format("{0} {1}", LastName, FirstName); } }
         

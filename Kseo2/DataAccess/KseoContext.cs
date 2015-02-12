@@ -18,6 +18,8 @@ namespace Kseo2.DataAccess
 
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Person> Persons { get; set; }
+        public virtual DbSet<Address> Addresses { get; set; }
+        public virtual DbSet<Workplace> Workplaces { get; set; }
         public virtual DbSet<Rank> Ranks { get; set; }
         public virtual DbSet<Organization> Organizations { get; set; }
         public virtual DbSet<OrganizationalUnit> OrganizationalUnits { get; set; }
@@ -37,6 +39,12 @@ namespace Kseo2.DataAccess
                 .WithMany()
                 .Map(m => m.ToTable("Citizenship", "Person"));
 
+            modelBuilder.Entity<Person>()
+                .HasMany(e => e.Workplaces);
+            
+            modelBuilder.Entity<Person>()
+                .HasMany(e => e.Addresses);
+            
             modelBuilder.Entity<Country>()
                 .HasMany(e => e.Subitems)
                 .WithOptional(x => x.Masteritem);
