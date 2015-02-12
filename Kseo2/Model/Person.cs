@@ -137,6 +137,10 @@ namespace Kseo2.Model
 
 
         #region Address routines
+
+        [NotMapped]
+        public Address CurrentAddress { get { return Addresses.FirstOrDefault(a => a.IsCurrent); } }
+
         public void SetAddressCurrent(Address currentAddress)
         {
             currentAddress.IsCurrent = true;
@@ -165,6 +169,7 @@ namespace Kseo2.Model
                 SetAddressCurrent(currentAddress);
             }
         } 
+
         #endregion
 
         [NotMapped]

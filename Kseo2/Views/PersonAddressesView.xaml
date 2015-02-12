@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="1000">
+             d:DesignHeight="300" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="80"/>
@@ -41,17 +41,14 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Height="20"  Source="{Binding CurrentImage}"/>
+                            <Image Height="20"  Source="{Binding IsCurrentImage}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 
-                <DataGridTextColumn Header="Rodzaj" Binding="{Binding LastName}" Width="200"></DataGridTextColumn>
-                <DataGridTextColumn Header="Miejscowość" Binding="{Binding FirstName}" Width="200" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Ulica" Binding="{Binding MiddleName}" Width="200" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Nr domu" Binding="{Binding FatherName}" Width="200"/>
-                <DataGridTextColumn Header="Nr lokalu." Binding="{Binding BirthDate}" Width="150"/>
-                <DataGridTextColumn Header="Kod poczt." Binding="{Binding Pesel}" Width="100*" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Rodzaj" Binding="{Binding AddressType}" Width="200"></DataGridTextColumn>
+                <DataGridTextColumn Header="Lokalizacja" Binding="{Binding Location}" Width="200" ></DataGridTextColumn>
+               
 
 
             </DataGrid.Columns>

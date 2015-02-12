@@ -25,7 +25,13 @@ namespace Kseo2.Model
         public string AddressType { get; set; }
         [Required(ErrorMessage = @"Adres jest wymagany")]
         [MaxLength(200,ErrorMessage = @"Adres nie może być dłuższy niż 200 znaków!")]
-        public string Notes  { get; set; }
+        public string Location  { get; set; }
+
+        [NotMapped]
+        public string IsCurrentImage
+        {
+            get { return IsCurrent ? @"..\Images/ok_mark.png" : String.Empty; }
+        }
  
     }
 }

@@ -34,7 +34,7 @@ namespace Kseo2.ViewModels
                 .Include("Workplaces")
                 .Include("Citizenships")
                 .FirstOrDefault(p => p.Id.Equals(personId));
-            PersonAddresses = new PersonAddressesViewModel();
+            PersonAddresses = new PersonAddressesViewModel(CurrentPerson);
         }
 
         public Person CurrentPerson

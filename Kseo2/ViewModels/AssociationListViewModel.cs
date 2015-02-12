@@ -16,9 +16,9 @@ namespace Kseo2.ViewModels
         private ObservableCollection<T> _items;
         private T _selectedItem;
 
-        public AssociationListViewModel(TRoot rootEntity, List<T> associationList)
+        public AssociationListViewModel(TRoot rootEntity)
         {
-            Items = new ObservableCollection<T>(associationList);
+            Items = new ObservableCollection<T>();
             RootEntity = rootEntity;
         }
 
@@ -63,17 +63,17 @@ namespace Kseo2.ViewModels
             }
         }
 
-        public void Add(T item)
+        public virtual void Add()
         {
             IsDirty = true;
         }
 
-        public void Remove()
+        public virtual void Remove()
         {
             IsDirty = true;
         }
 
-        public void Update()
+        public virtual void Edit()
         {
             IsDirty = true;
         }

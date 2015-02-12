@@ -24,7 +24,7 @@ namespace Kseo2.Model
         [MaxLength(200,ErrorMessage = @"Nazwa miejsca pracy nie może być dłuższa niż 200 znaków!")]
         public string Name { get; set; }
         public string UnitNumber { get; set; }
-        public string Address { get; set; }
+        public string Location { get; set; }
         
     }
 }
