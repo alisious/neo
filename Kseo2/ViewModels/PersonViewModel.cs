@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,7 @@ namespace Kseo2.ViewModels
         private Person _currentPerson;
         private List<Country> _countries;
         private bool _inAddingMode;
+        private bool _isDirty = false;
 
 
         public PersonViewModel(int personId=0)
@@ -47,8 +49,23 @@ namespace Kseo2.ViewModels
             }
         }
 
+
+        #region Dictionaries
+        public List<Country> Countries
+        {
+            get { return _countries; }
+            set
+            {
+                _countries = value;
+                NotifyOfPropertyChange(() => Countries);
+            }
+        } 
+        #endregion
+
         public PersonAddressesViewModel PersonAddresses{ get; set; }
        
+
+
         public string FullName
         {
             get { return CurrentPerson.FullName; }
@@ -250,15 +267,7 @@ namespace Kseo2.ViewModels
 
         }
 
-        public List<Country> Countries
-        {
-            get { return _countries; }
-            set
-            {
-                _countries = value;
-                NotifyOfPropertyChange(()=>Countries);
-            }
-        }
+        
 
         public HashSet<Country> Citizenships
         {
@@ -279,6 +288,54 @@ namespace Kseo2.ViewModels
             }
         }
 
+
+        #region Addresses routines
+        private ObservableCollection<Address> _addresses;
+        public ObservableCollection<Address> Addresses
+        {
+            get { return _addresses; }
+            private set
+            {
+                _addresses = value;
+                NotifyOfPropertyChange(() => Addresses);
+                NotifyOfPropertyChange(() => CurrentAddress);
+            }
+        }
+
+        private Address _selectedAddress;
+        public Address SelectedAddress
+        {
+            get { return _selectedAddress; }
+            set
+            {
+                _selectedAddress = value;
+                NotifyOfPropertyChange(() => SelectedAddress);
+            }
+        }
+
+        public Address CurrentAddress
+        {
+            get { return CurrentPerson.CurrentAddress; }
+        }
+
+        public void AddAddress()
+        {
+            var address = new Address { AddressType = "ZAMIESZKANIA", Location = "WARSZAWA, UL. WIEJSKA 13/14" };
+            CurrentPerson.AddAddress(address);
+            Addresses = new ObservableCollection<Address>(CurrentPerson.Addresses);
+        }
+
+
+        public void RemoveAddress()
+        {
+             new MessengerResult(String.Format("Adres: {0} zostanie usuniety.",SelectedAddress.Location))
+                .Caption("Uwaga!")
+                .Buttons(MessageButton.OKCancel)
+                .Image(MessageImage.Information);
+        }
+
+        #endregion
+        
         public void Cancel()
         {
             TryClose(false);
@@ -293,6 +350,16 @@ namespace Kseo2.ViewModels
                     return !r && !HasErrorsByGroup("HasPeselGroup");
                 else
                     return !r && !HasErrorsByGroup("HasNoPeselGroup");
+            }
+        }
+
+        public bool IsDirty
+        {
+            get { return _isDirty; }
+            set
+            {
+                _isDirty = value;
+                NotifyOfPropertyChange(()=>IsDirty);
             }
         }
 

@@ -91,9 +91,9 @@
                                 </ListBox>
                             </DockPanel>
                             <TextBlock Text="Aktualny adres zamieszkania:"/>
-                            <TextBox x:Name="PersonCurrentAddress" Background="LightYellow" IsReadOnly="True"/>
+                            <TextBox x:Name="CurrentAddress_Location" Background="LightYellow" IsReadOnly="True"/>
                             <TextBlock Text="Aktualne miejsce pracy:"/>
-                            <TextBox x:Name="PersonCurrentWorkplace" Background="LightYellow" IsReadOnly="True"/>
+                            <TextBox x:Name="CurrentWorkplace" Background="LightYellow" IsReadOnly="True"/>
                         </StackPanel>
                     </StackPanel>
                     <StackPanel>
@@ -105,7 +105,41 @@
                                         <TextBlock Text="Adresy" Foreground="Blue" VerticalAlignment="Center"/>
                                     </StackPanel>
                                 </TabItem.Header>
-                                <ContentControl x:Name="PersonAddresses"/>
+                                <DockPanel>
+                                    <StackPanel Orientation="Vertical" Width="80" DockPanel.Dock="Left">
+                                        <Button x:Name="AddAddress" Height="80">
+                                            <StackPanel Orientation="Vertical">
+                                                <Image Source="..\Images/file_add.png" Height="50"  Width="50"/>
+                                                <TextBlock Text="Dodaj"/>
+                                            </StackPanel>
+                                        </Button>
+                                        <Button x:Name="EditAddress" Height="80" IsEnabled="{Binding CanEdit}">
+                                            <StackPanel Orientation="Vertical">
+                                                <Image Source="..\Images/file_edit.png" Height="50"  Width="50"/>
+                                                <TextBlock Text="Edytuj"/>
+                                            </StackPanel>
+                                        </Button>
+                                        <Button x:Name="RemoveAddress" Height="80" IsEnabled="{Binding CanRemove}">
+                                            <StackPanel Orientation="Vertical">
+                                                <Image Source="..\Images/file_delete.png" Height="50"  Width="50"/>
+                                                <TextBlock Text="Usuń"/>
+                                            </StackPanel>
+                                        </Button>
+                                    </StackPanel>
+                                    <DataGrid x:Name="Addresses" >
+                                        <DataGrid.Columns>
+                                            <DataGridTemplateColumn>
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Image Height="20"  Source="{Binding IsCurrentImage}"/>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                            <DataGridTextColumn Header="Rodzaj" Binding="{Binding AddressType}" Width="200"></DataGridTextColumn>
+                                            <DataGridTextColumn Header="Lokalizacja" Binding="{Binding Location}" Width="200*" ></DataGridTextColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </DockPanel>
                             </TabItem>
                             <TabItem>
                                 <TabItem.Header>
