@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace Kseo2.Model
 {
     using System;
@@ -132,7 +134,39 @@ namespace Kseo2.Model
 
         public virtual HashSet<Address> Addresses { get; set; }
         public virtual HashSet<Workplace> Workplaces { get; set; }
-            
+
+
+        #region Address routines
+        public void SetAddressCurrent(Address currentAddress)
+        {
+            currentAddress.IsCurrent = true;
+            foreach (var address in Addresses)
+            {
+                if (!address.Equals(currentAddress))
+                    address.IsCurrent = false;
+            }
+        }
+
+        public void AddAddress(Address address)
+        {
+            Addresses.Add(address);
+            if (address.IsCurrent)
+                SetAddressCurrent(address);
+        }
+
+        public void RemoveAddress(Address address)
+        {
+            var isCurrent = address.IsCurrent;
+            Addresses.Remove(address);
+            if ((Addresses.Count > 0) && isCurrent)
+            {
+                var maxId = Addresses.Max(a => a.Id);
+                var currentAddress = Addresses.FirstOrDefault(a => a.Id.Equals(maxId));
+                SetAddressCurrent(currentAddress);
+            }
+        } 
+        #endregion
+
         [NotMapped]
         public String FullName { get { return String.Format("{0} {1}", LastName, FirstName); } }
         

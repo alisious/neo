@@ -14,7 +14,6 @@ namespace Kseo2.ViewModels
     public class ShellViewModel :Conductor<Screen>.Collection.OneActive,IShell
     {
         private readonly IWindowManager _windowManager;
-        private UnitOfWork _uow;
         private KseoContext _kseoContext;
         private User _activeUser;
 
@@ -53,7 +52,6 @@ namespace Kseo2.ViewModels
                 _activeUser = value;
                 NotifyOfPropertyChange(()=>ActiveUser);
             }
-
         }
 
        
@@ -71,12 +69,12 @@ namespace Kseo2.ViewModels
 
         public void ShowSearchPersonScreen()
         {
-            ActivateItem(new PersonSearchViewModel(_uow));
+            //ActivateItem(new PersonSearchViewModel(_uow));
         }
 
         public void ShowEditPersonScreen()
         {
-            ActivateItem(new PersonEditViewModel(_uow));
+            //ActivateItem(new PersonEditViewModel(_uow));
         }
 
        
