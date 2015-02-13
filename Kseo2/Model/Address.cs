@@ -14,15 +14,14 @@ namespace Kseo2.Model
 
         public Address()
         {
-            IsCurrent = true;
+            IsActive = true;
         }
 
         public int Id { get; set; }
         [Required]
-        public bool IsCurrent { get; set; }
+        public bool IsActive { get; set; }
         [Required(ErrorMessage = @"Rodzaj adresu jest wymagany!")]
-        [MaxLength(20,ErrorMessage = @"Rodzaj adresu może składać się najwyżej z 20 znaków!")]
-        public string AddressType { get; set; }
+        public virtual AddressType AddressType { get; set; }
         [Required(ErrorMessage = @"Adres jest wymagany")]
         [MaxLength(200,ErrorMessage = @"Adres nie może być dłuższy niż 200 znaków!")]
         public string Location  { get; set; }
@@ -30,7 +29,7 @@ namespace Kseo2.Model
         [NotMapped]
         public string IsCurrentImage
         {
-            get { return IsCurrent ? @"..\Images/ok_mark.png" : String.Empty; }
+            get { return IsActive ? @"..\Images/ok_mark.png" : String.Empty; }
         }
  
     }

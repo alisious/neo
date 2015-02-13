@@ -126,6 +126,7 @@
     <Compile Include="Service\UnitOfWork.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Service\VerificationService.cs" />
+    <Compile Include="ViewModels\AddressViewModel.cs" />
     <Compile Include="ViewModels\AssociationListViewModel.cs" />
     <Compile Include="ViewModels\CollaborationsViewModel.cs" />
     <Compile Include="ViewModels\CountrySelectViewModel.cs" />
@@ -154,6 +155,9 @@
     <Compile Include="ViewModels\Validation\ValidationGroupAttribute.cs" />
     <Compile Include="ViewModels\VerificationsViewModel.cs" />
     <Compile Include="ViewModels\VerificationViewModel.cs" />
+    <Compile Include="Views\AddressView.xaml.cs">
+      <DependentUpon>AddressView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CollaborationsView.xaml.cs">
       <DependentUpon>CollaborationsView.xaml</DependentUpon>
     </Compile>
@@ -238,6 +242,10 @@
     <Page Include="Kseo2ResourceDictionary.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AddressView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CollaborationsView.xaml">
       <SubType>Designer</SubType>

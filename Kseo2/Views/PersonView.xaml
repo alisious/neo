@@ -64,8 +64,7 @@
                                         ItemsSource="{Binding Countries}" 
                                         SelectedItem="{Binding Nationality}"
                                         SelectedValuePath="Name"
-                                        IsEditable="True">
-                            </ComboBox>
+                                        IsEditable="True"/>
                             <DockPanel  Margin="0,0,5,0" Height="160">
                                 <TextBlock DockPanel.Dock="Top" Text="Obywatelstwo:"/>
                                 <StackPanel DockPanel.Dock="Right">
@@ -91,9 +90,27 @@
                                 </ListBox>
                             </DockPanel>
                             <TextBlock Text="Aktualny adres zamieszkania:"/>
-                            <TextBox x:Name="CurrentAddress_Location" Background="LightYellow" IsReadOnly="True"/>
+                            <DockPanel LastChildFill="True" >
+                                <Button Name="EditActiveAddress" Width="40" TabIndex="12" Margin="0" DockPanel.Dock="Right">
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="..\Images\preferences_composer.png" Width="30" Height="30" />
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+                                <TextBox x:Name="ActiveAddress_Location" Background="LightYellow" IsReadOnly="True" Margin="0" />
+                            </DockPanel>
                             <TextBlock Text="Aktualne miejsce pracy:"/>
-                            <TextBox x:Name="CurrentWorkplace" Background="LightYellow" IsReadOnly="True"/>
+                            <DockPanel LastChildFill="True">
+                                <Button Name="EditWorkplaces" Width="40" TabIndex="12" Margin="0" DockPanel.Dock="Right">
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="..\Images\preferences_composer.png" Width="30" Height="30" />
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+                            <TextBox x:Name="ActiveWorkplace_Location" Background="LightYellow" IsReadOnly="True" Margin="0"/>
+                            </DockPanel>
                         </StackPanel>
                     </StackPanel>
                     <StackPanel>

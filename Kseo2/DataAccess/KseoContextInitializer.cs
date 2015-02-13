@@ -1,4 +1,6 @@
-﻿using Kseo2.Model;
+﻿using System.Runtime.Remoting.Contexts;
+using System.Windows.Documents;
+using Kseo2.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -309,8 +311,7 @@ namespace Kseo2.DataAccess
             context.Ranks.Add(new Rank() { Name = "PW", Description = "PRACOWNIK WOJSKA", DisplayOrder = 17, Masteritem=oc });
             context.Ranks.Add(new Rank() { Name = "OC", Description = "OSOBA NIE ZWIĄZANA Z WOJSKIEM", DisplayOrder = 18, Masteritem = oc });
             #endregion
-
-
+            
             #region Organizations, OrganizationalUnits (Instytucje, Jedostki organizacyjne)
             
             var zw = new Organization() { ShortName="ŻW", Name = "ŻANDARMERIA WOJSKOWA", Description = "", DisplayOrder = 10 };
@@ -334,6 +335,16 @@ namespace Kseo2.DataAccess
             context.Organizations.Add(new Organization() { ShortName = "", Name = "AGENCA BW i W", Description = "AGENCJA BEZPIECZEŃSWTA WEWNĘTRZNEGO i AGENCJA WYWIADU", DisplayOrder = 80 });
             
                        
+            #endregion
+
+            #region AddressTypes (Rodzaje adresów)
+            context.AddressTypes.AddRange(new List<AddressType>
+            {
+                new AddressType{Name = "ADRES ZAMIESZKANIA",DisplayOrder = 1},
+                new AddressType{Name = "ADRES ZAMELDOWANIA",DisplayOrder = 2},
+                new AddressType{Name = "ADRES KORESPONDENCYJNY",DisplayOrder = 3},
+                new AddressType{Name = "INNY ADRES",DisplayOrder = 4}
+            }); 
             #endregion
 
             #endregion

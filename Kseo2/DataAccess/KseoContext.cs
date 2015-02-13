@@ -19,6 +19,7 @@ namespace Kseo2.DataAccess
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Person> Persons { get; set; }
         public virtual DbSet<Address> Addresses { get; set; }
+        public virtual DbSet<AddressType> AddressTypes { get; set; }
         public virtual DbSet<Workplace> Workplaces { get; set; }
         public virtual DbSet<Rank> Ranks { get; set; }
         public virtual DbSet<Organization> Organizations { get; set; }
@@ -44,6 +45,9 @@ namespace Kseo2.DataAccess
             
             modelBuilder.Entity<Person>()
                 .HasMany(e => e.Addresses);
+
+            modelBuilder.Entity<Address>()
+                .HasRequired(e => e.AddressType);
             
             modelBuilder.Entity<Country>()
                 .HasMany(e => e.Subitems)

@@ -21,10 +21,7 @@ namespace Kseo2.ViewModels
         
         public override void Add()
         {
-            var address = new Address {AddressType = "ZAMIESZKANIA", Location = "WARSZAWA, UL. WIEJSKA 13/14"};
-            RootEntity.AddAddress(address);
-            Items = new ObservableCollection<Address>(RootEntity.Addresses);
-            base.Add();
+           
         }
     }
 }

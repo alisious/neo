@@ -52,15 +52,18 @@ namespace Kseo2.Model
     }
 
     [Table("Person.Country")]
-    public partial class Country : DictionaryItem<Country> {}
+    public class Country : DictionaryItem<Country> {}
     [Table("Verification.QuestionForm")]
-    public partial class QuestionForm : DictionaryItem<QuestionForm> { }
+    public class QuestionForm : DictionaryItem<QuestionForm> { }
     [Table("Verification.QuestionReason")]
-    public partial class QuestionReason : DictionaryItem<QuestionReason> { }
+    public class QuestionReason : DictionaryItem<QuestionReason> { }
     [Table("Common.Rank")]
-    public partial class Rank :DictionaryItem<Rank> {}
+    public class Rank :DictionaryItem<Rank> {}
     [Table("Common.Organization")]
-    public partial class Organization : DictionaryItem<Organization> { }
+    public class Organization : DictionaryItem<Organization> { }
+    [Table("Person.AddressType")]
+    public class AddressType : DictionaryItem<AddressType> { }
+
     
     
 }

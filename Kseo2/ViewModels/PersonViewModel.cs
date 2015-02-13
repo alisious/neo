@@ -298,7 +298,7 @@ namespace Kseo2.ViewModels
             {
                 _addresses = value;
                 NotifyOfPropertyChange(() => Addresses);
-                NotifyOfPropertyChange(() => CurrentAddress);
+                NotifyOfPropertyChange(() => ActiveAddress);
             }
         }
 
@@ -313,16 +313,33 @@ namespace Kseo2.ViewModels
             }
         }
 
-        public Address CurrentAddress
+        public Address ActiveAddress
         {
-            get { return CurrentPerson.CurrentAddress; }
+            get { return CurrentPerson.ActiveAddress; }
+        }
+
+
+        public void EditActiveAddress()
+        {
+            if (ActiveAddress == null)
+                AddAddress();
         }
 
         public void AddAddress()
         {
-            var address = new Address { AddressType = "ZAMIESZKANIA", Location = "WARSZAWA, UL. WIEJSKA 13/14" };
-            CurrentPerson.AddAddress(address);
-            Addresses = new ObservableCollection<Address>(CurrentPerson.Addresses);
+
+            var address = new Address();
+            var addressTypes = _context.AddressTypes.ToList();
+            var addressViewModel = new AddressViewModel(address,addressTypes);
+            
+            var windowManager = new WindowManager();
+
+            if (windowManager.ShowDialog(addressViewModel) == true)
+            {
+                
+                CurrentPerson.AddAddress(address);
+                Addresses = new ObservableCollection<Address>(CurrentPerson.Addresses);
+            }
         }
 
 
