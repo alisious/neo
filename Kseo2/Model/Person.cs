@@ -1,4 +1,5 @@
 using System.Linq;
+using AutoMapper;
 
 namespace Kseo2.Model
 {
@@ -71,36 +72,36 @@ namespace Kseo2.Model
 
         [Required(AllowEmptyStrings = true)]
         [StringLength(10)]
-        [DisplayName("Data urodzenia")]
+        [DisplayName(@"Data urodzenia")]
         //[RegularExpression("[0-9]{4}-[0-9]{2}-[0-9]{2}", ErrorMessage = "Data w formacie RRRR-MM-DD.")]
         public string BirthDate { get; set; }
 
         [StringLength(100)]
-        [DisplayName("Miejsce urodzenia")]
+        [DisplayName(@"Miejsce urodzenia")]
         public string BirthPlace { get; set; }
 
         [Required(AllowEmptyStrings=true)]
         [StringLength(50)]
-        [DisplayName("Imiê ojca")]
+        [DisplayName(@"Imiê ojca")]
         public string FatherName { get; set; }
 
         [StringLength(50)]
-        [DisplayName("Imiê matki")]
+        [DisplayName(@"Imiê matki")]
         public string MotherName { get; set; }
 
         [StringLength(50)]
-        [DisplayName("Nazwisko panieñskie matki")]
+        [DisplayName(@"Nazwisko panieñskie matki")]
         public string MotherMaidenName { get; set; }
 
         [Required(AllowEmptyStrings = false,ErrorMessage = @"P³eæ jest wymagana!")]
         [StringLength(1)]
-        [DisplayName("P³eæ")]
+        [DisplayName(@"P³eæ")]
         public string Sex { get; set; }
 
         private bool _hasPESEL;
 
         
-        [DisplayName("Posiada PESEL")]
+        [DisplayName(@"Posiada PESEL")]
         public bool HasPESEL
         {
             get { return _hasPESEL; } 
@@ -171,6 +172,29 @@ namespace Kseo2.Model
         } 
 
         #endregion
+
+        #region Workplace routines
+
+        public void WorkplaceAdd(Workplace workplace)
+        {
+            Workplaces.Add(workplace);
+        }
+
+        public void WorkplaceUpdate(Workplace workplace)
+        {
+            Mapper.CreateMap<Workplace, Workplace>().ForMember(w => w.Id,m=>m.Ignore());
+            Workplace updatedWorkplace = Workplaces.FirstOrDefault(w => w.Id.Equals(workplace.Id));
+            updatedWorkplace = Mapper.Map<Workplace, Workplace>(workplace);
+        }
+
+        public void WorkplaceRemove(Workplace workplace)
+        {
+            Workplaces.Remove(workplace);
+        }
+
+        #endregion
+
+
 
         [NotMapped]
         public String FullName { get { return String.Format("{0} {1}", LastName, FirstName); } }

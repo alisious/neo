@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Kseo2.Model
 {
-    public abstract class Location :Entity
+    [ComplexType]
+    public class Location
     {
-        public int Id { get; set; } 
-        
+       
         [Required]
         public string City { get; set; }
         public string Street { get; set; }
@@ -21,17 +21,13 @@ namespace Kseo2.Model
         public string PostalCode { get; set; }
         public string PostOffice { get; set; }
 
-        [NotMapped]
-        public string InLine
+        public override string ToString()
         {
-            get
-            {
-                return String.Format("{0}{1} {2}{3}",
+            return String.Format("{0}{1} {2}{3}",
                     City,
                     String.IsNullOrWhiteSpace(Street) ? String.Empty : String.Concat(", ",Street),
                     StreetNo,
                     String.IsNullOrWhiteSpace(PlaceNo) ? String.Empty : String.Concat("/",PlaceNo));
-            }
         }
         
     }

@@ -15,8 +15,9 @@ namespace Kseo2.Model
         public Address()
         {
             IsActive = true;
-        }
 
+        }
+        
         public int Id { get; set; }
         [Required]
         public bool IsActive { get; set; }

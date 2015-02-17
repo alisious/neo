@@ -15,19 +15,19 @@
         </Grid.RowDefinitions>
         
         <StackPanel Orientation="Vertical" Grid.Row="1">
-            <Button x:Name="Add" Height="80">
+            <Button x:Name="AddAddress" Height="80">
                 <StackPanel Orientation="Vertical">
                     <Image Source="..\Images/file_add.png" Height="50"  Width="50"/>
                     <TextBlock Text="Dodaj"/>
                 </StackPanel>
             </Button>
-            <Button x:Name="Edit" Height="80" IsEnabled="{Binding CanEdit}">
+            <Button x:Name="EditAddress" Height="80" IsEnabled="{Binding CanEdit}">
                 <StackPanel Orientation="Vertical">
                     <Image Source="..\Images/file_edit.png" Height="50"  Width="50"/>
                     <TextBlock Text="Edytuj"/>
                 </StackPanel>
             </Button>
-            <Button x:Name="Remove" Height="80" IsEnabled="{Binding CanRemove}">
+            <Button x:Name="RemoveAddress" Height="80" IsEnabled="{Binding CanRemove}">
                 <StackPanel Orientation="Vertical">
                     <Image Source="..\Images/file_delete.png" Height="50"  Width="50"/>
                     <TextBlock Text="Usuń"/>

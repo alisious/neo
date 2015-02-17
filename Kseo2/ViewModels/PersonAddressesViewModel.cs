@@ -10,7 +10,7 @@ using Kseo2.Model;
 
 namespace Kseo2.ViewModels
 {
-    public class PersonAddressesViewModel :AssociationListViewModel<Person,Address>
+    public class PersonAddressesViewModel :CompositionViewModel<Person,Address>
     {
         public PersonAddressesViewModel(Person currentPerson)
             : base(currentPerson)

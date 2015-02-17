@@ -15,6 +15,7 @@ namespace Kseo2.Model
         public Workplace()
         {
             IsCurrent = true;
+            WorkplaceAddress = new Location();
         }
 
         public int Id { get; set; }
@@ -24,7 +25,7 @@ namespace Kseo2.Model
         [MaxLength(200,ErrorMessage = @"Nazwa miejsca pracy nie może być dłuższa niż 200 znaków!")]
         public string Name { get; set; }
         public string UnitNumber { get; set; }
-        public string Location { get; set; }
+        public Location WorkplaceAddress { get; set; }
         
     }
 }
