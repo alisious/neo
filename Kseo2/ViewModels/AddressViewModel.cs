@@ -12,8 +12,7 @@ namespace Kseo2.ViewModels
     class AddressViewModel :ValidatingScreen<AddressViewModel>
     {
         private bool _isActiveAddress = true;
-        private string _location;
-
+        
 
         public AddressViewModel(Address address,List<AddressType> addressTypes )
         {
@@ -21,8 +20,9 @@ namespace Kseo2.ViewModels
             DisplayName = (address.Id==0)? @"Nowy adres." : address.Location;
             CurrentAddressType = address.AddressType;
             IsActiveAddress = address.IsActive;
-            Location = address.Location;
+            Location = new LocationViewModel();
             AddressTypes = addressTypes;
+
         }
 
 
@@ -42,29 +42,21 @@ namespace Kseo2.ViewModels
         }
 
 
-        public string Location
-        {
-            get { return _location; }
-            set
-            {
-                _location = value;
-                OnPropertyChanged(value);
-            }
-        }
+        public LocationViewModel Location { get; set; }
 
         public bool CanSave
         {
             get
             {
-                return CurrentAddressType != null
-                       && !String.IsNullOrWhiteSpace(Location);
+                return CurrentAddressType != null;
+                //&& !String.IsNullOrWhiteSpace(Location);
             } 
         }
 
         public void Save()
         {
             CurrentAddress.AddressType = CurrentAddressType;
-            CurrentAddress.Location = Location;
+            //CurrentAddress.Location = Location;
             CurrentAddress.IsActive = IsActiveAddress;
             TryClose(true);
         }

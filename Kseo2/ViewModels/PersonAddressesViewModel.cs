@@ -18,10 +18,13 @@ namespace Kseo2.ViewModels
             Items = new ObservableCollection<Address>(RootEntity.Addresses);
         }
 
-        
+
         public override void Add()
         {
-           
+            
+            base.Add();
         }
+
+       
     }
 }

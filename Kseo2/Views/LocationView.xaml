@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="Kseo2.Views.LocationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="180" d:DesignWidth="400">
+    <Grid>
+        
+<StackPanel >
+    <DockPanel>
+        <TextBlock Text="Miejscowość:" Width="150"/>
+        <TextBox></TextBox>
+    </DockPanel>
+            
+            <DockPanel>
+                <TextBlock Text="Ulica:" Width="150"/>
+                <TextBox></TextBox>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Nr domu:" Width="150"/>
+                <TextBox></TextBox>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Nr lokalu" Width="150"/>
+                <TextBox></TextBox>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Kod pocztowy:" Width="150"/>
+                <TextBox></TextBox>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Poczta:" Width="150"/>
+                <TextBox></TextBox>
+            </DockPanel>
+           
+        </StackPanel>
+        
+    </Grid>
+</UserControl>
