@@ -298,7 +298,7 @@ namespace Kseo2.ViewModels
             {
                 _addresses = value;
                 NotifyOfPropertyChange(() => Addresses);
-                NotifyOfPropertyChange(() => ActiveAddress);
+      
             }
         }
 
@@ -313,24 +313,16 @@ namespace Kseo2.ViewModels
             }
         }
 
-        public Address ActiveAddress
-        {
-            get { return CurrentPerson.ActiveAddress; }
-        }
+        
 
-
-        public void EditActiveAddress()
-        {
-            if (ActiveAddress == null)
-                AddAddress();
-        }
+        
 
         public void AddAddress()
         {
 
             var address = new Address();
             var addressTypes = _context.AddressTypes.ToList();
-            var addressViewModel = new AddressViewModel(address,addressTypes);
+            var addressViewModel = new AddressViewModel(address,addressTypes,new EventAggregator());
             
             var windowManager = new WindowManager();
 

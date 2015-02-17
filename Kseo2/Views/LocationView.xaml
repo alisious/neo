@@ -10,7 +10,7 @@
 <StackPanel >
     <DockPanel>
         <TextBlock Text="Miejscowość:" Width="150"/>
-        <TextBox></TextBox>
+        <TextBox x:Name="City"></TextBox>
     </DockPanel>
             
             <DockPanel>

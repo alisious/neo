@@ -3,62 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Caliburn.Micro;
 using Caliburn.Micro.Validation;
 using System.Runtime.CompilerServices;
 using Kseo2.Model;
 
 namespace Kseo2.ViewModels
 {
-    class AddressViewModel :ValidatingScreen<AddressViewModel>
+    public class AddressViewModel :ValidatingScreen<AddressViewModel>,IHandle<CanSaveEvent>
     {
-        private bool _isActiveAddress = true;
         
-
-        public AddressViewModel(Address address,List<AddressType> addressTypes )
+        public AddressViewModel(Address address,List<AddressType> addressTypes,IEventAggregator events)
         {
+            events.Subscribe(this);
             CurrentAddress = address;
-            DisplayName = (address.Id==0)? @"Nowy adres." : address.Location;
+            DisplayName = (address.Id==0)? @"Nowy adres." : address.Location.ToString();
             CurrentAddressType = address.AddressType;
-            IsActiveAddress = address.IsActive;
-            Location = new LocationViewModel();
+            Location = new LocationViewModel(CurrentAddress.Location,events);
             AddressTypes = addressTypes;
-
         }
 
 
         public List<AddressType> AddressTypes { get; private set; }
-
-
         public AddressType CurrentAddressType { get; set; }
-
-        public bool IsActiveAddress
-        {
-            get { return _isActiveAddress; }
-            set
-            {
-                _isActiveAddress = value;
-                OnPropertyChanged(value);
-            }
-        }
-
-
         public LocationViewModel Location { get; set; }
+        public bool CanSaveLocation { get; set; }
 
         public bool CanSave
         {
             get
             {
-                return CurrentAddressType != null;
-                //&& !String.IsNullOrWhiteSpace(Location);
+                return CurrentAddressType != null
+                    && Location.CanSave;
             } 
         }
 
         public void Save()
         {
-            CurrentAddress.AddressType = CurrentAddressType;
-            //CurrentAddress.Location = Location;
-            CurrentAddress.IsActive = IsActiveAddress;
-            TryClose(true);
+           CurrentAddress.AddressType = CurrentAddressType;
+           TryClose(true);
         }
 
         public void Cancel()
@@ -68,7 +51,14 @@ namespace Kseo2.ViewModels
 
 
         public Address CurrentAddress { get; private set; }
-        
+        public Location CurrentLocation { get { return CurrentAddress.Location; } 
+            set {
+            CurrentAddress.Location = value;
+            OnPropertyChanged(value);
+        } 
+        }
+
+
         protected void OnPropertyChanged(object value, [CallerMemberName] string propertyName = "")
         {
             NotifyOfPropertyChange(propertyName);
@@ -77,6 +67,11 @@ namespace Kseo2.ViewModels
 
 
 
-        
+
+
+        public void Handle(CanSaveEvent message)
+        {
+            NotifyOfPropertyChange(()=>CanSave);
+        }
     }
 }

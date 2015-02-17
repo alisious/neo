@@ -14,24 +14,13 @@ namespace Kseo2.Model
 
         public Address()
         {
-            IsActive = true;
-
+           Location = new Location();
         }
         
         public int Id { get; set; }
-        [Required]
-        public bool IsActive { get; set; }
         [Required(ErrorMessage = @"Rodzaj adresu jest wymagany!")]
         public virtual AddressType AddressType { get; set; }
-        [Required(ErrorMessage = @"Adres jest wymagany")]
-        [MaxLength(200,ErrorMessage = @"Adres nie może być dłuższy niż 200 znaków!")]
-        public string Location  { get; set; }
-
-        [NotMapped]
-        public string IsCurrentImage
-        {
-            get { return IsActive ? @"..\Images/ok_mark.png" : String.Empty; }
-        }
- 
+        public Location Location  { get; set; }
+        
     }
 }

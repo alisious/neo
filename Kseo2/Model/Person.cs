@@ -139,36 +139,18 @@ namespace Kseo2.Model
 
         #region Address routines
 
-        [NotMapped]
-        public Address ActiveAddress { get { return Addresses.FirstOrDefault(a => a.IsActive); } }
-
-        public void SetAddressCurrent(Address currentAddress)
-        {
-            currentAddress.IsActive = true;
-            foreach (var address in Addresses)
-            {
-                if (!address.Equals(currentAddress))
-                    address.IsActive = false;
-            }
-        }
+       
+        
 
         public void AddAddress(Address address)
         {
             Addresses.Add(address);
-            if (address.IsActive)
-                SetAddressCurrent(address);
         }
 
         public void RemoveAddress(Address address)
         {
-            var isCurrent = address.IsActive;
             Addresses.Remove(address);
-            if ((Addresses.Count > 0) && isCurrent)
-            {
-                var maxId = Addresses.Max(a => a.Id);
-                var currentAddress = Addresses.FirstOrDefault(a => a.Id.Equals(maxId));
-                SetAddressCurrent(currentAddress);
-            }
+            
         } 
 
         #endregion

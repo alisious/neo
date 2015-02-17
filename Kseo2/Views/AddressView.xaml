@@ -34,7 +34,6 @@
                                         IsEditable="False"/>
             </DockPanel>
             <ContentControl x:Name="Location"></ContentControl>
-            <CheckBox x:Name="IsActiveAddress" IsThreeState="False" Content="ADRES AKTUALNY"/>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -13,12 +13,17 @@ namespace Kseo2.Model
     {
        
         [Required]
+        [MaxLength(100)]
         public string City { get; set; }
+        [MaxLength(100)]
         public string Street { get; set; }
-        [Required]
+        [MaxLength(10)]
         public string StreetNo { get; set; }
+        [MaxLength(10)]
         public string PlaceNo { get; set; }
+        [MaxLength(6)]
         public string PostalCode { get; set; }
+        [MaxLength(100)]
         public string PostOffice { get; set; }
 
         public override string ToString()
