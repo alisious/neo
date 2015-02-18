@@ -26,47 +26,76 @@
                     </StackPanel>
                 </TabItem.Header>
                 <StackPanel>
-                    <StackPanel x:Name="DanePodstawowe" Orientation="Horizontal"  MinHeight="350">
-                        <StackPanel MinWidth="250">
-                            <CheckBox x:Name="HasPesel" IsThreeState="False" FlowDirection="RightToLeft" HorizontalAlignment="Left" Content=":Posiada PESEL" FontWeight="{Binding BoldWhenHasPesel}" />
-                            <TextBox x:Name="Pesel" Visibility="{Binding PeselVisibility}" />
-                            <TextBlock Text="Płeć:" FontWeight="Bold"/>
-                            <StackPanel Orientation="Horizontal" Height="20">
-                                <RadioButton x:Name="SexMale" IsChecked="{Binding IsMale}" Content="MĘŻCZYZNA" Margin="25,0,0,0" GroupName="Sex"/>
-                                <RadioButton x:Name="SexFemale" IsChecked="{Binding IsFemale}" Content="KOBIETA" Margin="20,0,0,0" GroupName="Sex"/>
+                    <StackPanel x:Name="DanePodstawowe" Orientation="Horizontal"  MinHeight="350" >
+                        <StackPanel MinWidth="250" Width="529" Margin="10,0,0,0">
+                            <DockPanel LastChildFill="True">
+                                <CheckBox x:Name="HasPesel" 
+                                          IsThreeState="False" 
+                                          FlowDirection="RightToLeft"
+                                          HorizontalContentAlignment="Right"
+                                          VerticalAlignment="Center"
+                                          Content=":Posiada PESEL" 
+                                          FontWeight="{Binding BoldWhenHasPesel}"
+                                          Width="140"
+                                          Margin="0,0,40,0"/>
+                                <TextBox x:Name="Pesel" Visibility="{Binding PeselVisibility}" />
+                            </DockPanel>
+                            <DockPanel LastChildFill="True">
+                                <TextBlock Text="Płeć:" FontWeight="Bold" Width="180" Height="24"/>
+                                <RadioButton x:Name="SexMale" IsChecked="{Binding IsMale}" Content="MĘŻCZYZNA" GroupName="Sex" VerticalAlignment="Center"/>
+                                <RadioButton x:Name="SexFemale" IsChecked="{Binding IsFemale}" Content="KOBIETA" Margin="20,0,0,0" GroupName="Sex" VerticalAlignment="Center"/>
                                 <TextBox x:Name="Sex" Width="0"    />
-                            </StackPanel>
-                            <TextBlock Text="Nazwisko:" FontWeight="Bold"/>
-                            <TextBox x:Name="LastName"/>
-                            <TextBlock Text="Imię:" FontWeight="Bold"/>
-                            <TextBox x:Name="FirstName"></TextBox>
-                            <TextBlock Text="Drugie imię:"/>
+                           </DockPanel>
+                           <DockPanel>
+                               <TextBlock Text="Nazwisko:" FontWeight="Bold" Width="180" VerticalAlignment="Center"/>
+                               <TextBox x:Name="LastName"/>
+                           </DockPanel> 
+                           <DockPanel>
+                                <TextBlock Text="Imię:" FontWeight="Bold" Width="180" VerticalAlignment="Center"/>
+                               <TextBox x:Name="FirstName"></TextBox>
+                           </DockPanel> 
+                            <DockPanel>
+                                <TextBlock Text="Drugie imię:" Width="180" VerticalAlignment="Center"/>
                             <TextBox x:Name="MiddleName" />
-                            <TextBlock Text="Nazwisko poprzednie:" />
+                            </DockPanel>
+                            <DockPanel>
+                                <TextBlock Text="Nazwisko poprzednie:" Width="180" VerticalAlignment="Center" />
                             <TextBox x:Name="PreviousName"   />
-                            
+                            </DockPanel>
+                            <DockPanel>
+                                <TextBlock Text="Imię ojca:" FontWeight="{Binding BoldWhenHasNoPesel}" Width="180" VerticalAlignment="Center"/>
+                                <TextBox x:Name="FatherName"/>
+                            </DockPanel>
+                            <DockPanel>
+                                <TextBlock Text="Imię matki:" Width="180" VerticalAlignment="Center"/>
+                                <TextBox x:Name="MotherName" />
+                            </DockPanel>
+                            <DockPanel>
+                                <TextBlock Text="Nazwisko rodowe matki:" Width="180" VerticalAlignment="Center"/>
+                                <TextBox x:Name="MotherMaidenName" />
+                            </DockPanel>
+                            <DockPanel>
+                                <TextBlock Text="Data urodzenia:" FontWeight="{Binding BoldWhenHasNoPesel}" Width="180" VerticalAlignment="Center"/>
+                                <TextBox x:Name="BirthDate"  />
+                            </DockPanel>
+                            <DockPanel>
+                                <TextBlock Text="Miejsce urodzenia:" Width="180" VerticalAlignment="Center" />
+                                <TextBox x:Name="BirthPlace" />
+                            </DockPanel>
                         </StackPanel>
-                        <StackPanel MinWidth="250">
-                            <TextBlock Text="Imię ojca:" FontWeight="{Binding BoldWhenHasNoPesel}"/>
-                            <TextBox x:Name="FatherName"/>
-                            <TextBlock Text="Imię matki:"/>
-                            <TextBox x:Name="MotherName" />
-                            <TextBlock Text="Nazwisko rodowe matki:"/>
-                            <TextBox x:Name="MotherMaidenName" />
-                            <TextBlock Text="Data urodzenia (RRRR-MM-DD):" FontWeight="{Binding BoldWhenHasNoPesel}"/>
-                            <TextBox x:Name="BirthDate"  />
-                            <TextBlock Text="Miejsce urodzenia:" />
-                            <TextBox x:Name="BirthPlace" />
-                        </StackPanel>
+                        
                         <StackPanel MinWidth="400" Width="489">
-                            <TextBlock Text="Narodowość:"/>
-                            <ComboBox x:Name="Nationality" Margin="0,0,40,0" 
+                            <DockPanel>
+                                <TextBlock Text="Narodowość:" Width="150" VerticalAlignment="Center" />
+                                <ComboBox x:Name="Nationality" Margin="0,0,40,0" 
                                         ItemsSource="{Binding Countries}" 
                                         SelectedItem="{Binding Nationality}"
                                         SelectedValuePath="Name"
                                         IsEditable="True"/>
-                            <DockPanel  Margin="0,0,5,0" Height="160">
-                                <TextBlock DockPanel.Dock="Top" Text="Obywatelstwo:"/>
+                            </DockPanel>
+                           
+                            <DockPanel  Margin="0,5,5,0" Height="160">
+                                <TextBlock Text="Obywatelstwo:" Width="150"/>
                                 <StackPanel DockPanel.Dock="Right">
                                     <Button Name="EditCitizenships" Width="40" TabIndex="12" Margin="0">
                                         <Button.Content>
@@ -89,29 +118,8 @@
                                     </ListBox.ItemTemplate>
                                 </ListBox>
                             </DockPanel>
-                            <TextBlock Text="Aktualny adres zamieszkania:"/>
-                            <DockPanel LastChildFill="True" >
-                                <Button Name="EditActiveAddress" Width="40" TabIndex="12" Margin="0" DockPanel.Dock="Right">
-                                    <Button.Content>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Image Source="..\Images\preferences_composer.png" Width="30" Height="30" />
-                                        </StackPanel>
-                                    </Button.Content>
-                                </Button>
-                                <TextBox x:Name="ActiveAddress_Location" Background="LightYellow" IsReadOnly="True" Margin="0" />
-                            </DockPanel>
-                            <TextBlock Text="Aktualne miejsce pracy:"/>
-                            <DockPanel LastChildFill="True">
-                                <Button Name="EditWorkplaces" Width="40" TabIndex="12" Margin="0" DockPanel.Dock="Right">
-                                    <Button.Content>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Image Source="..\Images\preferences_composer.png" Width="30" Height="30" />
-                                        </StackPanel>
-                                    </Button.Content>
-                                </Button>
-                            <TextBox x:Name="ActiveWorkplace_Location" Background="LightYellow" IsReadOnly="True" Margin="0"/>
-                            </DockPanel>
-                        </StackPanel>
+                            <TextBlock/>
+                           </StackPanel>
                     </StackPanel>
                     <StackPanel>
                         <TabControl MinHeight="300">
@@ -172,7 +180,7 @@
 
                 </StackPanel>
             </TabItem>
-            <TabItem IsEnabled="{Binding CanEditAttributes}">
+            <TabItem >
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal" Width="180">
                             <Image Source="..\Images/search_files.png" Height="50"  Width="50"/>
@@ -220,6 +228,12 @@
             <Button x:Name="Cancel" Height="100" IsEnabled="{Binding CanEdit}">
                 <StackPanel Orientation="Vertical">
                     <Image Source="..\Images/cancel_mark.png" Height="50"  Width="50"/>
+                    <TextBlock Text="Anuluj"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="Close" Height="100" IsEnabled="{Binding CanEdit}">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="..\Images/LogOut.png" Height="50"  Width="50"/>
                     <TextBlock Text="Zamknij"/>
                 </StackPanel>
             </Button>

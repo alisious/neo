@@ -21,20 +21,17 @@ namespace Kseo2.ViewModels
         private readonly KseoContext _context;
         private Person _currentPerson;
         private List<Country> _countries;
-        private bool _inAddingMode;
         private bool _isDirty = false;
-        private bool _canEditAttributes = false;
-
+        
 
         public PersonViewModel(int personId=0)
         {
             _context = new KseoContext();
-            _inAddingMode = (personId == 0);
             Countries = _context.Countries.Where(c => c.IsActive.Equals(true)).ToList();
             if (personId == 0)
             {
                 CurrentPerson = new Person();
-                CanEditAttributes = false;
+                _context.Persons.Add(CurrentPerson);
                 DisplayName = @"Nowa osoba.";
             }
             else
@@ -44,7 +41,6 @@ namespace Kseo2.ViewModels
                         .Include("Workplaces")
                         .Include("Citizenships")
                         .FirstOrDefault(p => p.Id.Equals(personId));
-                CanEditAttributes = true;
                 DisplayName = CurrentPerson.FullName;
             }
             PersonAddresses = new PersonAddressesViewModel(CurrentPerson);
@@ -61,17 +57,7 @@ namespace Kseo2.ViewModels
             }
         }
 
-        public bool CanEditAttributes
-        {
-            get { return _canEditAttributes; }
-            set
-            {
-                _canEditAttributes = value;
-                NotifyOfPropertyChange(()=>CanEditAttributes);
-                NotifyOfPropertyChange(() => CurrentPerson);
-            }
-        }
-
+        
 
 
         #region Dictionaries
@@ -312,67 +298,8 @@ namespace Kseo2.ViewModels
             }
         }
 
-
-        #region Addresses routines
-        private ObservableCollection<Address> _addresses;
-        public ObservableCollection<Address> Addresses
-        {
-            get { return _addresses; }
-            private set
-            {
-                _addresses = value;
-                NotifyOfPropertyChange(() => Addresses);
-      
-            }
-        }
-
-        private Address _selectedAddress;
-        public Address SelectedAddress
-        {
-            get { return _selectedAddress; }
-            set
-            {
-                _selectedAddress = value;
-                NotifyOfPropertyChange(() => SelectedAddress);
-            }
-        }
-
         
-
         
-
-        public void AddAddress()
-        {
-
-            var address = new Address();
-            var addressTypes = _context.AddressTypes.ToList();
-            var addressViewModel = new AddressViewModel(address,addressTypes,new EventAggregator());
-            
-            var windowManager = new WindowManager();
-
-            if (windowManager.ShowDialog(addressViewModel) == true)
-            {
-                
-                CurrentPerson.AddAddress(address);
-                Addresses = new ObservableCollection<Address>(CurrentPerson.Addresses);
-            }
-        }
-
-
-        public void RemoveAddress()
-        {
-             new MessengerResult(String.Format("Adres: {0} zostanie usuniety.",SelectedAddress.Location))
-                .Caption("Uwaga!")
-                .Buttons(MessageButton.OKCancel)
-                .Image(MessageImage.Information);
-        }
-
-        #endregion
-        
-        public void Cancel()
-        {
-            TryClose(false);
-        }
 
         public bool CanSave
         {
@@ -403,9 +330,8 @@ namespace Kseo2.ViewModels
             {
                 try
                 {
-                    if (_inAddingMode) _context.Persons.Add(CurrentPerson);
+                    //if (_inAddingMode) _context.Persons.Add(CurrentPerson);
                     _context.SaveChanges();
-                    CanEditAttributes = true;
                     DisplayName = CurrentPerson.FullName;
                     //TryClose(true);
                     return null;
@@ -427,6 +353,16 @@ namespace Kseo2.ViewModels
                 return null;
             }
 
+        }
+
+        public void Cancel()
+        {
+            TryClose(false);
+        }
+
+        public void Close()
+        {
+            TryClose(false);
         }
 
         protected void OnPropertyChanged(object value, [CallerMemberName] string propertyName = "")
