@@ -27,8 +27,7 @@ namespace Kseo2.ViewModels
         public List<AddressType> AddressTypes { get; private set; }
         public AddressType CurrentAddressType { get; set; }
         public LocationViewModel Location { get; set; }
-        public bool CanSaveLocation { get; set; }
-
+        
         public bool CanSave
         {
             get

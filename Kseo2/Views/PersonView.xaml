@@ -4,15 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1200">
+             d:DesignHeight="900" d:DesignWidth="1200">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
-            <RowDefinition Height="700*"/>
+            <RowDefinition Height="800"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="80"/>
-            <ColumnDefinition Width="800*"/>
+            <ColumnDefinition Width="1020"/>
             <ColumnDefinition Width="100"/>
         </Grid.ColumnDefinitions>
         <Image Grid.Column="0" Grid.Row="0" Source="../Images/man.png" />
@@ -165,17 +165,18 @@
                                         <TextBlock Text="Miejsca pracy" Foreground="Blue" VerticalAlignment="Center"/>
                                     </StackPanel>
                                 </TabItem.Header>
+                                <ContentControl x:Name ="PersonWorkplaces"></ContentControl>
                             </TabItem>
                         </TabControl>
                     </StackPanel>
 
                 </StackPanel>
             </TabItem>
-            <TabItem>
+            <TabItem IsEnabled="{Binding CanEditAttributes}">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal" Width="180">
                             <Image Source="..\Images/search_files.png" Height="50"  Width="50"/>
-                            <TextBlock Text="Sprawdzenia" Foreground="Blue" VerticalAlignment="Center"/>
+                            <TextBlock Text="Sprawdzenia" Foreground="Blue" VerticalAlignment="Center" />
                         </StackPanel>
                     </TabItem.Header>
                     <ContentControl x:Name="Verifications"/>
@@ -219,7 +220,7 @@
             <Button x:Name="Cancel" Height="100" IsEnabled="{Binding CanEdit}">
                 <StackPanel Orientation="Vertical">
                     <Image Source="..\Images/cancel_mark.png" Height="50"  Width="50"/>
-                    <TextBlock Text="Anuluj"/>
+                    <TextBlock Text="Zamknij"/>
                 </StackPanel>
             </Button>
         </StackPanel>

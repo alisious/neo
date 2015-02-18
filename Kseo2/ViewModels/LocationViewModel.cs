@@ -24,9 +24,9 @@ namespace Kseo2.ViewModels
     }
 
    
-    public class LocationViewModel :ValidatingScreen<LocationViewModel>
+    public class LocationViewModel :ValidatingScreen<LocationViewModel>,IHandle<CanSaveEvent>
     {
-        private IEventAggregator _events;
+        private readonly IEventAggregator _events;
 
         public LocationViewModel(Location location,IEventAggregator events)
         {
@@ -130,6 +130,12 @@ namespace Kseo2.ViewModels
             NotifyOfPropertyChange(() => CanSave);
             _events.PublishOnUIThread(new CanSaveEvent(CanSave));
             IsDirty = true;
+        }
+        
+
+        public void Handle(CanSaveEvent message)
+        {
+            NotifyOfPropertyChange(() => CanSave);
         }
     }
 }

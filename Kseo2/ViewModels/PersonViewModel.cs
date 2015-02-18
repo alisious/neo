@@ -23,20 +23,32 @@ namespace Kseo2.ViewModels
         private List<Country> _countries;
         private bool _inAddingMode;
         private bool _isDirty = false;
+        private bool _canEditAttributes = false;
 
 
         public PersonViewModel(int personId=0)
         {
-            DisplayName = "Edycja danych osoby.";
             _context = new KseoContext();
             _inAddingMode = (personId == 0);
             Countries = _context.Countries.Where(c => c.IsActive.Equals(true)).ToList();
-            CurrentPerson = _inAddingMode ? new Person() : _context.Persons
-                .Include("Addresses")
-                .Include("Workplaces")
-                .Include("Citizenships")
-                .FirstOrDefault(p => p.Id.Equals(personId));
+            if (personId == 0)
+            {
+                CurrentPerson = new Person();
+                CanEditAttributes = false;
+                DisplayName = @"Nowa osoba.";
+            }
+            else
+            {
+                CurrentPerson = _context.Persons
+                        .Include("Addresses")
+                        .Include("Workplaces")
+                        .Include("Citizenships")
+                        .FirstOrDefault(p => p.Id.Equals(personId));
+                CanEditAttributes = true;
+                DisplayName = CurrentPerson.FullName;
+            }
             PersonAddresses = new PersonAddressesViewModel(CurrentPerson);
+            PersonWorkplaces = new WorkplacesViewModel(CurrentPerson);
         }
 
         public Person CurrentPerson
@@ -48,6 +60,18 @@ namespace Kseo2.ViewModels
                 NotifyOfPropertyChange(()=>CurrentPerson);
             }
         }
+
+        public bool CanEditAttributes
+        {
+            get { return _canEditAttributes; }
+            set
+            {
+                _canEditAttributes = value;
+                NotifyOfPropertyChange(()=>CanEditAttributes);
+                NotifyOfPropertyChange(() => CurrentPerson);
+            }
+        }
+
 
 
         #region Dictionaries
@@ -63,7 +87,7 @@ namespace Kseo2.ViewModels
         #endregion
 
         public PersonAddressesViewModel PersonAddresses{ get; set; }
-       
+        public WorkplacesViewModel PersonWorkplaces { get; set; }
 
 
         public string FullName
@@ -372,6 +396,7 @@ namespace Kseo2.ViewModels
             }
         }
 
+        
         public IResult Save()
         {
             if (CanSave)
@@ -380,7 +405,9 @@ namespace Kseo2.ViewModels
                 {
                     if (_inAddingMode) _context.Persons.Add(CurrentPerson);
                     _context.SaveChanges();
-                    TryClose(true);
+                    CanEditAttributes = true;
+                    DisplayName = CurrentPerson.FullName;
+                    //TryClose(true);
                     return null;
                     //return new MessengerResult("Zmiany zostały zapisane.")
                     //    .Caption("Informacja")
@@ -406,8 +433,11 @@ namespace Kseo2.ViewModels
         {
             NotifyOfPropertyChange(propertyName);
             NotifyOfPropertyChange(() => CanSave);
+            NotifyOfPropertyChange(()=>IsDirty);
         }
 
 
+
+        
     }
 }

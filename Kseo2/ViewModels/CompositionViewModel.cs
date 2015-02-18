@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Data.Entity.Core.Mapping;
 using Caliburn.Micro;
 using Kseo2.Model;
 using System;
@@ -23,8 +24,9 @@ namespace Kseo2.ViewModels
 
         public CompositionViewModel(TRoot rootEntity)
         {
-            Items = new ObservableCollection<T>();
+            
             RootEntity = rootEntity;
+            Items = new ObservableCollection<T>();
         }
 
 
@@ -37,6 +39,13 @@ namespace Kseo2.ViewModels
                 NotifyOfPropertyChange(()=>IsDirty);
             }
         }
+
+        public bool CanEdit
+        { get { return (SelectedItem != null); } }
+
+        public bool CanRemove
+        { get { return (SelectedItem != null); } }
+
 
         public ObservableCollection<T> Items
         {
@@ -55,6 +64,9 @@ namespace Kseo2.ViewModels
             {
                 _selectedItem = value;
                 NotifyOfPropertyChange(()=>SelectedItem);
+                NotifyOfPropertyChange(()=>CanEdit);
+                NotifyOfPropertyChange(() => CanRemove);
+
             }
         }
 

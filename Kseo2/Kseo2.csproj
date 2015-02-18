@@ -145,6 +145,8 @@
     <Compile Include="ViewModels\PersonSearchViewModel.cs" />
     <Compile Include="ViewModels\PersonsViewModel.cs" />
     <Compile Include="ViewModels\PersonViewModel.cs" />
+    <Compile Include="ViewModels\WorkplacesViewModel.cs" />
+    <Compile Include="ViewModels\WorkplaceViewModel.cs" />
     <Compile Include="ViewModels\ProceduresViewModel.cs" />
     <Compile Include="ViewModels\QuestionViewModel.cs" />
     <Compile Include="ViewModels\ReservationsViewModel.cs" />
@@ -216,6 +218,12 @@
     </Compile>
     <Compile Include="Views\VerificationView.xaml.cs">
       <DependentUpon>VerificationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WorkplacesView.xaml.cs">
+      <DependentUpon>WorkplacesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WorkplaceView.xaml.cs">
+      <DependentUpon>WorkplaceView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -322,6 +330,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\VerificationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WorkplacesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WorkplaceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

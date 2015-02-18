@@ -157,12 +157,7 @@ namespace Kseo2.Model
 
         #region Workplace routines
 
-        public void WorkplaceAdd(Workplace workplace)
-        {
-            Workplaces.Add(workplace);
-        }
-
-        public void WorkplaceUpdate(Workplace workplace)
+       public void WorkplaceUpdate(Workplace workplace)
         {
             Mapper.CreateMap<Workplace, Workplace>().ForMember(w => w.Id,m=>m.Ignore());
             Workplace updatedWorkplace = Workplaces.FirstOrDefault(w => w.Id.Equals(workplace.Id));

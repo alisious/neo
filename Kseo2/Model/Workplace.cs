@@ -14,18 +14,15 @@ namespace Kseo2.Model
         
         public Workplace()
         {
-            IsCurrent = true;
-            WorkplaceAddress = new Location();
+           Location = new Location();
         }
 
         public int Id { get; set; }
-        [Required]
-        public bool IsCurrent { get; set; }
         [Required(AllowEmptyStrings = false,ErrorMessage = @"Nazwa miejsca pracy jest wymagana!")]
         [MaxLength(200,ErrorMessage = @"Nazwa miejsca pracy nie może być dłuższa niż 200 znaków!")]
-        public string Name { get; set; }
+        public string UnitName { get; set; }
         public string UnitNumber { get; set; }
-        public Location WorkplaceAddress { get; set; }
+        public Location Location { get; set; }
         
     }
 }
