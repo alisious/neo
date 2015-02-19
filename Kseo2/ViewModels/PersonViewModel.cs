@@ -90,7 +90,7 @@ namespace Kseo2.ViewModels
             set
             {
                 CurrentPerson.LastName = value;
-                NotifyOfPropertyChange(()=>LastName);
+                OnPropertyChanged(value);
                 NotifyOfPropertyChange(()=>FullName);
             }
         }
@@ -102,7 +102,7 @@ namespace Kseo2.ViewModels
             set
             {
                 CurrentPerson.FirstName = value;
-                NotifyOfPropertyChange(() => FirstName);
+                OnPropertyChanged(value);
                 NotifyOfPropertyChange(() => FullName);
             }
         }
@@ -228,7 +228,7 @@ namespace Kseo2.ViewModels
             set
             {
                 CurrentPerson.BirthPlace = value;
-                NotifyOfPropertyChange(() => BirthPlace);
+                OnPropertyChanged(value);
 
             }
         }
@@ -252,7 +252,7 @@ namespace Kseo2.ViewModels
             set
             {
                 CurrentPerson.MotherName = value;
-                NotifyOfPropertyChange(() => MotherName);
+                OnPropertyChanged(value);
 
             }
         }
@@ -263,7 +263,7 @@ namespace Kseo2.ViewModels
             set
             {
                 CurrentPerson.MotherMaidenName = value;
-                NotifyOfPropertyChange(() => MotherMaidenName);
+                OnPropertyChanged(value);
 
             }
         }
@@ -274,7 +274,7 @@ namespace Kseo2.ViewModels
             set
             {
                 CurrentPerson.Nationality = value;
-                NotifyOfPropertyChange(() => Nationality);
+                OnPropertyChanged(value);
             }
 
         }
@@ -297,6 +297,7 @@ namespace Kseo2.ViewModels
                 CurrentPerson.Citizenships = new HashSet<Country>(vm.GetSelectedCountries());
 
                 NotifyOfPropertyChange(() => Citizenships);
+                IsDirty = true;
             }
         }
 
@@ -335,6 +336,7 @@ namespace Kseo2.ViewModels
                     //if (_inAddingMode) _context.Persons.Add(CurrentPerson);
                     _context.SaveChanges();
                     DisplayName = CurrentPerson.FullName;
+                    IsDirty = false;
                     //TryClose(true);
                     return null;
                     //return new MessengerResult("Zmiany zostały zapisane.")
@@ -380,7 +382,8 @@ namespace Kseo2.ViewModels
         {
             NotifyOfPropertyChange(propertyName);
             NotifyOfPropertyChange(() => CanSave);
-            NotifyOfPropertyChange(()=>IsDirty);
+            IsDirty = true;
+           
         }
 
 
