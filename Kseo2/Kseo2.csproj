@@ -137,6 +137,8 @@
     <Compile Include="ViewModels\CollaborationsViewModel.cs" />
     <Compile Include="ViewModels\CountrySelectViewModel.cs" />
     <Compile Include="ViewModels\DailyReportViewModel.cs" />
+    <Compile Include="ViewModels\Events\CanSaveEvent.cs" />
+    <Compile Include="ViewModels\Events\IsDirtyEvent.cs" />
     <Compile Include="ViewModels\ListViewModel.cs" />
     <Compile Include="ViewModels\LocationViewModel.cs" />
     <Compile Include="ViewModels\PersonAddressesViewModel.cs" />

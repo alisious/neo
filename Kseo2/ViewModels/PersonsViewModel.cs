@@ -133,7 +133,7 @@ namespace Kseo2.ViewModels
 
         public void Add()
         {
-            var personViewModel = new PersonViewModel(0);
+            var personViewModel = new PersonViewModel(new EventAggregator(),0);
             personViewModel.DisplayName = "Nowa osoba.";
             var windowManager = new WindowManager();
             
@@ -147,7 +147,7 @@ namespace Kseo2.ViewModels
         {
             if (SelectedItem != null)
             {
-                var personViewModel = new PersonViewModel(SelectedItem.Id);
+                var personViewModel = new PersonViewModel(new EventAggregator(), SelectedItem.Id);
                 personViewModel.DisplayName = "Zmiana danych osoby.";
                 var windowManager = new WindowManager();
 

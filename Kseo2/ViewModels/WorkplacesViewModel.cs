@@ -14,7 +14,7 @@ namespace Kseo2.ViewModels
 {
     public class WorkplacesViewModel :CompositionViewModel<Person,Workplace>
     {
-        public WorkplacesViewModel(Person rootEntity) : base(rootEntity)
+        public WorkplacesViewModel(Person rootEntity,IEventAggregator events) : base(rootEntity,events)
         {
             Items = new ObservableCollection<Workplace>(RootEntity.Workplaces);
         }
@@ -37,7 +37,8 @@ namespace Kseo2.ViewModels
             var vm = new WorkplaceViewModel(SelectedItem,new EventAggregator());
             if (windowManager.ShowDialog(vm) == true)
             {
-                
+                RootEntity.Workplaces.Remove(SelectedItem);
+                RootEntity.Workplaces.Add(vm.CurrentWorkplace);
                 Items = new ObservableCollection<Workplace>(RootEntity.Workplaces);
                 base.Edit();
             }

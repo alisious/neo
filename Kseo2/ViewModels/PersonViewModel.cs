@@ -13,19 +13,21 @@ using System.Runtime.CompilerServices;
 using Kseo2.Helpers;
 using Caliburn.Micro;
 using Caliburn.Micro.Extras;
+using Kseo2.ViewModels.Events;
 
 namespace Kseo2.ViewModels
 {
-    public class PersonViewModel :ValidatingScreen<PersonViewModel>
+    public class PersonViewModel :ValidatingScreen<PersonViewModel>, IHandle<IsDirtyEvent>
     {
         private readonly KseoContext _context;
         private Person _currentPerson;
         private List<Country> _countries;
         private bool _isDirty = false;
-        
 
-        public PersonViewModel(int personId=0)
+
+        public PersonViewModel(IEventAggregator events,int personId = 0)
         {
+            events.Subscribe(this);
             _context = new KseoContext();
             Countries = _context.Countries.Where(c => c.IsActive.Equals(true)).ToList();
             if (personId == 0)
@@ -43,8 +45,8 @@ namespace Kseo2.ViewModels
                         .FirstOrDefault(p => p.Id.Equals(personId));
                 DisplayName = CurrentPerson.FullName;
             }
-            PersonAddresses = new PersonAddressesViewModel(CurrentPerson);
-            PersonWorkplaces = new WorkplacesViewModel(CurrentPerson);
+            PersonAddresses = new PersonAddressesViewModel(CurrentPerson,events);
+            PersonWorkplaces = new WorkplacesViewModel(CurrentPerson,events);
         }
 
         public Person CurrentPerson
@@ -362,7 +364,16 @@ namespace Kseo2.ViewModels
 
         public void Close()
         {
-            TryClose(false);
+            if (!IsDirty)
+            {
+                TryClose(false);
+                return;
+            } 
+            var ms = new MessageService();
+            if (ms.Show("Zamknięcie okna spowoduje, że wprowadzone zmiany nie zostaną zapisane.", "Uwaga!",
+                MessageButton.OKCancel, MessageImage.Warning) == MessageResult.OK) 
+               TryClose(false); 
+            
         }
 
         protected void OnPropertyChanged(object value, [CallerMemberName] string propertyName = "")
@@ -374,6 +385,12 @@ namespace Kseo2.ViewModels
 
 
 
+
+
+        public void Handle(IsDirtyEvent message)
+        {
+            IsDirty = IsDirty || message.IsDirty;
+        }
         
     }
 }

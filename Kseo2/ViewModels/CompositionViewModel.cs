@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Kseo2.ViewModels.Events;
 
 namespace Kseo2.ViewModels
 {
@@ -15,18 +16,20 @@ namespace Kseo2.ViewModels
     /// </summary>
     /// <typeparam name="TRoot">Typ agregatu.</typeparam>
     /// <typeparam name="T">Typ elementu kompozycji.</typeparam>
-    public class CompositionViewModel<TRoot,T> :Screen where TRoot :Entity
+    public class CompositionViewModel<TRoot,T> :Screen, IHandle<IsDirtyEvent>  where TRoot :Entity
     {
-        private bool _isDirty = false;
+        private readonly IEventAggregator _events;
+        private bool _isDirty;
         private TRoot _rootEntity;
         private ObservableCollection<T> _items;
         private T _selectedItem;
 
-        public CompositionViewModel(TRoot rootEntity)
+        public CompositionViewModel(TRoot rootEntity,IEventAggregator events)
         {
-            
+            _events = events;
             RootEntity = rootEntity;
             Items = new ObservableCollection<T>();
+            IsDirty = false;
         }
 
 
@@ -37,6 +40,7 @@ namespace Kseo2.ViewModels
             {
                 _isDirty = value;
                 NotifyOfPropertyChange(()=>IsDirty);
+               _events.PublishOnUIThread(new IsDirtyEvent(_isDirty));
             }
         }
 
@@ -93,6 +97,11 @@ namespace Kseo2.ViewModels
         public virtual void Edit()
         {
             IsDirty = true;
+        }
+
+        public void Handle(IsDirtyEvent message)
+        {
+            NotifyOfPropertyChange(() => IsDirty);
         }
 
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using Kseo2.Model;
 using System.Runtime.CompilerServices;
 using System.ComponentModel.DataAnnotations;
 using AutoMapper;
+using Kseo2.ViewModels.Events;
 
 namespace Kseo2.ViewModels
 {
@@ -18,15 +20,17 @@ namespace Kseo2.ViewModels
         public WorkplaceViewModel(Workplace workplace,IEventAggregator events)
         {
             events.Subscribe(this);
-            Mapper.CreateMap<Workplace, Workplace>().ForMember(w => w.Id, m => m.Ignore());
             DisplayName = (workplace.Id == 0) ? @"Nowe miejsce pracy." : workplace.Location.ToString();
             CurrentWorkplace = Mapper.Map<Workplace>(workplace);
             WorkplaceLocation = new LocationViewModel(CurrentWorkplace.Location, events);
+           
 
         }
         
         public LocationViewModel WorkplaceLocation { get; private set; }
         public Workplace CurrentWorkplace { get; private set; }
+        
+
 
         [Required(AllowEmptyStrings = false, ErrorMessage = @"Nazwa miejsca pracy jest wymagana!")]
         [MaxLength(200, ErrorMessage = @"Nazwa miejsca pracy nie może być dłuższa niż 200 znaków!")]
@@ -58,7 +62,7 @@ namespace Kseo2.ViewModels
 
         public void Save()
         {
-             Mapper.Map<Workplace>(CurrentWorkplace);
+            
             TryClose(true);
         }
 

@@ -10,28 +10,28 @@
 <StackPanel >
     <DockPanel>
         <TextBlock Text="Miejscowość:" Width="150"/>
-        <TextBox x:Name="City"></TextBox>
+        <TextBox x:Name="City"/>
     </DockPanel>
             
             <DockPanel>
                 <TextBlock Text="Ulica:" Width="150"/>
-                <TextBox></TextBox>
+                <TextBox x:Name="Street"/>
             </DockPanel>
             <DockPanel>
                 <TextBlock Text="Nr domu:" Width="150"/>
-                <TextBox></TextBox>
+                <TextBox x:Name="StreetNo"/>
             </DockPanel>
             <DockPanel>
                 <TextBlock Text="Nr lokalu" Width="150"/>
-                <TextBox></TextBox>
+                <TextBox x:Name="PlaceNo"/>
             </DockPanel>
             <DockPanel>
                 <TextBlock Text="Kod pocztowy:" Width="150"/>
-                <TextBox></TextBox>
+                <TextBox x:Name="PostalCode"/>
             </DockPanel>
             <DockPanel>
                 <TextBlock Text="Poczta:" Width="150"/>
-                <TextBox></TextBox>
+                <TextBox x:Name="PostOffice"/>
             </DockPanel>
            
         </StackPanel>

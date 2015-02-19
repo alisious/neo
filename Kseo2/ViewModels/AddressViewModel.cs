@@ -7,6 +7,7 @@ using Caliburn.Micro;
 using Caliburn.Micro.Validation;
 using System.Runtime.CompilerServices;
 using Kseo2.Model;
+using Kseo2.ViewModels.Events;
 
 namespace Kseo2.ViewModels
 {

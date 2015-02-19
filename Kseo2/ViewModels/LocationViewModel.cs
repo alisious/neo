@@ -9,19 +9,12 @@ using Caliburn.Micro.Validation;
 using Kseo2.Model;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
+using Kseo2.ViewModels.Events;
 
 namespace Kseo2.ViewModels
 {
 
-    public class CanSaveEvent
-    {
-        public CanSaveEvent(bool canSave)
-        {
-            CanSave = canSave;
-        }
-
-        public bool CanSave { get; private set; }
-    }
+    
 
    
     public class LocationViewModel :ValidatingScreen<LocationViewModel>,IHandle<CanSaveEvent>

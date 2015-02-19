@@ -12,19 +12,13 @@ namespace Kseo2.ViewModels
 {
     public class PersonAddressesViewModel :CompositionViewModel<Person,Address>
     {
-        public PersonAddressesViewModel(Person currentPerson)
-            : base(currentPerson)
+        public PersonAddressesViewModel(Person currentPerson,IEventAggregator events)
+            : base(currentPerson,events)
         {
             Items = new ObservableCollection<Address>(RootEntity.Addresses);
         }
 
 
-        public override void Add()
-        {
-            
-            base.Add();
-        }
-
-       
+      
     }
 }

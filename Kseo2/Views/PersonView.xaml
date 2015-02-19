@@ -25,8 +25,8 @@
                         <TextBlock Text="Dane podstawowe" Foreground="Blue" VerticalAlignment="Center"/>
                     </StackPanel>
                 </TabItem.Header>
-                <StackPanel>
-                    <StackPanel x:Name="DanePodstawowe" Orientation="Horizontal"  MinHeight="350" >
+                <DockPanel>
+                    <StackPanel x:Name="DanePodstawowe" Orientation="Horizontal"  MinHeight="350" DockPanel.Dock="Top">
                         <StackPanel MinWidth="250" Width="529" Margin="10,0,0,0">
                             <DockPanel LastChildFill="True">
                                 <CheckBox x:Name="HasPesel" 
@@ -121,8 +121,7 @@
                             <TextBlock/>
                            </StackPanel>
                     </StackPanel>
-                    <StackPanel>
-                        <TabControl MinHeight="300">
+                   <TabControl MinHeight="300">
                             <TabItem>
                                 <TabItem.Header>
                                     <StackPanel Orientation="Horizontal" Width="150">
@@ -130,41 +129,7 @@
                                         <TextBlock Text="Adresy" Foreground="Blue" VerticalAlignment="Center"/>
                                     </StackPanel>
                                 </TabItem.Header>
-                                <DockPanel>
-                                    <StackPanel Orientation="Vertical" Width="80" DockPanel.Dock="Left">
-                                        <Button x:Name="AddAddress" Height="80">
-                                            <StackPanel Orientation="Vertical">
-                                                <Image Source="..\Images/file_add.png" Height="50"  Width="50"/>
-                                                <TextBlock Text="Dodaj"/>
-                                            </StackPanel>
-                                        </Button>
-                                        <Button x:Name="EditAddress" Height="80" IsEnabled="{Binding CanEdit}">
-                                            <StackPanel Orientation="Vertical">
-                                                <Image Source="..\Images/file_edit.png" Height="50"  Width="50"/>
-                                                <TextBlock Text="Edytuj"/>
-                                            </StackPanel>
-                                        </Button>
-                                        <Button x:Name="RemoveAddress" Height="80" IsEnabled="{Binding CanRemove}">
-                                            <StackPanel Orientation="Vertical">
-                                                <Image Source="..\Images/file_delete.png" Height="50"  Width="50"/>
-                                                <TextBlock Text="Usuń"/>
-                                            </StackPanel>
-                                        </Button>
-                                    </StackPanel>
-                                    <DataGrid x:Name="Addresses" >
-                                        <DataGrid.Columns>
-                                            <DataGridTemplateColumn>
-                                                <DataGridTemplateColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <Image Height="20"  Source="{Binding IsCurrentImage}"/>
-                                                    </DataTemplate>
-                                                </DataGridTemplateColumn.CellTemplate>
-                                            </DataGridTemplateColumn>
-                                            <DataGridTextColumn Header="Rodzaj" Binding="{Binding AddressType}" Width="200"></DataGridTextColumn>
-                                            <DataGridTextColumn Header="Lokalizacja" Binding="{Binding Location}" Width="200*" ></DataGridTextColumn>
-                                        </DataGrid.Columns>
-                                    </DataGrid>
-                                </DockPanel>
+                                <ContentControl x:Name="PersonAddresses"/>
                             </TabItem>
                             <TabItem>
                                 <TabItem.Header>
@@ -176,9 +141,7 @@
                                 <ContentControl x:Name ="PersonWorkplaces"></ContentControl>
                             </TabItem>
                         </TabControl>
-                    </StackPanel>
-
-                </StackPanel>
+                    </DockPanel>
             </TabItem>
             <TabItem >
                     <TabItem.Header>
@@ -219,13 +182,13 @@
             </TabItem>
         </TabControl>
         <StackPanel Grid.Column="2" Grid.Row="1">
-            <Button x:Name="Save" Height="100">
+            <Button x:Name="Save" Height="100" IsDefault="True">
                 <StackPanel Orientation="Vertical">
                     <Image Source="..\Images/ok_mark.png" Height="50"  Width="50"/>
                     <TextBlock Text="Zapisz"/>
                 </StackPanel>
             </Button>
-            <Button x:Name="Cancel" Height="100" IsEnabled="{Binding CanEdit}">
+            <Button x:Name="Cancel" Height="100" IsEnabled="{Binding CanEdit}" IsCancel="True">
                 <StackPanel Orientation="Vertical">
                     <Image Source="..\Images/cancel_mark.png" Height="50"  Width="50"/>
                     <TextBlock Text="Anuluj"/>
