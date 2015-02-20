@@ -131,8 +131,9 @@ namespace Kseo2.ViewModels
 
         #region Public methods
             
-            public virtual void Search() {} 
-        
+            public virtual void Search() {}
+            public virtual void ListRowDoubleClick() {}
+
         #endregion
 
     }

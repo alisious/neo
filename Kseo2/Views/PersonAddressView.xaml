@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Kseo2.Views.AddressView"
+﻿<UserControl x:Class="Kseo2.Views.PersonAddressView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,13 +11,13 @@
             <ColumnDefinition Width="100"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="1">
-            <Button x:Name="Save" Height="100">
+            <Button x:Name="Save" Height="100" IsDefault="True">
                 <StackPanel Orientation="Vertical">
                     <Image Source="..\Images/ok_mark.png" Height="50"  Width="50"/>
                     <TextBlock Text="OK" HorizontalAlignment="Center"/>
                 </StackPanel>
             </Button>
-            <Button x:Name="Cancel" Height="100" IsEnabled="{Binding CanEdit}">
+            <Button x:Name="Cancel" Height="100" IsCancel="True">
                 <StackPanel Orientation="Vertical">
                     <Image Source="..\Images/cancel_mark.png" Height="50"  Width="50"/>
                     <TextBlock Text="Anuluj"/>

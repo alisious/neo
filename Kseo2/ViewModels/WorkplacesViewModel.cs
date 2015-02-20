@@ -22,7 +22,7 @@ namespace Kseo2.ViewModels
         public override void Add()
         {
             var windowManager = new WindowManager();
-            var vm = new WorkplaceViewModel(new Workplace(),new EventAggregator());
+            var vm = new WorkplaceViewModel(new EventAggregator());
             if (windowManager.ShowDialog(vm) == true)
             {
                 RootEntity.Workplaces.Add(vm.CurrentWorkplace);
@@ -34,7 +34,7 @@ namespace Kseo2.ViewModels
         public override void Edit()
         {
             var windowManager = new WindowManager();
-            var vm = new WorkplaceViewModel(SelectedItem,new EventAggregator());
+            var vm = new WorkplaceViewModel(new EventAggregator(),SelectedItem);
             if (windowManager.ShowDialog(vm) == true)
             {
                 RootEntity.Workplaces.Remove(SelectedItem);

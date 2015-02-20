@@ -29,7 +29,10 @@ namespace Kseo2.ViewModels
         {
             events.Subscribe(this);
             _context = new KseoContext();
+            
             Countries = _context.Countries.Where(c => c.IsActive.Equals(true)).ToList();
+            AddressTypes = _context.AddressTypes.Where(a => a.IsActive.Equals(true)).ToList();
+
             if (personId == 0)
             {
                 CurrentPerson = new Person();
@@ -45,9 +48,11 @@ namespace Kseo2.ViewModels
                         .FirstOrDefault(p => p.Id.Equals(personId));
                 DisplayName = CurrentPerson.FullName;
             }
-            PersonAddresses = new PersonAddressesViewModel(CurrentPerson,events);
+            PersonAddresses = new PersonAddressesViewModel(CurrentPerson,AddressTypes,events);
             PersonWorkplaces = new WorkplacesViewModel(CurrentPerson,events);
         }
+
+        public List<AddressType> AddressTypes { get; private set; }
 
         public Person CurrentPerson
         {

@@ -99,6 +99,11 @@ namespace Kseo2.ViewModels
             IsDirty = true;
         }
 
+        public virtual void ListRowDoubleClick()
+        {
+            if (CanEdit) Edit();
+        }
+
         public void Handle(IsDirtyEvent message)
         {
             NotifyOfPropertyChange(() => IsDirty);

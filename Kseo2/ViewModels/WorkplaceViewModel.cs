@@ -17,11 +17,16 @@ namespace Kseo2.ViewModels
     public class WorkplaceViewModel : ValidatingScreen<WorkplaceViewModel>, IHandle<CanSaveEvent>
     {
         
-        public WorkplaceViewModel(Workplace workplace,IEventAggregator events)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="events"></param>
+        /// <param name="workplace"> Podanie wartosci null, powoduje dodanie nowego obiektu.</param>
+        public WorkplaceViewModel(IEventAggregator events,Workplace workplace = null)
         {
             events.Subscribe(this);
-            DisplayName = (workplace.Id == 0) ? @"Nowe miejsce pracy." : workplace.Location.ToString();
-            CurrentWorkplace = Mapper.Map<Workplace>(workplace);
+            DisplayName = workplace==null ? @"Nowe miejsce pracy." : workplace.UnitName; 
+            CurrentWorkplace = workplace ?? new Workplace();
             WorkplaceLocation = new LocationViewModel(CurrentWorkplace.Location, events);
            
 

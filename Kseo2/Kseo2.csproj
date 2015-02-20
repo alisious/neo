@@ -132,7 +132,7 @@
     <Compile Include="Service\UnitOfWork.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Service\VerificationService.cs" />
-    <Compile Include="ViewModels\AddressViewModel.cs" />
+    <Compile Include="ViewModels\PersonAddressViewModel.cs" />
     <Compile Include="ViewModels\CompositionViewModel.cs" />
     <Compile Include="ViewModels\CollaborationsViewModel.cs" />
     <Compile Include="ViewModels\CountrySelectViewModel.cs" />
@@ -166,8 +166,8 @@
     <Compile Include="ViewModels\Validation\ValidationGroupAttribute.cs" />
     <Compile Include="ViewModels\VerificationsViewModel.cs" />
     <Compile Include="ViewModels\VerificationViewModel.cs" />
-    <Compile Include="Views\AddressView.xaml.cs">
-      <DependentUpon>AddressView.xaml</DependentUpon>
+    <Compile Include="Views\PersonAddressView.xaml.cs">
+      <DependentUpon>PersonAddressView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CollaborationsView.xaml.cs">
       <DependentUpon>CollaborationsView.xaml</DependentUpon>
@@ -263,7 +263,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\AddressView.xaml">
+    <Page Include="Views\PersonAddressView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
