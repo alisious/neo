@@ -134,6 +134,7 @@
     <Compile Include="Service\UnitOfWork.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Service\VerificationService.cs" />
+    <Compile Include="ViewModels\Common\BaseViewModel.cs" />
     <Compile Include="ViewModels\PersonAddressViewModel.cs" />
     <Compile Include="ViewModels\CompositionViewModel.cs" />
     <Compile Include="ViewModels\CollaborationsViewModel.cs" />
@@ -406,6 +407,7 @@
   <ItemGroup>
     <Resource Include="Images\LogOut.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
