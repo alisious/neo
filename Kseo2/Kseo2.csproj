@@ -100,9 +100,11 @@
     <Compile Include="DataAccess\OrganizationalUnitRepository.cs" />
     <Compile Include="DataAccess\VerificationRepository.cs" />
     <Compile Include="Model\Address.cs" />
+    <Compile Include="Model\Employee.cs" />
     <Compile Include="Model\IEntity.cs" />
     <Compile Include="Model\Location.cs" />
-    <Compile Include="Model\SearchResult.cs" />
+    <Compile Include="Model\Prolongation.cs" />
+    <Compile Include="Model\Reservation.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\OrganizationalUnit.cs" />
     <Compile Include="Model\Question.cs" />
@@ -143,10 +145,11 @@
     <Compile Include="ViewModels\LocationViewModel.cs" />
     <Compile Include="ViewModels\PersonAddressesViewModel.cs" />
     <Compile Include="ViewModels\PersonBaseViewModel.cs" />
-    <Compile Include="ViewModels\PersonEditViewModel.cs" />
+    <Compile Include="ViewModels\PersonReservationsViewModel.cs" />
     <Compile Include="ViewModels\PersonSearchViewModel.cs" />
     <Compile Include="ViewModels\PersonsViewModel.cs" />
     <Compile Include="ViewModels\PersonViewModel.cs" />
+    <Compile Include="ViewModels\ReservationViewModel.cs" />
     <Compile Include="ViewModels\WorkplacesViewModel.cs" />
     <Compile Include="ViewModels\WorkplaceViewModel.cs" />
     <Compile Include="ViewModels\ProceduresViewModel.cs" />
@@ -183,10 +186,6 @@
     </Compile>
     <Compile Include="Views\PersonAddressesView.xaml.cs">
       <DependentUpon>PersonAddressesView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PersonEditView.xaml.cs">
-      <SubType>Code</SubType>
-      <DependentUpon>PersonEditView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PersonsView.xaml.cs">
       <DependentUpon>PersonsView.xaml</DependentUpon>
@@ -247,6 +246,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Model\ClassDiagramReservation.cd" />
     <None Include="Model\ModelClassDiagram.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -284,10 +284,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PersonAddressesView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\PersonEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

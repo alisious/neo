@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,7 +70,21 @@ namespace Kseo2.ViewModels
                 get { return SelectedItem != null; }
             }
 
-            //Powinno być nadpisane w każdej pochodnej klasie.
+
+        public virtual void Add()
+        {
+
+        }
+
+        public virtual void Remove()
+        {
+
+        }
+
+        public virtual void Edit() 
+        {}
+    
+        //Powinno być nadpisane w każdej pochodnej klasie.
             public virtual bool CanSearch
             {
                 get { return true; }
@@ -95,6 +110,7 @@ namespace Kseo2.ViewModels
                 }
             }
 
+           
             //Results properties
             public int ResultsCounter
             {
@@ -132,7 +148,11 @@ namespace Kseo2.ViewModels
         #region Public methods
             
             public virtual void Search() {}
-            public virtual void ListRowDoubleClick() {}
+
+        public virtual void ListRowDoubleClick()
+        {
+            if (CanEdit) Edit();
+        }
 
         #endregion
 

@@ -131,7 +131,7 @@ namespace Kseo2.ViewModels
 
         }
 
-        public void Add()
+        public override void Add()
         {
             var personViewModel = new PersonViewModel(new EventAggregator(),0);
             personViewModel.DisplayName = "Nowa osoba.";
@@ -143,7 +143,7 @@ namespace Kseo2.ViewModels
             }
         }
 
-        public void Edit()
+        public override void Edit()
         {
             if (SelectedItem != null)
             {

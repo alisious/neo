@@ -58,6 +58,7 @@ namespace Kseo2.DataAccess
             return list;
         }
 
+        /*
         public virtual SearchResult<T> GetList(Func<T, bool> where, int resultsLimit = 20, params System.Linq.Expressions.Expression<Func<T, object>>[] navigationProperties)
         {
             var result = new SearchResult<T>();
@@ -73,7 +74,7 @@ namespace Kseo2.DataAccess
             }
             return result;
         }
-
+        */
         
         public virtual T GetSingle(Func<T, bool> where, params System.Linq.Expressions.Expression<Func<T, object>>[] navigationProperties)
         {

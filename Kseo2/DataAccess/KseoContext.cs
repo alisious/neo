@@ -29,9 +29,22 @@ namespace Kseo2.DataAccess
         public virtual DbSet<QuestionReason> QuestionReasons { get; set; }
         public virtual DbSet<Verification> Verifications { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Reservation> Reservations { get; set; }
+        public virtual DbSet<Prolongation> Prolongations { get; set; }
+        public virtual DbSet<ReservationPurpose> ReservationPurposes { get; set; }
+        public virtual DbSet<ReservationEndReason> ReservationEndReasons { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Reservation>().HasRequired(e => e.EndReason);
+            modelBuilder.Entity<Reservation>().HasRequired(e => e.Purpose);
+            modelBuilder.Entity<Reservation>().HasRequired(e => e.ConductingUnit);
+            modelBuilder.Entity<Reservation>().HasMany(e => e.Prolongations);
+            modelBuilder.Entity<Reservation>().HasRequired(e => e.ReservedPerson).WithMany(p=>p.Reservations).WillCascadeOnDelete();
+
+            modelBuilder.Entity<Prolongation>().HasRequired(e => e.OrganizationalUnit);
+            
             modelBuilder.Entity<Person>()
                 .HasOptional(e => e.Nationality);
                        

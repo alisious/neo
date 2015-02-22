@@ -112,6 +112,17 @@ namespace Kseo2.ViewModels
             }
         }
 
+        public string MiddleName
+        {
+            get { return CurrentPerson.MiddleName; }
+            set
+            {
+                CurrentPerson.MiddleName = value;
+                OnPropertyChanged(value);
+                NotifyOfPropertyChange(() => FullName);
+            }
+        }
+
         #region PESEL properties
 
         [RequiredEx(ErrorMessage = @"PESEL jest wymagany!", GuardProperty = "HasPesel")]

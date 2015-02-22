@@ -20,6 +20,7 @@ namespace Kseo2.Model
             Citizenships = new HashSet<Country>();
             Workplaces = new HashSet<Workplace>();
             Addresses = new HashSet<Address>();
+            Reservations = new HashSet<Reservation>();
             _hasPESEL = true;
             MiddleName = String.Empty;
             PreviousName = String.Empty;
@@ -34,6 +35,9 @@ namespace Kseo2.Model
         private  string _pesel;
 
         public int Id { get; set; }
+
+        [Column(TypeName = "ntext")]
+        public string Notes { get; set; }
 
         [Required]
         [StringLength(11)]
@@ -135,6 +139,7 @@ namespace Kseo2.Model
 
         public virtual HashSet<Address> Addresses { get; set; }
         public virtual HashSet<Workplace> Workplaces { get; set; }
+        public virtual HashSet<Reservation> Reservations { get; set; } 
 
 
         #region Address routines
@@ -229,7 +234,7 @@ namespace Kseo2.Model
         } 
         #endregion
 
-
+        
         public EntityState EntityState { get; set; }
         
     }

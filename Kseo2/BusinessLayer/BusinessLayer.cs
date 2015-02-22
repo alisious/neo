@@ -93,11 +93,12 @@ namespace Kseo2.BusinessLayer
             return _personRepository.GetAll();
         }
 
+        /*
         public Model.SearchResult<Model.Person> GetPersons(Func<Model.Person, bool> where, int resultsLimit = 20)
         {
             return _personRepository.GetList(where, resultsLimit);
         }
-
+        */
         public Model.Person GetPersonByPesel(string pesel)
         {
             return _personRepository.GetSingle(x => x.Pesel == pesel, p => p.Nationality, p => p.Citizenships);

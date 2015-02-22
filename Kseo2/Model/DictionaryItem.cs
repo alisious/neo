@@ -63,7 +63,11 @@ namespace Kseo2.Model
     public class Organization : DictionaryItem<Organization> { }
     [Table("Person.AddressType")]
     public class AddressType : DictionaryItem<AddressType> { }
+    //Reservation
+    [Table("Reservation.ReservationPurpose")]
+    public class ReservationPurpose : DictionaryItem<ReservationPurpose> { }
+    [Table("Reservation.ReservationEndReason")]
+    public class ReservationEndReason :DictionaryItem<ReservationEndReason> { }
 
-    
-    
+
 }
