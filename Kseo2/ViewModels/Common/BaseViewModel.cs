@@ -7,17 +7,23 @@ using Caliburn.Micro;
 using Caliburn.Micro.Validation;
 using Kseo2.ViewModels.Events;
 using System.Runtime.CompilerServices;
+using Kseo2.Model;
 
 namespace Kseo2.ViewModels.Common
 {
-    public class BaseViewModel<T> :ValidatingScreen<T>, IHandle<IsDirtyEvent>,IHandle<CanSaveEvent> where T :ValidatingScreen<T>
+    public class BaseViewModel<T,TEntity> :ValidatingScreen<T>, IHandle<IsDirtyEvent>,IHandle<CanSaveEvent> 
+        where T :ValidatingScreen<T> 
+        where TEntity :Entity
     {
         private bool _isDirty;
         
-        public BaseViewModel(IEventAggregator events)
+        public BaseViewModel(IEventAggregator events,TEntity currentEntity)
         {
             Events = events;
+            CurrentEntity = currentEntity;
         }
+
+        public TEntity CurrentEntity { get; protected set; }
 
         public IEventAggregator Events { get; private set; }
 

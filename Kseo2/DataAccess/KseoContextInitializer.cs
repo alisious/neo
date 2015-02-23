@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Kseo2.DataAccess
 {
-    public class KseoContextInitializer : DropCreateDatabaseIfModelChanges<KseoContext> //DropCreateDatabaseAlways<KseoContext>//
+    public class KseoContextInitializer : DropCreateDatabaseAlways<KseoContext>//DropCreateDatabaseIfModelChanges<KseoContext> //
     {
         protected override void Seed(KseoContext context)
         {
@@ -335,6 +335,41 @@ namespace Kseo2.DataAccess
             context.Organizations.Add(new Organization() { ShortName = "", Name = "AGENCA BW i W", Description = "AGENCJA BEZPIECZEŃSWTA WEWNĘTRZNEGO i AGENCJA WYWIADU", DisplayOrder = 80 });
             
                        
+            #endregion
+
+            #region ReservationPurposes (Cel pozyskania)
+            context.ReservationPurposes.Add(new ReservationPurpose() { Name = "A", Description = "ROZPRACOWANIE", DisplayOrder = 1 });
+            context.ReservationPurposes.Add(new ReservationPurpose() { Name = "AA", Description = "PRZED ZAINTERESOWANIEM OPERACYJNYM", DisplayOrder = 2 });
+            context.ReservationPurposes.Add(new ReservationPurpose() { Name = "QA", Description = "POSTĘPOWANIE SPRAWDZAJĄCE", DisplayOrder = 3 });
+            context.ReservationPurposes.Add(new ReservationPurpose() { Name = "QK", Description = "KONCESJA", DisplayOrder = 4 });
+            context.ReservationPurposes.Add(new ReservationPurpose() { Name = "J", Description = "DOPUSZCZENIE DO INFORMACJI NIEJAWNYCH", DisplayOrder = 5 });
+            context.ReservationPurposes.Add(new ReservationPurpose() { Name = "QC", Description = "RODZINA (KONKUBENT) OPINIOWANEGO W POST. SPRAW.", DisplayOrder = 6 });
+            context.ReservationPurposes.Add(new ReservationPurpose() { Name = "Q", Description = "OPINIOWANIE", DisplayOrder = 7 });
+            context.ReservationPurposes.Add(new ReservationPurpose() { Name = "U", Description = "SPRAWDZENIE KANDYDATA DO ŻW", DisplayOrder = 8 });
+            context.ReservationPurposes.Add(new ReservationPurpose() { Name = "AB", Description = "PRZED REJESTRACJĄ", DisplayOrder = 9 });
+            context.ReservationPurposes.Add(new ReservationPurpose() { Name = "AC", Description = "PRZED ROZMOWĄ", DisplayOrder = 10 });
+            context.ReservationPurposes.Add(new ReservationPurpose() { Name = "AD", Description = "PRZED ZASADZKĄ", DisplayOrder = 11 });
+            context.ReservationPurposes.Add(new ReservationPurpose() { Name = "KU", Description = "KANDYDAT DO SŁUŻBY (PRACY)", DisplayOrder = 12 });
+            context.ReservationPurposes.Add(new ReservationPurpose() { Name = "KW", Description = "RODZINA KANDYDATA DO SŁUŻBY (PRACY)", DisplayOrder = 13 });
+            context.ReservationPurposes.Add(new ReservationPurpose() { Name = "KZ", Description = "RODZINA FUNKCJONARIUSZA (PRACOWNIKA)", DisplayOrder = 14 });
+            context.ReservationPurposes.Add(new ReservationPurpose() { Name = "PA", Description = "PRZED (PO) ZATRZYMANIEM (-IU)", DisplayOrder = 15 });
+            context.ReservationPurposes.Add(new ReservationPurpose() { Name = "PB", Description = "PRZED PRZESZUKANIEM", DisplayOrder = 16 });
+            context.ReservationPurposes.Add(new ReservationPurpose() { Name = "PC", Description = "PRZED PRZESŁUCHANIEM", DisplayOrder = 17 });
+            context.ReservationPurposes.Add(new ReservationPurpose() { Name = "PD", Description = "PRZED PRZEDSTAWIENIEM ZARZUTU", DisplayOrder = 18 });
+            context.ReservationPurposes.Add(new ReservationPurpose() { Name = "PE", Description = "PRZED (PO) ZASTOSOWANIEM (IU) ŚRODKA ZAPOBIEGAWCZEGO", DisplayOrder = 19 });
+            context.ReservationPurposes.Add(new ReservationPurpose() { Name = "PF", Description = "PRZED POSZUKIWANIEM", DisplayOrder = 20 });
+            context.ReservationPurposes.Add(new ReservationPurpose() { Name = "QD", Description = "KONTAKT OPINIOWANEGO W POST. SPRAW.", DisplayOrder = 21 }); 
+            #endregion
+
+            #region ReservationEndReason (Przyczyna zakończenia)
+            context.ReservationEndReasons.Add(new ReservationEndReason() { Name = "A", Description = "UPŁYNIĘCIE TERMINU", DisplayOrder = 1 });
+            context.ReservationEndReasons.Add(new ReservationEndReason() { Name = "AA", Description = "NAWIĄZANIE WSPÓŁPRACY", DisplayOrder = 2 });
+            context.ReservationEndReasons.Add(new ReservationEndReason() { Name = "QA", Description = "INNE", DisplayOrder = 3 });
+            context.ReservationEndReasons.Add(new ReservationEndReason() { Name = "QK", Description = "KONCESJA", DisplayOrder = 4 });
+            context.ReservationEndReasons.Add(new ReservationEndReason() { Name = "J", Description = "DOPUSZCZENIE DO INFORMACJI NIEJAWNYCH", DisplayOrder = 5 });
+            context.ReservationEndReasons.Add(new ReservationEndReason() { Name = "QC", Description = "RODZINA (KONKUBENT) OPINIOWANEGO W POST. SPRAW.", DisplayOrder = 6 });
+            context.ReservationEndReasons.Add(new ReservationEndReason() { Name = "Q", Description = "OPINIOWANIE", DisplayOrder = 7 });
+            context.ReservationEndReasons.Add(new ReservationEndReason() { Name = "U", Description = "SPRAWDZENIE KANDYDATA DO ŻW", DisplayOrder = 8 });
             #endregion
 
             #region AddressTypes (Rodzaje adresów)

@@ -50,7 +50,15 @@ namespace Kseo2.ViewModels
             }
             PersonAddresses = new PersonAddressesViewModel(CurrentPerson,AddressTypes,events);
             PersonWorkplaces = new WorkplacesViewModel(CurrentPerson,events);
+
+            PersonReservations = new PersonReservationsViewModel(_context.ReservationPurposes.Where(c => c.IsActive.Equals(true)).ToList()
+                ,_context.ReservationEndReasons.Where(c => c.IsActive.Equals(true)).ToList(),
+                _context.OrganizationalUnits.Where(c => c.IsActive.Equals(true)).ToList(),
+                CurrentPerson, 
+                events);
         }
+
+        public PersonReservationsViewModel PersonReservations { get; private set; }
 
         public List<AddressType> AddressTypes { get; private set; }
 
@@ -234,7 +242,6 @@ namespace Kseo2.ViewModels
             {
                 CurrentPerson.BirthDate = value;
                 OnPropertyChanged(value);
-
             }
         }
 

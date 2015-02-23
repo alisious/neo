@@ -161,7 +161,7 @@
                         <TextBlock Text="Zabezpieczenia" Foreground="Blue" VerticalAlignment="Center"/>
                     </StackPanel>
                 </TabItem.Header>
-                <ContentControl x:Name="Reservations"/>
+                <ContentControl x:Name="PersonReservations"/>
             </TabItem>
             <TabItem>
                 <TabItem.Header>

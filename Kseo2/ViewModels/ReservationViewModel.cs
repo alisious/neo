@@ -17,7 +17,7 @@ namespace Kseo2.ViewModels
             List<ReservationEndReason> reservationEndReasons,
             Reservation reservation=null)
         {
-            DisplayName = reservation==null ? @"Nowe zabezpieczenie." : reservation.StartDate.ToShortDateString();
+            DisplayName = reservation==null ? @"Nowe zabezpieczenie." : reservation.StartDate;
             CurrentReservation = reservation ?? new Reservation();
             CurrentConductingUnit = CurrentReservation.ConductingUnit;
             OrganizationalUnits = organizationalUnits;

@@ -147,6 +147,7 @@
     <Compile Include="ViewModels\PersonAddressesViewModel.cs" />
     <Compile Include="ViewModels\PersonBaseViewModel.cs" />
     <Compile Include="ViewModels\PersonReservationsViewModel.cs" />
+    <Compile Include="ViewModels\PersonReservationViewModel.cs" />
     <Compile Include="ViewModels\PersonSearchViewModel.cs" />
     <Compile Include="ViewModels\PersonsViewModel.cs" />
     <Compile Include="ViewModels\PersonViewModel.cs" />
@@ -187,6 +188,9 @@
     </Compile>
     <Compile Include="Views\PersonAddressesView.xaml.cs">
       <DependentUpon>PersonAddressesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PersonReservationsView.xaml.cs">
+      <DependentUpon>PersonReservationsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PersonsView.xaml.cs">
       <DependentUpon>PersonsView.xaml</DependentUpon>
@@ -247,6 +251,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Model\ClassDiagramReservation.cd" />
     <None Include="Model\ModelClassDiagram.cd" />
     <None Include="packages.config" />
@@ -285,6 +290,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PersonAddressesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PersonReservationsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -18,12 +18,13 @@ namespace Kseo2.Model
         public int Id { get; set; }
         
         [Required]
-        [Column(TypeName = "date")]
-        public DateTime StartDate { get; set; }
+        [StringLength(10,MinimumLength = 10)]
+        [RegularExpression(@"(?:(19|20)\d\d)([-](0[1-9]|1[012]))([-](0[1-9]|[12][0-9]|3[01]))", ErrorMessage = @"Data formacie: RRRR-MM-DD")]
+        public string StartDate { get; set; }
 
-        [Required]
-        [Column(TypeName = "date")]
-        public DateTime EndDate { get; set; }
+        [Required(AllowEmptyStrings = true)]
+        [MaxLength(10)]
+        public string EndDate { get; set; }
 
         [Column(TypeName = "ntext")]
         public string Notes { get; set; }
@@ -46,6 +47,12 @@ namespace Kseo2.Model
         public virtual ReservationPurpose Purpose { get; set; }
         public virtual ReservationEndReason EndReason { get; set; }
 
+        [NotMapped]
         public EntityState EntityState { get; set; }
+
+        public override string ToString()
+        {
+            return String.Format("{0}", Purpose.ToString());
+        }
     }
 }
