@@ -22,7 +22,7 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal" Width="190">
-                        <Image Source="..\Images/man.png" Height="50"  Width="50"/>
+                        <Image Source="..\Images/preferences-contact-list.png" Height="50"  Width="50"/>
                         <TextBlock Text="Dane podstawowe" Foreground="Blue" VerticalAlignment="Center"/>
                     </StackPanel>
                 </TabItem.Header>
@@ -76,39 +76,9 @@
                         </StackPanel>
 
                         <StackPanel MinWidth="400" Width="489">
-                            <DockPanel>
-                                <TextBlock Text="Narodowość:" Width="150" VerticalAlignment="Center" />
-                                <ComboBox x:Name="Nationality" Margin="0,0,40,0" 
-                                        ItemsSource="{Binding Countries}" 
-                                        SelectedItem="{Binding Nationality}"
-                                        SelectedValuePath="Name"
-                                        IsEditable="True"/>
-                            </DockPanel>
+                           
 
-                            <DockPanel  Margin="0,5,5,0" Height="160">
-                                <TextBlock Text="Obywatelstwo:" Width="150"/>
-                                <StackPanel DockPanel.Dock="Right">
-                                    <Button Name="EditCitizenships" Width="40" TabIndex="12" Margin="0">
-                                        <Button.Content>
-                                            <StackPanel Orientation="Horizontal">
-                                                <Image Source="..\Images\preferences_composer.png" Width="30" Height="30" />
-                                            </StackPanel>
-                                        </Button.Content>
-                                    </Button>
-                                </StackPanel>
-                                <ListBox x:Name="Citizenships" ItemsSource="{Binding Citizenships}" TabIndex="10" Margin="0,0,0,0" Background="LightYellow" >
-                                    <ListBox.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <WrapPanel Orientation="Vertical" />
-                                        </ItemsPanelTemplate>
-                                    </ListBox.ItemsPanel>
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Name="Country" Text="{Binding Path=Name}"/>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                            </DockPanel>
+                            
                             <TextBlock/>
                         </StackPanel>
                     </StackPanel>
