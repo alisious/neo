@@ -37,12 +37,11 @@ namespace Kseo2.DataAccess
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Reservation>().HasRequired(e => e.EndReason);
+            modelBuilder.Entity<Reservation>().HasOptional(e => e.EndReason);
             modelBuilder.Entity<Reservation>().HasRequired(e => e.Purpose);
             modelBuilder.Entity<Reservation>().HasRequired(e => e.ConductingUnit);
             modelBuilder.Entity<Reservation>().HasMany(e => e.Prolongations);
-            modelBuilder.Entity<Reservation>().HasRequired(e => e.ReservedPerson).WithMany(p=>p.Reservations).WillCascadeOnDelete();
-
+          
             modelBuilder.Entity<Prolongation>().HasRequired(e => e.OrganizationalUnit);
             
             modelBuilder.Entity<Person>()
@@ -55,9 +54,13 @@ namespace Kseo2.DataAccess
 
             modelBuilder.Entity<Person>()
                 .HasMany(e => e.Workplaces);
-            
+
             modelBuilder.Entity<Person>()
                 .HasMany(e => e.Addresses);
+            
+            modelBuilder.Entity<Person>()
+                .HasMany(e => e.Reservations).WithRequired(r=>r.ReservedPerson);
+
 
             modelBuilder.Entity<Address>()
                 .HasRequired(e => e.AddressType);

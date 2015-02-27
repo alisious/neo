@@ -13,7 +13,7 @@ namespace Kseo2.ViewModels
     {
         private readonly OrganizationalUnitService _organizationalUnitService;
         private Question _question;
-        private List<OrganizationalUnit> _organizationalUnits;
+        //private List<OrganizationalUnit> _organizationalUnits;
         private OrganizationalUnit _MPHQ;
         private UnitOfWork _uow;
         private bool _isEnabledAskerOrganizationalUnit;

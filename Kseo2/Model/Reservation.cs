@@ -9,10 +9,12 @@ namespace Kseo2.Model
     [Table("Reservation.Reservation")]
     public class Reservation :Entity,IEntity
     {
-        public Reservation()
+        public Reservation(Person reservedPerson)
         {
+            ReservedPerson = reservedPerson;
             Creator = Environment.UserName;
             Prolongations = new HashSet<Prolongation>();
+            CreationTime = DateTime.Today;
         }
 
         public int Id { get; set; }
@@ -22,7 +24,7 @@ namespace Kseo2.Model
         [RegularExpression(@"(?:(19|20)\d\d)([-](0[1-9]|1[012]))([-](0[1-9]|[12][0-9]|3[01]))", ErrorMessage = @"Data formacie: RRRR-MM-DD")]
         public string StartDate { get; set; }
 
-        [Required(AllowEmptyStrings = true)]
+        //[Required(AllowEmptyStrings = true)]
         [MaxLength(10)]
         public string EndDate { get; set; }
 
@@ -35,7 +37,8 @@ namespace Kseo2.Model
         [Required]
         [MaxLength(50)]
         public string Creator { get; set; }
-        public DateTime TerminationTime { get; set; }
+
+        public DateTime? TerminationTime { get; set; }
         [MaxLength(50)]
         public string TerminationRegistrant { get; set; }
         

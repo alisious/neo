@@ -18,7 +18,7 @@
         </Grid.ColumnDefinitions>
         <Image Grid.Column="0" Grid.Row="0" Source="../Images/man.png" />
         <Label x:Name="FullName" Content="Nowa osoba" Grid.Column="1" Grid.Row="0" FontSize="20" FontWeight="Bold" Foreground="MediumBlue" VerticalContentAlignment="Center"/>
-        <TabControl Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" >
+        <TabControl Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" cal:Message.Attach= "[Event SelectionChanged] = [Action LoadSubitems($SelectedIndex)]" >
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal" Width="190">
@@ -144,19 +144,11 @@
                         </TabControl>
                     </DockPanel>
             </TabItem>
-            <TabItem >
-                    <TabItem.Header>
-                        <StackPanel Orientation="Horizontal" Width="180">
-                            <Image Source="..\Images/search_files.png" Height="50"  Width="50"/>
-                            <TextBlock Text="Sprawdzenia" Foreground="Blue" VerticalAlignment="Center" />
-                        </StackPanel>
-                    </TabItem.Header>
-                    <ContentControl x:Name="Verifications"/>
-                </TabItem>
+            
 
             <TabItem>
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal" Width="180">
+                <TabItem.Header >
+                    <StackPanel Orientation="Horizontal" Width="180" >
                         <Image Source="..\Images/preferences-contact-list.png" Height="50"  Width="50"/>
                         <TextBlock Text="Zabezpieczenia" Foreground="Blue" VerticalAlignment="Center"/>
                     </StackPanel>
@@ -180,6 +172,15 @@
                     </StackPanel>
                 </TabItem.Header>
                 <ContentControl x:Name="Procedures"></ContentControl>
+            </TabItem>
+            <TabItem >
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal" Width="180">
+                        <Image Source="..\Images/search_files.png" Height="50"  Width="50"/>
+                        <TextBlock Text="Sprawdzenia" Foreground="Blue" VerticalAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
+                <ContentControl x:Name="Verifications"/>
             </TabItem>
         </TabControl>
         <StackPanel Grid.Column="2" Grid.Row="1">

@@ -38,8 +38,7 @@ namespace Kseo2.BusinessLayer
         void RemovePerson(params Person[] persons); 
         
         #endregion
-
-
+        
         #region Verification routines
 
         
@@ -50,6 +49,16 @@ namespace Kseo2.BusinessLayer
 
         #endregion
         
+     
+        #region Reservations routines
 
+        Reservation GetReservationById(int id);
+        IList<Reservation> GetReservationsByPerson(Person person); 
+        //void AddReservation(params Reservation[] reservations);
+        //void UpdateReservation(params Reservation[] reservations);
+        //void RemoveReservation(params Reservation[] reservations);
+
+        #endregion
+        
     }
 }

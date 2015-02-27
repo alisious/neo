@@ -9,6 +9,7 @@ using Caliburn.Micro.Validation;
 using Kseo2.Model;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
+using Kseo2.ViewModels.Common;
 using Kseo2.ViewModels.Events;
 
 namespace Kseo2.ViewModels
@@ -17,13 +18,10 @@ namespace Kseo2.ViewModels
     
 
    
-    public class LocationViewModel :ValidatingScreen<LocationViewModel>,IHandle<CanSaveEvent>
+    public class LocationViewModel :BaseViewModel<LocationViewModel,Location>
     {
-        private readonly IEventAggregator _events;
-
-        public LocationViewModel(Location location,IEventAggregator events)
+        public LocationViewModel(Location location) :base(location,null)
         {
-            _events = events;
             CurrentLocation = location;
             IsDirty = false;
         }
@@ -108,27 +106,6 @@ namespace Kseo2.ViewModels
             }
         }
 
-
-        //Validation
-        public bool IsDirty { get; private set; }
-
-        public bool CanSave 
-        {
-            get { return !String.IsNullOrWhiteSpace(City); }
-        }
-
-        protected void OnPropertyChanged(object value, [CallerMemberName] string propertyName = "")
-        {
-            NotifyOfPropertyChange(propertyName);
-            NotifyOfPropertyChange(() => CanSave);
-            _events.PublishOnUIThread(new CanSaveEvent(CanSave));
-            IsDirty = true;
-        }
         
-
-        public void Handle(CanSaveEvent message)
-        {
-            NotifyOfPropertyChange(() => CanSave);
-        }
     }
 }

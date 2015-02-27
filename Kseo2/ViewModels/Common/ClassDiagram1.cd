@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Kseo2.ViewModels.Common.BaseViewModel&lt;T, TEntity&gt;" Collapsed="true">
+    <Position X="5.75" Y="2" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIARAAAACAAABAAAAAAABAAAAAAA=</HashCode>
+      <FileName>ViewModels\Common\BaseViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Kseo2.ViewModels.Common.ComplexViewModel&lt;T, TEntity&gt;" Collapsed="true">
+    <Position X="2.5" Y="4" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\Common\ComplexViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Kseo2.ViewModels.DialogViewModel&lt;T&gt;">
+    <Position X="10.25" Y="3.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AEABAAAAQAAAAAAAAAAAAAAAAAAAAAIAAAAAAQAAAAA=</HashCode>
+      <FileName>ViewModels\DialogViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

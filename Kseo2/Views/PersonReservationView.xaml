@@ -36,42 +36,32 @@
                             <DockPanel>
                                 <TextBlock Text="Podstawa pozyskania:" FontWeight="Bold"  Width="180" VerticalAlignment="Center" />
                                 <ComboBox x:Name="Purpose" Margin="0,0,40,0" 
-                                        ItemsSource="{Binding Purposes}" 
-                                        SelectedItem="{Binding purpose}"
+                                        ItemsSource="{Binding PurposesList}" 
+                                        SelectedItem="{Binding Purpose}"
                                         SelectedValuePath="Name"
                                         IsEditable="True"/>
                             </DockPanel>
                             <DockPanel>
-                                <TextBlock Text="Imię:" FontWeight="Bold" Width="180" VerticalAlignment="Center"/>
-                                <TextBox x:Name="FirstName"></TextBox>
+                                <TextBlock Text="Jednostka prowadząca:" FontWeight="Bold"  Width="180" VerticalAlignment="Center" />
+                                <ComboBox x:Name="ConductingUnit" Margin="0,0,40,0" 
+                                        ItemsSource="{Binding OrganizationalUnitsList}" 
+                                        SelectedItem="{Binding ConductingUnit}"
+                                        IsEditable="True"/>
                             </DockPanel>
                             <DockPanel>
-                                <TextBlock Text="Drugie imię:" Width="180" VerticalAlignment="Center"/>
-                                <TextBox x:Name="MiddleName" />
+                                <TextBlock Text="Osoba prowadząca:" FontWeight="Bold" Width="180" VerticalAlignment="Center"/>
+                                <TextBox x:Name="ConductingOffcer"/>
                             </DockPanel>
                             <DockPanel>
-                                <TextBlock Text="Nazwisko poprzednie:" Width="180" VerticalAlignment="Center" />
-                                <TextBox x:Name="PreviousName"   />
+                                <TextBlock Text="Data zakończenia:" Width="180" VerticalAlignment="Center"/>
+                                <TextBox x:Name="EndDate"/>
                             </DockPanel>
                             <DockPanel>
-                                <TextBlock Text="Imię ojca:" FontWeight="{Binding BoldWhenHasNoPesel}" Width="180" VerticalAlignment="Center"/>
-                                <TextBox x:Name="FatherName"/>
-                            </DockPanel>
-                            <DockPanel>
-                                <TextBlock Text="Imię matki:" Width="180" VerticalAlignment="Center"/>
-                                <TextBox x:Name="MotherName" />
-                            </DockPanel>
-                            <DockPanel>
-                                <TextBlock Text="Nazwisko rodowe matki:" Width="180" VerticalAlignment="Center"/>
-                                <TextBox x:Name="MotherMaidenName" />
-                            </DockPanel>
-                            <DockPanel>
-                                <TextBlock Text="Data urodzenia:" FontWeight="{Binding BoldWhenHasNoPesel}" Width="180" VerticalAlignment="Center"/>
-                                <TextBox x:Name="BirthDate"  />
-                            </DockPanel>
-                            <DockPanel>
-                                <TextBlock Text="Miejsce urodzenia:" Width="180" VerticalAlignment="Center" />
-                                <TextBox x:Name="BirthPlace" />
+                                <TextBlock Text="Podstawa zakończenia:" Width="180" VerticalAlignment="Center" />
+                                <ComboBox x:Name="EndReason" Margin="0,0,40,0" 
+                                        ItemsSource="{Binding EndReasonsList}" 
+                                        SelectedItem="{Binding EndReason}"
+                                        IsEditable="True"/>
                             </DockPanel>
                         </StackPanel>
 
@@ -115,23 +105,18 @@
             </TabItem>
             
         </TabControl>
+       
         <StackPanel Grid.Column="2" Grid.Row="1">
-            <Button x:Name="Save" Height="100" IsDefault="True" cal:Message.Attach="[Key Ctrl+S] = [Save()]">
+            <Button x:Name="Submit" Height="100" IsDefault="True">
                 <StackPanel Orientation="Vertical">
                     <Image Source="..\Images/ok_mark.png" Height="50"  Width="50"/>
-                    <TextBlock Text="Zapisz"/>
+                    <TextBlock Text="OK" HorizontalAlignment="Center"/>
                 </StackPanel>
             </Button>
-            <Button x:Name="Cancel" Height="100" IsEnabled="{Binding CanEdit}" IsCancel="True">
+            <Button x:Name="Cancel" Height="100" IsCancel="True">
                 <StackPanel Orientation="Vertical">
                     <Image Source="..\Images/cancel_mark.png" Height="50"  Width="50"/>
                     <TextBlock Text="Anuluj"/>
-                </StackPanel>
-            </Button>
-            <Button x:Name="Close" Height="100" IsEnabled="{Binding CanEdit}">
-                <StackPanel Orientation="Vertical">
-                    <Image Source="..\Images/LogOut.png" Height="50"  Width="50"/>
-                    <TextBlock Text="Zamknij"/>
                 </StackPanel>
             </Button>
         </StackPanel>

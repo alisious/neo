@@ -27,6 +27,11 @@ namespace Kseo2.BusinessLayer
             _dictionaries.Add(typeof(Organization), new List<Organization>());
             _dictionaries.Add(typeof(QuestionForm), new List<QuestionForm>());
             _dictionaries.Add(typeof(QuestionReason), new List<QuestionReason>());
+            _dictionaries.Add(typeof(ReservationPurpose),new List<ReservationPurpose>());
+            _dictionaries.Add(typeof(ReservationEndReason), new List<ReservationEndReason>());
+            _dictionaries.Add(typeof(Rank), new List<Rank>());
+
+
             
         }
 
@@ -170,5 +175,16 @@ namespace Kseo2.BusinessLayer
         }
 
         #endregion
+
+
+        public Reservation GetReservationById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList<Reservation> GetReservationsByPerson(Person person)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

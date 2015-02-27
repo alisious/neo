@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace Kseo2.ViewModels.Events
 {
-    public class IsDirtyEvent
+    public class ComponentStateChangeEvent
     {
-        public IsDirtyEvent(bool isDirty)
+        public ComponentStateChangeEvent(bool canSave, bool isDirty)
         {
+            CanSave = canSave;
             IsDirty = isDirty;
         }
 
         public bool IsDirty { get; private set; }
+
+        public bool CanSave { get; private set; }
     }
 }

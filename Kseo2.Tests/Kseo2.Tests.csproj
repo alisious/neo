@@ -81,6 +81,7 @@
     <Compile Include="UnitTests\PersonServiceUnitTest.cs" />
     <Compile Include="UnitTests\DictionaryUnitTest.cs" />
     <Compile Include="UnitTests\RepositoryUnitTest.cs" />
+    <Compile Include="UnitTests\ReservationUnitTest.cs" />
     <Compile Include="UnitTests\UserServiceUnitTest.cs" />
     <Compile Include="UnitTests\VerificationServiceUnitTest.cs" />
   </ItemGroup>

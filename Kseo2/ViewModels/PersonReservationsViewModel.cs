@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Kseo2.BusinessLayer;
+using Kseo2.DataAccess;
 using Kseo2.Model;
 using Caliburn.Micro;
 
@@ -11,33 +13,32 @@ namespace Kseo2.ViewModels
 {
     public class PersonReservationsViewModel :CompositionViewModel<Person,Reservation>
     {
-        public PersonReservationsViewModel(
-            List<ReservationPurpose> purposesList, 
-            List<ReservationEndReason> endReasonsList, 
-            List<OrganizationalUnit> organizationalUnitsList, 
-            Person rootEntity, 
-            IEventAggregator events)
-            : base(rootEntity, events)
+        private ReservationService _reservationService;
+
+        public PersonReservationsViewModel(Person rootEntity,IEventAggregator events,KseoContext kseoContext)
+            : base(rootEntity, events,kseoContext)
         {
-            Items = new ObservableCollection<Reservation>(rootEntity.Reservations);
-            PurposesList = purposesList;
-            EndReasonsList = endReasonsList;
-            OrganizationalUnitsList = organizationalUnitsList;
+            _reservationService = new ReservationService(kseoContext);
+            //LoadItems();
+            //Items = new ObservableCollection<Reservation>(rootEntity.Reservations);
         }
 
-        public List<OrganizationalUnit> OrganizationalUnitsList { get; private set; }
-        public List<ReservationEndReason> EndReasonsList { get; private set; }
-        public List<ReservationPurpose> PurposesList { get; private set; }
+
+        public void LoadItems()
+        {
+            Items = new ObservableCollection<Reservation>(_reservationService.GetReservationsByPerson(RootEntity));
+        }
 
         public override void Add()
         {
             var windowManager = new WindowManager();
-            var vm = new PersonReservationViewModel(PurposesList,EndReasonsList,OrganizationalUnitsList,new EventAggregator());
+            var vm = new PersonReservationViewModel(KseoContext,new Reservation(RootEntity));
             
             if (windowManager.ShowDialog(vm) == true)
             {
                 RootEntity.Reservations.Add(vm.CurrentEntity);
-                Items = new ObservableCollection<Reservation>(RootEntity.Reservations);
+                //Items = new ObservableCollection<Reservation>(RootEntity.Reservations);
+                LoadItems();
                 base.Add();
             }
         }

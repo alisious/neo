@@ -1,40 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Caliburn.Micro;
 using Caliburn.Micro.Validation;
 using System.Runtime.CompilerServices;
+using Kseo2.DataAccess;
 using Kseo2.Model;
+using Kseo2.ViewModels.Common;
 using Kseo2.ViewModels.Events;
 
 namespace Kseo2.ViewModels
 {
-    public class PersonAddressViewModel :ValidatingScreen<PersonAddressViewModel>,IHandle<CanSaveEvent>
+    public class PersonAddressViewModel :ComplexViewModel<PersonAddressViewModel,Address>
     {
         
-        public PersonAddressViewModel(List<AddressType> addressTypes,IEventAggregator events,Address address=null)
+        public PersonAddressViewModel(Address address,KseoContext kseoContext) :base(address,kseoContext)
         {
-            events.Subscribe(this);
             DisplayName = address==null ? @"Nowy adres." : address.Location.ToString();
             CurrentAddress = address ?? new Address();
             CurrentAddressType = CurrentAddress.AddressType;
-            Location = new LocationViewModel(CurrentAddress.Location,events);
-            AddressTypes = addressTypes;
+            Location = new LocationViewModel(CurrentAddress.Location);
+            AddressTypes = KseoContext.AddressTypes.Where(x=>x.IsActive.Equals(true)).ToList();
         }
 
 
         public List<AddressType> AddressTypes { get; private set; }
+        
+        [Required]
         public AddressType CurrentAddressType { get; set; }
         public LocationViewModel Location { get; set; }
         
-        public bool CanSave
+        public override bool CanSave
         {
             get
             {
-                return CurrentAddressType != null
-                    && Location.CanSave;
+                return !HasErrors && Location.CanSave;
             } 
         }
 
@@ -59,19 +62,9 @@ namespace Kseo2.ViewModels
         }
 
 
-        protected void OnPropertyChanged(object value, [CallerMemberName] string propertyName = "")
-        {
-            NotifyOfPropertyChange(propertyName);
-            NotifyOfPropertyChange(() => CanSave);
-        }
+        
+        
 
-
-
-
-
-        public void Handle(CanSaveEvent message)
-        {
-            NotifyOfPropertyChange(()=>CanSave);
-        }
+       
     }
 }

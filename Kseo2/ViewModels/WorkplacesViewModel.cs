@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms.VisualStyles;
 using Caliburn.Micro;
 using Caliburn.Micro.Extras;
+using Kseo2.DataAccess;
 using Kseo2.Model;
 using AutoMapper;
 
@@ -14,7 +15,7 @@ namespace Kseo2.ViewModels
 {
     public class WorkplacesViewModel :CompositionViewModel<Person,Workplace>
     {
-        public WorkplacesViewModel(Person rootEntity,IEventAggregator events) : base(rootEntity,events)
+        public WorkplacesViewModel(Person rootEntity,IEventAggregator events,KseoContext kseoContext) : base(rootEntity,events,kseoContext)
         {
             Items = new ObservableCollection<Workplace>(RootEntity.Workplaces);
         }
@@ -22,7 +23,7 @@ namespace Kseo2.ViewModels
         public override void Add()
         {
             var windowManager = new WindowManager();
-            var vm = new WorkplaceViewModel(new EventAggregator());
+            var vm = new WorkplaceViewModel(null,KseoContext);
             if (windowManager.ShowDialog(vm) == true)
             {
                 RootEntity.Workplaces.Add(vm.CurrentWorkplace);
@@ -34,7 +35,7 @@ namespace Kseo2.ViewModels
         public override void Edit()
         {
             var windowManager = new WindowManager();
-            var vm = new WorkplaceViewModel(new EventAggregator(),SelectedItem);
+            var vm = new WorkplaceViewModel(SelectedItem,KseoContext);
             if (windowManager.ShowDialog(vm) == true)
             {
                 RootEntity.Workplaces.Remove(SelectedItem);

@@ -6,28 +6,30 @@ using System.Text;
 using System.Threading.Tasks;
 using Caliburn.Micro;
 using Caliburn.Micro.Validation;
+using Kseo2.DataAccess;
 using Kseo2.Model;
 using System.Runtime.CompilerServices;
 using System.ComponentModel.DataAnnotations;
 using AutoMapper;
 using Kseo2.ViewModels.Events;
+using Kseo2.ViewModels.Common;
 
 namespace Kseo2.ViewModels
 {
-    public class WorkplaceViewModel : ValidatingScreen<WorkplaceViewModel>, IHandle<CanSaveEvent>
+    public class WorkplaceViewModel : ComplexViewModel<WorkplaceViewModel,Workplace>
     {
         
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="events"></param>
-        /// <param name="workplace"> Podanie wartosci null, powoduje dodanie nowego obiektu.</param>
-        public WorkplaceViewModel(IEventAggregator events,Workplace workplace = null)
+     /// <summary>
+     /// 
+     /// </summary>
+     /// <param name="workplace"></param>
+     /// <param name="kseoContext"></param>
+        public WorkplaceViewModel(Workplace workplace,KseoContext kseoContext) :base(workplace,kseoContext)
         {
-            events.Subscribe(this);
+            
             DisplayName = workplace==null ? @"Nowe miejsce pracy." : workplace.UnitName; 
             CurrentWorkplace = workplace ?? new Workplace();
-            WorkplaceLocation = new LocationViewModel(CurrentWorkplace.Location, events);
+            WorkplaceLocation = new LocationViewModel(CurrentWorkplace.Location);
            
 
         }
@@ -60,9 +62,9 @@ namespace Kseo2.ViewModels
 
        
 
-        public bool CanSave
+        public override bool CanSave
         {
-            get { return !String.IsNullOrWhiteSpace(UnitName) && WorkplaceLocation.CanSave; }
+            get { return !HasErrors && WorkplaceLocation.CanSave; }
         }
 
         public void Save()
@@ -76,16 +78,9 @@ namespace Kseo2.ViewModels
             TryClose(false);
         }
 
-        protected void OnPropertyChanged(object value, [CallerMemberName] string propertyName = "")
-        {
-            NotifyOfPropertyChange(propertyName);
-            NotifyOfPropertyChange(() => CanSave);
-        }
+        
 
-        public void Handle(CanSaveEvent message)
-        {
-            NotifyOfPropertyChange(() => CanSave);
-        }
+        
        
     }
 }

@@ -93,8 +93,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BusinessLayer\BusinessLayer.cs" />
+    <Compile Include="BusinessLayer\BusinessService.cs" />
     <Compile Include="BusinessLayer\IBusinessLayer.cs" />
     <Compile Include="BusinessLayer\PersonService.cs" />
+    <Compile Include="BusinessLayer\ReservationService.cs" />
     <Compile Include="BusinessLayer\SearchResult.cs" />
     <Compile Include="DataAccess\DictionaryItemRepository.cs" />
     <Compile Include="DataAccess\OrganizationalUnitRepository.cs" />
@@ -134,14 +136,18 @@
     <Compile Include="Service\UnitOfWork.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Service\VerificationService.cs" />
+    <Compile Include="ViewModels\Common\BaseListViewModel.cs" />
     <Compile Include="ViewModels\Common\BaseViewModel.cs" />
+    <Compile Include="ViewModels\Common\ComplexViewModel.cs" />
+    <Compile Include="ViewModels\Common\IBaseViewModel.cs" />
+    <Compile Include="ViewModels\DialogViewModel.cs" />
+    <Compile Include="ViewModels\Events\ComponentStateChangeEvent.cs" />
+    <Compile Include="ViewModels\Events\DialogContentStateChangeEvent.cs" />
     <Compile Include="ViewModels\PersonAddressViewModel.cs" />
     <Compile Include="ViewModels\CompositionViewModel.cs" />
     <Compile Include="ViewModels\CollaborationsViewModel.cs" />
     <Compile Include="ViewModels\CountrySelectViewModel.cs" />
     <Compile Include="ViewModels\DailyReportViewModel.cs" />
-    <Compile Include="ViewModels\Events\CanSaveEvent.cs" />
-    <Compile Include="ViewModels\Events\IsDirtyEvent.cs" />
     <Compile Include="ViewModels\ListViewModel.cs" />
     <Compile Include="ViewModels\LocationViewModel.cs" />
     <Compile Include="ViewModels\PersonAddressesViewModel.cs" />
@@ -151,7 +157,6 @@
     <Compile Include="ViewModels\PersonSearchViewModel.cs" />
     <Compile Include="ViewModels\PersonsViewModel.cs" />
     <Compile Include="ViewModels\PersonViewModel.cs" />
-    <Compile Include="ViewModels\ReservationViewModel.cs" />
     <Compile Include="ViewModels\WorkplacesViewModel.cs" />
     <Compile Include="ViewModels\WorkplaceViewModel.cs" />
     <Compile Include="ViewModels\ProceduresViewModel.cs" />
@@ -171,6 +176,9 @@
     <Compile Include="ViewModels\Validation\ValidationGroupAttribute.cs" />
     <Compile Include="ViewModels\VerificationsViewModel.cs" />
     <Compile Include="ViewModels\VerificationViewModel.cs" />
+    <Compile Include="Views\DialogView.xaml.cs">
+      <DependentUpon>DialogView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PersonAddressView.xaml.cs">
       <DependentUpon>PersonAddressView.xaml</DependentUpon>
     </Compile>
@@ -258,14 +266,17 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
-    <None Include="Model\ClassDiagramReservation.cd" />
-    <None Include="Model\ModelClassDiagram.cd" />
+    <None Include="Model\Diagrams\ClassDiagramPerson.cd" />
+    <None Include="Model\Diagrams\ClassDiagramReservation.cd" />
+    <None Include="Model\Diagrams\ModelClassDiagram.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="ViewModels\ClassDiagramViewModels.cd" />
+    <None Include="ViewModels\Common\ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -274,6 +285,10 @@
     <Page Include="Kseo2ResourceDictionary.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\DialogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PersonAddressView.xaml">
       <SubType>Designer</SubType>

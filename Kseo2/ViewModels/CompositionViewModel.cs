@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Data.Entity.Core.Mapping;
 using Caliburn.Micro;
+using Kseo2.DataAccess;
 using Kseo2.Model;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace Kseo2.ViewModels
     /// </summary>
     /// <typeparam name="TRoot">Typ agregatu.</typeparam>
     /// <typeparam name="T">Typ elementu kompozycji.</typeparam>
-    public class CompositionViewModel<TRoot,T> :Screen, IHandle<IsDirtyEvent>  where TRoot :Entity
+    public class CompositionViewModel<TRoot,T> :Screen  where TRoot :Entity
     {
         private readonly IEventAggregator _events;
         private bool _isDirty;
@@ -24,13 +25,16 @@ namespace Kseo2.ViewModels
         private ObservableCollection<T> _items;
         private T _selectedItem;
 
-        public CompositionViewModel(TRoot rootEntity,IEventAggregator events)
+        public CompositionViewModel(TRoot rootEntity,IEventAggregator events,KseoContext kseoContext)
         {
+            KseoContext = kseoContext;
             _events = events;
             RootEntity = rootEntity;
             Items = new ObservableCollection<T>();
             IsDirty = false;
         }
+
+        protected KseoContext KseoContext { get; private set; }
 
 
         public bool IsDirty
@@ -39,8 +43,7 @@ namespace Kseo2.ViewModels
             set
             {
                 _isDirty = value;
-                NotifyOfPropertyChange(()=>IsDirty);
-               _events.PublishOnUIThread(new IsDirtyEvent(_isDirty));
+                NotifyOfPropertyChange(() => IsDirty);
             }
         }
 
@@ -104,10 +107,7 @@ namespace Kseo2.ViewModels
             if (CanEdit) Edit();
         }
 
-        public void Handle(IsDirtyEvent message)
-        {
-            NotifyOfPropertyChange(() => IsDirty);
-        }
+       
 
     }
 }

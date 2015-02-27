@@ -22,6 +22,8 @@ namespace Kseo2
             container.Singleton<IMessageService, MessageService>();
             container.Singleton<IEventAggregator, EventAggregator>();
             container.PerRequest<IShell, ShellViewModel>();
+            
+
         }
 
         protected override object GetInstance(Type service, string key)
@@ -46,6 +48,6 @@ namespace Kseo2
         protected override void OnStartup(object sender, System.Windows.StartupEventArgs e)
         {
             DisplayRootViewFor<IShell>();
-        }
+       }
     }
 }

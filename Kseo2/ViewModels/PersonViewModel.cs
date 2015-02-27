@@ -17,7 +17,7 @@ using Kseo2.ViewModels.Events;
 
 namespace Kseo2.ViewModels
 {
-    public class PersonViewModel :ValidatingScreen<PersonViewModel>, IHandle<IsDirtyEvent>
+    public class PersonViewModel :ValidatingScreen<PersonViewModel>
     {
         private readonly KseoContext _context;
         private Person _currentPerson;
@@ -45,20 +45,17 @@ namespace Kseo2.ViewModels
                         .Include("Addresses")
                         .Include("Workplaces")
                         .Include("Citizenships")
+                        .Include("Reservations")
                         .FirstOrDefault(p => p.Id.Equals(personId));
                 DisplayName = CurrentPerson.FullName;
             }
-            PersonAddresses = new PersonAddressesViewModel(CurrentPerson,AddressTypes,events);
-            PersonWorkplaces = new WorkplacesViewModel(CurrentPerson,events);
+            PersonAddresses = new PersonAddressesViewModel(CurrentPerson,AddressTypes,events,_context);
+            PersonWorkplaces = new WorkplacesViewModel(CurrentPerson,events,_context);
 
-            PersonReservations = new PersonReservationsViewModel(_context.ReservationPurposes.Where(c => c.IsActive.Equals(true)).ToList()
-                ,_context.ReservationEndReasons.Where(c => c.IsActive.Equals(true)).ToList(),
-                _context.OrganizationalUnits.Where(c => c.IsActive.Equals(true)).ToList(),
-                CurrentPerson, 
-                events);
+            PersonReservations = new PersonReservationsViewModel(CurrentPerson,events,_context);
         }
 
-        public PersonReservationsViewModel PersonReservations { get; private set; }
+        
 
         public List<AddressType> AddressTypes { get; private set; }
 
@@ -89,7 +86,13 @@ namespace Kseo2.ViewModels
 
         public PersonAddressesViewModel PersonAddresses{ get; set; }
         public WorkplacesViewModel PersonWorkplaces { get; set; }
+        public PersonReservationsViewModel PersonReservations { get; private set; }
 
+
+        public void LoadSubitems(int index)
+        {
+            if (index==1) PersonReservations.LoadItems();
+        }
 
         public string FullName
         {
@@ -413,10 +416,7 @@ namespace Kseo2.ViewModels
 
 
 
-        public void Handle(IsDirtyEvent message)
-        {
-            IsDirty = IsDirty || message.IsDirty;
-        }
+      
         
     }
 }

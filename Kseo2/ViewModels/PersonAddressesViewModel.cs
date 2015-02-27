@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Caliburn.Micro;
+using Kseo2.DataAccess;
 using Kseo2.Model;
 using Caliburn.Micro.Extras;
 
@@ -15,8 +16,8 @@ namespace Kseo2.ViewModels
     {
         
         
-        public PersonAddressesViewModel(Person rootEntity,List<AddressType> addressTypes, IEventAggregator events)
-            : base(rootEntity,events)
+        public PersonAddressesViewModel(Person rootEntity,List<AddressType> addressTypes, IEventAggregator events,KseoContext kseoContext)
+            : base(rootEntity,events,kseoContext)
         {
             Items = new ObservableCollection<Address>(RootEntity.Addresses);
             AddressTypes = addressTypes;
@@ -28,10 +29,10 @@ namespace Kseo2.ViewModels
         public override void Add()
         {
             var windowManager = new WindowManager();
-            var vm = new PersonAddressViewModel(AddressTypes, new EventAggregator());
+            var vm = new DialogViewModel<PersonAddressViewModel>(new PersonAddressViewModel(null, KseoContext));
             if (windowManager.ShowDialog(vm) == true)
             {
-                RootEntity.Addresses.Add(vm.CurrentAddress);
+                RootEntity.Addresses.Add(vm.ContentViewModel.CurrentAddress);
                 Items = new ObservableCollection<Address>(RootEntity.Addresses);
                 base.Add();
             }
@@ -40,7 +41,7 @@ namespace Kseo2.ViewModels
         public override void Edit()
         {
             var windowManager = new WindowManager();
-            var vm = new PersonAddressViewModel(AddressTypes, new EventAggregator(),SelectedItem);
+            var vm = new PersonAddressViewModel(SelectedItem,KseoContext);
             if (windowManager.ShowDialog(vm) == true)
             {
                 RootEntity.Addresses.Remove(SelectedItem);
