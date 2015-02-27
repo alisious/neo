@@ -10,24 +10,31 @@ using Caliburn.Micro.Extras;
 using Kseo2.DataAccess;
 using Kseo2.Model;
 using AutoMapper;
+using Kseo2.ViewModels.Common;
 
 namespace Kseo2.ViewModels
 {
-    public class WorkplacesViewModel :CompositionViewModel<Person,Workplace>
+    public class WorkplacesViewModel :BaseListViewModel<Workplace>
     {
-        public WorkplacesViewModel(Person rootEntity,IEventAggregator events,KseoContext kseoContext) : base(rootEntity,events,kseoContext)
+        public WorkplacesViewModel(Person person, KseoContext kseoContext) : base(new List<Workplace>(person.Workplaces), kseoContext)
         {
-            Items = new ObservableCollection<Workplace>(RootEntity.Workplaces);
+            RootEntity = person;
         }
+
+        public override void LoadItems()
+        {
+            Items = new BindableCollection<Workplace>(RootEntity.Workplaces);
+        }
+
 
         public override void Add()
         {
             var windowManager = new WindowManager();
-            var vm = new WorkplaceViewModel(null,KseoContext);
+            var vm = new DialogViewModel<WorkplaceViewModel>(new WorkplaceViewModel(null,KseoContext));
             if (windowManager.ShowDialog(vm) == true)
             {
-                RootEntity.Workplaces.Add(vm.CurrentWorkplace);
-                Items = new ObservableCollection<Workplace>(RootEntity.Workplaces);
+                RootEntity.Workplaces.Add(vm.ContentViewModel.CurrentWorkplace);
+                LoadItems();
                 base.Add();
             }
         }
@@ -35,12 +42,12 @@ namespace Kseo2.ViewModels
         public override void Edit()
         {
             var windowManager = new WindowManager();
-            var vm = new WorkplaceViewModel(SelectedItem,KseoContext);
+            var vm = new DialogViewModel<WorkplaceViewModel>(new WorkplaceViewModel(SelectedItem,KseoContext));
             if (windowManager.ShowDialog(vm) == true)
             {
                 RootEntity.Workplaces.Remove(SelectedItem);
-                RootEntity.Workplaces.Add(vm.CurrentWorkplace);
-                Items = new ObservableCollection<Workplace>(RootEntity.Workplaces);
+                RootEntity.Workplaces.Add(vm.ContentViewModel.CurrentWorkplace);
+                LoadItems();
                 base.Edit();
             }
         }
@@ -53,9 +60,11 @@ namespace Kseo2.ViewModels
                     MessageImage.Warning) == MessageResult.OK)
             {
                RootEntity.Workplaces.Remove(SelectedItem);
-               Items = new ObservableCollection<Workplace>(RootEntity.Workplaces);
+               LoadItems();
                base.Remove();
             }
         }
+
+        public Person RootEntity { get; private set; }
     }
 }

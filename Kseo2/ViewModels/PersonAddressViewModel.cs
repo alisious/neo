@@ -21,16 +21,23 @@ namespace Kseo2.ViewModels
         {
             DisplayName = address==null ? @"Nowy adres." : address.Location.ToString();
             CurrentAddress = address ?? new Address();
-            CurrentAddressType = CurrentAddress.AddressType;
             Location = new LocationViewModel(CurrentAddress.Location);
             AddressTypes = KseoContext.AddressTypes.Where(x=>x.IsActive.Equals(true)).ToList();
         }
 
 
         public List<AddressType> AddressTypes { get; private set; }
-        
+
         [Required]
-        public AddressType CurrentAddressType { get; set; }
+        public AddressType CurrentAddressType
+        {
+            get { return CurrentAddress.AddressType; }
+            set
+            {
+                CurrentAddress.AddressType = value;
+                OnPropertyChanged(value);
+            }
+        }
         public LocationViewModel Location { get; set; }
         
         public override bool CanSave

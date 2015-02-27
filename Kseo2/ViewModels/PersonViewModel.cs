@@ -49,8 +49,8 @@ namespace Kseo2.ViewModels
                         .FirstOrDefault(p => p.Id.Equals(personId));
                 DisplayName = CurrentPerson.FullName;
             }
-            PersonAddresses = new PersonAddressesViewModel(CurrentPerson,AddressTypes,events,_context);
-            PersonWorkplaces = new WorkplacesViewModel(CurrentPerson,events,_context);
+            PersonAddresses = new PersonAddressesViewModel(CurrentPerson,_context);
+            PersonWorkplaces = new WorkplacesViewModel(CurrentPerson,_context);
 
             PersonReservations = new PersonReservationsViewModel(CurrentPerson,events,_context);
         }

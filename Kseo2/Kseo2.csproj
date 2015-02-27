@@ -143,6 +143,8 @@
     <Compile Include="ViewModels\DialogViewModel.cs" />
     <Compile Include="ViewModels\Events\ComponentStateChangeEvent.cs" />
     <Compile Include="ViewModels\Events\DialogContentStateChangeEvent.cs" />
+    <Compile Include="ViewModels\Events\ListStateChangeEvent.cs" />
+    <Compile Include="ViewModels\FormViewModel.cs" />
     <Compile Include="ViewModels\PersonAddressViewModel.cs" />
     <Compile Include="ViewModels\CompositionViewModel.cs" />
     <Compile Include="ViewModels\CollaborationsViewModel.cs" />

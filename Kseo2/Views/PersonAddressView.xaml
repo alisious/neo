@@ -7,7 +7,7 @@
              d:DesignHeight="300" d:DesignWidth="600">
     <Grid>
         
-        <StackPanel Grid.Column="0" >
+        <StackPanel Grid.Column="0" Width="600">
             <DockPanel>
             <TextBlock Text="Rodzaj adresu:" Width="150"/>
             <ComboBox x:Name="AddressType" Margin="0,0,40,0"

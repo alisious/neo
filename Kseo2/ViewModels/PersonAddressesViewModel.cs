@@ -9,22 +9,24 @@ using Caliburn.Micro;
 using Kseo2.DataAccess;
 using Kseo2.Model;
 using Caliburn.Micro.Extras;
+using Kseo2.ViewModels.Common;
 
 namespace Kseo2.ViewModels
 {
-    public class PersonAddressesViewModel :CompositionViewModel<Person,Address>
+    public class PersonAddressesViewModel :BaseListViewModel<Address>
     {
         
         
-        public PersonAddressesViewModel(Person rootEntity,List<AddressType> addressTypes, IEventAggregator events,KseoContext kseoContext)
-            : base(rootEntity,events,kseoContext)
+        public PersonAddressesViewModel(Person rootEntity,KseoContext kseoContext) :base(new List<Address>(rootEntity.Addresses),kseoContext)
         {
-            Items = new ObservableCollection<Address>(RootEntity.Addresses);
-            AddressTypes = addressTypes;
+            RootEntity = rootEntity;
         }
 
 
-        public List<AddressType> AddressTypes { get; private set; } 
+        public override void LoadItems()
+        {
+            Items = new BindableCollection<Address>(RootEntity.Addresses);
+        }
 
         public override void Add()
         {
@@ -33,20 +35,22 @@ namespace Kseo2.ViewModels
             if (windowManager.ShowDialog(vm) == true)
             {
                 RootEntity.Addresses.Add(vm.ContentViewModel.CurrentAddress);
-                Items = new ObservableCollection<Address>(RootEntity.Addresses);
+                LoadItems();
                 base.Add();
             }
         }
 
+        public Person RootEntity { get; private set; }
+
         public override void Edit()
         {
             var windowManager = new WindowManager();
-            var vm = new PersonAddressViewModel(SelectedItem,KseoContext);
+            var vm = new DialogViewModel<PersonAddressViewModel>(new PersonAddressViewModel(SelectedItem,KseoContext));
             if (windowManager.ShowDialog(vm) == true)
             {
                 RootEntity.Addresses.Remove(SelectedItem);
-                RootEntity.Addresses.Add(vm.CurrentAddress);
-                Items = new ObservableCollection<Address>(RootEntity.Addresses);
+                RootEntity.Addresses.Add(vm.ContentViewModel.CurrentAddress);
+                LoadItems();
                 base.Edit();
             }
         }
@@ -59,11 +63,10 @@ namespace Kseo2.ViewModels
                     MessageImage.Warning) == MessageResult.OK)
             {
                 RootEntity.Addresses.Remove(SelectedItem);
-                Items = new ObservableCollection<Address>(RootEntity.Addresses);
+                LoadItems();
                 base.Remove();
             }
         }
-
-       
+        
     }
 }

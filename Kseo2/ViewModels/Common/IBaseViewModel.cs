@@ -10,5 +10,6 @@ namespace Kseo2.ViewModels.Common
     {
         bool CanSave { get; }
         bool IsDirty { get; set; }
+        string DisplayName { get; set; }
     }
 }

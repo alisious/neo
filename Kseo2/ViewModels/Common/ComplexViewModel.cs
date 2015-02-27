@@ -10,7 +10,7 @@ using Kseo2.DataAccess;
 
 namespace Kseo2.ViewModels.Common
 {
-    public class ComplexViewModel<T,TEntity> :BaseViewModel<T,TEntity>, IHandle<ComponentStateChangeEvent> 
+    public class ComplexViewModel<T,TEntity> :BaseViewModel<T,TEntity>, IHandle<ComponentStateChangeEvent>, IHandle<ListStateChangeEvent> 
         where T :ValidatingScreen<T> 
         where TEntity : class
     {
@@ -26,6 +26,11 @@ namespace Kseo2.ViewModels.Common
         public void Handle(ComponentStateChangeEvent message)
         {
            _events.PublishOnUIThread(new DialogContentStateChangeEvent(CanSave,IsDirty));
+        }
+
+        public void Handle(ListStateChangeEvent message)
+        {
+            IsDirty = IsDirty || message.IsDirty;
         }
     }
 }

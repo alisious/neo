@@ -25,6 +25,7 @@ namespace Kseo2.ViewModels
             var events = IoC.Get<IEventAggregator>();
             events.Subscribe(this);
             ContentViewModel = contentViewModel;
+            DisplayName = ContentViewModel.DisplayName;
         }
 
 

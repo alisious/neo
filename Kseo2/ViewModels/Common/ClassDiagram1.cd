@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Kseo2.ViewModels.Common.BaseViewModel&lt;T, TEntity&gt;" Collapsed="true">
-    <Position X="5.75" Y="2" Width="2.75" />
+    <Position X="3.75" Y="1.75" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAIARAAAACAAABAAAAAAABAAAAAAA=</HashCode>
       <FileName>ViewModels\Common\BaseViewModel.cs</FileName>
@@ -9,20 +9,41 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Kseo2.ViewModels.Common.ComplexViewModel&lt;T, TEntity&gt;" Collapsed="true">
-    <Position X="2.5" Y="4" Width="3" />
+    <Position X="1.25" Y="3.5" Width="3" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\Common\ComplexViewModel.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Kseo2.ViewModels.DialogViewModel&lt;T&gt;">
-    <Position X="10.25" Y="3.5" Width="2.75" />
+    <Position X="8.25" Y="3" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AEABAAAAQAAAAAAAAAAAAAAAAAAAAAIAAAAAAQAAAAA=</HashCode>
       <FileName>ViewModels\DialogViewModel.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Kseo2.ViewModels.Common.BaseListViewModel&lt;T&gt;" Collapsed="true">
+    <Position X="4.75" Y="3.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AEIAAAAAAAAACAAAAABABAAAARABQAACAFCBAAAAAAA=</HashCode>
+      <FileName>ViewModels\Common\BaseListViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kseo2.ViewModels.PersonAddressesViewModel" Collapsed="true">
+    <Position X="0.75" Y="5.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAEAAAAAAAAAAABAAAAAAAQAACAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\PersonAddressesViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kseo2.ViewModels.WorkplacesViewModel" Collapsed="true">
+    <Position X="5.75" Y="5.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAEAAAAAAAAAAABAAAAAAAQAACAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\WorkplacesViewModel.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

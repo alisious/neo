@@ -4,27 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="800">
+             d:DesignHeight="300" d:DesignWidth="700">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="700"/>
-            <ColumnDefinition Width="100"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="1">
-            <Button x:Name="Save" Height="100" IsDefault="True">
-                <StackPanel Orientation="Vertical">
-                    <Image Source="..\Images/ok_mark.png" Height="50"  Width="50"/>
-                    <TextBlock Text="OK" HorizontalAlignment="Center"/>
-                </StackPanel>
-            </Button>
-            <Button x:Name="Cancel" Height="100" IsCancel="True">
-                <StackPanel Orientation="Vertical">
-                    <Image Source="..\Images/cancel_mark.png" Height="50"  Width="50"/>
-                    <TextBlock Text="Anuluj"/>
-                </StackPanel>
-            </Button>
-        </StackPanel>
-        <StackPanel Grid.Column="0" >
+        <StackPanel Width="700" >
             <DockPanel>
                 <TextBlock Text="Nazwa:" Width="150"/>
                 <TextBox x:Name="UnitName"></TextBox>
