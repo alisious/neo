@@ -139,12 +139,14 @@
     <Compile Include="ViewModels\Common\BaseListViewModel.cs" />
     <Compile Include="ViewModels\Common\BaseViewModel.cs" />
     <Compile Include="ViewModels\Common\ComplexViewModel.cs" />
+    <Compile Include="ViewModels\Common\CompositionViewModel.cs" />
     <Compile Include="ViewModels\Common\IBaseViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModel.cs" />
     <Compile Include="ViewModels\Events\ComponentStateChangeEvent.cs" />
+    <Compile Include="ViewModels\Events\CompositionStateChangeEvent.cs" />
     <Compile Include="ViewModels\Events\DialogContentStateChangeEvent.cs" />
     <Compile Include="ViewModels\Events\ListStateChangeEvent.cs" />
-    <Compile Include="ViewModels\FormViewModel.cs" />
+    <Compile Include="ViewModels\Common\ICompositionViewModel.cs" />
     <Compile Include="ViewModels\PersonAddressViewModel.cs" />
     <Compile Include="ViewModels\CompositionViewModel.cs" />
     <Compile Include="ViewModels\CollaborationsViewModel.cs" />
