@@ -3,19 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Kseo2.ViewModels.Events
 {
-    public class ComponentStateChangeEvent
+    public class ComponentStateChangeEvent :StateChangeEvent
     {
-        public ComponentStateChangeEvent(bool canSave, bool isDirty)
+        public ComponentStateChangeEvent(bool canSave, bool isDirty) : base(canSave, isDirty)
         {
-            CanSave = canSave;
-            IsDirty = isDirty;
         }
-
-        public bool IsDirty { get; private set; }
-
-        public bool CanSave { get; private set; }
     }
 }

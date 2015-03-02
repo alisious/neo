@@ -12,47 +12,12 @@ using Kseo2.ViewModels.Events;
 
 namespace Kseo2.ViewModels
 {
-    public class PersonBaseViewModel :Conductor<IScreen>.Collection.AllActive,IHandle<CompositionStateChangeEvent>,ICompositionViewModel
+    public class PersonBaseViewModel :ComponentWorkspace
     {
-        private readonly IEventAggregator _events = IoC.Get<IEventAggregator>();
+        public PersonBaseViewModel(IEventAggregator events) : base(events)
+        {
 
-        public PersonBaseViewModel()
-        {
-            _events.Subscribe(this);
-            Items.Add(PersonalitiesViewModel);
-            Items.Add(PersonAddressesViewModel);
-            Items.Add(PersonWorkplacesViewModel);
-        }
-        
-        public bool IsDirty
-        {
-            get
-            {
-                
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public bool CanSave
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public void Handle(CompositionStateChangeEvent message)
-        {
-            throw new NotImplementedException();
         }
     }
 
-    
 }
