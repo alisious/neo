@@ -8,10 +8,11 @@ using Kseo2.BusinessLayer;
 using Kseo2.DataAccess;
 using Kseo2.Model;
 using System.Collections.ObjectModel;
+using Kseo2.ViewModels.Common;
 
 namespace Kseo2.ViewModels
 {
-    public class PersonsViewModel :ListViewModel<Person>
+    public class PersonsViewModel :SearchableListViewModel<Person>
     {
 
         #region Private fields
@@ -25,7 +26,7 @@ namespace Kseo2.ViewModels
         #endregion
         
         
-        public PersonsViewModel(KseoContext kseoContext) :base(kseoContext)
+        public PersonsViewModel(KseoContext kseoContext) :base(null,kseoContext)
         {
             
             _personService = new PersonService(kseoContext);
@@ -122,7 +123,7 @@ namespace Kseo2.ViewModels
                                                 && p.BirthDate.StartsWith(BirthDateTemplate ?? String.Empty)
                                                 && p.Pesel.StartsWith(PeselTemplate ?? String.Empty),ResultsLimit);
             if (sr.ResultsCounter<=ResultsLimit)
-                Items = new ObservableCollection<Person>(sr.Results);
+                Items = new BindableCollection<Person>(sr.Results);
             else
             {
                 Items.Clear();
@@ -133,7 +134,7 @@ namespace Kseo2.ViewModels
 
         public override void Add()
         {
-            var personViewModel = new PersonViewModel(new EventAggregator(),0);
+            var personViewModel = new PersonBaseViewModel(0);
             personViewModel.DisplayName = "Nowa osoba.";
             var windowManager = new WindowManager();
             
@@ -147,7 +148,7 @@ namespace Kseo2.ViewModels
         {
             if (SelectedItem != null)
             {
-                var personViewModel = new PersonViewModel(new EventAggregator(), SelectedItem.Id);
+                var personViewModel = new PersonBaseViewModel(SelectedItem.Id);
                 personViewModel.DisplayName = "Zmiana danych osoby.";
                 var windowManager = new WindowManager();
 

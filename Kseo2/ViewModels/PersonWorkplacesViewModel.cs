@@ -14,9 +14,9 @@ using Kseo2.ViewModels.Common;
 
 namespace Kseo2.ViewModels
 {
-    public class WorkplacesViewModel :BaseListViewModel<Workplace>
+    public class PersonWorkplacesViewModel :ListViewModel<Workplace>
     {
-        public WorkplacesViewModel(Person person, KseoContext kseoContext) : base(new List<Workplace>(person.Workplaces), kseoContext)
+        public PersonWorkplacesViewModel(Person person, KseoContext kseoContext) : base(new List<Workplace>(person.Workplaces), kseoContext)
         {
             RootEntity = person;
         }
@@ -30,7 +30,7 @@ namespace Kseo2.ViewModels
         public override void Add()
         {
             var windowManager = new WindowManager();
-            var vm = new DialogViewModel<WorkplaceViewModel>(new WorkplaceViewModel(null,KseoContext));
+            var vm = new DialogViewModel<PersonWorkplaceViewModel>(new PersonWorkplaceViewModel(null,KseoContext));
             if (windowManager.ShowDialog(vm) == true)
             {
                 RootEntity.Workplaces.Add(vm.ContentViewModel.CurrentWorkplace);
@@ -42,7 +42,7 @@ namespace Kseo2.ViewModels
         public override void Edit()
         {
             var windowManager = new WindowManager();
-            var vm = new DialogViewModel<WorkplaceViewModel>(new WorkplaceViewModel(SelectedItem,KseoContext));
+            var vm = new DialogViewModel<PersonWorkplaceViewModel>(new PersonWorkplaceViewModel(SelectedItem,KseoContext));
             if (windowManager.ShowDialog(vm) == true)
             {
                 RootEntity.Workplaces.Remove(SelectedItem);

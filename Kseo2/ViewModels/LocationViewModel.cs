@@ -14,10 +14,6 @@ using Kseo2.ViewModels.Events;
 
 namespace Kseo2.ViewModels
 {
-
-    
-
-   
     public class LocationViewModel :BaseViewModel<LocationViewModel,Location>
     {
         public LocationViewModel(Location location) :base(location,null)

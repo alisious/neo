@@ -1,103 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
+using Caliburn.Micro;
 using Caliburn.Micro.Validation;
 using Kseo2.DataAccess;
+using Kseo2.Helpers;
 using Kseo2.Model;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
-using Kseo2.Helpers;
-using Caliburn.Micro;
-using Caliburn.Micro.Extras;
-using Kseo2.ViewModels.Events;
 
 namespace Kseo2.ViewModels
 {
-    public class PersonViewModel :ValidatingScreen<PersonViewModel>
+    public class PersonViewModel :ValidatingScreen<PersonViewModel>,IHasState
     {
-        private readonly KseoContext _context;
-        private Person _currentPerson;
-        private List<Country> _countries;
-        private bool _isDirty = false;
 
+        private readonly IEventAggregator _events = IoC.Get<IEventAggregator>();
 
-        public PersonViewModel(IEventAggregator events,int personId = 0)
+        public PersonViewModel(Person currentPerson,KseoContext kseoContext)
         {
-            events.Subscribe(this);
-            _context = new KseoContext();
-            
-            Countries = _context.Countries.Where(c => c.IsActive.Equals(true)).ToList();
-            AddressTypes = _context.AddressTypes.Where(a => a.IsActive.Equals(true)).ToList();
-
-            if (personId == 0)
-            {
-                CurrentPerson = new Person();
-                _context.Persons.Add(CurrentPerson);
-                DisplayName = @"Nowa osoba.";
-            }
-            else
-            {
-                CurrentPerson = _context.Persons
-                        .Include("Addresses")
-                        .Include("Workplaces")
-                        .Include("Citizenships")
-                        .Include("Reservations")
-                        .FirstOrDefault(p => p.Id.Equals(personId));
-                DisplayName = CurrentPerson.FullName;
-            }
-            PersonAddresses = new PersonAddressesViewModel(CurrentPerson,_context);
-            PersonWorkplaces = new WorkplacesViewModel(CurrentPerson,_context);
-
-            PersonReservations = new PersonReservationsViewModel(CurrentPerson,events,_context);
+            IsDirty = false;
+            CurrentPerson = currentPerson;
+            KseoContext = kseoContext;
+            Countries = KseoContext.Countries.Where(c => c.IsActive.Equals(true)).ToList();
         }
-
         
-
-        public List<AddressType> AddressTypes { get; private set; }
-
-        public Person CurrentPerson
-        {
-            get { return _currentPerson; }
-            set
-            {
-                _currentPerson = value;
-                NotifyOfPropertyChange(()=>CurrentPerson);
-            }
-        }
-
+        public KseoContext KseoContext { get; private set; }
+        public Person CurrentPerson { get; private set; }
+        public List<Country> Countries { get; private set; }
         
-
-
-        #region Dictionaries
-        public List<Country> Countries
-        {
-            get { return _countries; }
-            set
-            {
-                _countries = value;
-                NotifyOfPropertyChange(() => Countries);
-            }
-        } 
-        #endregion
-
-        public PersonAddressesViewModel PersonAddresses{ get; set; }
-        public WorkplacesViewModel PersonWorkplaces { get; set; }
-        public PersonReservationsViewModel PersonReservations { get; private set; }
-
-
-        public void LoadSubitems(int index)
-        {
-            if (index==1) PersonReservations.LoadItems();
-        }
-
+        //Personalities
         public string FullName
         {
             get { return CurrentPerson.FullName; }
         }
+
+        
+        #region CurrentPerson properties
 
         [Required(ErrorMessage = @"Nazwisko jest wymagane!", AllowEmptyStrings = false)]
         public string LastName
@@ -107,7 +47,7 @@ namespace Kseo2.ViewModels
             {
                 CurrentPerson.LastName = value;
                 OnPropertyChanged(value);
-                NotifyOfPropertyChange(()=>FullName);
+                _events.PublishOnUIThread(new PersonFilesTittleChangeEvent(CurrentPerson.FullName));
             }
         }
 
@@ -119,7 +59,7 @@ namespace Kseo2.ViewModels
             {
                 CurrentPerson.FirstName = value;
                 OnPropertyChanged(value);
-                NotifyOfPropertyChange(() => FullName);
+                _events.PublishOnUIThread(new PersonFilesTittleChangeEvent(CurrentPerson.FullName));
             }
         }
 
@@ -192,7 +132,7 @@ namespace Kseo2.ViewModels
         public string PeselVisibility
         {
             get { return HasPesel ? "Visible" : "Hidden"; }
-        } 
+        }
         #endregion
 
         #region Sex properties
@@ -305,7 +245,7 @@ namespace Kseo2.ViewModels
 
         }
 
-        
+
 
         public HashSet<Country> Citizenships
         {
@@ -326,97 +266,28 @@ namespace Kseo2.ViewModels
                 IsDirty = true;
             }
         }
-
         
-        
+        #endregion
 
+
+        //IHasState implementation
+        public bool IsDirty { get; set; }
+        
         public bool CanSave
         {
-            get
-            {
-                var r = HasErrorsByGroup();
-                if (HasPesel)
-                    return !r && !HasErrorsByGroup("HasPeselGroup");
-                else
-                    return !r && !HasErrorsByGroup("HasNoPeselGroup");
-            }
+            get { return !HasErrors; }
         }
 
-        public bool IsDirty
-        {
-            get { return _isDirty; }
-            set
-            {
-                _isDirty = value;
-                NotifyOfPropertyChange(()=>IsDirty);
-            }
-        }
 
-        
-        public IResult Save()
-        {
-            if (CanSave)
-            {
-                try
-                {
-                    //if (_inAddingMode) _context.Persons.Add(CurrentPerson);
-                    _context.SaveChanges();
-                    DisplayName = CurrentPerson.FullName;
-                    IsDirty = false;
-                    //TryClose(true);
-                    return null;
-                    //return new MessengerResult("Zmiany zostały zapisane.")
-                    //    .Caption("Informacja")
-                    //    .Image(MessageImage.Information);
-
-                }
-                catch (Exception ex)
-                {
-                    var msg = (ex.InnerException != null) ? ex.InnerException.Message : ex.Message;
-                    return new MessengerResult(msg)
-                        .Caption("Błąd!")
-                        .Image(MessageImage.Error);
-                }
-            }
-            else
-            {
-                return null;
-            }
-
-        }
-
-        public void Cancel()
-        {
-            TryClose(false);
-        }
-
-        public void Close()
-        {
-            if (!IsDirty)
-            {
-                TryClose(false);
-                return;
-            } 
-            var ms = new MessageService();
-            if (ms.Show("Zamknięcie okna spowoduje, że wprowadzone zmiany nie zostaną zapisane.", "Uwaga!",
-                MessageButton.OKCancel, MessageImage.Warning) == MessageResult.OK) 
-               TryClose(false); 
-            
-        }
-
+        //ValidatingScreen<> implementation
         protected void OnPropertyChanged(object value, [CallerMemberName] string propertyName = "")
         {
             NotifyOfPropertyChange(propertyName);
             NotifyOfPropertyChange(() => CanSave);
             IsDirty = true;
            
+             
+
         }
-
-
-
-
-
-      
-        
     }
 }

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Kseo2.Views
 {
     /// <summary>
-    /// Interaction logic for ScreenTwoView.xaml
+    /// Interaction logic for CollaborationFilesBaseView.xaml
     /// </summary>
-    public partial class ScreenTwoView : UserControl
+    public partial class CollaborationFilesBaseView : UserControl
     {
-        public ScreenTwoView()
+        public CollaborationFilesBaseView()
         {
             InitializeComponent();
         }

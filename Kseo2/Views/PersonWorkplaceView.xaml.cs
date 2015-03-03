@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Kseo2.Views
 {
     /// <summary>
-    /// Interaction logic for WorkplaceView.xaml
+    /// Interaction logic for PersonWorkplaceView.xaml
     /// </summary>
-    public partial class WorkplaceView : UserControl
+    public partial class PersonWorkplaceView : UserControl
     {
-        public WorkplaceView()
+        public PersonWorkplaceView()
         {
             InitializeComponent();
         }

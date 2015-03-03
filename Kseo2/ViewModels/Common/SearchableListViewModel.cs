@@ -9,25 +9,21 @@ using Kseo2.Model;
 using Kseo2.DataAccess;
 using System.Collections.ObjectModel;
 
-namespace Kseo2.ViewModels
+namespace Kseo2.ViewModels.Common
 {
-    public class ListViewModel<T> :Screen where T :Entity
+    public class SearchableListViewModel<TEntity> :ListViewModel<TEntity>
+        where TEntity :Entity
     {
         #region Common private fields
-            private readonly KseoContext _kseoContext;
             private int _resultsLimit = 20;
             private bool _canSearchAutomatically = true;
             private int _resultsCounter = 0;
             private int _filterTemplateLengthTrigger = 3;
-            private ObservableCollection<T> _items;
-            private T _selectedItem;
         #endregion
 
         #region Constructors
-            public ListViewModel(KseoContext kseoContext)
+            public SearchableListViewModel(List<TEntity> items,KseoContext kseoContext) :base(items,kseoContext)
             {
-                _kseoContext = kseoContext;
-                Items = new ObservableCollection<T>();
                 ResultsCounter = Items.Count;
             }
 
@@ -35,54 +31,7 @@ namespace Kseo2.ViewModels
 
         #region Public common properties
 
-            public KseoContext Context { get { return _kseoContext; } }
-    
-            public ObservableCollection<T> Items
-            {
-                get { return _items; }
-                set
-                {
-                    _items = value;
-                    NotifyOfPropertyChange(() => Items);
-                }
-            }
-
-            public T SelectedItem
-            {
-                get { return _selectedItem; }
-                set
-                {
-                    _selectedItem = value;
-                    NotifyOfPropertyChange(() => SelectedItem);
-                    NotifyOfPropertyChange(() => CanEdit);
-                    NotifyOfPropertyChange(() => CanRemove);
-                }
-            }
-
-            //Guard properties
-            public bool CanEdit
-            {
-                get { return SelectedItem != null; }
-            }
-
-            public bool CanRemove
-            {
-                get { return SelectedItem != null; }
-            }
-
-
-        public virtual void Add()
-        {
-
-        }
-
-        public virtual void Remove()
-        {
-
-        }
-
-        public virtual void Edit() 
-        {}
+            
     
         //Powinno być nadpisane w każdej pochodnej klasie.
             public virtual bool CanSearch

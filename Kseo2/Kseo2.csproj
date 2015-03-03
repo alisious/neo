@@ -137,16 +137,14 @@
     <Compile Include="Service\UnitOfWork.cs" />
     <Compile Include="Service\UserService.cs" />
     <Compile Include="Service\VerificationService.cs" />
-    <Compile Include="ViewModels\Common\BaseListViewModel.cs" />
+    <Compile Include="ViewModels\Common\ListViewModel.cs" />
     <Compile Include="ViewModels\Common\BaseViewModel.cs" />
     <Compile Include="ViewModels\Common\ComplexViewModel.cs" />
     <Compile Include="ViewModels\Common\ComponentWorkspace.cs" />
     <Compile Include="ViewModels\Common\IComponentBase.cs" />
     <Compile Include="ViewModels\Common\ListBase.cs" />
-    <Compile Include="ViewModels\Common\ValidatingComponentBase.cs" />
     <Compile Include="ViewModels\Events\DialogSubmitedEvent.cs" />
-    <Compile Include="ViewModels\Events\ComponentWorkspaceStateChangeEvent.cs" />
-    <Compile Include="ViewModels\Common\CompositionViewModel.cs" />
+    <Compile Include="ViewModels\Events\FilesStateChangeEvent.cs" />
     <Compile Include="ViewModels\Common\ComponentBase.cs" />
     <Compile Include="ViewModels\Common\IBaseViewModel.cs" />
     <Compile Include="ViewModels\DialogViewModel.cs" />
@@ -156,27 +154,30 @@
     <Compile Include="ViewModels\Events\ListStateChangeEvent.cs" />
     <Compile Include="ViewModels\Common\ICompositionViewModel.cs" />
     <Compile Include="ViewModels\Events\StateChangeEvent.cs" />
+    <Compile Include="ViewModels\FilesViewModel.cs" />
+    <Compile Include="ViewModels\IHasDisplayName.cs" />
+    <Compile Include="ViewModels\IHasState.cs" />
+    <Compile Include="ViewModels\IIsPersistent.cs" />
     <Compile Include="ViewModels\PersonAddressViewModel.cs" />
     <Compile Include="ViewModels\CompositionViewModel.cs" />
     <Compile Include="ViewModels\CollaborationsViewModel.cs" />
     <Compile Include="ViewModels\CountrySelectViewModel.cs" />
     <Compile Include="ViewModels\DailyReportViewModel.cs" />
-    <Compile Include="ViewModels\ListViewModel.cs" />
+    <Compile Include="ViewModels\Common\SearchableListViewModel.cs" />
     <Compile Include="ViewModels\LocationViewModel.cs" />
     <Compile Include="ViewModels\PersonAddressesViewModel.cs" />
-    <Compile Include="ViewModels\PersonBaseViewModel.cs" />
+    <Compile Include="ViewModels\PersonFilesViewModel.cs" />
+    <Compile Include="ViewModels\PersonFilesTittleChangeEvent.cs" />
     <Compile Include="ViewModels\PersonReservationsViewModel.cs" />
     <Compile Include="ViewModels\PersonReservationViewModel.cs" />
     <Compile Include="ViewModels\PersonSearchViewModel.cs" />
     <Compile Include="ViewModels\PersonsViewModel.cs" />
+    <Compile Include="ViewModels\PersonBaseViewModel.cs" />
     <Compile Include="ViewModels\PersonViewModel.cs" />
-    <Compile Include="ViewModels\WorkplacesViewModel.cs" />
-    <Compile Include="ViewModels\WorkplaceViewModel.cs" />
+    <Compile Include="ViewModels\PersonWorkplacesViewModel.cs" />
+    <Compile Include="ViewModels\PersonWorkplaceViewModel.cs" />
     <Compile Include="ViewModels\ProceduresViewModel.cs" />
-    <Compile Include="ViewModels\QuestionViewModel.cs" />
     <Compile Include="ViewModels\ReservationsViewModel.cs" />
-    <Compile Include="ViewModels\ScreenOneViewModel.cs" />
-    <Compile Include="ViewModels\ScreenTwoViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\Validation\DomainValidator.cs" />
     <Compile Include="ViewModels\Validation\EmailValidator.cs" />
@@ -188,9 +189,20 @@
     <Compile Include="ViewModels\Validation\ValidatingScreen.cs" />
     <Compile Include="ViewModels\Validation\ValidationGroupAttribute.cs" />
     <Compile Include="ViewModels\VerificationsViewModel.cs" />
-    <Compile Include="ViewModels\VerificationViewModel.cs" />
+    <Compile Include="Views\CollaborationFilesBaseView.xaml.cs">
+      <DependentUpon>CollaborationFilesBaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CollaborationFilesPersonView.xaml.cs">
+      <DependentUpon>CollaborationFilesPersonView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CollaborationFilesView.xaml.cs">
+      <DependentUpon>CollaborationFilesView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DialogView.xaml.cs">
       <DependentUpon>DialogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FilesView.xaml.cs">
+      <DependentUpon>FilesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PersonAddressView.xaml.cs">
       <DependentUpon>PersonAddressView.xaml</DependentUpon>
@@ -210,6 +222,9 @@
     <Compile Include="Views\PersonAddressesView.xaml.cs">
       <DependentUpon>PersonAddressesView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PersonFilesView.xaml.cs">
+      <DependentUpon>PersonFilesView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PersonReservationsView.xaml.cs">
       <DependentUpon>PersonReservationsView.xaml</DependentUpon>
     </Compile>
@@ -218,6 +233,9 @@
     </Compile>
     <Compile Include="Views\PersonsView.xaml.cs">
       <DependentUpon>PersonsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PersonBaseView.xaml.cs">
+      <DependentUpon>PersonBaseView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PersonView.xaml.cs">
       <DependentUpon>PersonView.xaml</DependentUpon>
@@ -234,12 +252,6 @@
     <Compile Include="Views\ReservationView.xaml.cs">
       <DependentUpon>ReservationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ScreenOneView.xaml.cs">
-      <DependentUpon>ScreenOneView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ScreenTwoView.xaml.cs">
-      <DependentUpon>ScreenTwoView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\PersonSearchView.xaml.cs">
       <DependentUpon>PersonSearchView.xaml</DependentUpon>
     </Compile>
@@ -252,11 +264,11 @@
     <Compile Include="Views\VerificationView.xaml.cs">
       <DependentUpon>VerificationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WorkplacesView.xaml.cs">
-      <DependentUpon>WorkplacesView.xaml</DependentUpon>
+    <Compile Include="Views\PersonWorkplacesView.xaml.cs">
+      <DependentUpon>PersonWorkplacesView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WorkplaceView.xaml.cs">
-      <DependentUpon>WorkplaceView.xaml</DependentUpon>
+    <Compile Include="Views\PersonWorkplaceView.xaml.cs">
+      <DependentUpon>PersonWorkplaceView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -299,7 +311,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\CollaborationFilesBaseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CollaborationFilesPersonView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CollaborationFilesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DialogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FilesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -327,6 +355,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\PersonFilesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PersonReservationsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -336,6 +368,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PersonsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PersonBaseView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -359,14 +395,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ScreenOneView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ScreenTwoView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\PersonSearchView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -383,11 +411,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\WorkplacesView.xaml">
+    <Page Include="Views\PersonWorkplacesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\WorkplaceView.xaml">
+    <Page Include="Views\PersonWorkplaceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

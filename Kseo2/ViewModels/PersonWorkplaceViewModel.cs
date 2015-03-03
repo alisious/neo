@@ -16,7 +16,7 @@ using Kseo2.ViewModels.Common;
 
 namespace Kseo2.ViewModels
 {
-    public class WorkplaceViewModel : ComplexViewModel<WorkplaceViewModel,Workplace>
+    public class PersonWorkplaceViewModel : ComplexViewModel<PersonWorkplaceViewModel,Workplace>
     {
         
      /// <summary>
@@ -24,7 +24,7 @@ namespace Kseo2.ViewModels
      /// </summary>
      /// <param name="workplace"></param>
      /// <param name="kseoContext"></param>
-        public WorkplaceViewModel(Workplace workplace,KseoContext kseoContext) :base(workplace,kseoContext)
+        public PersonWorkplaceViewModel(Workplace workplace,KseoContext kseoContext) :base(workplace,kseoContext)
         {
             
             DisplayName = workplace==null ? @"Nowe miejsce pracy." : workplace.UnitName; 

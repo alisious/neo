@@ -37,7 +37,7 @@ namespace Kseo2.ViewModels.Common
 
         public void Handle(ComponentStateChangeEvent message)
         {
-            _events.PublishOnUIThread(new ComponentWorkspaceStateChangeEvent(IsDirty,CanSave));
+            _events.PublishOnUIThread(new FilesStateChangeEvent(IsDirty,CanSave));
         }
     }
 }

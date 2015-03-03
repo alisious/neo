@@ -13,7 +13,7 @@ using Kseo2.ViewModels.Common;
 
 namespace Kseo2.ViewModels
 {
-    public class PersonAddressesViewModel :BaseListViewModel<Address>
+    public class PersonAddressesViewModel :ListViewModel<Address>
     {
         
         

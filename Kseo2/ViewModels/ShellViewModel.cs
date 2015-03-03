@@ -57,17 +57,7 @@ namespace Kseo2.ViewModels
        
         //TODO: Usunąć poniższe
 
-        public void ShowScreenOne()
-        {
-            ActivateItem(new ScreenOneViewModel());
-        }
-
-        public void ShowScreenTwo()
-        {
-            ActivateItem(new ScreenTwoViewModel());
-        }
-
-        public void ShowSearchPersonScreen()
+       public void ShowSearchPersonScreen()
         {
             //ActivateItem(new PersonSearchViewModel(_uow));
         }
