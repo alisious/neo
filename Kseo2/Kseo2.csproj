@@ -166,8 +166,9 @@
     <Compile Include="ViewModels\Common\SearchableListViewModel.cs" />
     <Compile Include="ViewModels\LocationViewModel.cs" />
     <Compile Include="ViewModels\PersonAddressesViewModel.cs" />
+    <Compile Include="ViewModels\PersonCollaborationsViewModel.cs" />
     <Compile Include="ViewModels\PersonFilesViewModel.cs" />
-    <Compile Include="ViewModels\PersonFilesTittleChangeEvent.cs" />
+    <Compile Include="ViewModels\Events\PersonFilesTittleChangeEvent.cs" />
     <Compile Include="ViewModels\PersonReservationsViewModel.cs" />
     <Compile Include="ViewModels\PersonReservationViewModel.cs" />
     <Compile Include="ViewModels\PersonSearchViewModel.cs" />

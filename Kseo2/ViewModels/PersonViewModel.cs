@@ -10,6 +10,7 @@ using Kseo2.Helpers;
 using Kseo2.Model;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
+using Kseo2.ViewModels.Events;
 
 namespace Kseo2.ViewModels
 {
@@ -285,9 +286,15 @@ namespace Kseo2.ViewModels
             NotifyOfPropertyChange(propertyName);
             NotifyOfPropertyChange(() => CanSave);
             IsDirty = true;
-           
+            _events.PublishOnUIThread(new ComponentStateChangeEvent(CanSave,IsDirty));
              
 
+        }
+
+
+        public void Load()
+        {
+            throw new NotImplementedException();
         }
     }
 }

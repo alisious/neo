@@ -9,5 +9,6 @@ namespace Kseo2.ViewModels
     public interface IIsPersistent
     {
         void Save();
+        
     }
 }

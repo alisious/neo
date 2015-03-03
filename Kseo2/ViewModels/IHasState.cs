@@ -10,5 +10,6 @@ namespace Kseo2.ViewModels
     {
         bool IsDirty { get; set; }
         bool CanSave { get; }
+        void Load();
     }
 }

@@ -5,15 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using Caliburn.Micro;
 using Caliburn.Micro.Extras;
+using Kseo2.ViewModels.Events;
 
 namespace Kseo2.ViewModels
 {
-    public sealed class FilesViewModel<T> :Conductor<IScreen>.Collection.OneActive
+    public sealed class FilesViewModel<T> :Conductor<IScreen>.Collection.OneActive,IHandle<FilesStateChangeEvent>
         where T :IHasDisplayName,IHasState,IIsPersistent
     {
 
         public FilesViewModel(T filesWorkspace)
         {
+            var events = IoC.Get<IEventAggregator>();
+            events.Subscribe(this);
             FilesWorkspace = filesWorkspace;
             DisplayName = FilesWorkspace.DisplayName;
         }
@@ -21,7 +24,7 @@ namespace Kseo2.ViewModels
 
         public T FilesWorkspace { get; private set; }
 
-        public bool CanSave { get { return FilesWorkspace.CanSave; } }
+        public bool CanSave { get; set; }
         
         public void Save()
         {
@@ -48,5 +51,10 @@ namespace Kseo2.ViewModels
         }
 
 
+        public void Handle(FilesStateChangeEvent message)
+        {
+            CanSave = message.CanSave;
+            NotifyOfPropertyChange(()=>CanSave);
+        }
     }
 }

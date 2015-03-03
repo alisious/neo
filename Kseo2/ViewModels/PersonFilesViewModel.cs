@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Forms.VisualStyles;
 using Caliburn.Micro;
 using Kseo2.DataAccess;
@@ -34,10 +36,20 @@ namespace Kseo2.ViewModels
             DisplayName = "Teczka osoby.";
             
             Items.Add(new PersonViewModel(currentPerson,KseoContext));
+            Items.Add(new PersonCollaborationsViewModel());
         }
 
 
         public PersonViewModel PersonData { get { return (PersonViewModel)Items[0]; } }
+        public PersonCollaborationsViewModel CollaborationsData 
+        { 
+            get
+                {
+                return (PersonCollaborationsViewModel) Items[1];
+            } 
+        }
+
+        public IHasState SelectedContent { get; set; }
 
         public string PersonFilesTittle
         {
@@ -69,7 +81,10 @@ namespace Kseo2.ViewModels
 
         public bool CanSave
         {
-            get { return Items.Aggregate(true, (current, item) => current && item.CanSave); }
+            get
+            {
+                return Items.Aggregate(true, (current, item) => current && item.CanSave);
+            }
             set
             {
                 throw new NotImplementedException();
@@ -78,7 +93,7 @@ namespace Kseo2.ViewModels
 
         public void Save()
         {
-            throw new NotImplementedException();
+            IsDirty = false;
         }
 
         public void Handle(PersonFilesTittleChangeEvent message)
@@ -90,7 +105,20 @@ namespace Kseo2.ViewModels
 
         public void Handle(ComponentStateChangeEvent message)
         {
-            _events.PublishOnUIThread(new FilesStateChangeEvent(IsDirty,CanSave));
+            _events.PublishOnUIThread(new FilesStateChangeEvent(CanSave,IsDirty));
+        }
+
+
+        public void Load(object selectedItem)
+        {
+          
+            
+        }
+
+
+        public void Load()
+        {
+            throw new NotImplementedException();
         }
     }
 }

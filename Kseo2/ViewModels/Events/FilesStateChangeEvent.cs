@@ -7,7 +7,7 @@ namespace Kseo2.ViewModels.Events
 {
     public class FilesStateChangeEvent :StateChangeEvent
     {
-        public FilesStateChangeEvent(bool isDirty, bool canSave) : base(isDirty, canSave)
+        public FilesStateChangeEvent(bool canSave,bool isDirty) : base(canSave,isDirty)
         {
         }
     }
