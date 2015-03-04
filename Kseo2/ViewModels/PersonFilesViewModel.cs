@@ -15,7 +15,7 @@ namespace Kseo2.ViewModels
         IHasDisplayName,
         IHasState,
         IIsPersistent,
-        IHandle<PersonFilesTittleChangeEvent>,
+        IHandle<FilesTittleChangeEvent>,
         IHandle<ComponentStateChangeEvent>
     {
         private string _personFilesTittle;
@@ -96,7 +96,7 @@ namespace Kseo2.ViewModels
             IsDirty = false;
         }
 
-        public void Handle(PersonFilesTittleChangeEvent message)
+        public void Handle(FilesTittleChangeEvent message)
         {
             PersonFilesTittle = message.Tittle;
         }

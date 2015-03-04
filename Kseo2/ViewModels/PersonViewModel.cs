@@ -48,7 +48,7 @@ namespace Kseo2.ViewModels
             {
                 CurrentPerson.LastName = value;
                 OnPropertyChanged(value);
-                _events.PublishOnUIThread(new PersonFilesTittleChangeEvent(CurrentPerson.FullName));
+                _events.PublishOnUIThread(new FilesTittleChangeEvent(CurrentPerson.FullName));
             }
         }
 
@@ -60,7 +60,7 @@ namespace Kseo2.ViewModels
             {
                 CurrentPerson.FirstName = value;
                 OnPropertyChanged(value);
-                _events.PublishOnUIThread(new PersonFilesTittleChangeEvent(CurrentPerson.FullName));
+                _events.PublishOnUIThread(new FilesTittleChangeEvent(CurrentPerson.FullName));
             }
         }
 

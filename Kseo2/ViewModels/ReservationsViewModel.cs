@@ -17,5 +17,12 @@ namespace Kseo2.ViewModels
             get { return SelectedItem != null; }
         }
         public bool CanRemove { get { return SelectedItem != null; } }
+
+        public void Add()
+        {
+            var vm = new FilesViewModel<ReservationFilesViewModel>(new ReservationFilesViewModel());
+            var wm = IoC.Get<IWindowManager>();
+            wm.ShowDialog(vm);
+        }
     }
 }

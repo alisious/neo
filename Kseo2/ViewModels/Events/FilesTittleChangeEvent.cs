@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Kseo2.ViewModels.Events
 {
-    public class PersonFilesTittleChangeEvent
+    public class FilesTittleChangeEvent
     {
-        public PersonFilesTittleChangeEvent(string tittle)
+        public FilesTittleChangeEvent(string tittle)
         {
             Tittle = tittle;
         }

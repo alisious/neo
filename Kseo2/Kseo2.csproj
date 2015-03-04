@@ -168,7 +168,7 @@
     <Compile Include="ViewModels\PersonAddressesViewModel.cs" />
     <Compile Include="ViewModels\PersonCollaborationsViewModel.cs" />
     <Compile Include="ViewModels\PersonFilesViewModel.cs" />
-    <Compile Include="ViewModels\Events\PersonFilesTittleChangeEvent.cs" />
+    <Compile Include="ViewModels\Events\FilesTittleChangeEvent.cs" />
     <Compile Include="ViewModels\PersonReservationsViewModel.cs" />
     <Compile Include="ViewModels\PersonReservationViewModel.cs" />
     <Compile Include="ViewModels\PersonSearchViewModel.cs" />
@@ -178,6 +178,7 @@
     <Compile Include="ViewModels\PersonWorkplacesViewModel.cs" />
     <Compile Include="ViewModels\PersonWorkplaceViewModel.cs" />
     <Compile Include="ViewModels\ProceduresViewModel.cs" />
+    <Compile Include="ViewModels\ReservationFilesViewModel.cs" />
     <Compile Include="ViewModels\ReservationsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\Validation\DomainValidator.cs" />
@@ -246,6 +247,9 @@
     </Compile>
     <Compile Include="Views\QuestionView.xaml.cs">
       <DependentUpon>QuestionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReservationFilesView.xaml.cs">
+      <DependentUpon>ReservationFilesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ReservationsView.xaml.cs">
       <DependentUpon>ReservationsView.xaml</DependentUpon>
@@ -385,6 +389,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\QuestionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReservationFilesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
