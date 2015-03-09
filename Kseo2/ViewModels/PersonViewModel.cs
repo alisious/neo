@@ -24,11 +24,16 @@ namespace Kseo2.ViewModels
             CurrentPerson = currentPerson;
             KseoContext = kseoContext;
             Countries = KseoContext.Countries.Where(c => c.IsActive.Equals(true)).ToList();
+            PersonWorkplaces = new PersonWorkplacesViewModel(currentPerson,KseoContext);
+            PersonAddresses = new PersonAddressesViewModel(currentPerson,KseoContext);
         }
         
         public KseoContext KseoContext { get; private set; }
         public Person CurrentPerson { get; private set; }
         public List<Country> Countries { get; private set; }
+        public PersonAddressesViewModel PersonAddresses { get; private set; }
+        public PersonWorkplacesViewModel PersonWorkplaces { get; private set; }
+
         
         //Personalities
         public string FullName

@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using Caliburn.Micro.Extras;
+using Kseo2.Service;
 using Kseo2.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ namespace Kseo2
             container.Singleton<IWindowManager, WindowManager>();
             container.Singleton<IMessageService, MessageService>();
             container.Singleton<IEventAggregator, EventAggregator>();
+            //container.Singleton<IPersonService, PersonService>();
             container.PerRequest<IShell, ShellViewModel>();
             
 

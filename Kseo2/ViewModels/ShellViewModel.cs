@@ -16,12 +16,7 @@ namespace Kseo2.ViewModels
         private readonly IWindowManager _windowManager;
         private KseoContext _kseoContext;
         private User _activeUser;
-
-         
-
-
-
-
+        
 
         public ShellViewModel(IWindowManager windowManager)
         {

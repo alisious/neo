@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,5 +27,17 @@ namespace Kseo2.BusinessLayer
                 result.Results = query.ToList();
             return result;
         }
+
+        public Person GetPersonFiles(int personId)
+        {
+           return _kseoContext.Persons
+                .Include(p => p.Nationality)
+                .Include(p => p.Citizenships)
+                .Include(p => p.Addresses)
+                .Include(p => p.Workplaces)
+                .Include(p => p.Reservations)
+                .FirstOrDefault(p => p.Id.Equals(personId));
+        }
+
     }
 }

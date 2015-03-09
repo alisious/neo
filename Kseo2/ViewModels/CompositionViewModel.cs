@@ -25,10 +25,10 @@ namespace Kseo2.ViewModels
         private ObservableCollection<T> _items;
         private T _selectedItem;
 
-        public CompositionViewModel(TRoot rootEntity,IEventAggregator events,KseoContext kseoContext)
+        public CompositionViewModel(TRoot rootEntity,KseoContext kseoContext)
         {
             KseoContext = kseoContext;
-            _events = events;
+            _events = IoC.Get<IEventAggregator>();
             RootEntity = rootEntity;
             Items = new ObservableCollection<T>();
             IsDirty = false;

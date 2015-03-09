@@ -11,12 +11,12 @@ using Caliburn.Micro;
 
 namespace Kseo2.ViewModels
 {
-    public class PersonReservationsViewModel :CompositionViewModel<Person,Reservation>
+    public class PersonReservationsViewModel :CompositionViewModel<Person,Reservation>,IHasState
     {
         private ReservationService _reservationService;
 
-        public PersonReservationsViewModel(Person rootEntity,IEventAggregator events,KseoContext kseoContext)
-            : base(rootEntity, events,kseoContext)
+        public PersonReservationsViewModel(Person rootEntity,KseoContext kseoContext)
+            : base(rootEntity, kseoContext)
         {
             _reservationService = new ReservationService(kseoContext);
             //LoadItems();
@@ -26,7 +26,7 @@ namespace Kseo2.ViewModels
 
         public void LoadItems()
         {
-            Items = new ObservableCollection<Reservation>(_reservationService.GetReservationsByPerson(RootEntity));
+            Items = new ObservableCollection<Reservation>(RootEntity.Reservations);
         }
 
         public override void Add()
@@ -41,6 +41,26 @@ namespace Kseo2.ViewModels
                 LoadItems();
                 base.Add();
             }
+        }
+
+        public override void Edit()
+        {
+            var windowManager = new WindowManager();
+            var vm = new PersonReservationViewModel(KseoContext, SelectedItem);
+
+            if (windowManager.ShowDialog(vm) == true)
+            {
+                //RootEntity.Reservations.Add(vm.CurrentEntity);
+                //Items = new ObservableCollection<Reservation>(RootEntity.Reservations);
+                LoadItems();
+                base.Edit();
+            }
+        }
+
+
+        public bool CanSave
+        {
+            get { return true; }
         }
     }
 }

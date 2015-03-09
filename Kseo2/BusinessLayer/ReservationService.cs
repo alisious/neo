@@ -12,10 +12,7 @@ namespace Kseo2.BusinessLayer
     {
 
 
-        public ReservationService(KseoContext kseoContext) : base(kseoContext)
-        {
-
-        }
+        public ReservationService(KseoContext kseoContext) : base(kseoContext) {}
         
         public SearchResult<Reservation> Search(Func<Reservation, bool> where, int resultsLimit = 20)
         {
@@ -32,6 +29,18 @@ namespace Kseo2.BusinessLayer
                 r => r.ConductingUnit, r => r.EndReason);
         }
 
+        public Reservation GetReservationFiles(int reservationId)
+        {
+            return GetSingle(r => r.Id.Equals(reservationId),
+                r => r.ReservedPerson,
+                r => r.ReservedPerson.Addresses,
+                r => r.ReservedPerson.Workplaces,
+                r => r.Prolongations,
+                r => r.Purpose,
+                r => r.ConductingUnit,
+                r => r.EndReason);
+        }
+        
         public IList<Reservation> GetReservationsByPerson(Person person)
         {
             return GetAll(r => r.ReservedPerson.Id.Equals(person.Id), r => r.Purpose, r => r.ConductingUnit,

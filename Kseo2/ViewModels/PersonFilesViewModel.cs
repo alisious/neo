@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Windows.Forms.VisualStyles;
 using Caliburn.Micro;
+using Kseo2.BusinessLayer;
 using Kseo2.DataAccess;
 using Kseo2.Model;
 using Kseo2.ViewModels.Events;
@@ -18,26 +19,25 @@ namespace Kseo2.ViewModels
     {
         private string _personFilesTittle;
         private readonly IEventAggregator _events = IoC.Get<IEventAggregator>();
+        private readonly PersonService _personService;
 
         public PersonFilesViewModel(int personId,KseoContext kseoContext)
         {
             _events.Subscribe(this);
             KseoContext = kseoContext;
+            _personService = new PersonService(KseoContext);
             var currentPerson = (personId == 0)
                 ? new Person()
-                : KseoContext.Persons
-                .Include(p=>p.Addresses)
-                .Include(p=>p.Workplaces)
-                .Include(p=>p.Nationality)
-                .Include(p=>p.Citizenships)
-                .FirstOrDefault(p => p.Id.Equals(personId));
+                : _personService.GetPersonFiles(personId);
             DisplayName = "Teczka osoby.";
             
             Items.Add(new PersonViewModel(currentPerson,KseoContext));
+            Items.Add(new PersonReservationsViewModel(currentPerson,KseoContext));
         }
 
 
         public PersonViewModel PersonData { get { return (PersonViewModel)Items[0]; } }
+        public PersonReservationsViewModel PersonReservations { get { return (PersonReservationsViewModel)Items[1]; } } 
 
         public string PersonFilesTittle
         {

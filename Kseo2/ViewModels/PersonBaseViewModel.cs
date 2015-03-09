@@ -54,7 +54,7 @@ namespace Kseo2.ViewModels
             PersonAddresses = new PersonAddressesViewModel(CurrentPerson,_context);
             PersonWorkplaces = new PersonWorkplacesViewModel(CurrentPerson,_context);
 
-            PersonReservations = new PersonReservationsViewModel(CurrentPerson,events,_context);
+            PersonReservations = new PersonReservationsViewModel(CurrentPerson,_context);
         }
 
         
